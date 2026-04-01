@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Venice | Day 4</title>
+  <style>
+:root{
+  --bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;
+  --blue:#2563eb;--blue-soft:#eff6ff;--green:#065f46;--green-bg:#ecfdf5;
+  --orange:#9a3412;--orange-bg:#fff7ed;--shadow:0 10px 24px rgba(15,23,42,.06)
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1100px;margin:0 auto;padding:24px}
+.hero{background:linear-gradient(135deg,#1d4ed8,#2563eb 60%,#60a5fa);color:#fff;border-radius:24px;padding:24px;box-shadow:var(--shadow);margin-bottom:18px}
+.hero h1{margin:0 0 8px;font-size:30px}
+.hero p{margin:0;opacity:.95}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.nav a,.btn,.pill{display:inline-block;padding:10px 14px;border-radius:999px;font-weight:700;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff}
+.section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
+.hd{padding:22px 22px 12px;border-bottom:1px solid var(--line)}
+.hd h2{margin:0 0 6px;font-size:26px}
+.sub{color:var(--muted);font-size:14px}
+.bd{padding:18px 22px 22px}
+.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin-bottom:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px}
+.card h3{margin:0 0 10px;font-size:17px}
+.mapph{min-height:120px;border:1px dashed #bfd7ff;border-radius:14px;background:linear-gradient(180deg,#f8fbff,#eef4ff);padding:16px;color:#334155}
+.btns,.microbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.btn{padding:8px 10px;border-radius:10px;font-size:12px;font-weight:700;border:1px solid var(--line);background:#fff;color:var(--text)}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.mini{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px}
+.k{font-size:12px;color:var(--muted)}
+.v{font-weight:700;margin-top:2px}
+.timeline{margin-left:8px}
+.item{position:relative;padding:0 0 16px 24px;border-left:2px solid #dbeafe}
+.item:last-child{padding-bottom:0}
+.item:before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:999px;background:var(--blue);box-shadow:0 0 0 4px #eff6ff}
+.time{color:var(--blue);font-size:13px;font-weight:800;margin-bottom:4px}
+.title{font-size:18px;font-weight:800;margin-bottom:4px}
+.desc{color:var(--muted);font-size:14px;margin-bottom:8px}
+details{margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fafafa;padding:10px 12px}
+summary{cursor:pointer;font-weight:700}
+.meta{margin-top:8px;color:#374151;font-size:14px}
+.meta strong{color:#111827}
+.note{margin-top:16px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:16px;padding:14px 16px}
+.budget{margin-top:16px;background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;border-radius:16px;padding:14px 16px}
+.hotelgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.footerlink{display:inline-block;margin-top:6px}
+@media(max-width:900px){.wrap{padding:16px}.grid,.stats,.hotelgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <h1>Venice｜Day 4</h1>
+      <p>先把已确认的酒店和到达逻辑放稳，后面再继续往这页补威尼斯本岛玩法。</p>
+      <div class="nav">
+        <a href="index.html">← 返回总入口</a>
+        <a href="rome.html">回 Rome</a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="hd"><h2>Day 4｜06-06｜Venice (Mestre)</h2><div class="sub">入住酒店后的首个完整威尼斯日。</div></div>
+      <div class="bd">
+        <div class="card">
+          <h3>酒店信息（已确认）</h3>
+          <div class="hotelgrid">
+            <div class="mini"><div class="k">酒店</div><div class="v">Best Western Plus Hotel Bologna</div></div>
+            <div class="mini"><div class="k">地址</div><div class="v">Via Piave 214, Mestre</div></div>
+            <div class="mini"><div class="k">电话</div><div class="v">+39 041 931000</div></div>
+            <div class="mini"><div class="k">入住/退房</div><div class="v">15:00 / 12:00</div></div>
+            <div class="mini"><div class="k">价格</div><div class="v">€288 / 2晚</div></div>
+            <div class="mini"><div class="k">车站到酒店</div><div class="v">步行约2分钟</div></div>
+          </div>
+          <div class="btns">
+            <a class="btn" href="https://www.google.com/maps/search/Best+Western+Plus+Hotel+Bologna+Mestre" target="_blank">打开地图</a>
+          </div>
+        </div>
+
+        <div class="timeline">
+          <div class="item">
+            <div class="time">上午</div>
+            <div class="title">从 Mestre 出发去威尼斯本岛</div>
+            <details open>
+              <summary>🚆 交通逻辑</summary>
+              <div class="meta">Mestre → Venezia Santa Lucia 火车班次很密，适合作为本岛游的起点。</div>
+            </details>
+          </div>
+
+          <div class="item">
+            <div class="time">全天</div>
+            <div class="title">待排 D4 行程</div>
+            <div class="desc">下一步可继续细化圣马可广场 / 总督宫 / 贡多拉 / 大运河等内容。</div>
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>这页先放酒店和转场基础信息。</strong><br>
+          你确认 D4 想去的威尼斯点后，我再把这页补成完整版。
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

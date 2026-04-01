@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>26 EU Trip</title>
+  <style>
+:root{
+  --bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;
+  --blue:#2563eb;--blue-soft:#eff6ff;--green:#065f46;--green-bg:#ecfdf5;
+  --orange:#9a3412;--orange-bg:#fff7ed;--shadow:0 10px 24px rgba(15,23,42,.06)
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1100px;margin:0 auto;padding:24px}
+.hero{background:linear-gradient(135deg,#1d4ed8,#2563eb 60%,#60a5fa);color:#fff;border-radius:24px;padding:24px;box-shadow:var(--shadow);margin-bottom:18px}
+.hero h1{margin:0 0 8px;font-size:30px}
+.hero p{margin:0;opacity:.95}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.nav a,.btn,.pill{display:inline-block;padding:10px 14px;border-radius:999px;font-weight:700;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff}
+.section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
+.hd{padding:22px 22px 12px;border-bottom:1px solid var(--line)}
+.hd h2{margin:0 0 6px;font-size:26px}
+.sub{color:var(--muted);font-size:14px}
+.bd{padding:18px 22px 22px}
+.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin-bottom:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px}
+.card h3{margin:0 0 10px;font-size:17px}
+.mapph{min-height:120px;border:1px dashed #bfd7ff;border-radius:14px;background:linear-gradient(180deg,#f8fbff,#eef4ff);padding:16px;color:#334155}
+.btns,.microbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.btn{padding:8px 10px;border-radius:10px;font-size:12px;font-weight:700;border:1px solid var(--line);background:#fff;color:var(--text)}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.mini{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px}
+.k{font-size:12px;color:var(--muted)}
+.v{font-weight:700;margin-top:2px}
+.timeline{margin-left:8px}
+.item{position:relative;padding:0 0 16px 24px;border-left:2px solid #dbeafe}
+.item:last-child{padding-bottom:0}
+.item:before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:999px;background:var(--blue);box-shadow:0 0 0 4px #eff6ff}
+.time{color:var(--blue);font-size:13px;font-weight:800;margin-bottom:4px}
+.title{font-size:18px;font-weight:800;margin-bottom:4px}
+.desc{color:var(--muted);font-size:14px;margin-bottom:8px}
+details{margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fafafa;padding:10px 12px}
+summary{cursor:pointer;font-weight:700}
+.meta{margin-top:8px;color:#374151;font-size:14px}
+.meta strong{color:#111827}
+.note{margin-top:16px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:16px;padding:14px 16px}
+.budget{margin-top:16px;background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;border-radius:16px;padding:14px 16px}
+.hotelgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.footerlink{display:inline-block;margin-top:6px}
+@media(max-width:900px){.wrap{padding:16px}.grid,.stats,.hotelgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <h1>欧洲行程总入口</h1>
+      <p>这是给手机和 GitHub Pages 用的完整网页版入口。建议先上传这 3 个文件到仓库根目录，再开启 Pages。</p>
+      <div class="nav">
+        <a href="rome.html">Rome｜Day 1–Day 3</a>
+        <a href="venice.html">Venice｜Day 4</a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="hd">
+        <h2>当前结构</h2>
+        <div class="sub">把单页大文件拆成多个页面，既保留信息密度，也更稳定。</div>
+      </div>
+      <div class="bd">
+        <div class="stats">
+          <div class="mini"><div class="k">页面 1</div><div class="v">rome.html</div></div>
+          <div class="mini"><div class="k">范围</div><div class="v">D1–D3</div></div>
+          <div class="mini"><div class="k">页面 2</div><div class="v">venice.html</div></div>
+          <div class="mini"><div class="k">范围</div><div class="v">D4（后续可继续加）</div></div>
+        </div>
+        <div class="note">
+          <strong>GitHub 上传顺序：</strong><br>
+          1. 上传 index.html、rome.html、venice.html 到仓库根目录。<br>
+          2. Settings → Pages → Deploy from branch → main / root。<br>
+          3. 等待生成网址后，用手机打开 index 即可。
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
