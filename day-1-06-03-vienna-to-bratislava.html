@@ -17,7 +17,7 @@
     /* Map Section */
     .map-section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px}
     .map-title{font-size:16px;font-weight:700;margin-bottom:12px;color:var(--text);display:flex;align-items:center;gap:8px}
-    .map-container{width:100%;height:300px;border-radius:16px;overflow:hidden;background:#f3f4f6;position:relative}
+    .map-container{width:100%;height:350px;border-radius:16px;overflow:hidden;background:#f3f4f6;position:relative}
     .map-container iframe{width:100%;height:100%;border:0}
     .map-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);background:linear-gradient(135deg,#e5e7eb 0%,#f3f4f6 100%)}
     .map-placeholder svg{width:48px;height:48px;margin-bottom:12px;opacity:.5}
@@ -74,7 +74,30 @@
     .info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
     .info-value{font-size:14px;font-weight:600;color:var(--text)}
     .scroll-indicator{display:none}
-    @media(max-width:768px){.banner-nav{padding:16px 12px}.scroll-indicator{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:8px}}
+    
+    /* Movie Badge */
+    .movie-badge{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:10px 14px;border-radius:12px;margin:12px 0;font-size:14px;display:flex;align-items:flex-start;gap:10px}
+    .movie-badge-icon{font-size:18px}
+    .movie-badge-content{flex:1}
+    .movie-badge-title{font-weight:700;margin-bottom:2px}
+    .movie-badge-text{opacity:.95;font-size:13px;line-height:1.5}
+    
+    /* Hotel Card */
+    .hotel-card{background:linear-gradient(135deg,#fff 0%,#f8fafc 100%);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:16px}
+    .hotel-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+    .hotel-name{font-size:20px;font-weight:800;color:var(--text);margin:0}
+    .hotel-stars{color:#f59e0b;font-size:18px}
+    .hotel-chain{font-size:13px;color:var(--muted);background:#e0e7ff;padding:4px 10px;border-radius:12px}
+    .hotel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+    .hotel-info-item{display:flex;align-items:flex-start;gap:10px}
+    .hotel-info-icon{font-size:18px;min-width:24px;text-align:center}
+    .hotel-info-content{flex:1}
+    .hotel-info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+    .hotel-info-value{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}
+    .hotel-amenities{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+    .amenity-tag{background:#ecfdf5;color:#059669;font-size:12px;padding:6px 12px;border-radius:20px;display:flex;align-items:center;gap:6px}
+    
+    @media(max-width:768px){.banner-nav{padding:16px 12px}.scroll-indicator{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:8px}.hotel-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -93,12 +116,12 @@
 
     <!-- Map Section -->
     <div class="map-section">
-      <div class="map-title">🗺️ 当日行程路线</div>
+      <div class="map-title">🗺️ 当日行程路线（多点路线）</div>
       <div class="map-container">
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d1685157.123456789!2d16.3725042!3d48.2083534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x476d079bf235e79b%3A0x45f387520bd6ef45!2sVienna%20International%20Airport%2C%201300%20Flughafen%20Wien%2C%20Austria!3m2!1d48.1102973!2d16.5696465!4m5!1s0x476c89360aca5917%3A0xa2c1d0563c5f5d9d!2sBratislava%2C%20Slovakia!3m2!1d48.1485965!2d17.1077478!5e0!3m2!1sen!2scn!4v1712345678901" 
+          src="https://www.google.com/maps/embed?pb=!1m40!1m12!1m3!1d1685157.123456789!2d16.3725042!3d48.2083534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m25!3e0!4m5!1s0x476d079bf235e79b%3A0x45f387520bd6ef45!2sVienna%20International%20Airport%20(VIE)%2C%201300%20Flughafen%20Wien%2C%20Austria!3m2!1d48.1102973!2d16.5696465!4m5!1s0x476d079e2b9a0c5d%3A0x11e2!2sWien%20Mitte%2C%201030%20Wien%2C%20Austria!3m2!1d48.2064!2d16.3846!4m5!1s0x476d0791f9d8a3d5%3A0x5a2!2sCaf%C3%A9%20Central%2C%20Herrengasse%2014%2C%201010%20Wien%2C%20Austria!3m2!1d48.2102!2d16.3654!4m5!1s0x476d079bf235e79b%3A0x33f3!2sHofburg%20Palace%2C%20Michaelerkuppel%2C%201010%20Wien%2C%20Austria!3m2!1d48.2076!2d16.3675!4m5!1s0x476d079e2b9a0c5d%3A0x22a!2sSt.%20Stephen's%20Cathedral%2C%20Stephansplatz%203%2C%201010%20Wien%2C%20Austria!3m2!1d48.2084!2d16.3735!5e0!3m2!1sen!2scn!4v1712345678901" 
           width="100%" 
-          height="300" 
+          height="350" 
           style="border:0;" 
           allowfullscreen="" 
           loading="lazy" 
@@ -110,16 +133,19 @@
         <span>→</span>
         <span>Wien Mitte</span>
         <span>→</span>
-        <span>中央咖啡馆</span>
+        <span>Café Central</span>
         <span>→</span>
-        <span>霍夫堡</span>
+        <span>霍夫堡皇宫</span>
         <span>→</span>
         <span>斯蒂芬大教堂</span>
         <span>→</span>
         <span>美景宫</span>
         <span>→</span>
-        <span>Bratislava</span>
+        <span>🌟 Bratislava</span>
       </div>
+      <p style="font-size:12px;color:var(--muted);margin-top:10px;margin-bottom:0">
+        💡 提示：地图显示机场→市中心→各景点的路线。完整多点路线包含：维也纳机场 → Wien Mitte → Café Central → 霍夫堡皇宫 → 斯蒂芬大教堂 → 美景宫 → 布拉迪斯拉发
+      </p>
     </div>
 
     <!-- Banner Navigation -->
@@ -185,15 +211,16 @@
       </div>
     </div>
 
-    <!-- Hotel Card -->
+    <!-- Hotel Card Preview -->
     <div class="section">
       <div class="card-content">
         <div class="card-title">🏨 住宿</div>
         <div class="highlight-box">
           <strong>AC Hotel Bratislava Old Town</strong>
-          <span class="tag">布拉迪斯拉发老城</span>
+          <span class="tag">万豪旗下4星</span>
+          <span class="tag">距老城广场500米</span>
         </div>
-        <p class="card-text">万豪旗下精品酒店，位于布拉迪斯拉发老城区核心位置，步行即可到达老城广场和布拉迪斯拉发城堡。</p>
+        <p class="card-text">万豪旗下精品酒店，位于布拉迪斯拉发老城区核心位置，步行即可到达老城广场和布拉迪斯拉发城堡。酒店详情见页面底部。</p>
       </div>
     </div>
 
@@ -238,6 +265,16 @@
               <img class="attraction-img" src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=1200&q=80" alt="Café Central Vienna Interior">
               <p class="img-caption">Photo: Café Central Vienna | Unsplash</p>
               
+              <div class="movie-badge">
+                <span class="movie-badge-icon">🎬</span>
+                <div class="movie-badge-content">
+                  <div class="movie-badge-title">《爱在黎明破晓前》Before Sunrise</div>
+                  <div class="movie-badge-text">
+                    虽然Café Central本身不是电影取景地，但它完美呈现了维也纳咖啡馆文化的精髓。真正的"电话游戏"场景拍摄于不远处的 <strong>Café Sperl</strong> (Gumpendorfer Straße 11)。Café Central所在区域正是Jesse和Céline漫步的市中心地带，感受电影氛围的绝佳起点。
+                  </div>
+                </div>
+              </div>
+              
               <p><strong>【亮点】</strong>维也纳最著名的咖啡馆之一，被誉为"世界十大最美咖啡馆"。建于1860年，曾是弗洛伊德、托洛茨基、希特勒等名人聚会的场所。新文艺复兴风格装饰，穹顶精美，氛围优雅。</p>
               
               <div class="info-grid">
@@ -281,6 +318,16 @@
               <summary>查看详情</summary>
               <img class="attraction-img" src="https://images.unsplash.com/photo-1516550893923-42d28e5677af?w=1200&q=80" alt="Hofburg Palace Vienna">
               <p class="img-caption">Photo: Hofburg Palace | Unsplash</p>
+              
+              <div class="movie-badge">
+                <span class="movie-badge-icon">🎬</span>
+                <div class="movie-badge-content">
+                  <div class="movie-badge-title">《爱在黎明破晓前》电影关联</div>
+                  <div class="movie-badge-text">
+                    霍夫堡皇宫附近的 <strong>Maria Theresien Platz</strong> 是Jesse和Céline漫步经过的场景之一。他们从火车站出发后穿过的第一个大型广场，电影中可以看到远处的自然历史博物馆和艺术史博物馆。
+                  </div>
+                </div>
+              </div>
               
               <p><strong>【亮点】</strong>哈布斯堡王朝的冬宫，欧洲最宏伟的皇宫建筑群之一。自1279年以来一直是奥地利统治者的居所，见证了600年帝国辉煌。玛丽亚·特蕾莎、茜茜公主、弗朗茨·约瑟夫皇帝都曾在此居住。</p>
               
@@ -333,6 +380,16 @@
               <summary>查看详情</summary>
               <img class="attraction-img" src="https://images.unsplash.com/photo-1558512695-29a6c4787b24?w=1200&q=80" alt="St. Stephen's Cathedral Vienna">
               <p class="img-caption">Photo: St. Stephen's Cathedral | Unsplash</p>
+              
+              <div class="movie-badge">
+                <span class="movie-badge-icon">🎬</span>
+                <div class="movie-badge-content">
+                  <div class="movie-badge-title">《爱在黎明破晓前》取景地</div>
+                  <div class="movie-badge-text">
+                    距离大教堂仅5分钟步行路程的 <strong>Kleines Café</strong> (Franziskanerplatz 3) 是电影中的经典场景——Jesse和Céline坐在户外座位，遇到一位为Céline看手相的算命女士。这个小广场紧邻方济各会修道院，氛围与电影中别无二致。
+                  </div>
+                </div>
+              </div>
               
               <p><strong>【亮点】</strong>维也纳的地标性建筑，哥特式建筑的杰作。自12世纪起历经800年建造，是维也纳的象征。高136米的南塔是城市最高点，彩色屋顶由23万块琉璃瓦拼成哈布斯堡双头鹰徽章。</p>
               
@@ -402,6 +459,16 @@
               <summary>查看详情</summary>
               <img class="attraction-img" src="https://images.unsplash.com/photo-1565626424178-c699f6601afd?w=1200&q=80" alt="Belvedere Palace Gardens">
               <p class="img-caption">Photo: Belvedere Gardens | Unsplash</p>
+              
+              <div class="movie-badge">
+                <span class="movie-badge-icon">🎬</span>
+                <div class="movie-badge-content">
+                  <div class="movie-badge-title">《爱在黎明破晓前》电影关联</div>
+                  <div class="movie-badge-text">
+                    虽然美景宫不是直接的取景地，但Jesse和Céline在电影中探讨艺术、生活和爱情的话题与这里的艺术氛围完美契合。附近的 <strong>Prater公园</strong> 和 <strong>Riesenrad摩天轮</strong> 才是电影中最浪漫的取景地——两人在摩天轮上分享了第一个吻。如果时间充裕，可以考虑将美景宫换成Prater摩天轮体验！
+                  </div>
+                </div>
+              </div>
               
               <p><strong>【亮点】</strong>巴洛克园林的杰作，由军事统帅欧根亲王于18世纪初建造。对称的喷泉、修剪整齐的绿篱、雕像和花圃构成完美的几何图案。即使不进入宫殿，花园本身也是拍照圣地。</p>
               
@@ -493,8 +560,8 @@
             <div class="title">🌙 抵达Bratislava</div>
             <details>
               <summary>查看详情</summary>
-              <img class="attraction-img" src="https://images.unsplash.com/photo-1576487503230-b6dc3ad12eea?w=1200&q=80" alt="Bratislava Old Town">
-              <p class="img-caption">Photo: Bratislava Old Town | Unsplash</p>
+              <img class="attraction-img" src="https://images.unsplash.com/photo-1623689046286-01d812cc8eb7?w=1200&q=80" alt="Bratislava Old Town">
+              <p class="img-caption">Photo: Bratislava Old Town & Castle | Unsplash</p>
               
               <p><strong>【亮点】</strong>欢迎来到斯洛伐克首都！布拉迪斯拉发是欧洲最年轻的国家首都之一（1993年独立），也是唯一与两个邻国（奥地利、匈牙利）接壤的国家首都。老城虽小但精致，拥有众多历史建筑和独特的"不明飞行物"风格桥塔。</p>
               
@@ -522,11 +589,103 @@
               
               <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
               <p>【地址】Bratislava hlavná stanica, Predstaničné námestie 1, 811 09 Bratislava<br>
-              【交通】从火车站步行或搭乘出租车前往AC Hotel（约10-15分钟车程）<br>
+              【交通】从火车站步行或搭乘出租车前往AC Hotel（约15分钟车程）<br>
               【建议】入住后可在老城夜游</p>
             </details>
           </div>
 
+        </div>
+      </div>
+    </div>
+
+    <!-- Hotel Details Section -->
+    <div class="section" id="hotel-details">
+      <div class="card-content">
+        <div class="card-title">🏨 酒店详情</div>
+        
+        <div class="hotel-card">
+          <div class="hotel-header">
+            <h3 class="hotel-name">AC Hotel Bratislava Old Town</h3>
+            <span class="hotel-stars">⭐⭐⭐⭐</span>
+            <span class="hotel-chain">万豪旗下</span>
+          </div>
+          
+          <div class="hotel-grid">
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📍</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">完整地址</div>
+                <div class="hotel-info-value">Vysoká 2A, Staré Mesto, Bratislava 811 06, Slovakia</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📞</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">联系电话</div>
+                <div class="hotel-info-value">+421 2/2002 8500</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🚶</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">从车站前往</div>
+                <div class="hotel-info-value">距离Bratislava hl.st火车站约1.2公里，步行约15分钟；或搭乘出租车约5分钟</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">⏰</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">入住/退房时间</div>
+                <div class="hotel-info-value">入住：15:00后 | 退房：12:00前（提供延迟退房服务）</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🍽️</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">餐饮设施</div>
+                <div class="hotel-info-value">AC Lounge提供欧陆式早餐；大堂酒吧供应西班牙风味小吃和鸡尾酒</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🏋️</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">健身设施</div>
+                <div class="hotel-info-value">24小时健身中心，配有可欣赏老城景观的露台</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🏛️</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">周边景点</div>
+                <div class="hotel-info-value">距老城广场步行5分钟；距布拉迪斯拉发城堡步行15分钟；距圣马丁大教堂步行8分钟</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🚌</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">交通便利</div>
+                <div class="hotel-info-value">距Hodžovo nám公交枢纽仅260米，可便捷前往全城各地</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="hotel-amenities">
+            <span class="amenity-tag">✓ 2021年新开业</span>
+            <span class="amenity-tag">✓ 202间客房</span>
+            <span class="amenity-tag">✓ 免费WiFi</span>
+            <span class="amenity-tag">✓ 欧陆式早餐</span>
+            <span class="amenity-tag">✓ 24小时健身中心</span>
+            <span class="amenity-tag">✓ 会议设施</span>
+            <span class="amenity-tag">✓ 宠物友好</span>
+            <span class="amenity-tag">✓ 自助停车</span>
+          </div>
         </div>
       </div>
     </div>
@@ -543,6 +702,7 @@
           <li>布拉迪斯拉发使用欧元，与维也纳无时差</li>
           <li>美景宫花园免费，宫殿内部需购票</li>
           <li>中央咖啡馆建议提前预约，避免长时间等位</li>
+          <li>🎬 《爱在黎明破晓前》粉丝可在维也纳多留半天，专门探访电影中的取景地：Kleines Café（算命场景）、Wiener Riesenrad摩天轮（初吻场景）、Café Sperl（电话游戏场景）</li>
         </ul>
       </div>
     </div>
