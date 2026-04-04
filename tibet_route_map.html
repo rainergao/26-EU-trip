@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>西藏行程地图 - Tibet Travel Route</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(90deg, #ff6b35 0%, #f7931e 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .container {
+            display: flex;
+            height: calc(100vh - 80px);
+        }
+        
+        .sidebar {
+            width: 320px;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+        }
+        
+        .sidebar h2 {
+            color: #f7931e;
+            margin-bottom: 15px;
+            font-size: 18px;
+            border-bottom: 2px solid #f7931e;
+            padding-bottom: 8px;
+        }
+        
+        .route-card {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #f7931e;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .route-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(247, 147, 30, 0.3);
+        }
+        
+        .route-card h3 {
+            color: #f7931e;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .route-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+        
+        .route-info span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .location-list {
+            margin-top: 20px;
+        }
+        
+        .location-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: #2d3748;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .location-item:hover {
+            background: #3d4f6f;
+            transform: translateX(3px);
+        }
+        
+        .location-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 14px;
+        }
+        
+        .icon-lhasa { background: #e74c3c; }
+        .icon-namtso { background: #3498db; }
+        .icon-nyingchi { background: #27ae60; }
+        
+        .location-name {
+            flex: 1;
+        }
+        
+        .location-name .main {
+            font-weight: bold;
+            color: #f1f5f9;
+        }
+        
+        .location-name .sub {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+        
+        #map {
+            flex: 1;
+            height: 100%;
+        }
+        
+        .custom-popup {
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        .popup-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #d35400;
+            margin-bottom: 8px;
+            border-bottom: 2px solid #f7931e;
+            padding-bottom: 5px;
+        }
+        
+        .popup-content {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        .popup-content p {
+            margin: 5px 0;
+        }
+        
+        .legend {
+            background: rgba(30, 41, 59, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid #334155;
+        }
+        
+        .legend h3 {
+            color: #f7931e;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            font-size: 12px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 4px;
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+        
+        .legend-marker {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .distance-badge {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        
+        .leaflet-popup-content-wrapper {
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        
+        .leaflet-popup-content {
+            margin: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏔️ 西藏行程地图 Tibet Travel Route</h1>
+        <p>拉萨 · 纳木错 · 林芝 | 2024 探秘之旅</p>
+    </div>
+    
+    <div class="container">
+        <div class="sidebar">
+            <h2>🚗 行程路线</h2>
+            
+            <div class="route-card">
+                <h3>拉萨 ↔ 纳木错</h3>
+                <div class="route-info">
+                    <span>📏 240km</span>
+                    <span>⏱️ 3.5小时</span>
+                </div>
+            </div>
+            
+            <div class="route-card">
+                <h3>拉萨 ↔ 林芝 (G318)</h3>
+                <div class="route-info">
+                    <span>📏 400km</span>
+                    <span>⏱️ 5-6小时</span>
+                </div>
+            </div>
+            
+            <div class="route-card">
+                <h3>林芝 → 雅鲁藏布大峡谷</h3>
+                <div class="route-info">
+                    <span>📏 80km</span>
+                    <span>⏱️ 1.5小时</span>
+                </div>
+            </div>
+            
+            <div class="route-card">
+                <h3>林芝 → 巴松措</h3>
+                <div class="route-info">
+                    <span>📏 120km</span>
+                    <span>⏱️ 2小时</span>
+                </div>
+            </div>
+            
+            <h2>📍 目的地</h2>
+            <div class="location-list">
+                <div class="location-item" onclick="flyToLocation(29.65, 91.1, 13)">
+                    <div class="location-icon icon-lhasa">🏛️</div>
+                    <div class="location-name">
+                        <div class="main">拉萨 Lhasa</div>
+                        <div class="sub">布达拉宫 · 大昭寺 · 八廓街</div>
+                    </div>
+                </div>
+                
+                <div class="location-item" onclick="flyToLocation(30.7, 90.6, 11)">
+                    <div class="location-icon icon-namtso">🏔️</div>
+                    <div class="location-name">
+                        <div class="main">纳木错 Namtso</div>
+                        <div class="sub">天湖 · 海拔4718米</div>
+                    </div>
+                </div>
+                
+                <div class="location-item" onclick="flyToLocation(29.65, 94.35, 10)">
+                    <div class="location-icon icon-nyingchi">🌲</div>
+                    <div class="location-name">
+                        <div class="main">林芝 Nyingchi</div>
+                        <div class="sub">雅鲁藏布大峡谷 · 巴松措 · 索松村</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="legend">
+                <h3>图例 Legend</h3>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #e74c3c;"></div>
+                    <span>拉萨路线</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #3498db;"></div>
+                    <span>纳木错路线</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #27ae60;"></div>
+                    <span>林芝路线</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-marker" style="background: #e74c3c;"></div>
+                    <span>主要景点</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="map"></div>
+    </div>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // 初始化地图
+        const map = L.map('map', {
+            center: [29.8, 92.5],
+            zoom: 8,
+            zoomControl: true
+        });
+        
+        // 添加地图图层 - 使用高德地图作为底图
+        L.tileLayer('https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
+            subdomains: '1234',
+            attribution: '© 高德地图 | Tibet Travel Route'
+        }).addTo(map);
+        
+        // 自定义图标
+        const createIcon = (emoji, color) => {
+            return L.divIcon({
+                className: 'custom-div-icon',
+                html: `<div style="background: ${color}; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; border: 3px solid white; box-shadow: 0 3px 10px rgba(0,0,0,0.4);">${emoji}</div>`,
+                iconSize: [36, 36],
+                iconAnchor: [18, 18],
+                popupAnchor: [0, -20]
+            });
+        };
+        
+        // 地点数据
+        const locations = {
+            lhasa: { lat: 29.65, lng: 91.1, name: '拉萨', emoji: '🏛️', color: '#e74c3c' },
+            potala: { lat: 29.657, lng: 91.117, name: '布达拉宫', emoji: '🏯', color: '#c0392b' },
+            jokhang: { lat: 29.652, lng: 91.137, name: '大昭寺', emoji: '🛕', color: '#e74c3c' },
+            barkhor: { lat: 29.651, lng: 91.136, name: '八廓街', emoji: '🛍️', color: '#e67e22' },
+            namtso: { lat: 30.7, lng: 90.6, name: '纳木错', emoji: '🏔️', color: '#3498db' },
+            nyingchi: { lat: 29.65, lng: 94.35, name: '林芝', emoji: '🌲', color: '#27ae60' },
+            canyon: { lat: 29.75, lng: 95.0, name: '雅鲁藏布大峡谷', emoji: '🏞️', color: '#16a085' },
+            basum: { lat: 30.0, lng: 93.95, name: '巴松措', emoji: '💧', color: '#2980b9' },
+            suosong: { lat: 29.7, lng: 94.95, name: '索松村', emoji: '🏘️', color: '#27ae60' }
+        };
+        
+        // 添加标记点
+        const markers = {};
+        
+        // 拉萨市内景点
+        markers.potala = L.marker([locations.potala.lat, locations.potala.lng], { 
+            icon: createIcon(locations.potala.emoji, locations.potala.color) 
+        }).addTo(map).bindPopup(`
+            <div class="custom-popup">
+                <div class="popup-title">🏯 布达拉宫 Potala Palace</div>
+                <div class="popup-content">
+                    <p><strong>海拔：</strong>3700米</p>
+                    <p><strong>特色：</strong>世界文化遗产，西藏最具代表性的建筑</p>
+                    <p><strong>建议游玩：</strong>2-3小时</p>
+                </div>
+            </div>
+        `);
+        
+        markers.jokhang = L.marker([locations.jokhang.lat, locations.jokhang.lng], { 
+            icon: createIcon(locations.jokhang.emoji, locations.jokhang.color) 
+        }).addTo(map).bindPopup(`
+            <div class="custom-popup">
+                <div class="popup-title">🛕 大昭寺 Jokhang Temple</div>
+                <div class="popup-content">
+                    <p><strong>海拔：</strong>3650米</p>
+                    <p><strong>特色：</strong>藏传佛教最神圣的寺庙</p>
+                    <p><strong>建议游玩：</strong>1-2小时</p>
+                </div>
+            </div>
+        `);
+        
+        markers.barkhor = L.marker([locations.barkhor.lat, locations.barkhor.lng], { 
+            icon: createIcon(locations.barkhor.emoji, locations.barkhor.color) 
+        }).addTo(map).bindPopup(`
+            <div class="custom-popup">
+                <div class="popup-title">🛍️ 八廓街 Barkhor Street</div>
+                <div class="popup-content">
+                    <p><strong>特色：</strong>拉萨最繁华的商业街，转经道</p>
+                    <p><strong>建议游玩：</strong>1-2小时，可购买藏式纪念品</p>
+                </div>
+            </div>
+        `);
+        
+        // 纳木错
+        markers.namtso = L.marker([locations.namtso.lat, locations.namtso.lng], { 
+            icon: createIcon(locations.namtso.emoji, locations.namtso.color) 
+        }).addTo(map).bindPopup(`
+            <div class="custom-popup">
+                <div class="popup-title">🏔️ 纳木错 Namtso Lake</div>
+                <div class="popup-content">
+                    <p><strong>海拔：</strong>4718米</p>
+                    <p><strong>特色：</strong>西藏第二大湖泊，"天湖"</p>
+                    <p><strong>距拉萨：</strong>240km，约3.5小时车程</p>
+                    <p><strong>建议游玩：</strong>半天至一天</p>
+                </div>
+            </div>
+        `);
+        
+        // 林芝区域
+        markers.nyingchi = L.marker([locations.nyingchi.lat, locations.nyingchi.lng], { 
+            icon: createIcon(locations.nyingchi.emoji, locations.nyingchi.color) 
+        }).addTo(map).bindPopup(`
+            <div class="custom-popup">
+                <div class="popup-title">🌲 林芝 Nyingchi</div>
+                <div class="popup-content">
+                    <p><strong>海拔：</strong>2900米</p>
+                    <p><strong>特色：</strong>西藏江南，低海拔氧吧</p>
+                    <p><strong>距拉萨：</strong>400km，约5-6小时（G318）</p>
+                    <p><strong>建议游玩：</strong>2-3天</p>
+                </div>
+            </div>
+        `);
+        
+        markers.canyon = L.marker([locations.canyon.lat, locations.canyon.lng], { 
+            icon: createIcon(locations.canyon.emoji, locations.canyon.color) 
+        }).addTo(map).bindPopup(`
+            <div class="custom-popup">
+                <div class="popup-title">🏞️ 雅鲁藏布大峡谷 Yarlung Tsangpo Canyon</div>
+                <div class="popup-content">
+                    <p><strong>特色：</strong>世界第一大峡谷</p>
+                    <p><strong>距林芝：</strong>80km，约1.5小时车程</p>
+                    <p><strong>最佳观景点：</strong>索松村看南迦巴瓦峰</p>
+                    <p><strong>建议游玩：</strong>1-2天</p>
+                </div>
+            </div>
+        `);
+        
+        markers.suosong = L.marker([locations.suosong.lat, locations.suosong.lng], { 
+            icon: createIcon(locations.suosong.emoji, locations.suosong.color) 
+        }).addTo(map).bindPopup(`
+            <div class="custom-popup">
+                <div class="popup-title">🏘️ 索松村 Suosong Village</div>
+                <div class="popup-content">
+                    <p><strong>特色：</strong>观赏南迦巴瓦峰最佳位置</p>
+                    <p><strong>距大峡谷：</strong>约20km</p>
+                    <p><strong>建议：</strong>住一晚看日照金山</p>
+                </div>
+            </div>
+        `);
+        
+        markers.basum = L.marker([locations.basum.lat, locations.basum.lng], { 
+            icon: createIcon(locations.basum.emoji, locations.basum.color) 
+        }).addTo(map).bindPopup(`
+            <div class="custom-popup">
+                <div class="popup-title">💧 巴松措 Basum Tso</div>
+                <div class="popup-content">
+                    <p><strong>海拔：</strong>3480米</p>
+                    <p><strong>特色：</strong>国家森林公园，碧绿湖水</p>
+                    <p><strong>距林芝：</strong>120km，约2小时车程</p>
+                    <p><strong>建议游玩：</strong>半天</p>
+                </div>
+            </div>
+        `);
+        
+        // 绘制路线
+        const lhasaPoint = [locations.lhasa.lat, locations.lhasa.lng];
+        const namtsoPoint = [locations.namtso.lat, locations.namtso.lng];
+        const nyingchiPoint = [locations.nyingchi.lat, locations.nyingchi.lng];
+        const canyonPoint = [locations.canyon.lat, locations.canyon.lng];
+        const basumPoint = [locations.basum.lat, locations.basum.lng];
+        
+        // 路线样式
+        const routeStyle = {
+            color: '#e74c3c',
+            weight: 4,
+            opacity: 0.8,
+            dashArray: '10, 10',
+            lineCap: 'round'
+        };
+        
+        const namtsoRouteStyle = {
+            color: '#3498db',
+            weight: 4,
+            opacity: 0.8,
+            dashArray: '10, 10',
+            lineCap: 'round'
+        };
+        
+        const nyingchiRouteStyle = {
+            color: '#27ae60',
+            weight: 4,
+            opacity: 0.8,
+            dashArray: '10, 10',
+            lineCap: 'round'
+        };
+        
+        // 拉萨 - 纳木错路线
+        const namtsoRoute = L.polyline([lhasaPoint, namtsoPoint], namtsoRouteStyle)
+            .addTo(map)
+            .bindTooltip('<b>拉萨 → 纳木错</b><br>📏 240km | ⏱️ 约3.5小时', {
+                permanent: false,
+                direction: 'top',
+                className: 'route-tooltip'
+            });
+        
+        // 拉萨 - 林芝路线
+        const nyingchiRoute = L.polyline([lhasaPoint, nyingchiPoint], nyingchiRouteStyle)
+            .addTo(map)
+            .bindTooltip('<b>拉萨 → 林芝 (G318)</b><br>📏 400km | ⏱️ 约5-6小时', {
+                permanent: false,
+                direction: 'top',
+                className: 'route-tooltip'
+            });
+        
+        // 林芝 - 大峡谷路线
+        const canyonRoute = L.polyline([nyingchiPoint, canyonPoint], nyingchiRouteStyle)
+            .addTo(map)
+            .bindTooltip('<b>林芝 → 大峡谷</b><br>📏 80km | ⏱️ 约1.5小时', {
+                permanent: false,
+                direction: 'top',
+                className: 'route-tooltip'
+            });
+        
+        // 林芝 - 巴松措路线
+        const basumRoute = L.polyline([nyingchiPoint, basumPoint], nyingchiRouteStyle)
+            .addTo(map)
+            .bindTooltip('<b>林芝 → 巴松措</b><br>📏 120km | ⏱️ 约2小时', {
+                permanent: false,
+                direction: 'top',
+                className: 'route-tooltip'
+            });
+        
+        // 飞行到指定位置的函数
+        function flyToLocation(lat, lng, zoom) {
+            map.flyTo([lat, lng], zoom, {
+                duration: 1.5
+            });
+        }
+        
+        // 添加CSS样式
+        const style = document.createElement('style');
+        style.textContent = `
+            .route-tooltip {
+                background: rgba(30, 41, 59, 0.95);
+                border: 1px solid #f7931e;
+                border-radius: 8px;
+                padding: 10px 15px;
+                color: #e2e8f0;
+                font-size: 13px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            }
+            .route-tooltip b {
+                color: #f7931e;
+                display: block;
+                margin-bottom: 5px;
+            }
+            .leaflet-tooltip-left:before {
+                border-left-color: #f7931e;
+            }
+            .leaflet-tooltip-right:before {
+                border-right-color: #f7931e;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // 适应所有标记的视图
+        const group = new L.featureGroup([
+            markers.potala, markers.jokhang, markers.barkhor,
+            markers.namtso, markers.nyingchi, markers.canyon, markers.basum, markers.suosong
+        ]);
+        map.fitBounds(group.getBounds().pad(0.1));
+        
+        // 添加地图点击事件（调试用途）
+        map.on('click', function(e) {
+            console.log('Clicked at:', e.latlng.lat, e.latlng.lng);
+        });
+    </script>
+</body>
+</html>
