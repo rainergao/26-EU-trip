@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 10｜06-12｜Paris 核心文化日</title>
+  <style>
+    :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08);--accent:#f59e0b}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+    .wrap{max-width:1160px;margin:0 auto;padding:24px}
+    
+    /* Hero Section */
+    .hero{background:linear-gradient(135deg,#1e3a8a,#3b82f6 50%,#60a5fa);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
+    h1{margin:0 0 8px;font-size:28px}
+    .subtitle{margin:0;opacity:.9;font-size:16px}
+    
+    /* Map Section */
+    .map-section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px}
+    .map-title{font-size:16px;font-weight:700;margin-bottom:12px;color:var(--text);display:flex;align-items:center;gap:8px}
+    .map-container{width:100%;height:350px;border-radius:16px;overflow:hidden;background:#f3f4f6;position:relative}
+    .map-container iframe{width:100%;height:100%;border:0}
+    .map-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);background:linear-gradient(135deg,#e5e7eb 0%,#f3f4f6 100%)}
+    .map-placeholder svg{width:48px;height:48px;margin-bottom:12px;opacity:.5}
+    .map-route{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:13px;color:var(--muted)}
+    .map-route span{background:#f3f4f6;padding:4px 10px;border-radius:12px}
+    
+    /* Banner Navigation */
+    .banner-nav{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px;overflow-x:auto}
+    .banner-title{font-size:14px;font-weight:700;color:var(--muted);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
+    .banner-track{display:flex;align-items:center;min-width:max-content;gap:0}
+    .banner-node{display:flex;flex-direction:column;align-items:center;text-decoration:none;position:relative;padding:0 8px}
+    .banner-node:first-child{padding-left:0}
+    .banner-node:last-child{padding-right:0}
+    .banner-time{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px;white-space:nowrap}
+    .banner-dot{width:14px;height:14px;border-radius:50%;background:var(--line);border:3px solid var(--card);box-shadow:0 0 0 2px var(--line);transition:all .2s}
+    .banner-node:hover .banner-dot{background:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+    .banner-node.active .banner-dot{background:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+    .banner-label{font-size:12px;color:var(--text);margin-top:8px;white-space:nowrap;font-weight:500;max-width:80px;text-align:center;line-height:1.3}
+    .banner-arrow{color:var(--line);font-size:20px;margin:0 4px;padding-bottom:20px}
+    
+    /* Cards */
+    .section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
+    .card-content{padding:20px}
+    .card-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px}
+    .card-text{color:var(--muted);font-size:14px}
+    
+    /* Timeline */
+    .timeline{margin-left:8px}
+    .item{position:relative;padding:0 0 16px 24px;border-left:2px solid #dbeafe}
+    .item:before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:999px;background:var(--blue);box-shadow:0 0 0 4px #eff6ff}
+    .item:last-child{border-left:2px solid transparent}
+    .time{color:var(--blue);font-size:13px;font-weight:800;margin-bottom:4px}
+    .title{font-size:18px;font-weight:800;margin-bottom:4px}
+    
+    /* Details */
+    details{margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fafafa;padding:10px 12px}
+    summary{cursor:pointer;font-weight:600;color:var(--blue)}
+    details[open] summary{margin-bottom:12px}
+    
+    /* Attraction Images */
+    .attraction-img{width:100%;border-radius:16px;margin:12px 0;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+    .img-caption{font-size:12px;color:var(--muted);text-align:center;margin-top:4px;font-style:italic}
+    
+    /* Navigation */
+    .nav-links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+    .nav-links a{color:var(--blue);text-decoration:none;font-weight:500}
+    .nav-links a:hover{text-decoration:underline}
+    
+    /* Utilities */
+    .highlight-box{background:#eff6ff;border-left:4px solid var(--blue);padding:12px 16px;border-radius:0 12px 12px 0;margin:12px 0}
+    .tag{display:inline-block;background:var(--bg);color:var(--muted);font-size:12px;padding:4px 10px;border-radius:20px;margin-right:8px}
+    .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+    .info-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
+    .info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+    .info-value{font-size:14px;font-weight:600;color:var(--text)}
+    .scroll-indicator{display:none}
+    
+    /* Hotel Card */
+    .hotel-card{background:linear-gradient(135deg,#fff 0%,#f8fafc 100%);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:16px}
+    .hotel-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+    .hotel-name{font-size:20px;font-weight:800;color:var(--text);margin:0}
+    .hotel-stars{color:#f59e0b;font-size:18px}
+    .hotel-chain{font-size:13px;color:var(--muted);background:#e0e7ff;padding:4px 10px;border-radius:12px}
+    .hotel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+    .hotel-info-item{display:flex;align-items:flex-start;gap:10px}
+    .hotel-info-icon{font-size:18px;min-width:24px;text-align:center}
+    .hotel-info-content{flex:1}
+    .hotel-info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+    .hotel-info-value{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}
+    .hotel-amenities{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+    .amenity-tag{background:#ecfdf5;color:#059669;font-size:12px;padding:6px 12px;border-radius:20px;display:flex;align-items:center;gap:6px}
+    
+    /* Attraction highlight */
+    .attraction-highlight{background:linear-gradient(135deg,#eff6ff 0%,#fff 100%);border:1px solid #bfdbfe;border-radius:20px;padding:20px;margin-top:16px}
+    .attraction-title{font-size:18px;font-weight:800;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+    
+    /* Tips Section */
+    .tips-box{background:linear-gradient(135deg,#fef3c7 0%,#fffbeb 100%);border:1px solid #fcd34d;border-radius:16px;padding:16px;margin-top:12px}
+    .tips-title{font-size:14px;font-weight:700;color:#92400e;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+    .tips-list{margin:0;padding-left:18px;color:#78350f}
+    .tips-list li{margin-bottom:6px;font-size:13px}
+    
+    /* Masterpiece Gallery */
+    .masterpiece-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:16px}
+    .masterpiece-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:transform .2s,box-shadow .2s}
+    .masterpiece-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+    .masterpiece-img{width:100%;height:180px;object-fit:cover}
+    .masterpiece-content{padding:12px}
+    .masterpiece-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+    .masterpiece-desc{font-size:12px;color:var(--muted);line-height:1.5}
+    
+    @media(max-width:768px){.banner-nav{padding:16px 12px}.scroll-indicator{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:8px}.hotel-grid{grid-template-columns:1fr}.masterpiece-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Hero Section -->
+    <div class="hero">
+      <h1>🎨 Day 10｜06-12｜Paris 核心文化日</h1>
+      <p class="subtitle">艺术朝圣之旅｜卢浮宫三宝 · 圣母院 Gothic · 圣礼拜堂彩窗 · 塞纳河畔漫步</p>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-links">
+      <a href="index.html">← 返回主页</a>
+      <a href="day-9-06-11-geneva-to-paris.html">← Day 9</a>
+      <a href="day-11-06-13-paris-to-vienna.html">Day 11 →</a>
+    </div>
+
+    <!-- Map Section -->
+    <div class="map-section">
+      <div class="map-title">🗺️ 当日行程路线（巴黎文化景点环线）</div>
+      <div class="map-container">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m44!1m12!1m3!1d2625.123456789!2d2.3357!3d48.8606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m29!3e2!4m5!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sLe%20M%C3%A9ridien%20Paris%20Arc%20de%20Triomphe%2C%20Avenue%20de%20Wagram%2C%20Paris!3m2!1d48.8757!2d2.2986!4m5!1s0x47e671d877937b0f%3A0xb975bfa6!2sLouvre%20Museum%2C%20Rue%20de%20Rivoli%2C%20Paris!3m2!1d48.8606!2d2.3376!4m5!1s0x47e671f3e7f87ecb%3A0x50b82c3688c5c60!2sCath%C3%A9drale%20Notre-Dame%20de%20Paris%2C%206%20Parvis%20Notre-Dame%20-%20Place%20Jean-Paul%20II%2C%2075004%20Paris!3m2!1d48.8529!2d2.3499!4m5!1s0x47e671f4eb4e3b59%3A0x50b82c3688c4d60!2sSainte-Chapelle%2C%208%20Boulevard%20du%20Palais%2C%2075001%20Paris!3m2!1d48.8554!2d2.345!4m5!1s0x47e66f1d6f9e1234%3A0x50b82c3688c3e60!2sSeine%20River%2C%20Paris!3m2!1d48.8589!2d2.347!5e0!3m2!1sen!2scn!4v1712345678901" 
+          width="100%" 
+          height="350" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+      <div class="map-route">
+        <span>🏨 Le Méridien 酒店</span>
+        <span>→</span>
+        <span>🎨 Louvre Museum 卢浮宫</span>
+        <span>→</span>
+        <span>⛪ Notre-Dame de Paris 巴黎圣母院</span>
+        <span>→</span>
+        <span>🌈 Sainte-Chapelle 圣礼拜堂</span>
+        <span>→</span>
+        <span>🌊 Seine River 塞纳河漫步</span>
+        <span>→</span>
+        <span>🏨 返回酒店</span>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin-top:10px;margin-bottom:0">
+        💡 提示：今日行程集中在巴黎市中心第1区、第4区，全程步行约3-4公里，建议穿舒适步行鞋。各景点之间步行5-15分钟可达。
+      </p>
+    </div>
+
+    <!-- Banner Navigation -->
+    <div class="banner-nav">
+      <div class="banner-title">📍 行程导航</div>
+      <div class="banner-track">
+        <a href="#louvre" class="banner-node active">
+          <div class="banner-time">09:00</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">卢浮宫</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#notredame" class="banner-node">
+          <div class="banner-time">14:00</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">巴黎圣母院</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#saintechapelle" class="banner-node">
+          <div class="banner-time">15:00</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">圣礼拜堂</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#seine" class="banner-node">
+          <div class="banner-time">17:30</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">塞纳河</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#hotel" class="banner-node">
+          <div class="banner-time">22:30</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">返回酒店</div>
+        </a>
+      </div>
+      <div class="scroll-indicator">← 左右滑动查看更多 →</div>
+    </div>
+
+    <!-- Timeline Section -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">📍 行程安排</div>
+        <div class="timeline">
+          
+          <!-- Louvre Museum -->
+          <div class="item" id="louvre">
+            <div class="time">09:00 - 12:30</div>
+            <div class="title">🎨 Louvre Museum 卢浮宫</div>
+            <details>
+              <summary>查看详情</summary>
+              <img class="attraction-img" src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1200&q=80" alt="Louvre Museum">
+              <p class="img-caption">Photo: Louvre Museum and Glass Pyramid | Unsplash</p>
+              
+              <p><strong>【亮点】</strong>卢浮宫(Musée du Louvre)是世界上最大、最古老的艺术博物馆之一，也是巴黎的象征。从前法国王宫到今天的艺术殿堂，这里收藏了超过38万件艺术珍品，横跨人类文明的8000年历史。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">始建年份</div>
+                  <div class="info-value">1204年（原为城堡）</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">开放时间</div>
+                  <div class="info-value">09:00-18:00（周二闭馆）</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">馆藏数量</div>
+                  <div class="info-value">38万+件</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">年访客</div>
+                  <div class="info-value">约800万人次</div>
+                </div>
+              </div>
+              
+              <!-- Masterpiece Gallery -->
+              <div class="attraction-highlight">
+                <div class="attraction-title">👑 卢浮宫三宝</div>
+                <div class="masterpiece-grid">
+                  <div class="masterpiece-card">
+                    <img class="masterpiece-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Mona Lisa">
+                    <div class="masterpiece-content">
+                      <div class="masterpiece-name">🎨 Mona Lisa 蒙娜丽莎</div>
+                      <div class="masterpiece-desc">达·芬奇杰作，神秘微笑背后的艺术巅峰。1503-1519年间创作，尺寸77×53cm。被盗经历让其成为世界最著名画作。</div>
+                    </div>
+                  </div>
+                  <div class="masterpiece-card">
+                    <img class="masterpiece-img" src="https://images.unsplash.com/photo-1564399580075-5dfe19c205f3?w=800&q=80" alt="Winged Victory">
+                    <div class="masterpiece-content">
+                      <div class="masterpiece-name">🏛️ Winged Victory 胜利女神</div>
+                      <div class="masterpiece-desc">公元前190年的古希腊雕塑，发现于萨莫色雷斯岛。高2.75米，展现胜利女神从海风吹拂的船上降临的动态之美。</div>
+                    </div>
+                  </div>
+                  <div class="masterpiece-card">
+                    <img class="masterpiece-img" src="https://images.unsplash.com/photo-1549887534-1541e9326642?w=800&q=80" alt="Venus de Milo">
+                    <div class="masterpiece-content">
+                      <div class="masterpiece-name">🗿 Venus de Milo 断臂维纳斯</div>
+                      <div class="masterpiece-desc">公元前130-100年的古希腊雕塑，高2.02米。1820年在希腊米洛斯岛被发现，是古典美学的永恒象征。</div>
+                    </div>
+                  </div>
+                  <div class="masterpiece-card">
+                    <img class="masterpiece-img" src="https://images.unsplash.com/photo-1566139884358-4d5febe02a48?w=800&q=80" alt="Louvre Pyramid">
+                    <div class="masterpiece-content">
+                      <div class="masterpiece-name">🔺 Glass Pyramid 玻璃金字塔</div>
+                      <div class="masterpiece-desc">贝聿铭1989年设计，高21米，由673块玻璃组成。现代建筑与古典宫殿的完美融合，是卢浮宫的当代标志。</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <img class="attraction-img" src="https://images.unsplash.com/photo-1549144511-f099e773c147?w=1200&q=80" alt="Louvre Interior">
+              <p class="img-caption">Photo: Louvre Museum Interior | Unsplash</p>
+              
+              <p style="margin-top:12px"><strong>🏛️ 主要展馆：</strong></p>
+              <ul>
+                <li><strong>德农馆(Denon)：</strong>意大利绘画（蒙娜丽莎、岩间圣母）、法国绘画、阿波罗画廊</li>
+                <li><strong>萨里馆(Sully)：</strong>古希腊古罗马雕塑（断臂维纳斯、胜利女神）、埃及文物、近东文物</li>
+                <li><strong>黎塞留馆(Richelieu)：</strong>荷兰佛兰德斯绘画、德国绘画、法国雕塑、拿破仑三世套房</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>🎫 门票信息：</strong></p>
+              <ul>
+                <li>成人票：€17（在线预订）</li>
+                <li>18-25岁欧盟居民：免费</li>
+                <li>18岁以下：免费</li>
+                <li>每月第一个周五18:00后：26岁以下免费</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Rue de Rivoli, 75001 Paris<br>
+              【交通】地铁1/7号线至Palais Royal - Musée du Louvre站<br>
+              【建议时长】3-4小时（精选路线），全天（深度参观）<br>
+              【预约入口】见页面底部"卢浮宫预约攻略"</p>
+            </details>
+          </div>
+
+          <!-- Lunch -->
+          <div class="item">
+            <div class="time">12:30 - 14:00</div>
+            <div class="title">🍽️ 午餐</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【推荐区域】</strong>卢浮宫周边或前往圣母院途中</p>
+              <p style="margin-top:8px"><strong>🍴 推荐选择：</strong></p>
+              <ul>
+                <li><strong>卢浮宫内 Café Marly：</strong>可边用餐边欣赏玻璃金字塔和杜乐丽花园，氛围绝佳</li>
+                <li><strong>卢浮宫地下商场 Carrousel du Louvre：</strong>快餐、简餐、咖啡厅选择丰富</li>
+                <li><strong>拉丁区 Rue de Buci：</strong>传统法式小餐馆，价格实惠</li>
+                <li><strong>圣日耳曼德佩区：</strong>文艺气息浓厚，花神咖啡馆、双叟咖啡馆所在区域</li>
+              </ul>
+              <p style="margin-top:8px"><strong>💡 贴士：</strong>卢浮宫附近餐厅价格较高，步行10分钟到拉丁区或玛黑区能找到性价比更好的选择。</p>
+            </details>
+          </div>
+
+          <!-- Notre-Dame de Paris -->
+          <div class="item" id="notredame">
+            <div class="time">14:00 - 15:00</div>
+            <div class="title">⛪ Notre-Dame de Paris 巴黎圣母院</div>
+            <details>
+              <summary>查看详情</summary>
+              <img class="attraction-img" src="https://images.unsplash.com/photo-1478391679764-b2d8b3cdfa6f?w=1200&q=80" alt="Notre-Dame de Paris">
+              <p class="img-caption">Photo: Notre-Dame Cathedral Gothic Facade | Unsplash</p>
+              
+              <p><strong>【亮点】</strong>巴黎圣母院(Cathédrale Notre-Dame de Paris)是哥特式建筑的巅峰之作，也是法国最著名的教堂之一。维克多·雨果的同名小说让这座教堂成为浪漫与悲剧的象征。2019年大火后，修复工程正在如火如荼地进行。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">建造时间</div>
+                  <div class="info-value">1163-1345年（历时180年）</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">建筑风格</div>
+                  <div class="info-value">法国哥特式</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">塔楼高度</div>
+                  <div class="info-value">69米</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">地位</div>
+                  <div class="info-value">联合国教科文组织世界遗产</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🏛️ 哥特式建筑特色：</strong></p>
+              <ul>
+                <li><strong>西立面双塔：</strong>标志性的69米高双塔，南塔为大钟楼所在地</li>
+                <li><strong>玫瑰花窗(Rose Window)：</strong>直径13米的巨大彩色玻璃窗，阳光透过时呈现神秘的光影效果</li>
+                <li><strong>滴水嘴兽(Gargoyles)：</strong>屋顶边缘的怪兽雕塑，兼具排水功能与装饰效果</li>
+                <li><strong>石像鬼(Chimerae)：</strong>著名的"思提志"(Stryge)俯瞰巴黎，是雨果小说《钟楼怪人》的灵感来源</li>
+                <li><strong>飞扶壁(Flying Buttresses)：</strong>哥特式建筑的创新结构，支撑高耸的拱顶</li>
+              </ul>
+              
+              <div class="attraction-highlight">
+                <div class="attraction-title">🌹 玫瑰花窗 (Rose Window)</div>
+                <img class="attraction-img" src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=1200&q=80" alt="Rose Window">
+                <p class="img-caption">Photo: Notre-Dame Rose Window | Unsplash</p>
+                
+                <p>西立面的玫瑰花窗是哥特式彩色玻璃的杰作，直径13米，由数百块彩色玻璃组成，描绘了圣经故事。阳光透过时，内部会被五彩斑斓的光影笼罩，令人屏息。</p>
+                <p style="margin-top:8px"><strong>彩色玻璃主题：</strong>中央为圣母与圣婴，周围环绕着旧约先知和国王。整体设计遵循严格的宗教象征主义，每种颜色都有特定含义。</p>
+              </div>
+              
+              <div class="attraction-highlight">
+                <div class="attraction-title">🔔 钟楼怪人 (The Hunchback of Notre-Dame)</div>
+                <img class="attraction-img" src="https://images.unsplash.com/photo-1549144511-f099e773c147?w=1200&q=80" alt="Notre-Dame Towers">
+                <p class="img-caption">Photo: Notre-Dame Bell Towers | Unsplash</p>
+                
+                <p>维克多·雨果1831年出版的小说《巴黎圣母院》让这座教堂名扬世界。故事中的"钟楼怪人"卡西莫多(Quasimodo)是圣母院的敲钟人，他暗恋吉普赛少女爱斯梅拉达(Esmeralda)。</p>
+                <p style="margin-top:8px"><strong>历史背景：</strong>雨果写作本书时，圣母院正处于破败状态，小说唤起了法国人对这座历史建筑的保护意识，最终促成了19世纪的修复工程。</p>
+                <p style="margin-top:8px"><strong>南塔大钟：</strong>重达13吨的"埃玛纽埃尔"(Emmanuel)大钟，卡西莫多敲钟的场景即在此。</p>
+              </div>
+              
+              <div class="tips-box">
+                <div class="tips-title">⚠️ 修复工程提醒</div>
+                <ul class="tips-list">
+                  <li>2019年4月15日，圣母院遭遇严重火灾，尖顶倒塌</li>
+                  <li>目前修复工程进行中，内部不对外开放参观</li>
+                  <li>外部可正常参观拍照，西立面和双塔保持完好</li>
+                  <li>预计2024年12月重新开放（请关注官方最新消息）</li>
+                  <li>修复期间，广场上的临时装置艺术也是独特体验</li>
+                </ul>
+              </div>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】6 Parvis Notre-Dame - Place Jean-Paul II, 75004 Paris<br>
+              【交通】地铁4号线至Cité站，或RER B/C线至Saint-Michel - Notre-Dame站<br>
+              【修复期间】外观可参观，内部暂不开放<br>
+              【停留时间】30-45分钟（外观）</p>
+            </details>
+          </div>
+
+          <!-- Sainte-Chapelle -->
+          <div class="item" id="saintechapelle">
+            <div class="time">15:00 - 17:00</div>
+            <div class="title">🌈 Sainte-Chapelle 圣礼拜堂</div>
+            <details>
+              <summary>查看详情</summary>
+              <img class="attraction-img" src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=1200&q=80" alt="Sainte-Chapelle">
+              <p class="img-caption">Photo: Sainte-Chapelle Stained Glass Windows | Unsplash</p>
+              
+              <p><strong>【亮点】</strong>圣礼拜堂(Sainte-Chapelle)是巴黎最精美、最神秘的中世纪建筑之一，被誉为"彩绘玻璃的圣殿"。这座13世纪的皇家礼拜堂以其高达15米的彩色玻璃窗闻名于世，描绘了新约全书的故事，宛如一本"石头上的圣经"。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">建造时间</div>
+                  <div class="info-value">1242-1248年（仅6年）</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">建筑风格</div>
+                  <div class="info-value">辐射式哥特式</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">彩色玻璃窗</div>
+                  <div class="info-value">15扇，总面积618㎡</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">建造者</div>
+                  <div class="info-value">路易九世（圣路易）</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🏛️ 建筑结构：</strong></p>
+              <ul>
+                <li><strong>下层礼拜堂：</strong>供宫廷仆役使用，装饰相对朴素，有精美的壁画和雕塑</li>
+                <li><strong>上层礼拜堂：</strong>供王室成员使用，拥有世界上最精美的彩绘玻璃窗群，15扇窗户共描绘了1113幅圣经场景</li>
+                <li><strong>15米彩窗：</strong>从地板直达拱顶的彩绘玻璃，阳光透射时创造出神圣的"光之洗礼"效果</li>
+              </ul>
+              
+              <div class="attraction-highlight">
+                <div class="attraction-title">🌈 彩色玻璃窗 (Vitraux)</div>
+                <img class="attraction-img" src="https://images.unsplash.com/photo-1539650116455-251d9a063595?w=1200&q=80" alt="Stained Glass">
+                <p class="img-caption">Photo: Sainte-Chapelle Upper Chapel Stained Glass | Unsplash</p>
+                
+                <p>圣礼拜堂的15扇彩绘玻璃窗是13世纪艺术的巅峰之作，保存了70%的原始玻璃。这些窗户以蓝色和红色为主色调，按顺时针方向阅读，完整呈现从创世纪到耶稣复活的新约故事。</p>
+                
+                <p style="margin-top:12px"><strong>彩绘玻璃窗内容：</strong></p>
+                <ul>
+                  <li><strong>东侧中央窗：</strong>耶稣受难与复活（最精美）</li>
+                  <li><strong>北侧7扇窗：</strong>旧约故事（创世纪、出埃及记等）</li>
+                  <li><strong>南侧7扇窗：</strong>耶稣生平（诞生、传道、神迹）</li>
+                  <li><strong>玫瑰花窗：</strong>末日审判（15世纪增补）</li>
+                </ul>
+                
+                <p style="margin-top:12px"><strong>最佳观赏时间：</strong>晴天下午3-5点，阳光直射彩绘玻璃窗，内部会沐浴在斑斓的光影中。</p>
+              </div>
+              
+              <div class="attraction-highlight">
+                <div class="attraction-title">👑 圣物储藏室</div>
+                <p>圣礼拜堂最初是为了收藏路易九世从君士坦丁堡购买的耶稣受难圣物而建，包括荆棘冠冕、十字架碎片等。这些圣物如今保存在附近的巴黎圣母院宝库中。</p>
+                <p style="margin-top:8px"><strong>历史意义：</strong>路易九世是法国唯一被册封为圣徒的国王（圣路易），他购买圣物使巴黎成为中世纪基督教的重要朝圣地。</p>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🎫 门票信息：</strong></p>
+              <ul>
+                <li>成人票：€11.50</li>
+                <li>18-25岁欧盟居民：免费</li>
+                <li>18岁以下：免费</li>
+                <li>巴黎博物馆通票：免费</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】8 Boulevard du Palais, 75001 Paris<br>
+              【交通】地铁4号线至Cité站，步行3分钟<br>
+              【开放时间】09:00-17:00（夏季延长至19:00）<br>
+              【建议时长】45-60分钟<br>
+              【贴士】与巴黎古监狱(Conciergerie)联票更划算</p>
+            </details>
+          </div>
+
+          <!-- Seine River -->
+          <div class="item" id="seine">
+            <div class="time">17:30 - 20:00</div>
+            <div class="title">🌊 Seine River 塞纳河漫步 / 游船</div>
+            <details>
+              <summary>查看详情</summary>
+              <img class="attraction-img" src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1200&q=80" alt="Seine River">
+              <p class="img-caption">Photo: Seine River and Paris Bridges | Unsplash</p>
+              
+              <p><strong>【亮点】</strong>塞纳河(La Seine)是巴黎的母亲河，也是这座城市的灵魂所在。河岸两侧被列为联合国教科文组织世界遗产，沿途经过卢浮宫、奥赛博物馆、巴黎圣母院、埃菲尔铁塔等标志性建筑。黄昏时分的塞纳河是巴黎最浪漫的体验之一。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">全长</div>
+                  <div class="info-value">776公里</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">巴黎段</div>
+                  <div class="info-value">约13公里</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">桥梁数量</div>
+                  <div class="info-value">37座（巴黎市内）</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">UNESCO遗产</div>
+                  <div class="info-value">1991年列入</div>
+                </div>
+              </div>
+              
+              <div class="attraction-highlight">
+                <div class="attraction-title">🚢 塞纳河游船 (Bateaux Mouches)</div>
+                <img class="attraction-img" src="https://images.unsplash.com/photo-1562835155-1d5799d986f8?w=1200&q=80" alt="Seine River Cruise">
+                <p class="img-caption">Photo: Seine River Cruise at Sunset | Unsplash</p>
+                
+                <p>乘坐玻璃顶游船沿塞纳河游览是感受巴黎的绝佳方式。1小时的航程经过巴黎最精华的地段，语音导览介绍两岸建筑的历史故事。</p>
+                
+                <p style="margin-top:12px"><strong>游船信息：</strong></p>
+                <ul>
+                  <li><strong>票价：</strong>成人€15，4-13岁€7</li>
+                  <li><strong>航程：</strong>约1小时</li>
+                  <li><strong>出发码头：</strong>Alma桥附近（Pont de l'Alma）</li>
+                  <li><strong>最佳时间：</strong>日落前后（19:00-20:00），可同时欣赏日景和夜景</li>
+                  <li><strong>班次：</strong>每30分钟一班，夏季至22:30</li>
+                </ul>
+                
+                <p style="margin-top:12px"><strong>沿途经过：</strong></p>
+                <p>埃菲尔铁塔 → 荣军院 → 奥赛博物馆 → 卢浮宫 → 巴黎圣母院 → 圣路易岛 → 市政厅 → 阿拉伯世界学院 → 新桥 → 协和广场</p>
+              </div>
+              
+              <div class="attraction-highlight">
+                <div class="attraction-title">☕ 左岸咖啡馆漫步</div>
+                <img class="attraction-img" src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200&q=80" alt="Paris Cafe">
+                <p class="img-caption">Photo: Traditional Parisian Cafe on Left Bank | Unsplash</p>
+                
+                <p>如果不乘船，沿着塞纳河岸漫步也是一种享受。尤其是左岸(Left Bank/Rive Gauche)，这里是巴黎的知识分子和艺术家聚集地，遍布着百年咖啡馆和书店。</p>
+                
+                <p style="margin-top:12px"><strong>🍷 著名咖啡馆：</strong></p>
+                <ul>
+                  <li><strong>Café de Flore 花神咖啡馆：</strong>萨特和波伏娃的"办公室"，存在主义哲学的诞生地</li>
+                  <li><strong>Les Deux Magots 双叟咖啡馆：</strong>海明威、毕加索常去的地方，曾获诺贝尔文学奖</li>
+                  <li><strong>Café de la Paix 和平咖啡馆：</strong>位于歌剧院旁，历史最悠久的咖啡馆之一</li>
+                </ul>
+                
+                <p style="margin-top:12px"><strong>📚 莎士比亚书店：</strong></p>
+                <p>位于圣母院对岸的莎士比亚书店(Shakespeare and Company)是英语文学爱好者的圣地。这家1919年创立的书店曾是海明威、乔伊斯等"迷惘的一代"作家的聚集地。如今的书店是1951年重建的，仍保留着波西米亚的氛围。</p>
+              </div>
+              
+              <div class="attraction-highlight">
+                <div class="attraction-title">🌉 必看桥梁</div>
+                <ul>
+                  <li><strong>Pont Neuf 新桥：</strong>巴黎最古老的桥（1607年建成），连接西岱岛与两岸</li>
+                  <li><strong>Pont des Arts 艺术桥：</strong>著名的"爱情锁"桥（现已禁止挂锁），连接卢浮宫与法兰西学院</li>
+                  <li><strong>Pont Alexandre III 亚历山大三世桥：</strong>最华丽的桥，新艺术风格灯柱和镀金雕塑</li>
+                  <li><strong>Pont de Bir-Hakeim 比尔哈凯姆桥：</strong>《盗梦空间》取景地，双层设计（行人和地铁）</li>
+                </ul>
+              </div>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【推荐路线】从圣母院出发，沿左岸向西漫步至奥赛博物馆或荣军院<br>
+              【游船码头】Port de la Conférence, Pont de l'Alma, 75008 Paris<br>
+              【最佳时间】日落前1小时开始漫步，可同时欣赏日景和夜景<br>
+              【停留时间】2-3小时（含游船或咖啡馆小憩）</p>
+            </details>
+          </div>
+
+          <!-- Dinner -->
+          <div class="item">
+            <div class="time">20:00</div>
+            <div class="title">🍽️ 晚餐</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【推荐选择】</strong></p>
+              <ul>
+                <li><strong>拉丁区(Latin Quarter)：</strong>圣米歇尔大道周边，学生区价格亲民，选择多样</li>
+                <li><strong>玛黑区(Le Marais)：</strong>时尚街区，众多精品餐厅和酒吧</li>
+                <li><strong>圣日耳曼德佩(Saint-Germain-des-Prés)：</strong>高端餐厅区，米其林选择多</li>
+                <li><strong>塞纳河畔：</strong>多家餐厅可边用餐边欣赏河景</li>
+              </ul>
+            </details>
+          </div>
+
+          <!-- Hotel Return -->
+          <div class="item" id="hotel">
+            <div class="time">22:30</div>
+            <div class="title">🏨 返回酒店</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【从塞纳河返回】</strong></p>
+              <p>搭乘地铁1号线或RER A线至Charles de Gaulle-Étoile站，步行5分钟即达酒店。夜晚的香榭丽舍大道灯火辉煌，是巴黎夜生活的中心。</p>
+            </details>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Hotel Details Section -->
+    <div class="section" id="hotel-details">
+      <div class="card-content">
+        <div class="card-title">🏨 酒店详情</div>
+        
+        <div class="hotel-card">
+          <div class="hotel-header">
+            <h3 class="hotel-name">Le Méridien Paris Arc de Triomphe</h3>
+            <span class="hotel-stars">⭐⭐⭐⭐⭐</span>
+            <span class="hotel-chain">艾美酒店（万豪旗下）</span>
+          </div>
+          
+          <div class="hotel-grid">
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📍</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">完整地址</div>
+                <div class="hotel-info-value">81 Avenue de Wagram, 75017 Paris, France</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📞</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">联系电话</div>
+                <div class="hotel-info-value">+33 1 43 80 40 30</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🚇</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">最近地铁站</div>
+                <div class="hotel-info-value">Charles de Gaulle-Étoile（地铁1/2/6号线，RER A线）</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🚶</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">到卢浮宫</div>
+                <div class="hotel-info-value">地铁1号线直达，约15分钟</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">⏰</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">入住/退房时间</div>
+                <div class="hotel-info-value">入住：15:00后 | 退房：12:00前</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🏛️</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">周边景点</div>
+                <div class="hotel-info-value">距凯旋门步行5分钟；距香榭丽舍大道步行10分钟；距埃菲尔铁塔地铁15分钟</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="hotel-amenities">
+            <span class="amenity-tag">✓ 五星豪华酒店</span>
+            <span class="amenity-tag">✓ 118间客房</span>
+            <span class="amenity-tag">✓ 免费WiFi</span>
+            <span class="amenity-tag">✓ 24小时礼宾服务</span>
+            <span class="amenity-tag">✓ 24小时健身中心</span>
+            <span class="amenity-tag">✓ 餐厅及酒吧</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Louvre Tips Section -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">🎫 卢浮宫预约入口攻略</div>
+        
+        <div class="tips-box" style="background:linear-gradient(135deg,#dbeafe 0%,#eff6ff 100%);border-color:#60a5fa">
+          <div class="tips-title" style="color:#1e40af">📱 官方预约渠道</div>
+          <ul class="tips-list" style="color:#1e3a8a">
+            <li><strong>官方网站：</strong>tickets.louvre.fr（最可靠）</li>
+            <li><strong>官方APP：</strong>下载"Louvre"官方APP购票</li>
+            <li><strong>第三方平台：</strong>GetYourGuide、Tiqets（注意手续费）</li>
+            <li><strong>巴黎博物馆通票：</strong>Paris Museum Pass（如计划参观多个博物馆）</li>
+          </ul>
+        </div>
+        
+        <div class="tips-box" style="margin-top:12px;background:linear-gradient(135deg,#fef3c7 0%,#fffbeb 100%)">
+          <div class="tips-title">⏰ 预约时间选择</div>
+          <ul class="tips-list">
+            <li><strong>最佳时段：</strong>09:00开馆即入，人最少，可优先看蒙娜丽莎</li>
+            <li><strong>避开高峰：</strong>周三、周五开馆至21:45，傍晚人流较少</li>
+            <li><strong>避开日期：</strong>周一、周二（部分展厅关闭），法国公众假期</li>
+            <li><strong>每月第一个周五：</strong>18:00后26岁以下免费（需预约）</li>
+          </ul>
+        </div>
+        
+        <div class="tips-box" style="margin-top:12px;background:linear-gradient(135deg,#d1fae5 0%,#ecfdf5 100%);border-color:#6ee7b7">
+          <div class="tips-title" style="color:#065f46">🚪 入口选择（重要！）</div>
+          <ul class="tips-list" style="color:#064e3b">
+            <li><strong>金字塔主入口：</strong>最显眼但排队最长，不推荐</li>
+            <li><strong>🌟 卡鲁塞尔入口(Carrousel du Louvre)：</strong>强烈推荐！位于地下商场，排队最短，99%的人不知道</li>
+            <li><strong>里沃利街入口(Porte des Lions)：</strong>侧门，人流量中等</li>
+            <li><strong>团体入口：</strong>预约团体票可走专门通道</li>
+          </ul>
+        </div>
+        
+        <div class="tips-box" style="margin-top:12px;background:linear-gradient(135deg,#fce7f3 0%,#fdf2f8 100%);border-color:#f9a8d4">
+          <div class="tips-title" style="color:#9d174d">💡 参观贴士</div>
+          <ul class="tips-list" style="color:#831843">
+            <li><strong>下载地图：</strong>卢浮宫APP内有中文地图，面积太大容易迷路</li>
+            <li><strong>优先路线：</strong>蒙娜丽莎（德农馆1层）→ 胜利女神（德农馆顶层）→ 断臂维纳斯（萨里馆0层）</li>
+            <li><strong>蒙娜丽莎：</strong>排队可能长达30-60分钟，建议一开馆就直奔</li>
+            <li><strong>穿着建议：</strong>博物馆内温度较低，建议带件薄外套</li>
+            <li><strong>餐饮：</strong>馆内餐厅价格较高，可在地下商场用餐后再入馆</li>
+            <li><strong>行李：</strong>大包需寄存，入口旁有免费储物柜</li>
+          </ul>
+        </div>
+        
+        <div class="highlight-box" style="margin-top:16px">
+          <strong>📍 卡鲁塞尔入口详细路线：</strong><br>
+          地铁1/7号线至Palais Royal - Musée du Louvre站 → 从"Carrousel du Louvre"出口出站 → 直接进入地下商场 → 沿指示牌"Entrée Musée"前行约3分钟 → 看到倒金字塔后左转 → 持电子票扫码入场
+        </div>
+      </div>
+    </div>
+
+    <!-- Tips Section -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">💡 巴黎核心文化日贴士</div>
+        <ul style="color:var(--muted);padding-left:20px">
+          <li><strong>预约必备：</strong>卢浮宫必须提前预约！当天现场几乎买不到票</li>
+          <li><strong>舒适鞋履：</strong>今日步行约3-4公里，卢浮宫内也需大量行走</li>
+          <li><strong>巴黎博物馆通票：</strong>如计划参观2个以上收费博物馆，通票更划算</li>
+          <li><strong>圣母院现状：</strong>修复期间内部不开放，但外观和广场仍可参观</li>
+          <li><strong>圣礼拜堂最佳时间：</strong>晴天下午3-5点，彩绘玻璃效果最佳</li>
+          <li><strong>塞纳河游船：</strong>日落前后（19:00-20:00）最能感受浪漫氛围</li>
+          <li><strong>左岸漫步：</strong>莎士比亚书店、花神咖啡馆是文学爱好者的朝圣地</li>
+          <li><strong>安全防范：</strong>热门景点需防范扒手，贵重物品放在胸前包</li>
+          <li><strong>餐厅预订：</strong>晚餐建议提前预订，尤其是周五晚上</li>
+          <li><strong>地铁末班：</strong>巴黎地铁约凌晨1:00收班，注意时间安排</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

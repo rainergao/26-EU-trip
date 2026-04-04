@@ -1,80 +1,849 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>欧洲12天行程｜2026年6月</title>
-  <style>
-    :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08)}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
-    a{color:var(--blue);text-decoration:none} a:hover{text-decoration:underline}
-    .wrap{max-width:1160px;margin:0 auto;padding:24px}
-    .hero{background:linear-gradient(135deg,#1d4ed8,#2563eb 60%,#60a5fa);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
-    .hero h1{margin:0 0 8px;font-size:32px}
-    .hero p{margin:0;opacity:.95}
-    .stats{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
-    .stat{background:rgba(255,255,255,.15);padding:12px 20px;border-radius:12px}
-    .stat-value{font-size:24px;font-weight:800}
-    .stat-label{font-size:12px;opacity:.9}
-    .section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
-    .hd{padding:22px 22px 12px;border-bottom:1px solid var(--line)}
-    .hd h2{margin:0 0 6px;font-size:26px}
-    .sub{color:var(--muted);font-size:14px}
-    .bd{padding:18px 22px 22px}
-    .entrygrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
-    .daycard{background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:0 6px 16px rgba(15,23,42,.04)}
-    .daycard h3{margin:0 0 8px;font-size:20px}.daycard p{margin:0;color:var(--muted)}
-    .daycard .enter{display:inline-block;margin-top:12px;padding:10px 14px;border-radius:10px;background:var(--blue);color:#fff;font-weight:700}
-    .progress{margin:20px 0;padding:16px;background:#fef3c7;border:1px solid #fed7aa;color:#92400e;border-radius:16px}
-    @media(max-width:900px){.wrap{padding:16px}.hero{padding:22px}}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欧洲12天深度行程</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #e53e3e;
+            --gold: #d69e2e;
+            --light: #f7fafc;
+            --dark: #1a202c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .hero .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--gold);
+        }
+        
+        .stat-label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .section-header p {
+            color: #666;
+        }
+        
+        /* Map Section */
+        .map-section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .map-container {
+            position: relative;
+            padding-bottom: 50%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .route-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 25px;
+            padding: 20px;
+            background: var(--light);
+            border-radius: 12px;
+        }
+        
+        .route-city {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            font-weight: 500;
+        }
+        
+        .route-arrow {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+        
+        /* Days Grid */
+        .days-section {
+            margin-bottom: 50px;
+        }
+        
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .day-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .day-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+        
+        .day-header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: white;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .day-number {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        
+        .day-date {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .day-body {
+            padding: 20px;
+        }
+        
+        .day-route {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .day-route .arrow {
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+        
+        .day-highlights {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .day-highlights ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .day-highlights li {
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .day-highlights li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+        
+        .day-footer {
+            padding: 15px 20px;
+            background: var(--light);
+            font-size: 0.85rem;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .transport-type {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Info Section */
+        .info-section {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .info-block h3 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-block ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .info-block li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .info-block li:last-child {
+            border-bottom: none;
+        }
+        
+        .info-block .icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .info-block strong {
+            color: var(--primary);
+        }
+        
+        /* Country Flags */
+        .country-flag {
+            font-size: 1.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #a0aec0;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-time {
+            color: #718096;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .stats {
+                gap: 30px;
+            }
+            
+            .stat-number {
+                font-size: 2.2rem;
+            }
+            
+            .days-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .map-container {
+                padding-bottom: 70%;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="hero">
-    <h1>🇪🇺 欧洲12天深度行程</h1>
-    <p>2026年6月3日 - 6月14日｜维也纳出发·维也纳返回</p>
-    <div class="stats">
-      <div class="stat"><div class="stat-value">12</div><div class="stat-label">天行程</div></div>
-      <div class="stat"><div class="stat-value">4</div><div class="stat-label">国家</div></div>
-      <div class="stat"><div class="stat-value">8</div><div class="stat-label">城市</div></div>
-      <div class="stat"><div class="stat-value">6</div><div class="stat-label">进行中</div></div>
-    </div>
-  </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🌍 欧洲12天深度行程</h1>
+            <p class="subtitle">2025年6月3日 - 6月14日 | 一次穿越中欧与西欧的经典之旅</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">天行程</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">个国家</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">座城市</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <div class="progress">
-    <strong>🚧 制作进度：D1-D3 已完成（25%）</strong><br>
-    当前可查看：Day 1-3 | 待制作：Day 4-12 + 完整主页
-  </div>
+    <!-- Map Section -->
+    <div class="container">
+        <div class="map-section">
+            <div class="section-header">
+                <h2>🗺️ 行程概览地图</h2>
+                <p>从维也纳出发，穿越四国，最终返回起点</p>
+            </div>
+            
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d14117855.838685193!2d1.5045049312500155!3d46.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x476d079e5136ca9f%3A0xfdc2e58a51a25b46!2sVienna%2C%20Austria!3m2!1d48.2081743!2d16.3738189!4m5!1s0x47f4ea6b689fc375%3A0x408ab2ae4baa830!2sBratislava%2C%20Slovakia!3m2!1d48.1485965!2d17.1077477!5e0!3m2!1sen!2s!4v1709820000000!5m2!1sen!2s"
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            
+            <div class="route-info">
+                <div class="route-city">🇦🇹 维也纳 Vienna</div>
+                <span class="route-arrow">→</span>
+                <div class="route-city">🇸🇰 布拉迪斯拉发 Bratislava</div>
+                <span class="route-arrow">→</span>
+                <div class="route-city">🇮🇹 罗马 Rome</div>
+                <span class="route-arrow">→</span>
+                <div class="route-city">🇮🇹 威尼斯 Venice</div>
+                <span class="route-arrow">→</span>
+                <div class="route-city">🇮🇹 米兰 Milan</div>
+                <span class="route-arrow">→</span>
+                <div class="route-city">🇨🇭 格林德瓦 Grindelwald</div>
+                <span class="route-arrow">→</span>
+                <div class="route-city">🇨🇭 日内瓦 Geneva</div>
+                <span class="route-arrow">→</span>
+                <div class="route-city">🇫🇷 巴黎 Paris</div>
+                <span class="route-arrow">→</span>
+                <div class="route-city">🇦🇹 维也纳 Vienna</div>
+            </div>
+        </div>
 
-  <div class="section">
-    <div class="hd"><h2>📅 每日行程</h2><div class="sub">点击查看详细行程安排、景点介绍、交通指南</div></div>
-    <div class="bd">
-      <div class="entrygrid">
-        <div class="daycard"><h3>Day 1</h3><p>06-03｜Vienna → Bratislava<br>🇦🇹奥地利·🇷🇴斯洛伐克</p><a class="enter" href="day-1-06-03-vienna-to-bratislava.html">进入行程</a></div>
-        <div class="daycard"><h3>Day 2</h3><p>06-04｜Bratislava → Rome<br>🇷🇴斯洛伐克·🇮🇹意大利</p><a class="enter" href="day-2-06-04-bratislava-to-rome.html">进入行程</a></div>
-        <div class="daycard"><h3>Day 3</h3><p>06-05｜Rome → Venice<br>🇮🇹意大利</p><a class="enter" href="day-3-06-05-rome-to-venice.html">进入行程</a></div>
-        <div class="daycard" style="opacity:.6"><h3>Day 4</h3><p>06-06｜Venice<br>🇮🇹意大利</p><span class="enter" style="background:var(--muted)">制作中...</span></div>
-        <div class="daycard" style="opacity:.6"><h3>Day 5</h3><p>06-07｜Venice → Milan<br>🇮🇹意大利</p><span class="enter" style="background:var(--muted)">制作中...</span></div>
-        <div class="daycard" style="opacity:.6"><h3>Day 6</h3><p>06-08｜Milan<br>🇮🇹意大利</p><span class="enter" style="background:var(--muted)">制作中...</span></div>
-        <div class="daycard" style="opacity:.6"><h3>Day 7</h3><p>06-09｜Milan → Grindelwald<br>🇮🇹意大利·🇨🇭瑞士</p><span class="enter" style="background:var(--muted)">制作中...</span></div>
-        <div class="daycard" style="opacity:.6"><h3>Day 8</h3><p>06-10｜Grindelwald → Geneva<br>🇨🇭瑞士</p><span class="enter" style="background:var(--muted)">制作中...</span></div>
-        <div class="daycard" style="opacity:.6"><h3>Day 9</h3><p>06-11｜Geneva → Paris<br>🇨🇭瑞士·🇫🇷法国</p><span class="enter" style="background:var(--muted)">制作中...</span></div>
-        <div class="daycard" style="opacity:.6"><h3>Day 10</h3><p>06-12｜Paris<br>🇫🇷法国</p><span class="enter" style="background:var(--muted)">制作中...</span></div>
-        <div class="daycard" style="opacity:.6"><h3>Day 11</h3><p>06-13｜Paris → Vienna<br>🇫🇷法国·🇦🇹奥地利</p><span class="enter" style="background:var(--muted)">制作中...</span></div>
-        <div class="daycard" style="opacity:.6"><h3>Day 12</h3><p>06-14｜Vienna → 返程<br>🇦🇹奥地利</p><span class="enter" style="background:var(--muted)">制作中...</span></div>
-      </div>
-    </div>
-  </div>
+        <!-- Days Grid -->
+        <div class="days-section">
+            <div class="section-header">
+                <h2>📅 每日行程</h2>
+                <p>点击卡片查看详细安排</p>
+            </div>
+            
+            <div class="days-grid">
+                <!-- Day 1 -->
+                <a href="day1.html" class="day-card">
+                    <div class="day-header">
+                        <div class="day-number">Day 1</div>
+                        <div class="day-date">6月3日 周二</div>
+                    </div>
+                    <div class="day-body">
+                        <div class="day-route">
+                            🇦🇹 维也纳 <span class="arrow">→</span> 🇸🇰 布拉迪斯拉发
+                        </div>
+                        <div class="day-highlights">
+                            <ul>
+                                <li>中央咖啡馆 Café Central</li>
+                                <li>霍夫堡皇宫</li>
+                                <li>斯蒂芬大教堂</li>
+                                <li>美景宫花园</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="day-footer">
+                        <span class="transport-type">🚂 火车 20:14</span>
+                        <span>🏨 AC Hotel</span>
+                    </div>
+                </a>
 
-  <div class="section">
-    <div class="hd"><h2>🗺️ 行程概览</h2></div>
-    <div class="bd">
-      <p><strong>路线：</strong>Vienna → Bratislava → Rome → Venice → Milan → Grindelwald → Geneva → Paris → Vienna</p>
-      <p style="color:var(--muted);margin-top:8px">覆盖奥地利、斯洛伐克、意大利、瑞士、法国五国精华，从古典艺术到阿尔卑斯自然风光。</p>
+                <!-- Day 2 -->
+                <a href="day2.html" class="day-card">
+                    <div class="day-header">
+                        <div class="day-number">Day 2</div>
+                        <div class="day-date">6月4日 周三</div>
+                    </div>
+                    <div class="day-body">
+                        <div class="day-route">
+                            🇸🇰 布拉迪斯拉发 <span class="arrow">→</span> 🇮🇹 罗马
+                        </div>
+                        <div class="day-highlights">
+                            <ul>
+                                <li>万神殿 Pantheon</li>
+                                <li>纳沃纳广场</li>
+                                <li>特雷维喷泉</li>
+                                <li>罗马斗兽场</li>
+                                <li>橘园日落</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="day-footer">
+                        <span class="transport-type">✈️ 航班 08:00</span>
+                        <span>🏨 Le Méridien</span>
+                    </div>
+                </a>
+
+                <!-- Day 3 -->
+                <a href="day3.html" class="day-card">
+                    <div class="day-header">
+                        <div class="day-number">Day 3</div>
+                        <div class="day-date">6月5日 周四</div>
+                    </div>
+                    <div class="day-body">
+                        <div class="day-route">
+                            🇮🇹 罗马 <span class="arrow">→</span> 🇮🇹 威尼斯
+                        </div>
+                        <div class="day-highlights">
+                            <ul>
+                                <li>博尔盖塞美术馆</li>
+                                <li>梵蒂冈博物馆</li>
+                                <li>圣彼得大教堂</li>
+                                <li>圣天使堡</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="day-footer">
+                        <span class="transport-type">🚄 高铁 18:35</span>
+                        <span>🏨 Best Western</span>
+                    </div>
+                </a>
+
+                <!-- Day 4 -->
+                <a href="day4.html" class="day-card">
+                    <div class="day-header">
+                        <div class="day-number">Day 4</div>
+                        <div class="day-date">6月6日 周五</div>
+                    </div>
+                    <div class="day-body">
+                        <div class="day-route">
+                            🇮🇹 威尼斯
+                        </div>
+                        <div class="day-highlights">
+                            <ul>
+                                <li>大运河 Vaporetto</li>
+                                <li>Rialto桥</li>
+                                <li>圣马可广场 & 教堂</li>
+                                <li>总督宫</li>
+                                <li>夜威尼斯</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="day-footer">
+                        <span class="transport-type">🚢 水上巴士</span>
+                        <span>🏨 Best Western</span>
+                    </div>
+                </a>
+
+                <!-- Day 5 -->
+                <a href="day5.html" class="day-card">
+                    <div class="day-header">
+                        <div class="day-number">Day 5</div>
+                        <div class="day-date">6月7日 周六</div>
+                    </div>
+                    <div class="day-body">
+                        <div class="day-route">
+                            🇮🇹 威尼斯 <span class="arrow">→</span> 🇮🇹 米兰
+                        </div>
+                        <div class="day-highlights">
+                            <ul>
+                                <li>米兰大教堂（含屋顶）</li>
+                                <li>埃马努埃莱长廊</li>
+                                <li>斯卡拉歌剧院</li>
+                                <li>斯福尔扎城堡</li>
+                                <li>Corso Como夜生活</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="day-footer">
+                        <span class="transport-type">🚄 高铁 07:30</span>
+                        <span>🏨 Holiday Inn</span>
+                    </div>
+                </a>
+
+                <!-- Day 6 -->
+                <a href="day6.html" class="day-card">
+                    <div class="day-header">
+                        <div class="day-number">Day 6</div>
+                        <div class="day-date">6月8日 周日</div>
+                    </div>
+                    <div class="day-body">
+                        <div class="day-route">
+                            🇮🇹 米兰
+                        </div>
+                        <div class="day-highlights">
+                            <ul>
+                                <li>最后的晚餐（如有票）</li>
+                                <li>Navigli运河区</li>
+                                <li>时尚四边形</li>
+                                <li>Brera文艺区</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="day-footer">
+                        <span class="transport-type">🚇 市区交通</span>
+                        <span>🏨 Holiday Inn</span>
+                    </div>
+                </a>
+
+                <!-- Day 7 -->
+                <a href="day7.html" class="day-card">
+                    <div class="day-header">
+                        <div class="day-number">Day 7</div>
+                        <div class="day-date">6月9日 周一</div>
+                    </div>
+                    <div class="day-body">
+                        <div class="day-route">
+                            🇮🇹 米兰 <span class="arrow">→</span> 🇨🇭 格林德瓦
+                        </div>
+                        <div class="day-highlights">
+                            <ul>
+                                <li>First山</li>
+                                <li>Cliff Walk 悬崖步道</li>
+                                <li>Bachalpsee 徒步</li>
+                                <li>阿尔卑斯山景</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="day-footer">
+                        <span class="transport-type">🚂 火车 07:20</span>
+                        <span>🏨 Hotel Central</span>
+                    </div>
+                </a>
+
+                <!-- Day 8 -->
+                <a href="day8.html" class="day-card">
+                    <div class="day-header">
+                        <div class="day-number">Day 8</div>
+                        <div class="day-date">6月10日 周二</div>
+                    </div>
+                    <div class="day-body">
+                        <div class="day-route">
+                            🇨🇭 格林德瓦 <span class="arrow">→</span> 🇨🇭 日内瓦
+                        </div>
+                        <div class="day-highlights">
+                            <ul>
+                                <li>小镇晨间散步</li>
+                                <li>日内瓦湖</li>
+                                <li>大喷泉 Jet d'Eau</li>
+                                <li>联合国总部参观</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="day-footer">
+                        <span class="transport-type">🚂 火车 10:47</span>
+                        <span>🏨 Adagio</span>
+                    </div>
+                </a>
+
+                <!-- Day 9 -->
+                <a href="day9.html" class="day-card">
+                    <div class="day-header">
+                        <div class="day-number">Day 9</div>
+                        <div class="day-date">6月11日 周三</div>
+                    </div>
+                    <div class="day-body">
+                        <div class="day-route">
+                            🇨🇭 日内瓦 <span class="arrow">→</span> 🇫🇷 巴黎
+                        </div>
+                        <div class="day-highlights">
+                            <ul>
+                                <li>日内瓦老城</li>
+                                <li>圣彼得大教堂</li>
+                                <li>凯旋门</li>
+                                <li>香榭丽舍大街</li>
+                                <li>埃菲尔铁塔夜景</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="day-footer">
+                        <span class="transport-type">🚄 TGV 12:30</span>
+                        <span>🏨 Le Méridien</span>
+                    </div>
+                </a>
+
+                <!-- Day 10 -->
+                <a href="day10.html" class="day-card">
+                    <div class="day-header">
+                        <div class="day-number">Day 10</div>
+                        <div class="day-date">6月12日 周四</div>
+                    </div>
+                    <div class="day-body">
+                        <div class="day-route">
+                            🇫🇷 巴黎
+                        </div>
+                        <div class="day-highlights">
+                            <ul>
+                                <li>卢浮宫博物馆</li>
+                                <li>巴黎圣母院</li>
+                                <li>圣礼拜堂</li>
+                                <li>塞纳河散步/游船</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="day-footer">
+                        <span class="transport-type">🚇 市区交通</span>
+                        <span>🏨 Le Méridien</span>
+                    </div>
+                </a>
+
+                <!-- Day 11 -->
+                <a href="day11.html" class="day-card">
+                    <div class="day-header">
+                        <div class="day-number">Day 11</div>
+                        <div class="day-date">6月13日 周五</div>
+                    </div>
+                    <div class="day-body">
+                        <div class="day-route">
+                            🇫🇷 巴黎 <span class="arrow">→</span> 🇦🇹 维也纳
+                        </div>
+                        <div class="day-highlights">
+                            <ul>
+                                <li>蒙马特高地</li>
+                                <li>圣心大教堂</li>
+                                <li>小丘广场</li>
+                                <li>返回维也纳</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="day-footer">
+                        <span class="transport-type">✈️ 航班 17:30</span>
+                        <span>🏨 Moxy机场</span>
+                    </div>
+                </a>
+
+                <!-- Day 12 -->
+                <a href="day12.html" class="day-card">
+                    <div class="day-header">
+                        <div class="day-number">Day 12</div>
+                        <div class="day-date">6月14日 周六</div>
+                    </div>
+                    <div class="day-body">
+                        <div class="day-route">
+                            🇦🇹 维也纳 <span class="arrow">→</span> ✈️ 返程
+                        </div>
+                        <div class="day-highlights">
+                            <ul>
+                                <li>机场值机</li>
+                                <li>免税购物</li>
+                                <li>返回国内</li>
+                                <li>行程圆满结束</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="day-footer">
+                        <span class="transport-type">✈️ 航班 12:45</span>
+                        <span>🏠 回家</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="info-section">
+            <div class="section-header">
+                <h2>📋 实用信息</h2>
+            </div>
+            
+            <div class="info-grid">
+                <!-- 行程总览 -->
+                <div class="info-block">
+                    <h3><span class="icon">🗓️</span> 行程总览</h3>
+                    <ul>
+                        <li><span class="icon">📅</span> <strong>出发日期：</strong>2025年6月3日</li>
+                        <li><span class="icon">🏠</span> <strong>返回日期：</strong>2025年6月14日</li>
+                        <li><span class="icon">⏱️</span> <strong>总天数：</strong>12天11晚</li>
+                        <li><span class="icon">🇦🇹</span> <strong>途径国家：</strong>奥地利、斯洛伐克、意大利、瑞士、法国</li>
+                        <li><span class="icon">🏙️</span> <strong>途经城市：</strong>维也纳、布拉迪斯拉发、罗马、威尼斯、米兰、格林德瓦、日内瓦、巴黎</li>
+                        <li><span class="icon">🎒</span> <strong>行程类型：</strong>文化历史 + 自然风光 + 城市体验</li>
+                    </ul>
+                </div>
+
+                <!-- 紧急联系 -->
+                <div class="info-block">
+                    <h3><span class="icon">🆘</span> 紧急联系</h3>
+                    <ul>
+                        <li><span class="icon">🚔</span> <strong>欧洲通用紧急电话：</strong>112</li>
+                        <li><span class="icon">👮</span> <strong>奥地利警察：</strong>133</li>
+                        <li><span class="icon">🚑</span> <strong>奥地利急救：</strong>144</li>
+                        <li><span class="icon">🚒</span> <strong>奥地利火警：</strong>122</li>
+                        <li><span class="icon">🏛️</span> <strong>中国领事馆：</strong>+86-10-12308</li>
+                        <li><span class="icon">📱</span> <strong>外交部领保：</strong>+86-10-12308</li>
+                    </ul>
+                </div>
+
+                <!-- 注意事项 -->
+                <div class="info-block">
+                    <h3><span class="icon">⚠️</span> 注意事项</h3>
+                    <ul>
+                        <li><span class="icon">💶</span> 奥地利、斯洛伐克、意大利、法国使用欧元；瑞士使用瑞郎</li>
+                        <li><span class="icon">🔌</span> 欧洲插座为Type C/F，需携带转换插头</li>
+                        <li><span class="icon">🎫</span> 热门景点需提前预订门票（尤其是最后的晚餐、卢浮宫）</li>
+                        <li><span class="icon">🚂</span> 瑞士铁路发达但票价较高，可考虑Swiss Travel Pass</li>
+                        <li><span class="icon">💧</span> 瑞士和意大利自来水可直接饮用</li>
+                        <li><span class="icon">📶</span> 建议提前购买欧洲多国通用SIM卡或漫游包</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>🌍 欧洲12天深度行程</h3>
+            <p>探索中欧与西欧的经典之旅</p>
+            
+            <div class="footer-links">
+                <a href="https://github.com" target="_blank">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+                <a href="#">📧 联系作者</a>
+                <a href="#">📄 导出PDF</a>
+            </div>
+            
+            <p class="footer-time">制作时间：2025年4月5日 | 最后更新：2025年4月5日</p>
+            <p style="color: #4a5568; font-size: 0.85rem; margin-top: 10px;">© 2025 欧洲行程规划 | 祝您旅途愉快！</p>
+        </div>
+    </footer>
 </body>
 </html>
