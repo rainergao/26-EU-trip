@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Day 2｜06-04｜Bratislava → Rome</title>
+  <style>
+    :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08)}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+    .wrap{max-width:1160px;margin:0 auto;padding:24px}
+    .hero{background:linear-gradient(135deg,#1d4ed8,#2563eb 60%,#60a5fa);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
+    .hero h1{margin:0 0 10px;font-size:32px}
+    .hero p{margin:0;opacity:.95}
+    .hero .meta{margin-top:12px;font-size:14px;opacity:.9}
+    .nav{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+    .nav a{color:var(--blue);text-decoration:none;font-weight:600;padding:8px 16px;background:var(--card);border-radius:12px;border:1px solid var(--line)}
+    .section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
+    .section-header{padding:20px 24px;border-bottom:1px solid var(--line);background:#fafafa}
+    .section-header h2{margin:0;font-size:20px;display:flex;align-items:center;gap:10px}
+    .section-body{padding:24px}
+    .transport{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .transport-icon{width:56px;height:56px;background:linear-gradient(135deg,#3b82f6,#2563eb);border-radius:16px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px}
+    .transport-info{flex:1}
+    .transport-info h3{margin:0 0 4px;font-size:18px}
+    .transport-info p{margin:0;color:var(--muted);font-size:14px}
+    .hotel{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .hotel-icon{width:56px;height:56px;background:linear-gradient(135deg,#f59e0b,#d97706);border-radius:16px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px}
+    .hotel-info{flex:1}
+    .hotel-info h3{margin:0 0 4px;font-size:18px}
+    .hotel-info p{margin:0;color:var(--muted);font-size:14px}
+    .timeline{margin-left:8px}
+    .item{position:relative;padding:0 0 16px 24px;border-left:2px solid #dbeafe}
+    .item:before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:999px;background:var(--blue);box-shadow:0 0 0 4px #eff6ff}
+    .item:last-child{border-left-color:transparent}
+    .time{color:var(--blue);font-size:13px;font-weight:800;margin-bottom:4px}
+    .title{font-size:18px;font-weight:800;margin-bottom:4px}
+    .desc{color:var(--muted);font-size:14px;margin-bottom:8px}
+    details{margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fafafa;padding:10px 12px}
+    summary{font-weight:600;cursor:pointer;padding:4px 0;list-style:none}
+    summary::-webkit-details-marker{display:none}
+    summary:before{content:"▸";margin-right:6px;display:inline-block;transition:transform .2s}
+    details[open] summary:before{transform:rotate(90deg)}
+    .details-content{padding-top:12px;font-size:14px}
+    .details-content h4{margin:12px 0 6px;font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+    .details-content h4:first-child{margin-top:0}
+    .details-content p{margin:0 0 8px}
+    .tag{display:inline-block;padding:3px 10px;background:#eff6ff;color:var(--blue);border-radius:20px;font-size:12px;font-weight:600;margin-right:6px;margin-bottom:6px}
+    .food-tag{background:#fef3c7;color:#d97706}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Hero Section -->
+    <div class="hero">
+      <h1>Day 2｜06-04｜Bratislava → Rome</h1>
+      <p>从布拉迪斯拉发飞往永恒之城罗马，开启古罗马文明探索之旅。一天之内遍览万神殿、纳沃纳广场、许愿池、西班牙阶梯、斗兽场等经典地标，最后在阿文提诺山的橘园欣赏绝美日落。</p>
+      <div class="meta">📅 2025年6月4日 星期三 | 🌍 斯洛伐克 → 意大利</div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav">
+      <a href="index.html">← 返回主页</a>
+      <a href="day-1-06-03-vienna-to-bratislava.html">前一天 (D1)</a>
+      <a href="day-3-06-05-rome-to-venice.html">后一天 (D3) →</a>
+    </div>
+
+    <!-- Transport Section -->
+    <div class="section">
+      <div class="section-header">
+        <h2>✈️ 大交通</h2>
+      </div>
+      <div class="section-body">
+        <div class="transport">
+          <div class="transport-icon">✈️</div>
+          <div class="transport-info">
+            <h3>航班 FR4225</h3>
+            <p>Bratislava (BTS) → Rome CIA | 08:00 - 09:35 | 约1小时35分钟</p>
+            <p style="margin-top:6px;color:var(--text)">📝 建议提前2小时到达机场，罗马钱皮诺机场距离市中心较近</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hotel Section -->
+    <div class="section">
+      <div class="section-header">
+        <h2>🏨 住宿</h2>
+      </div>
+      <div class="section-body">
+        <div class="hotel">
+          <div class="hotel-icon">🏨</div>
+          <div class="hotel-info">
+            <h3>Le Méridien Visconti Rome</h3>
+            <p>📍 罗马市中心 | 距离主要景点步行可达</p>
+            <p style="margin-top:6px;color:var(--text)">万豪集团旗下高端酒店，位于历史中心区，交通便利</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline Section -->
+    <div class="section">
+      <div class="section-header">
+        <h2>📍 行程时间线</h2>
+      </div>
+      <div class="section-body">
+        <div class="timeline">
+          <!-- 05:30 -->
+          <div class="item">
+            <div class="time">05:30</div>
+            <div class="title">起床</div>
+            <div class="desc">早起准备，收拾行李，享用简易早餐</div>
+          </div>
+
+          <!-- 06:00 -->
+          <div class="item">
+            <div class="time">06:00</div>
+            <div class="title">出发前往机场</div>
+            <div class="desc">从酒店前往布拉迪斯拉发机场 (BTS)</div>
+          </div>
+
+          <!-- 08:00 -->
+          <div class="item">
+            <div class="time">08:00</div>
+            <div class="title">航班起飞 ✈️</div>
+            <div class="desc">FR4225 飞往罗马</div>
+          </div>
+
+          <!-- 09:35 -->
+          <div class="item">
+            <div class="time">09:35</div>
+            <div class="title">抵达罗马</div>
+            <div class="desc">到达罗马钱皮诺机场 (CIA)，前往酒店办理入住</div>
+          </div>
+
+          <!-- Pantheon -->
+          <div class="item">
+            <div class="time">11:30</div>
+            <div class="title">万神殿 Pantheon ⭐</div>
+            <div class="desc">古罗马建筑奇迹，世界最大砌筑圆顶</div>
+            <details>
+              <summary>查看详情</summary>
+              <div class="details-content">
+                <h4>🌟 亮点</h4>
+                <p>• 穹顶直径43.3米，是世界上最大的无筋混凝土圆顶，被米开朗基罗赞为「天使的设计」</p>
+                <p>• 穹顶中央直径8.9米的圆洞（Oculus）是殿内唯一光源，阳光洒入形成神圣光柱</p>
+                <p>• 文艺复兴大师拉斐尔长眠于此，墓上方有圣母子雕像</p>
+                <p>• 16根花岗岩圆柱组成的希腊式柱廊，石材来自埃及</p>
+                
+                <h4>📍 地址</h4>
+                <p>Piazza della Rotonda, 00186 Roma RM, Italy</p>
+                
+                <h4>🚇 交通方式</h4>
+                <p>• 从罗马钱皮诺机场：乘机场大巴至Termini火车站，转乘公交116/116T至Santa Chiara站，步行3分钟</p>
+                <p>• 地铁：A线至Barberini站，步行约10分钟</p>
+                
+                <h4>⏱️ 建议停留时间</h4>
+                <p>30分钟 - 1小时（殿内不大，但建筑值得细细欣赏）</p>
+                
+                <h4>💡 贴士</h4>
+                <p>• 门票€5，建议提前官网预订</p>
+                <p>• 作为教堂，入内需穿着得体，肩膀及膝盖需遮盖</p>
+                <p>• 每月第一个周日免费（需现场排队）</p>
+              </div>
+            </details>
+          </div>
+
+          <!-- Piazza Navona -->
+          <div class="item">
+            <div class="time">12:30</div>
+            <div class="title">纳沃纳广场 Piazza Navona ⭐</div>
+            <div class="desc">罗马最美丽的广场，三座巴洛克喷泉杰作</div>
+            <details>
+              <summary>查看详情</summary>
+              <div class="details-content">
+                <h4>🌟 亮点</h4>
+                <p>• 四河喷泉（Fontana dei Quattro Fiumi）：贝尼尼1651年设计的巅峰之作，四座人像分别象征尼罗河、恒河、多瑙河与拉普拉塔河</p>
+                <p>• 摩尔人喷泉：广场南端，1653年贝尼尼增加中央摩尔人雕像</p>
+                <p>• 海神喷泉：广场北端，1574年由贾科莫·德拉·波塔设计</p>
+                <p>• 圣阿涅塞教堂：博罗米尼设计的巴洛克建筑典范，波浪形立面精美绝伦</p>
+                <p>• 广场保留古罗马图密善竞技场的椭圆形轮廓</p>
+                
+                <h4>📍 地址</h4>
+                <p>Piazza Navona, 00186 Roma RM, Italy</p>
+                
+                <h4>🚶 交通方式</h4>
+                <p>• 从万神殿：向西步行约5分钟（约300米）</p>
+                <p>• 公交：40/46/62/64/81/87/116/492/628路至Corso Rinascimento</p>
+                
+                <h4>⏱️ 建议停留时间</h4>
+                <p>1 - 2小时</p>
+              </div>
+            </details>
+          </div>
+
+          <!-- Lunch -->
+          <div class="item">
+            <div class="time">13:30</div>
+            <div class="title">午餐 🍝</div>
+            <div class="desc">在纳沃纳广场周边享用正宗意大利午餐</div>
+          </div>
+
+          <!-- Trevi Fountain -->
+          <div class="item">
+            <div class="time">14:30</div>
+            <div class="title">特雷维喷泉 Trevi Fountain ⭐</div>
+            <div class="desc">全球最大的巴洛克式喷泉，投币许愿的传统圣地</div>
+            <details>
+              <summary>查看详情</summary>
+              <div class="details-content">
+                <h4>🌟 亮点</h4>
+                <p>• 全球最大的巴洛克式喷泉，1762年由尼科洛·萨尔维设计完成</p>
+                <p>• 中央是驾驭战车的海神尼普顿，两侧是丰饶与健康女神</p>
+                <p>• 电影《罗马假日》取景地，因赫本而闻名世界</p>
+                <p>• 投币许愿传统：背对喷泉用右手从左肩上方抛入硬币，可确保再次回到罗马</p>
+                
+                <h4>📍 地址</h4>
+                <p>Piazza di Trevi, 00187 Roma RM, Italy</p>
+                
+                <h4>🚶 交通方式</h4>
+                <p>• 从纳沃纳广场：步行约10-15分钟，途经Via del Corso商业街</p>
+                <p>• 地铁：A线至Barberini站，步行约10分钟</p>
+                
+                <h4>⏱️ 建议停留时间</h4>
+                <p>15 - 30分钟</p>
+                
+                <h4>💡 贴士</h4>
+                <p>• 9:00-17:00人最多，建议上午9点前或傍晚前往</p>
+                <p>• 注意保管随身物品，谨防扒手</p>
+                <p>• 2024年12月起需购票进入（约€2），但可在喷泉外围免费观赏</p>
+              </div>
+            </details>
+          </div>
+
+          <!-- Spanish Steps -->
+          <div class="item">
+            <div class="time">15:30</div>
+            <div class="title">西班牙台阶 Spanish Steps ⭐</div>
+            <div class="desc">《罗马假日》经典场景，欧洲最宽最长的户外阶梯</div>
+            <details>
+              <summary>查看详情</summary>
+              <div class="details-content">
+                <h4>🌟 亮点</h4>
+                <p>• 全欧洲最长最宽的户外阶梯，共135级，建于1723-1725年</p>
+                <p>• 连接西班牙广场与山顶的圣三一教堂，是洛可可风格的建筑杰作</p>
+                <p>• 破船喷泉（Fontana della Barcaccia）：台阶下方的巴洛克喷泉，贝尼尼父亲设计</p>
+                <p>• Via dei Condotti：罗马最著名的奢侈品购物街，一线品牌旗舰店林立</p>
+                <p>• 《罗马假日》中赫本吃冰淇淋的经典场景</p>
+                
+                <h4>📍 地址</h4>
+                <p>Piazza di Spagna, 00187 Roma, Italy</p>
+                
+                <h4>🚶 交通方式</h4>
+                <p>• 从特雷维喷泉：步行约10分钟</p>
+                <p>• 地铁：A线至Spagna站，出站即达</p>
+                
+                <h4>⏱️ 建议停留时间</h4>
+                <p>1小时（含周边购物区）</p>
+                
+                <h4>💡 贴士</h4>
+                <p>• 现在禁止坐在台阶上，否则可能面临罚款</p>
+                <p>• 早上8-9点人少，适合拍照</p>
+                <p>• 山顶圣三一教堂可免费参观</p>
+              </div>
+            </details>
+          </div>
+
+          <!-- Colosseum -->
+          <div class="item">
+            <div class="time">16:30</div>
+            <div class="title">罗马斗兽场 Colosseum ⭐</div>
+            <div class="desc">古罗马文明的象征，世界新七大奇迹之一</div>
+            <details>
+              <summary>查看详情</summary>
+              <div class="details-content">
+                <h4>🌟 亮点</h4>
+                <p>• 建于公元72-80年，可容纳5-8万名观众，是古罗马最大的圆形角斗场</p>
+                <p>• 外墙高48米，共四层，曾是角斗士生死搏斗的舞台</p>
+                <p>• 地下复杂的通道和囚笼系统，当年供野兽和角斗士使用</p>
+                <p>• 世界新七大奇迹之一，罗马最具代表性的地标</p>
+                
+                <h4>📍 地址</h4>
+                <p>Piazza del Colosseo, 1, 00184 Roma RM, Italy</p>
+                
+                <h4>🚇 交通方式</h4>
+                <p>• 从西班牙台阶：步行约20分钟，或乘地铁A线至Termini转B线</p>
+                <p>• 地铁：B线至Colosseo站，出站即见斗兽场</p>
+                <p>• 公交：60/75/85/87/117/271/571/175/186/810/850/C3路至Colosseo站</p>
+                
+                <h4>⏱️ 建议停留时间</h4>
+                <p>1.5 - 2小时</p>
+                
+                <h4>💡 贴士</h4>
+                <p>• 门票€18（含古罗马广场和帕拉蒂尼山），强烈建议提前网上预约</p>
+                <p>• 持Roma Pass可走快速通道</p>
+                <p>• 参观顺序建议：斗兽场 → 帕拉蒂尼山 → 古罗马广场</p>
+              </div>
+            </details>
+          </div>
+
+          <!-- Roman Forum -->
+          <div class="item">
+            <div class="time">18:00</div>
+            <div class="title">古罗马广场 Roman Forum ⭐</div>
+            <div class="desc">古罗马的政治宗教商业中心，众神与凯撒的殿堂</div>
+            <details>
+              <summary>查看详情</summary>
+              <div class="details-content">
+                <h4>🌟 亮点</h4>
+                <p>• 建于公元前7世纪，是古罗马时代最重要的公共建筑群</p>
+                <p>• 提图斯凯旋门（Arch of Titus）：公元81年建造，罗马现存最古老的凯旋门</p>
+                <p>• 圣道（Via Sacra）：古罗马的主街道，从卡比托利欧山延伸至斗兽场</p>
+                <p>• 凯撒神庙：屋大维为养父凯撒修建，始建于公元前42年</p>
+                <p>• 元老院（Curia）：古罗马审议团体，类似现代议会</p>
+                <p>• 灶神庙（Temple of Vesta）：供奉炉灶女神，圣火由贞女守护</p>
+                
+                <h4>📍 地址</h4>
+                <p>Via della Salara Vecchia, 5/6, 00186 Roma RM, Italy</p>
+                
+                <h4>🚶 交通方式</h4>
+                <p>• 从斗兽场：步行约5分钟，从斗兽场出来即可看到入口</p>
+                <p>• 与斗兽场使用联票，入口位于神圣之路（Via Sacra）</p>
+                
+                <h4>⏱️ 建议停留时间</h4>
+                <p>1.5 - 2小时</p>
+                
+                <h4>💡 贴士</h4>
+                <p>• 建议下载官方App「You&Colosseo」，有中文导览</p>
+                <p>• 园区较大，穿舒适的鞋子，注意防晒</p>
+                <p>• 傍晚光线柔和，适合摄影</p>
+              </div>
+            </details>
+          </div>
+
+          <!-- Giardino degli Aranci -->
+          <div class="item">
+            <div class="time">19:30</div>
+            <div class="title">橘园日落 Giardino degli Aranci 🌅</div>
+            <div class="desc">阿文提诺山上的秘密花园，俯瞰罗马全景的绝美日落</div>
+            <details>
+              <summary>查看详情</summary>
+              <div class="details-content">
+                <h4>🌟 亮点</h4>
+                <p>• 位于阿文提诺山上，是罗马最佳的日落观赏点之一</p>
+                <p>• 从露台可俯瞰台伯河、圣彼得大教堂圆顶、罗马历史中心全景</p>
+                <p>• 园内种植大量苦橙树，春天橘花芬芳四溢</p>
+                <p>• 毗邻著名的「马耳他骑士团钥匙孔」——透过钥匙孔可看到圣彼得大教堂</p>
+                <p>• 圣萨宾娜大教堂（Basilica di Santa Sabina）：罗马现存最古老的教堂之一（公元5世纪）</p>
+                
+                <h4>📍 地址</h4>
+                <p>Piazza Pietro D'Illiria, 00153 Roma RM, Italy</p>
+                
+                <h4>🚇 交通方式</h4>
+                <p>• 从古罗马广场：步行至Circo Massimo地铁站约10分钟，从地铁站步行上山约10分钟</p>
+                <p>• 地铁：B线至Circo Massimo站，沿Via di Santa Sabina步行上山</p>
+                <p>• 也可乘公交或打车前往</p>
+                
+                <h4>⏱️ 建议停留时间</h4>
+                <p>45分钟 - 1小时（日落前后最美）</p>
+                
+                <h4>💡 贴士</h4>
+                <p>• 免费入场，每日开放（通常7:00-日落）</p>
+                <p>• 日落时分人多，建议提前到达占位</p>
+                <p>• 钥匙孔在附近马耳他骑士团修道院大门，可能需要排队</p>
+                <p>• 附近是住宅区，请保持安静</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tips Section -->
+    <div class="section">
+      <div class="section-header">
+        <h2>💡 今日贴士</h2>
+      </div>
+      <div class="section-body">
+        <p>🎫 <strong>门票建议：</strong>斗兽场+古罗马广场+帕拉蒂尼山联票€18，强烈建议提前网上预约；万神殿€5，可现场购买</p>
+        <p>🚶 <strong>步行强度：</strong>今日步行量较大，约15-20公里，请穿舒适的运动鞋</p>
+        <p>🌡️ <strong>天气：</strong>6月初罗马气温约20-28°C，注意防晒和补水</p>
+        <p>⚠️ <strong>安全：</strong>景点人多处注意保管财物，谨防扒手</p>
+        <p>📱 <strong>推荐App：</strong>下载「You&Colosseo」APP获取古罗马广场中文导览</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

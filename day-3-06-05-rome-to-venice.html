@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 3｜06-05｜Rome → Venice</title>
+  <style>
+    :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08)}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+    .wrap{max-width:1160px;margin:0 auto;padding:24px}
+    .hero{background:linear-gradient(135deg,#1d4ed8,#2563eb 60%,#60a5fa);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
+    .hero h1{margin:0 0 8px;font-size:28px}
+    .hero p{margin:0;opacity:.9;font-size:16px}
+    .nav{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+    .nav a{color:var(--blue);text-decoration:none;padding:8px 16px;background:var(--card);border-radius:12px;border:1px solid var(--line);font-size:14px;font-weight:600}
+    .nav a:hover{background:#eff6ff}
+    .section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
+    .section-header{padding:20px 24px;border-bottom:1px solid var(--line);background:#fafafa}
+    .section-header h2{margin:0;font-size:18px;color:var(--text)}
+    .section-body{padding:24px}
+    .transport-info{display:flex;gap:20px;flex-wrap:wrap}
+    .transport-info>div{flex:1;min-width:200px}
+    .transport-info strong{color:var(--blue);font-size:14px;display:block;margin-bottom:4px}
+    .hotel-info{display:flex;align-items:flex-start;gap:16px}
+    .hotel-icon{font-size:32px}
+    .hotel-details h3{margin:0 0 4px;font-size:18px}
+    .hotel-details p{margin:0;color:var(--muted);font-size:14px}
+    .timeline{margin-left:8px}
+    .item{position:relative;padding:0 0 16px 24px;border-left:2px solid #dbeafe}
+    .item:last-child{border-left:2px solid transparent}
+    .item:before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:999px;background:var(--blue);box-shadow:0 0 0 4px #eff6ff}
+    .time{color:var(--blue);font-size:13px;font-weight:800;margin-bottom:4px}
+    .title{font-size:18px;font-weight:800;margin-bottom:4px}
+    .desc{color:var(--muted);font-size:14px;margin-bottom:8px}
+    details{margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fafafa;padding:10px 12px;cursor:pointer}
+    details summary{font-weight:600;font-size:14px;color:var(--text)}
+    details[open] summary{margin-bottom:10px}
+    .detail-content{font-size:13px;color:var(--muted)}
+    .detail-content p{margin:6px 0}
+    .detail-content strong{color:var(--text)}
+    .tag{display:inline-block;padding:4px 10px;background:#eff6ff;color:var(--blue);border-radius:20px;font-size:12px;font-weight:600;margin-right:6px}
+    .summary-bar{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+    .summary-item{font-size:14px;color:var(--muted)}
+    .summary-item strong{color:var(--text)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Hero -->
+    <div class="hero">
+      <h1>Day 3｜06-05｜Rome → Venice</h1>
+      <p>艺术+宗教核心日 — 从文艺复兴的博尔盖塞到梵蒂冈的神圣殿堂，穿越千年文明的灵魂之旅</p>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav">
+      <a href="index.html">← 返回主页</a>
+      <a href="day-2-06-04-bratislava-to-rome.html">← Day 2: Bratislava → Rome</a>
+      <a href="day-4-06-06-venice.html">Day 4: Venice → →</a>
+    </div>
+
+    <!-- Transport Card -->
+    <div class="section">
+      <div class="section-header">
+        <h2>🚄 大交通</h2>
+      </div>
+      <div class="section-body">
+        <div class="transport-info">
+          <div>
+            <strong>班次</strong>
+            Frecciarossa 红箭高铁
+          </div>
+          <div>
+            <strong>路线</strong>
+            Rome Termini → Venice Mestre
+          </div>
+          <div>
+            <strong>时间</strong>
+            18:35 - 22:42 (约4小时7分钟)
+          </div>
+          <div>
+            <strong>票价参考</strong>
+            €45-85 (建议提前在Trenitalia官网购买)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hotel Card -->
+    <div class="section">
+      <div class="section-header">
+        <h2>🏨 住宿</h2>
+      </div>
+      <div class="section-body">
+        <div class="hotel-info">
+          <div class="hotel-icon">🏨</div>
+          <div class="hotel-details">
+            <h3>Best Western Plus Hotel Bologna</h3>
+            <p>📍 Via Piave 214, Venice Mestre, 30171, Italy</p>
+            <p>🚶 距离Mestre火车站步行约3分钟，交通便利</p>
+            <p>✨ 评分：8.5/10 | 四星级商务酒店，早餐丰富，房间舒适</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="section">
+      <div class="section-header">
+        <h2>📍 行程安排</h2>
+      </div>
+      <div class="section-body">
+        <div class="timeline">
+          
+          <!-- Item 1 -->
+          <div class="item">
+            <div class="time">08:30</div>
+            <div class="title">博尔盖塞美术馆 (Galleria Borghese)</div>
+            <div class="desc">文艺复兴艺术瑰宝，贝尼尼雕塑与卡拉瓦乔画作的殿堂</div>
+            <span class="tag">需提前预约</span>
+            <details>
+              <summary>查看详情</summary>
+              <div class="detail-content">
+                <p><strong>🎨 亮点：</strong>贝尼尼《阿波罗与达芙妮》《大卫》《被劫持的普罗塞庇娜》；卡拉瓦乔《手提歌利亚头的大卫》《捧果篮的男孩》；提香《神圣与世俗之爱》</p>
+                <p><strong>📍 地址：</strong>Piazzale Scipione Borghese 5, 00197 Roma RM, Italy</p>
+                <p><strong>🚇 交通：</strong>地铁Line A线到Spagna站或Flaminio站，步行约15分钟；或从酒店打车/公交52、53、83、160、490、495路到Pinciano/Borghese站</p>
+                <p><strong>⏱️ 建议停留：</strong>2小时 (入场分时段，每次限2小时)</p>
+                <p><strong>💡 贴士：</strong>必须提前官网预约(galleriaborghese.beniculturali.it)，旺季建议提前2-4周预订；门票€13+预约费€2；周三至周一9:00-19:00开放</p>
+              </div>
+            </details>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="item">
+            <div class="time">11:30</div>
+            <div class="title">梵蒂冈博物馆 (Vatican Museums)</div>
+            <div class="desc">世界上最伟大的艺术博物馆之一，西斯廷礼拜堂所在地</div>
+            <span class="tag">需提前预约</span>
+            <details>
+              <summary>查看详情</summary>
+              <div class="detail-content">
+                <p><strong>🎨 亮点：</strong>西斯廷礼拜堂(米开朗基罗《创世纪》《最后的审判》)；拉斐尔画室(《雅典学院》《圣礼之争》)；地图廊；松果庭院；埃及馆和伊特鲁里亚馆</p>
+                <p><strong>📍 地址：</strong>Viale Vaticano, 00165 Roma RM, Italy</p>
+                <p><strong>🚇 交通：</strong>从博尔盖塞美术馆步行20分钟或打车；或地铁Line A线到Ottaviano站或Cipro站，步行10分钟</p>
+                <p><strong>⏱️ 建议停留：</strong>3-4小时</p>
+                <p><strong>💡 贴士：</strong>强烈建议提前官网购票(museivaticani.va)避开排队；门票€17；周一六9:00-18:00开放，周日闭馆(除每月最后一个周日免费)；着装有要求(肩膝需遮盖)</p>
+              </div>
+            </details>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="item">
+            <div class="time">14:00</div>
+            <div class="title">圣彼得大教堂 (St. Peter's Basilica)</div>
+            <div class="desc">基督教世界的中心，巴洛克建筑的巅峰之作</div>
+            <span class="tag">免费入场</span>
+            <details>
+              <summary>查看详情</summary>
+              <div class="detail-content">
+                <p><strong>🎨 亮点：</strong>米开朗基罗《圣殇》(Pietà)；贝尼尼设计的青铜华盖(Baldacchino)；教皇祭坛；圣彼得宝座；穹顶登顶俯瞰罗马全景(需付费€8-10)</p>
+                <p><strong>📍 地址：</strong>Piazza San Pietro, 00120 Città del Vaticano</p>
+                <p><strong>🚇 交通：</strong>从梵蒂冈博物馆步行10分钟(经西斯廷礼拜堂直通圣彼得大教堂，无需重新安检)；或从圣天使堡步行10分钟</p>
+                <p><strong>⏱️ 建议停留：</strong>1.5-2小时</p>
+                <p><strong>💡 贴士：</strong>教堂免费入场但需安检；穹顶登顶8:00开放建议早去；电梯到一半后需爬320级台阶；穿着要求严格(短裤短裙无袖衫禁止)；弥撒期间部分区域关闭</p>
+              </div>
+            </details>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="item">
+            <div class="time">15:30</div>
+            <div class="title">圣天使堡 (Castel Sant'Angelo) - 外观</div>
+            <div class="desc">古罗马陵墓变身中世纪城堡，台伯河畔的标志性圆顶建筑</div>
+            <span class="tag">外观免费</span>
+            <details>
+              <summary>查看详情</summary>
+              <div class="detail-content">
+                <p><strong>🎨 外观看点：</strong>巨大的圆柱形古罗马结构；顶部的青铜天使雕像(手持长矛的米迦勒天使)；圣天使桥上的10座天使雕像(贝尼尼设计)；城堡与桥梁的壮丽组合</p>
+                <p><strong>📍 地址：</strong>Lungotevere Castello, 50, 00193 Roma RM, Italy</p>
+                <p><strong>🚇 交通：</strong>从圣彼得大教堂出发，沿协和大道(Via della Conciliazione)向东步行10分钟，跨过圣天使桥即达</p>
+                <p><strong>⏱️ 建议停留：</strong>20-30分钟(外观拍照)</p>
+                <p><strong>💡 贴士：</strong>如想入内参观需门票€15(可提前购票)，内有教皇的避难通道、武器博物馆、屋顶露台；傍晚的城堡外景和圣天使桥是摄影黄金时间</p>
+              </div>
+            </details>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="item">
+            <div class="time">16:30</div>
+            <div class="title">返回酒店取行李</div>
+            <div class="desc">从圣天使堡区域返回酒店，收拾行李准备前往火车站</div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="item">
+            <div class="time">18:35</div>
+            <div class="title">罗马火车站出发</div>
+            <div class="desc">前往Roma Termini火车站，搭乘Frecciarossa高铁前往威尼斯</div>
+          </div>
+
+          <!-- Item 7 -->
+          <div class="item">
+            <div class="time">22:42</div>
+            <div class="title">抵达威尼斯Mestre</div>
+            <div class="desc">入住Best Western Plus Hotel Bologna，结束充实的艺术之旅</div>
+          </div>
+
+        </div>
+
+        <!-- Summary -->
+        <div class="summary-bar">
+          <div class="summary-item"><strong>📅 日期：</strong>6月5日</div>
+          <div class="summary-item"><strong>🚶 步行：</strong>约12-15km</div>
+          <div class="summary-item"><strong>🏛️ 景点：</strong>4个核心景点</div>
+          <div class="summary-item"><strong>🎫 门票：</strong>约€30-35</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Important Notes -->
+    <div class="section">
+      <div class="section-header">
+        <h2>⚠️ 重要提示</h2>
+      </div>
+      <div class="section-body">
+        <ul style="margin:0;padding-left:20px;color:var(--muted)">
+          <li>博尔盖塞美术馆<strong>必须提前预约</strong>，临时去大概率无法入场</li>
+          <li>梵蒂冈博物馆建议购买免排队票，旺季排队可达2小时</li>
+          <li>进入教堂/博物馆要求肩部和膝盖遮盖，建议带披肩或穿长裤</li>
+          <li>火车票建议提前购买，旺季当天可能无票或价格翻倍</li>
+          <li>下午行程紧凑，注意控制时间，确保18:00前到达火车站</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+{
+  "day1": {
+    "date": "06-03",
+    "route": "Vienna → Bratislava",
+    "title": "Day 1｜06-03｜Vienna → Bratislava",
+    "schedule": [
+      {"time": "07:25", "activity": "抵达维也纳机场"},
+      {"time": "08:30", "activity": "进城(Wien Mitte寄存行李)"},
+      {"time": "09:30", "activity": "Café Central（中央咖啡馆）"},
+      {"time": "10:30", "activity": "霍夫堡皇宫"},
+      {"time": "11:30", "activity": "斯蒂芬大教堂"},
+      {"time": "12:30", "activity": "午餐"},
+      {"time": "14:00", "activity": "美景宫花园"},
+      {"time": "17:30", "activity": "取行李"},
+      {"time": "20:14", "activity": "火车前往Bratislava"},
+      {"time": "21:10", "activity": "抵达Bratislava"}
+    ],
+    "transport": {
+      "type": "火车",
+      "details": "Vienna Hbf → Bratislava hl.st",
+      "time": "20:14-21:10"
+    },
+    "hotel": {
+      "name": "AC Hotel Bratislava Old Town",
+      "location": "Bratislava老城"
+    },
+    "notes": "首日轻松+老城精华压缩",
+    "cities": ["Vienna", "Bratislava"],
+    "country": ["奥地利", "斯洛伐克"]
+  },
+  "day2": {
+    "date": "06-04", 
+    "route": "Bratislava → Rome",
+    "title": "Day 2｜06-04｜Bratislava → Rome",
+    "schedule": [
+      {"time": "05:30", "activity": "起床"},
+      {"time": "06:00", "activity": "出发前往机场"},
+      {"time": "08:00", "activity": "航班起飞"},
+      {"time": "09:35", "activity": "抵达罗马"},
+      {"time": "11:30", "activity": "万神殿(Pantheon)"},
+      {"time": "12:30", "activity": "纳沃纳广场(Piazza Navona)"},
+      {"time": "13:30", "activity": "午餐"},
+      {"time": "14:30", "activity": "特雷维喷泉(Trevi Fountain)"},
+      {"time": "15:30", "activity": "西班牙台阶(Spanish Steps)"},
+      {"time": "16:30", "activity": "罗马斗兽场(Colosseum)"},
+      {"time": "18:00", "activity": "古罗马广场(Roman Forum)"},
+      {"time": "19:30", "activity": "橘园日落(Giardino degli Aranci)"}
+    ],
+    "transport": {
+      "type": "航班",
+      "details": "FR4225 Bratislava → Rome",
+      "time": "08:00-09:35"
+    },
+    "hotel": {
+      "name": "Le Méridien Visconti Rome",
+      "location": "罗马市中心"
+    },
+    "notes": "罗马高覆盖日",
+    "cities": ["Bratislava", "Rome"],
+    "country": ["斯洛伐克", "意大利"]
+  },
+  "day3": {
+    "date": "06-05",
+    "route": "Rome → Venice", 
+    "title": "Day 3｜06-05｜Rome → Venice",
+    "schedule": [
+      {"time": "08:30", "activity": "博尔盖塞美术馆(Galleria Borghese)"},
+      {"time": "11:30", "activity": "梵蒂冈博物馆(Vatican Museums)"},
+      {"time": "14:00", "activity": "圣彼得大教堂(St. Peter's Basilica)"},
+      {"time": "15:30", "activity": "圣天使堡(外观, Castel Sant'Angelo)"},
+      {"time": "16:30", "activity": "回酒店取行李"},
+      {"time": "18:35", "activity": "高铁前往Venice"},
+      {"time": "22:42", "activity": "抵达Mestre"}
+    ],
+    "transport": {
+      "type": "高铁",
+      "details": "Frecciarossa Rome → Venice Mestre",
+      "time": "18:35-22:42"
+    },
+    "hotel": {
+      "name": "Best Western Plus Hotel Bologna",
+      "location": "Venice Mestre"
+    },
+    "notes": "艺术+宗教核心日",
+    "cities": ["Rome", "Venice"],
+    "country": ["意大利"]
+  }
+}
