@@ -5,28 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Day 1｜06-03｜Vienna → Bratislava</title>
   <style>
-    :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08)}
+    :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08);--accent:#f59e0b}
     body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
     .wrap{max-width:1160px;margin:0 auto;padding:24px}
+    
+    /* Hero Section */
     .hero{background:linear-gradient(135deg,#1d4ed8,#2563eb 60%,#60a5fa);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
+    h1{margin:0 0 8px;font-size:28px}
+    .subtitle{margin:0;opacity:.9;font-size:16px}
+    
+    /* Map Section */
+    .map-section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px}
+    .map-title{font-size:16px;font-weight:700;margin-bottom:12px;color:var(--text);display:flex;align-items:center;gap:8px}
+    .map-container{width:100%;height:300px;border-radius:16px;overflow:hidden;background:#f3f4f6;position:relative}
+    .map-container iframe{width:100%;height:100%;border:0}
+    .map-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);background:linear-gradient(135deg,#e5e7eb 0%,#f3f4f6 100%)}
+    .map-placeholder svg{width:48px;height:48px;margin-bottom:12px;opacity:.5}
+    .map-route{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:13px;color:var(--muted)}
+    .map-route span{background:#f3f4f6;padding:4px 10px;border-radius:12px}
+    
+    /* Banner Navigation */
+    .banner-nav{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px;overflow-x:auto}
+    .banner-title{font-size:14px;font-weight:700;color:var(--muted);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
+    .banner-track{display:flex;align-items:center;min-width:max-content;gap:0}
+    .banner-node{display:flex;flex-direction:column;align-items:center;text-decoration:none;position:relative;padding:0 8px}
+    .banner-node:first-child{padding-left:0}
+    .banner-node:last-child{padding-right:0}
+    .banner-time{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px;white-space:nowrap}
+    .banner-dot{width:14px;height:14px;border-radius:50%;background:var(--line);border:3px solid var(--card);box-shadow:0 0 0 2px var(--line);transition:all .2s}
+    .banner-node:hover .banner-dot{background:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+    .banner-node.active .banner-dot{background:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+    .banner-label{font-size:12px;color:var(--text);margin-top:8px;white-space:nowrap;font-weight:500;max-width:80px;text-align:center;line-height:1.3}
+    .banner-arrow{color:var(--line);font-size:20px;margin:0 4px;padding-bottom:20px}
+    
+    /* Cards */
     .section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
-    .timeline{margin-left:8px}
-    .item{position:relative;padding:0 0 16px 24px;border-left:2px solid #dbeafe}
-    .item:before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:999px;background:var(--blue);box-shadow:0 0 0 4px #eff6ff}
-    .time{color:var(--blue);font-size:13px;font-weight:800;margin-bottom:4px}
-    .title{font-size:18px;font-weight:800;margin-bottom:4px}
-    details{margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fafafa;padding:10px 12px}
-    summary{cursor:pointer;font-weight:600;color:var(--blue)}
-    .nav-links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
-    .nav-links a{color:var(--blue);text-decoration:none;font-weight:500}
-    .nav-links a:hover{text-decoration:underline}
     .card-content{padding:20px}
     .card-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px}
     .card-text{color:var(--muted);font-size:14px}
+    
+    /* Timeline */
+    .timeline{margin-left:8px}
+    .item{position:relative;padding:0 0 16px 24px;border-left:2px solid #dbeafe}
+    .item:before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:999px;background:var(--blue);box-shadow:0 0 0 4px #eff6ff}
+    .item:last-child{border-left:2px solid transparent}
+    .time{color:var(--blue);font-size:13px;font-weight:800;margin-bottom:4px}
+    .title{font-size:18px;font-weight:800;margin-bottom:4px}
+    
+    /* Details */
+    details{margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fafafa;padding:10px 12px}
+    summary{cursor:pointer;font-weight:600;color:var(--blue)}
+    details[open] summary{margin-bottom:12px}
+    
+    /* Attraction Images */
+    .attraction-img{width:100%;border-radius:16px;margin:12px 0;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+    .img-caption{font-size:12px;color:var(--muted);text-align:center;margin-top:4px;font-style:italic}
+    
+    /* Navigation */
+    .nav-links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+    .nav-links a{color:var(--blue);text-decoration:none;font-weight:500}
+    .nav-links a:hover{text-decoration:underline}
+    
+    /* Utilities */
     .highlight-box{background:#eff6ff;border-left:4px solid var(--blue);padding:12px 16px;border-radius:0 12px 12px 0;margin:12px 0}
     .tag{display:inline-block;background:var(--bg);color:var(--muted);font-size:12px;padding:4px 10px;border-radius:20px;margin-right:8px}
-    h1{margin:0 0 8px;font-size:28px}
-    .subtitle{margin:0;opacity:.9;font-size:16px}
+    .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+    .info-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
+    .info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+    .info-value{font-size:14px;font-weight:600;color:var(--text)}
+    .scroll-indicator{display:none}
+    @media(max-width:768px){.banner-nav{padding:16px 12px}.scroll-indicator{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:8px}}
   </style>
 </head>
 <body>
@@ -41,6 +89,86 @@
     <div class="nav-links">
       <a href="index.html">← 返回主页</a>
       <a href="day-2-06-04-bratislava-to-rome.html">Day 2 →</a>
+    </div>
+
+    <!-- Map Section -->
+    <div class="map-section">
+      <div class="map-title">🗺️ 当日行程路线</div>
+      <div class="map-container">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d1685157.123456789!2d16.3725042!3d48.2083534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x476d079bf235e79b%3A0x45f387520bd6ef45!2sVienna%20International%20Airport%2C%201300%20Flughafen%20Wien%2C%20Austria!3m2!1d48.1102973!2d16.5696465!4m5!1s0x476c89360aca5917%3A0xa2c1d0563c5f5d9d!2sBratislava%2C%20Slovakia!3m2!1d48.1485965!2d17.1077478!5e0!3m2!1sen!2scn!4v1712345678901" 
+          width="100%" 
+          height="300" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+      <div class="map-route">
+        <span>📍 维也纳机场</span>
+        <span>→</span>
+        <span>Wien Mitte</span>
+        <span>→</span>
+        <span>中央咖啡馆</span>
+        <span>→</span>
+        <span>霍夫堡</span>
+        <span>→</span>
+        <span>斯蒂芬大教堂</span>
+        <span>→</span>
+        <span>美景宫</span>
+        <span>→</span>
+        <span>Bratislava</span>
+      </div>
+    </div>
+
+    <!-- Banner Navigation -->
+    <div class="banner-nav">
+      <div class="banner-title">📍 行程导航</div>
+      <div class="banner-track">
+        <a href="#arrival" class="banner-node">
+          <div class="banner-time">07:25</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">维也纳机场</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#mitte" class="banner-node">
+          <div class="banner-time">08:30</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">Wien Mitte</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#cafe" class="banner-node active">
+          <div class="banner-time">09:30</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">中央咖啡馆</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#hofburg" class="banner-node">
+          <div class="banner-time">10:30</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">霍夫堡</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#cathedral" class="banner-node">
+          <div class="banner-time">11:30</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">斯蒂芬大教堂</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#belvedere" class="banner-node">
+          <div class="banner-time">14:00</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">美景宫</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#bratislava" class="banner-node">
+          <div class="banner-time">21:10</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">Bratislava</div>
+        </a>
+      </div>
+      <div class="scroll-indicator">← 左右滑动查看更多 →</div>
     </div>
 
     <!-- Transport Card -->
@@ -76,7 +204,7 @@
         <div class="timeline">
           
           <!-- Arrival -->
-          <div class="item">
+          <div class="item" id="arrival">
             <div class="time">07:25</div>
             <div class="title">✈️ 抵达维也纳机场</div>
             <details>
@@ -89,7 +217,7 @@
           </div>
 
           <!-- Luggage Storage -->
-          <div class="item">
+          <div class="item" id="mitte">
             <div class="time">08:30</div>
             <div class="title">🧳 进城(Wien Mitte寄存行李)</div>
             <details>
@@ -102,41 +230,155 @@
           </div>
 
           <!-- Café Central -->
-          <div class="item">
+          <div class="item" id="cafe">
             <div class="time">09:30</div>
             <div class="title">☕ Café Central（中央咖啡馆）</div>
             <details>
               <summary>查看详情</summary>
-              <p><strong>【亮点】</strong>维也纳最著名的咖啡馆之一，被誉为"世界十大最美咖啡馆"。建于1860年，曾是弗洛伊德、托洛茨基、希特勒等名人聚会的场所。新文艺复兴风格装饰，穹顶精美，氛围优雅。推荐品尝维也纳经典咖啡Melange和萨赫蛋糕(Sachertorte)。</p>
-              <p><strong>【地址】</strong>Herrengasse 14, 1010 Wien, Austria</p>
-              <p><strong>【交通方式】</strong>从Wien Mitte站搭乘地铁U3线至Herrengasse站，步行3分钟即达</p>
-              <p><strong>【建议停留时间】</strong>45-60分钟（品咖啡+甜点）</p>
+              <img class="attraction-img" src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=1200&q=80" alt="Café Central Vienna Interior">
+              <p class="img-caption">Photo: Café Central Vienna | Unsplash</p>
+              
+              <p><strong>【亮点】</strong>维也纳最著名的咖啡馆之一，被誉为"世界十大最美咖啡馆"。建于1860年，曾是弗洛伊德、托洛茨基、希特勒等名人聚会的场所。新文艺复兴风格装饰，穹顶精美，氛围优雅。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">历史</div>
+                  <div class="info-value">始建于1860年</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">建筑风格</div>
+                  <div class="info-value">新文艺复兴</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">名人足迹</div>
+                  <div class="info-value">弗洛伊德、托洛茨基</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">必点美食</div>
+                  <div class="info-value">Melange、萨赫蛋糕</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🍰 必点美食：</strong></p>
+              <ul>
+                <li><strong>Melange</strong> - 维也纳经典咖啡，类似卡布奇诺但更奶香浓郁</li>
+                <li><strong>萨赫蛋糕(Sachertorte)</strong> - 奥地利国宝级甜点，巧克力蛋糕配杏子酱</li>
+                <li><strong>苹果卷(Apfelstrudel)</strong> - 传统维也纳甜点，薄面皮包裹肉桂苹果</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Herrengasse 14, 1010 Wien, Austria<br>
+              【交通】从Wien Mitte站搭乘地铁U3线至Herrengasse站，步行3分钟即达<br>
+              【停留时间】45-60分钟（品咖啡+甜点）</p>
             </details>
           </div>
 
           <!-- Hofburg Palace -->
-          <div class="item">
+          <div class="item" id="hofburg">
             <div class="time">10:30</div>
             <div class="title">🏛️ 霍夫堡皇宫</div>
             <details>
               <summary>查看详情</summary>
-              <p><strong>【亮点】</strong>哈布斯堡王朝的冬宫，欧洲最宏伟的皇宫建筑群之一。看点包括：皇家公寓(Imperial Apartments)、茜茜公主博物馆(Sisi Museum)、银器馆(Silver Collection)、西班牙骑术学校。新古典主义与巴洛克风格完美融合，见证600年帝国辉煌。</p>
-              <p><strong>【地址】</strong>Michaelerkuppel, 1010 Wien, Austria</p>
-              <p><strong>【交通方式】</strong>从中央咖啡馆步行约10分钟，或搭乘地铁U3线至Herrengasse站再步行5分钟</p>
-              <p><strong>【建议停留时间】</strong>60-90分钟</p>
+              <img class="attraction-img" src="https://images.unsplash.com/photo-1516550893923-42d28e5677af?w=1200&q=80" alt="Hofburg Palace Vienna">
+              <p class="img-caption">Photo: Hofburg Palace | Unsplash</p>
+              
+              <p><strong>【亮点】</strong>哈布斯堡王朝的冬宫，欧洲最宏伟的皇宫建筑群之一。自1279年以来一直是奥地利统治者的居所，见证了600年帝国辉煌。玛丽亚·特蕾莎、茜茜公主、弗朗茨·约瑟夫皇帝都曾在此居住。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">历史</div>
+                  <div class="info-value">始于13世纪</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">建筑风格</div>
+                  <div class="info-value">巴洛克+新古典</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">面积</div>
+                  <div class="info-value">24万平方米</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">房间数</div>
+                  <div class="info-value">超过2600间</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🏛️ 主要展馆：</strong></p>
+              <ul>
+                <li><strong>皇家公寓(Imperial Apartments)</strong> - 皇帝弗朗茨·约瑟夫和伊丽莎白皇后的私人居所，保留原始家具和装饰</li>
+                <li><strong>茜茜公主博物馆(Sisi Museum)</strong> - 展示伊丽莎白皇后的传奇一生，包括她的礼服、珠宝和个人物品</li>
+                <li><strong>银器馆(Silver Collection)</strong> - 展出哈布斯堡王朝精美的餐具收藏，包括可容纳千人的晚宴餐具</li>
+                <li><strong>西班牙骑术学校</strong> - 观看著名的利皮扎马马术表演（需单独预约）</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>💡 参观建议：</strong></p>
+              <ul>
+                <li>建议购买联票（Imperial Tour包含公寓+茜茜博物馆+银器馆）</li>
+                <li>提前在官网预订，避免排队</li>
+                <li>语音导览约60分钟，建议预留90分钟深度参观</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Michaelerkuppel, 1010 Wien, Austria<br>
+              【交通】从中央咖啡馆步行约10分钟，或搭乘地铁U3线至Herrengasse站再步行5分钟<br>
+              【停留时间】60-90分钟</p>
             </details>
           </div>
 
           <!-- St. Stephen's Cathedral -->
-          <div class="item">
+          <div class="item" id="cathedral">
             <div class="time">11:30</div>
             <div class="title">⛪ 斯蒂芬大教堂</div>
             <details>
               <summary>查看详情</summary>
-              <p><strong>【亮点】</strong>维也纳的地标性建筑，哥特式建筑的杰作。高136米的南塔是城市最高点，彩色屋顶由23万块琉璃瓦拼成哈布斯堡双头鹰徽章。可登上塔楼俯瞰全城，或参观地下墓穴。教堂内部有巨型管风琴和精美的哥特式祭坛。</p>
-              <p><strong>【地址】</strong>Stephansplatz 3, 1010 Wien, Austria</p>
-              <p><strong>【交通方式】</strong>从霍夫堡皇宫步行约15分钟穿过Graben购物街，或搭乘地铁U1/U3线至Stephansplatz站直达</p>
-              <p><strong>【建议停留时间】</strong>45-60分钟</p>
+              <img class="attraction-img" src="https://images.unsplash.com/photo-1558512695-29a6c4787b24?w=1200&q=80" alt="St. Stephen's Cathedral Vienna">
+              <p class="img-caption">Photo: St. Stephen's Cathedral | Unsplash</p>
+              
+              <p><strong>【亮点】</strong>维也纳的地标性建筑，哥特式建筑的杰作。自12世纪起历经800年建造，是维也纳的象征。高136米的南塔是城市最高点，彩色屋顶由23万块琉璃瓦拼成哈布斯堡双头鹰徽章。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">建造时间</div>
+                  <div class="info-value">12-15世纪</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">建筑风格</div>
+                  <div class="info-value">哥特式</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">南塔高度</div>
+                  <div class="info-value">136.4米</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">屋顶面积</div>
+                  <div class="info-value">23万块琉璃瓦</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🏰 南塔 vs 北塔：</strong></p>
+              <ul>
+                <li><strong>南塔(Südturm)</strong> - 高136.4米，哥特式建筑巅峰。需攀登343级螺旋台阶登顶，无电梯。登顶后可360°俯瞰维也纳老城全景</li>
+                <li><strong>北塔(Nordturm)</strong> - 较矮，可乘电梯登顶。这里是著名的"普默林"大钟所在地，也是欣赏屋顶彩色琉璃瓦的最佳视角</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>⚰️ 地下墓穴(Katakomben)：</strong></p>
+              <p>教堂地下有哈布斯堡家族成员的内脏安葬处（心脏在奥古斯丁教堂，遗体在卡普奇纳教堂）。还可看到罗马时期的地基和地下礼拜堂。需预约导览参观。</p>
+              
+              <p style="margin-top:12px"><strong>🎵 音乐传统：</strong></p>
+              <p>莫扎特曾在此担任管风琴师，海顿在此唱诗班演唱。每周日12:00的弥撒常有现场演奏。</p>
+              
+              <p style="margin-top:12px"><strong>💡 参观建议：</strong></p>
+              <ul>
+                <li>教堂内部免费参观</li>
+                <li>登顶需购票：南塔约6欧元（爬楼梯），北塔约6欧元（电梯）</li>
+                <li>地下墓穴导览约6欧元，约30分钟</li>
+                <li>清晨或傍晚光线最美，适合拍照</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Stephansplatz 3, 1010 Wien, Austria<br>
+              【交通】从霍夫堡皇宫步行约15分钟穿过Graben购物街，或搭乘地铁U1/U3线至Stephansplatz站直达<br>
+              【停留时间】45-60分钟</p>
             </details>
           </div>
 
@@ -153,15 +395,69 @@
           </div>
 
           <!-- Belvedere Gardens -->
-          <div class="item">
+          <div class="item" id="belvedere">
             <div class="time">14:00</div>
             <div class="title">🌸 美景宫花园</div>
             <details>
               <summary>查看详情</summary>
-              <p><strong>【亮点】</strong>巴洛克园林的杰作，连接上美景宫(Oberes Belvedere)和下美景宫(Unteres Belvedere)。对称的喷泉、修剪整齐的绿篱、雕像和花圃构成完美的几何图案。即使不进入宫殿，花园本身也是拍照圣地。上美景宫藏有克里姆特名作《吻》。</p>
-              <p><strong>【地址】</strong>Prinz Eugen-Straße 27, 1030 Wien, Austria</p>
-              <p><strong>【交通方式】</strong>从斯蒂芬大教堂搭乘地铁U1线至Südtiroler Platz-Hauptbahnhof站，换乘 tram O线或18路至Schloss Belvedere站；或搭乘D线有轨电车直达</p>
-              <p><strong>【建议停留时间】</strong>2-3小时（花园漫步+可选参观宫殿）</p>
+              <img class="attraction-img" src="https://images.unsplash.com/photo-1565626424178-c699f6601afd?w=1200&q=80" alt="Belvedere Palace Gardens">
+              <p class="img-caption">Photo: Belvedere Gardens | Unsplash</p>
+              
+              <p><strong>【亮点】</strong>巴洛克园林的杰作，由军事统帅欧根亲王于18世纪初建造。对称的喷泉、修剪整齐的绿篱、雕像和花圃构成完美的几何图案。即使不进入宫殿，花园本身也是拍照圣地。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">建造年代</div>
+                  <div class="info-value">1712-1723年</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">建筑师</div>
+                  <div class="info-value">卢卡斯·冯·希尔德布兰特</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">花园面积</div>
+                  <div class="info-value">超过17公顷</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">名画收藏</div>
+                  <div class="info-value">克里姆特《吻》</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🏛️ 上宫 vs 下宫：</strong></p>
+              <ul>
+                <li><strong>上美景宫(Oberes Belvedere)</strong> - 较大的宫殿，现为奥地利国家美术馆。收藏有克里姆特《吻》、埃贡·席勒等维也纳分离派名作，还有莫奈、梵高等印象派大师作品</li>
+                <li><strong>下美景宫(Unteres Belvedere)</strong> - 较小的宫殿，曾是欧根亲王的私人居所。以精美的壁画和马赛克装饰闻名，还有奥地利中世纪艺术收藏</li>
+              </ul>
+              
+              <img class="attraction-img" src="https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=1200&q=80" alt="Klimt The Kiss">
+              <p class="img-caption">Gustav Klimt - "The Kiss" (1907-1908) | Photo: Belvedere Museum</p>
+              
+              <p style="margin-top:12px"><strong>🎨 克里姆特《吻》(Der Kuss)：</strong></p>
+              <p>这幅创作于1907-1908年的作品是维也纳分离派的代表作，也是奥地利最著名的艺术品。画中使用了大量金箔，灵感来自拜占庭马赛克。位于上美景宫二楼主展厅，是必看之作。</p>
+              
+              <p style="margin-top:12px"><strong>🌳 花园设计：</strong></p>
+              <p>花园由法国景观设计师多米尼克·吉拉德设计，融合了法式几何园林和英式风景园林元素。特色包括：</p>
+              <ul>
+                <li><strong>大喷泉</strong> - 位于上宫前方，是花园的视觉中心</li>
+                <li><strong>斯芬克斯雕像</strong> - 守护着宫殿入口的神秘守护者</li>
+                <li><strong>凯旋门</strong> - 花园尽头的标志性建筑，俯瞰维也纳城</li>
+                <li><strong>温室花园</strong> - 季节性花卉展示</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>💡 参观建议：</strong></p>
+              <ul>
+                <li>花园免费开放，是散步和拍照的好地方</li>
+                <li>上宫门票约16欧元，含《吻》等名作</li>
+                <li>两宫联票约24欧元，建议艺术爱好者购买</li>
+                <li>建议从花园漫步至上宫，沿途欣赏几何园林美景</li>
+                <li>春天(4-5月)和秋天(9-10月)花园最美</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Prinz Eugen-Straße 27, 1030 Wien, Austria<br>
+              【交通】从斯蒂芬大教堂搭乘地铁U1线至Südtiroler Platz-Hauptbahnhof站，换乘 tram O线或18路至Schloss Belvedere站；或搭乘D线有轨电车直达<br>
+              【停留时间】2-3小时（花园漫步+可选参观宫殿）</p>
             </details>
           </div>
 
@@ -192,15 +488,42 @@
           </div>
 
           <!-- Arrive Bratislava -->
-          <div class="item">
+          <div class="item" id="bratislava">
             <div class="time">21:10</div>
             <div class="title">🌙 抵达Bratislava</div>
             <details>
               <summary>查看详情</summary>
-              <p><strong>【亮点】</strong>欢迎来到斯洛伐克首都！布拉迪斯拉发是欧洲最年轻的首都之一，也是唯一与两个邻国接壤的国家首都。</p>
-              <p><strong>【地址】</strong>Bratislava hlavná stanica, Predstaničné námestie 1, 811 09 Bratislava</p>
-              <p><strong>【交通方式】</strong>从火车站步行或搭乘出租车前往AC Hotel（约10-15分钟车程）</p>
-              <p><strong>【建议停留时间】</strong>入住后可在老城夜游</p>
+              <img class="attraction-img" src="https://images.unsplash.com/photo-1576487503230-b6dc3ad12eea?w=1200&q=80" alt="Bratislava Old Town">
+              <p class="img-caption">Photo: Bratislava Old Town | Unsplash</p>
+              
+              <p><strong>【亮点】</strong>欢迎来到斯洛伐克首都！布拉迪斯拉发是欧洲最年轻的国家首都之一（1993年独立），也是唯一与两个邻国（奥地利、匈牙利）接壤的国家首都。老城虽小但精致，拥有众多历史建筑和独特的"不明飞行物"风格桥塔。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">人口</div>
+                  <div class="info-value">约43万</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">货币</div>
+                  <div class="info-value">欧元(EUR)</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">语言</div>
+                  <div class="info-value">斯洛伐克语</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">特色</div>
+                  <div class="info-value">UFO桥塔</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🌃 夜生活建议：</strong></p>
+              <p>入住后如果时间允许，可在老城夜游。推荐去Hlavné námestie（主广场）欣赏 Roland喷泉和旧市政厅，或沿着多瑙河散步欣赏城堡夜景。</p>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Bratislava hlavná stanica, Predstaničné námestie 1, 811 09 Bratislava<br>
+              【交通】从火车站步行或搭乘出租车前往AC Hotel（约10-15分钟车程）<br>
+              【建议】入住后可在老城夜游</p>
             </details>
           </div>
 
@@ -218,6 +541,8 @@
           <li>斯蒂芬大教堂登顶需额外购票，电梯登顶约6欧元</li>
           <li>前往布拉迪斯拉发的火车票可在ÖBB App购买，约11-15欧元</li>
           <li>布拉迪斯拉发使用欧元，与维也纳无时差</li>
+          <li>美景宫花园免费，宫殿内部需购票</li>
+          <li>中央咖啡馆建议提前预约，避免长时间等位</li>
         </ul>
       </div>
     </div>
