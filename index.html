@@ -115,56 +115,94 @@
         }
         
         /* Map Section */
-        .map-section {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 50px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-        
-        .map-container {
-            position: relative;
-            padding-bottom: 50%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 12px;
-        }
-        
-        .map-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        .route-info {
+        /* Route Visual - 新路线可视化 */
+        .route-visual {
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 25px;
-            padding: 20px;
-            background: var(--light);
-            border-radius: 12px;
+            flex-direction: column;
+            gap: 20px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 16px;
+            margin-bottom: 30px;
         }
         
-        .route-city {
+        .route-line, .route-line-center {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            font-weight: 500;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
         
-        .route-arrow {
+        .route-node {
+            background: white;
+            border-radius: 16px;
+            padding: 20px 15px;
+            text-align: center;
+            min-width: 100px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .route-node:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+        
+        .node-flag {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .node-city {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+        
+        .node-country {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+        
+        .route-arrow-h {
+            font-size: 1.5rem;
             color: var(--accent);
-            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        /* Route Stats */
+        .route-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        
+        .stat-box {
+            background: white;
+            border-radius: 12px;
+            padding: 20px 15px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
         }
         
         /* Days Grid */
@@ -395,8 +433,57 @@
                 gap: 30px;
             }
             
-            .map-container {
-                padding-bottom: 70%;
+            /* 移动端路线可视化优化 */
+            .route-visual {
+                padding: 20px 15px;
+                gap: 15px;
+            }
+            
+            .route-line, .route-line-center {
+                gap: 8px;
+            }
+            
+            .route-node {
+                min-width: 75px;
+                padding: 12px 8px;
+                border-radius: 12px;
+            }
+            
+            .node-flag {
+                font-size: 1.8rem;
+            }
+            
+            .node-city {
+                font-size: 0.85rem;
+            }
+            
+            .node-country {
+                font-size: 0.75rem;
+            }
+            
+            .route-arrow-h {
+                font-size: 1.2rem;
+            }
+            
+            .route-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .stat-box {
+                padding: 15px 10px;
+            }
+            
+            .stat-icon {
+                font-size: 1.5rem;
+            }
+            
+            .stat-value {
+                font-size: 1.1rem;
+            }
+            
+            .stat-label {
+                font-size: 0.75rem;
             }
         }
     </style>
@@ -433,33 +520,88 @@
                 <p>从维也纳出发，穿越四国，最终返回起点</p>
             </div>
             
-            <div class="map-container">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d14117855.838685193!2d1.5045049312500155!3d46.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x476d079e5136ca9f%3A0xfdc2e58a51a25b46!2sVienna%2C%20Austria!3m2!1d48.2081743!2d16.3738189!4m5!1s0x47f4ea6b689fc375%3A0x408ab2ae4baa830!2sBratislava%2C%20Slovakia!3m2!1d48.1485965!2d17.1077477!5e0!3m2!1sen!2s!4v1709820000000!5m2!1sen!2s"
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+            <!-- 路线可视化卡片 -->
+            <div class="route-visual">
+                <div class="route-line">
+                    <div class="route-node">
+                        <div class="node-flag">🇦🇹</div>
+                        <div class="node-city">维也纳</div>
+                        <div class="node-country">奥地利</div>
+                    </div>
+                    <div class="route-arrow-h">→</div>
+                    <div class="route-node">
+                        <div class="node-flag">🇸🇰</div>
+                        <div class="node-city">布拉迪斯拉发</div>
+                        <div class="node-country">斯洛伐克</div>
+                    </div>
+                    <div class="route-arrow-h">→</div>
+                    <div class="route-node">
+                        <div class="node-flag">🇮🇹</div>
+                        <div class="node-city">罗马</div>
+                        <div class="node-country">意大利</div>
+                    </div>
+                </div>
+                <div class="route-line">
+                    <div class="route-node">
+                        <div class="node-flag">🇦🇹</div>
+                        <div class="node-city">维也纳</div>
+                        <div class="node-country">返回</div>
+                    </div>
+                    <div class="route-arrow-h">←</div>
+                    <div class="route-node">
+                        <div class="node-flag">🇫🇷</div>
+                        <div class="node-city">巴黎</div>
+                        <div class="node-country">法国</div>
+                    </div>
+                    <div class="route-arrow-h">←</div>
+                    <div class="route-node">
+                        <div class="node-flag">🇨🇭</div>
+                        <div class="node-city">日内瓦</div>
+                        <div class="node-country">瑞士</div>
+                    </div>
+                </div>
+                <div class="route-line-center">
+                    <div class="route-node">
+                        <div class="node-flag">🇨🇭</div>
+                        <div class="node-city">格林德瓦</div>
+                        <div class="node-country">瑞士</div>
+                    </div>
+                    <div class="route-arrow-h">←</div>
+                    <div class="route-node">
+                        <div class="node-flag">🇮🇹</div>
+                        <div class="node-city">米兰</div>
+                        <div class="node-country">意大利</div>
+                    </div>
+                    <div class="route-arrow-h">←</div>
+                    <div class="route-node">
+                        <div class="node-flag">🇮🇹</div>
+                        <div class="node-city">威尼斯</div>
+                        <div class="node-country">意大利</div>
+                    </div>
+                </div>
             </div>
             
-            <div class="route-info">
-                <div class="route-city">🇦🇹 维也纳 Vienna</div>
-                <span class="route-arrow">→</span>
-                <div class="route-city">🇸🇰 布拉迪斯拉发 Bratislava</div>
-                <span class="route-arrow">→</span>
-                <div class="route-city">🇮🇹 罗马 Rome</div>
-                <span class="route-arrow">→</span>
-                <div class="route-city">🇮🇹 威尼斯 Venice</div>
-                <span class="route-arrow">→</span>
-                <div class="route-city">🇮🇹 米兰 Milan</div>
-                <span class="route-arrow">→</span>
-                <div class="route-city">🇨🇭 格林德瓦 Grindelwald</div>
-                <span class="route-arrow">→</span>
-                <div class="route-city">🇨🇭 日内瓦 Geneva</div>
-                <span class="route-arrow">→</span>
-                <div class="route-city">🇫🇷 巴黎 Paris</div>
-                <span class="route-arrow">→</span>
-                <div class="route-city">🇦🇹 维也纳 Vienna</div>
+            <div class="route-stats">
+                <div class="stat-box">
+                    <div class="stat-icon">🛫</div>
+                    <div class="stat-value">12天</div>
+                    <div class="stat-label">总行程</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">🌍</div>
+                    <div class="stat-value">5国</div>
+                    <div class="stat-label">途经国家</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">🏙️</div>
+                    <div class="stat-value">8城</div>
+                    <div class="stat-label">深度游览</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">✈️</div>
+                    <div class="stat-value">3段</div>
+                    <div class="stat-label">飞行航程</div>
+                </div>
             </div>
         </div>
 
