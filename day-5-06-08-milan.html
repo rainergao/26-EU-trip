@@ -1,536 +1,114 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Day 5｜06-07｜Venice → Milan</title>
-  <style>
-    :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--accent:#e11d48;--shadow:0 12px 28px rgba(15,23,42,.08)}
-    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
-    .wrap{max-width:1160px;margin:0 auto;padding:24px}
-    
-    /* Hero */
-    .hero{background:linear-gradient(135deg,#1e3a8a,#2563eb 60%,#60a5fa);color:#fff;border-radius:28px;padding:32px;box-shadow:var(--shadow);margin-bottom:20px;position:relative;overflow:hidden}
-    .hero:before{content:"";position:absolute;top:-50%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(255,255,255,.15),transparent 70%);border-radius:50%}
-    .hero h1{margin:0 0 8px;font-size:32px;position:relative;z-index:1}
-    .hero p{margin:0;opacity:.9;font-size:16px;position:relative;z-index:1}
-    
-    /* Banner Navigation */
-    .banner-nav{background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:16px 20px;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
-    .banner-nav::-webkit-scrollbar{display:none}
-    .banner-nav a{flex-shrink:0;padding:10px 16px;background:#f1f5f9;border-radius:12px;text-decoration:none;color:var(--text);font-size:14px;font-weight:600;transition:all .2s;border:2px solid transparent}
-    .banner-nav a:hover{background:#e2e8f0}
-    .banner-nav a.active{background:var(--blue);color:#fff}
-    .banner-nav .time-badge{font-size:11px;opacity:.8;margin-right:4px}
-    
-    /* Navigation */
-    .nav{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
-    .nav a{color:var(--blue);text-decoration:none;padding:8px 16px;background:var(--card);border-radius:12px;border:1px solid var(--line);font-size:14px;font-weight:600}
-    .nav a:hover{background:#eff6ff}
-    
-    /* Section */
-    .section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
-    .section-header{padding:20px 24px;border-bottom:1px solid var(--line);background:#fafafa}
-    .section-header h2{margin:0;font-size:18px;color:var(--text)}
-    .section-body{padding:24px}
-    
-    /* Map Container */
-    .map-container{width:100%;height:450px;border-radius:16px;overflow:hidden;margin-bottom:16px;border:1px solid var(--line)}
-    .map-container iframe{width:100%;height:100%;border:0}
-    
-    /* Transport Card */
-    .transport-info{display:flex;gap:20px;flex-wrap:wrap}
-    .transport-info>div{flex:1;min-width:200px}
-    .transport-info strong{color:var(--blue);font-size:14px;display:block;margin-bottom:4px}
-    .train-highlight{background:linear-gradient(135deg,#fef3c7,#fde68a);padding:16px;border-radius:16px;margin-top:16px;border:1px solid #fcd34d}
-    .train-highlight strong{color:#92400e}
-    
-    /* Hotel Card */
-    .hotel-info{display:flex;align-items:flex-start;gap:16px}
-    .hotel-icon{font-size:40px;background:linear-gradient(135deg,#e0e7ff,#c7d2fe);padding:16px;border-radius:16px}
-    .hotel-details h3{margin:0 0 4px;font-size:20px}
-    .hotel-details p{margin:0 0 6px;color:var(--muted);font-size:14px}
-    .hotel-amenities{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    .amenity-tag{font-size:12px;padding:6px 12px;background:#f3f4f6;border-radius:20px;color:var(--muted)}
-    
-    /* Timeline */
-    .timeline{margin-left:8px}
-    .item{position:relative;padding:0 0 20px 28px;border-left:3px solid #dbeafe}
-    .item:last-child{border-left:3px solid transparent}
-    .item:before{content:"";position:absolute;left:-8px;top:6px;width:14px;height:14px;border-radius:999px;background:var(--blue);box-shadow:0 0 0 4px #eff6ff}
-    .item.highlight:before{background:var(--accent);box-shadow:0 0 0 4px #fce7f3}
-    .time{color:var(--blue);font-size:13px;font-weight:800;margin-bottom:4px}
-    .title{font-size:20px;font-weight:800;margin-bottom:4px}
-    .subtitle{font-size:14px;color:var(--accent);font-weight:600;margin-bottom:8px}
-    .desc{color:var(--muted);font-size:15px;margin-bottom:8px}
-    
-    /* Attraction Card */
-    .attraction-card{background:#fafafa;border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:12px}
-    .attraction-header{display:flex;gap:16px;align-items:flex-start;margin-bottom:12px}
-    .attraction-img{width:120px;height:90px;object-fit:cover;border-radius:12px;flex-shrink:0}
-    .attraction-title h4{margin:0 0 4px;font-size:16px}
-    .attraction-title p{margin:0;font-size:13px;color:var(--muted)}
-    .attraction-details{font-size:13px;color:var(--muted)}
-    .attraction-details p{margin:6px 0}
-    .attraction-details strong{color:var(--text)}
-    .rating{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:#f59e0b;font-weight:600}
-    
-    /* Tags */
-    .tag{display:inline-block;padding:4px 10px;background:#eff6ff;color:var(--blue);border-radius:20px;font-size:12px;font-weight:600;margin-right:6px}
-    .tag-red{background:#fef2f2;color:var(--accent)}
-    .tag-green{background:#f0fdf4;color:#16a34a}
-    
-    /* Details */
-    details{margin-top:12px;border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px 14px;cursor:pointer}
-    details summary{font-weight:600;font-size:14px;color:var(--text);list-style:none;display:flex;align-items:center;gap:8px}
-    details summary:before{content:"▶";font-size:10px;transition:transform .2s}
-    details[open] summary:before{transform:rotate(90deg)}
-    details[open] summary{margin-bottom:10px}
-    .detail-content{font-size:13px;color:var(--muted)}
-    .detail-content p{margin:8px 0;line-height:1.8}
-    .detail-content strong{color:var(--text)}
-    
-    /* Summary Bar */
-    .summary-bar{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
-    .summary-item{font-size:14px;color:var(--muted)}
-    .summary-item strong{color:var(--text)}
-    
-    /* Route Info */
-    .route-visual{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:16px;background:#f8fafc;border-radius:16px;margin-bottom:16px}
-    .route-point{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600}
-    .route-point .dot{width:12px;height:12px;border-radius:50%;background:var(--blue)}
-    .route-point .dot.end{background:var(--accent)}
-    .route-arrow{color:var(--muted)}
-    .route-line{flex:1;height:2px;background:linear-gradient(90deg,var(--blue),var(--accent));min-width:60px}
-  
-    @media(max-width:768px){
-      /* 1. 基础布局优化 */
-      .wrap{padding:16px}
-      
-      /* 2. Hero区域字体优化 */
-      .hero{padding:20px}
-      .hero h1{font-size:22px}
-      .hero .subtitle{font-size:14px}
-      
-      /* 3. Banner导航优化 */
-      .banner-nav{padding:12px}
-      .banner-node{padding:0 6px}
-      .banner-label{max-width:70px}
-      
-      /* 4. 卡片间距优化 */
-      .section{margin-bottom:14px}
-      .card-content{padding:16px}
-      .card-title{font-size:15px}
-      
-      /* 5. 时间轴优化 */
-      .timeline{margin-left:4px}
-      .item{padding:0 0 16px 20px}
-      .item .time{font-size:12px}
-      .item .title{font-size:16px}
-      
-      /* 6. 信息网格优化 - 小屏幕单列显示 */
-      .info-grid{grid-template-columns:1fr}
-      .info-item{padding:10px}
-      
-      /* 7. 电影badge优化 */
-      .movie-badge{padding:8px 12px}
-      .movie-badge-text{font-size:12px}
-      
-      /* 8. 酒店卡片优化 */
-      .hotel-card{padding:16px}
-      .hotel-name{font-size:18px}
-      .hotel-grid{grid-template-columns:1fr;gap:12px}
-      
-      /* 9. 地图区域优化 */
-      .map-section{padding:16px}
-      .map-container{height:250px}
-      
-      /* 10. 滚动提示 */
-      .scroll-indicator{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 5｜6月8日｜米兰</title>
+    <style>
+        body { font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.6; background: #f5f7fa; }
+        .header { background: linear-gradient(135deg, #1a365d, #2c5282); color: white; padding: 30px; border-radius: 12px; margin-bottom: 20px; }
+        .nav { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .nav a { color: #2c5282; text-decoration: none; font-weight: 500; }
+        .section { background: white; padding: 20px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .time { font-weight: bold; color: #d69e2e; display: inline-block; width: 60px; }
+        .spot { font-weight: 600; color: #1a365d; }
+        .tips { background: #fffaf0; border-left: 4px solid #d69e2e; padding: 15px; margin: 15px 0; }
+        h2 { color: #1a365d; border-bottom: 2px solid #d69e2e; padding-bottom: 10px; }
+        .hotel { background: #f0fff4; padding: 15px; border-radius: 8px; }
+    </style>
 </head>
 <body>
-  <div class="wrap">
-    <!-- Hero -->
-    <div class="hero">
-      <h1>Day 5｜06-07｜Venice → Milan</h1>
-      <p>地标轴线日 — 从水城威尼斯的晨光中出发，奔赴米兰的时尚与古典交融之旅</p>
-    </div>
-
-    <!-- Banner Navigation - 6个时间节点 -->
-    <div class="banner-nav">
-      <a href="#t1"><span class="time-badge">07:30</span>出发</a>
-      <a href="#t2"><span class="time-badge">09:45</span>抵达米兰</a>
-      <a href="#t3"><span class="time-badge">11:30</span>大教堂</a>
-      <a href="#t4"><span class="time-badge">14:30</span>长廊&歌剧院</a>
-      <a href="#t5"><span class="time-badge">16:30</span>城堡&公园</a>
-      <a href="#t6"><span class="time-badge">20:00</span>夜生活</a>
-    </div>
-
-    <!-- Navigation -->
     <div class="nav">
-      <a href="index.html">← 返回主页</a>
-      <a href="day-4-06-06-venice.html">← Day 4: Venice</a>
-      <a href="day-6-06-08-milan.html">Day 6: Milan →</a>
+        <a href="day-4-06-07-venice-to-milan.html">← Day 4</a>
+        <a href="index.html">返回主页</a>
+        <a href="day-6-06-09-milan-to-grindelwald.html">Day 6 →</a>
+    </div>
+    
+    <div class="header">
+        <h1>🌍 Day 5｜6月8日｜米兰</h1>
+        <p>时尚之都：大教堂、购物、艺术</p>
     </div>
 
-    <!-- Map Section -->
     <div class="section">
-      <div class="section-header">
-        <h2>🗺️ 路线总览</h2>
-      </div>
-      <div class="section-body">
-        <div class="route-visual">
-          <div class="route-point"><span class="dot"></span>Venice Mestre</div>
-          <span class="route-arrow">→</span>
-          <div class="route-line"></div>
-          <span class="route-arrow">→</span>
-          <div class="route-point"><span class="dot end"></span>Milan</div>
-        </div>
-        <div class="map-container">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d1790904.5317191976!2d9.1772675!3d45.4642045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x477eb1daf1d63d89%3A0x30493af3b74a6e0!2sVenice%20Mestre%20Railway%20Station%2C%20Viale%20Stazione%2C%2030171%20Venice%20VE%2C%20Italy!3m2!1d45.4819!2d12.2318!4m5!1s0x4786c1493f1275e7%3A0x3cff53c71ed0fe5b!2sMilano%20Centrale%20Railway%20Station%2C%20Piazza%20Duca%20d'Aosta%2C%20Milan%2C%20Italy!3m2!1d45.4861!2d9.2040!5e0!3m2!1sen!2scn!4v1699000000000!5m2!1sen!2scn"
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        </div>
-        <p style="color:var(--muted);font-size:14px;margin:0">📍 全程约280公里 | 🚄 高铁2小时15分钟 | 途经帕多瓦、维罗纳、布雷西亚</p>
-      </div>
+        <h2>🎯 今日行程概览</h2>
+        <p>酒店 → 米兰大教堂 → 埃马努埃莱长廊 → 午餐 → 斯卡拉歌剧院 → 斯福尔扎城堡 → 晚餐</p>
+        <p><strong>住宿：</strong>Duo Milan Porta Nuova（同上）</p>
     </div>
 
-    <!-- Transport Card -->
     <div class="section">
-      <div class="section-header">
-        <h2>🚄 大交通</h2>
-      </div>
-      <div class="section-body">
-        <div class="transport-info">
-          <div>
-            <strong>班次</strong>
-            Frecciarossa 9708 红箭高铁
-          </div>
-          <div>
-            <strong>路线</strong>
-            Venice Mestre → Milano Centrale
-          </div>
-          <div>
-            <strong>时间</strong>
-            07:30 - 09:45 (约2小时15分钟)
-          </div>
-          <div>
-            <strong>票价参考</strong>
-            €35-75 (建议提前在Trenitalia购买)
-          </div>
-        </div>
-        <div class="train-highlight">
-          <strong>🚅 Frecciarossa 9708</strong> — 意大利国家铁路旗舰高速列车，最高时速300km/h，提供座位充电、免费WiFi、餐车服务。建议选坐左侧欣赏阿尔卑斯山景。
-        </div>
-      </div>
-    </div>
-
-    <!-- Hotel Card -->
-    <div class="section">
-      <div class="section-header">
-        <h2>🏨 住宿</h2>
-      </div>
-      <div class="section-body">
-        <div class="hotel-info">
-          <div class="hotel-icon">🏨</div>
-          <div class="hotel-details">
-            <h3>Duo Milan Porta Nuova, a Tribute Portfolio Hotel</h3>
-            <p>📍 Corso Como 15, 20154 Milan, Italy</p>
-            <p>📋 预订确认码：<strong>#75159863</strong></p>
-            <p>🚇 距离Garibaldi火车站步行5分钟，地铁M2/M5线交汇</p>
-            <p>✨ 万豪Tribute Portfolio精品酒店，位于时尚Porta Nuova区，Corso Como购物街步行2分钟</p>
-            <div class="hotel-amenities">
-              <span class="amenity-tag">🍽️ 早餐</span>
-              <span class="amenity-tag">🏋️ 健身房</span>
-              <span class="amenity-tag">🍸 屋顶酒吧</span>
-              <span class="amenity-tag">📶 免费WiFi</span>
-              <span class="amenity-tag">🐕 宠物友好</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Timeline -->
-    <div class="section">
-      <div class="section-header">
-        <h2>📍 行程安排</h2>
-      </div>
-      <div class="section-body">
-        <div class="timeline">
-          
-          <!-- Item 1: 出发 -->
-          <div class="item" id="t1">
-            <div class="time">07:30</div>
-            <div class="title">高铁前往米兰</div>
-            <div class="desc">从Venice Mestre火车站出发，搭乘Frecciarossa 9708前往米兰</div>
-            <span class="tag">🚄 Frecciarossa 9708</span>
-          </div>
-
-          <!-- Item 2: 抵达 -->
-          <div class="item" id="t2">
-            <div class="time">09:45</div>
-            <div class="title">抵达米兰中央火车站</div>
-            <div class="desc">Milano Centrale — 欧洲最宏伟的火车站之一，本身就是新古典主义建筑杰作</div>
-            <span class="tag">🏛️ 建筑景点</span>
-            <details>
-              <summary>查看详情</summary>
-              <div class="detail-content">
-                <p><strong>🎨 看点：</strong>宏伟的新古典主义外观；巨大拱门和穹顶；大理石装饰的候车大厅；巨型雕塑装饰</p>
-                <p><strong>📍 地址：</strong>Piazza Duca d'Aosta, 20124 Milano MI, Italy</p>
-                <p><strong>💡 贴士：</strong>火车站本身就是一个值得拍照的建筑；从这里可乘地铁M2/M3线前往各大景点；周边有行李寄存服务</p>
-              </div>
-            </details>
-          </div>
-
-          <!-- Item: 前往酒店放行李 -->
-          <div class="item" id="t2b">
-            <div class="time">10:30</div>
-            <div class="title">🏨 前往酒店放行李</div>
-            <div class="desc">从中央火车站搭乘地铁M2线至Garibaldi站，步行至酒店存放行李</div>
-            <span class="tag">🧳 轻装上阵</span>
-            <details>
-              <summary>查看详情</summary>
-              <div class="detail-content">
-                <p><strong>【路线】</strong>中央火车站 → 地铁M2线 → Garibaldi站（2站，约5分钟）</p>
-                <p><strong>【到酒店】</strong>Garibaldi站步行5分钟即达 Duo Milan Porta Nuova 酒店</p>
-                <p><strong>【存行李】</strong>一般15:00后才能入住，可先办理手续、存放行李，轻装出发游览</p>
-                <p><strong>【时间安排】</strong>09:45抵达 → 10:30到酒店存行李 → 11:30开始游览</p>
-                <p><strong>【周边】</strong>酒店位于Porta Nuova时尚区，Corso Como购物街就在附近</p>
-              </div>
-            </details>
-          </div>
-
-          <!-- Item 3: 米兰大教堂 -->
-          <div class="item highlight" id="t3">
-            <div class="time">11:30</div>
-            <div class="title">米兰大教堂 (Duomo di Milano)</div>
+        <h2>📍 详细安排</h2>
         
+        <p><span class="time">08:00</span> 🍽️ <span class="spot">酒店早餐</span></p>
         
-            <div class="subtitle">Duomo di Milano — 世界第二大教堂，哥特式建筑巅峰</div>
-            <div class="desc">历经六个世纪建造完成，拥有135座尖塔和3400座雕像，屋顶可俯瞰整个米兰</div>
-            <span class="tag tag-red">🏆 必打卡</span>
-            <span class="tag">⛪ 宗教建筑</span>
-            
-            <div class="attraction-card">
-              <div class="attraction-header">
-                
-                <div class="attraction-title">
-                  <h4>Duomo di Milano</h4>
-                  <p>世界第二大教堂 | 哥特式建筑杰作</p>
-                  <div class="rating">⭐ 4.8/5 (8万+评价)</div>
-                </div>
-              </div>
-              <div class="attraction-details">
-                <p><strong>🎨 亮点：</strong>135座精美尖塔直插云霄；中央尖塔顶部4米高的金色圣母像(La Madonnina)；内部祭坛供奉着圣钉(耶稣受难的遗物之一)；3400座内外部雕像和浮雕</p>
-                <p><strong>🚶 屋顶Walk：</strong>强烈推荐走楼梯或电梯登上屋顶(€14/楼梯，€22/电梯)，在哥特式尖塔间漫步，近距离欣赏雕塑细节，360°俯瞰米兰全景，天气好时可看到阿尔卑斯山</p>
-                <p><strong>📍 地址：</strong>Piazza del Duomo, 20122 Milano MI, Italy</p>
-                <p><strong>🚇 交通：</strong>地铁M1/M3线Duomo站，出站即到；从中央火车站乘M3线3站直达</p>
-                <p><strong>⏱️ 建议停留：</strong>2-3小时(含屋顶)</p>
-                <p><strong>🎫 门票：</strong>教堂内部€6；含屋顶步行€14；含电梯登顶€22；联票(含博物馆)€22-27</p>
-                <p><strong>💡 贴士：</strong>建议提前官网购票避免排队；穿着要求肩膝遮盖；屋顶上午光线最佳；周末和节假日人很多</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Item 4: 午餐 -->
-          <div class="item">
-            <div class="time">13:30</div>
-            <div class="title">午餐</div>
-            <div class="desc">在大教堂周边或埃马努埃莱长廊内享用米兰特色美食</div>
-            <span class="tag tag-green">🍽️ 推荐</span>
-            <details>
-              <summary>查看推荐</summary>
-              <div class="detail-content">
-                <p><strong>🥘 米兰美食：</strong>Risotto alla Milanese(藏红花炖饭) — 米兰标志性菜品，金黄色来自珍贵藏红花；Cotoletta alla Milanese(米兰炸肉排) — 金黄酥脆的炸小牛肉；Panettone(潘妮托尼) — 圣诞传统面包，全年可买</p>
-                <p><strong>📍 推荐区域：</strong>大教堂广场周边餐厅；埃马努埃莱长廊内的高级餐厅；Via Torino购物街上的平价餐馆</p>
-              </div>
-            </details>
-          </div>
-
-          <!-- Item 5: 埃马努埃莱长廊 -->
-          <div class="item highlight" id="t4">
-            <div class="time">14:30</div>
-            <div class="title">埃马努埃莱二世长廊 (Galleria Vittorio Emanuele II)</div>
-            <div class="subtitle">Galleria Vittorio Emanuele II — 米兰的客厅，世界上最古老的购物中心</div>
-            <div class="desc">19世纪玻璃穹顶拱廊，汇聚Prada、Gucci、LV等顶级奢侈品牌，被誉为"米兰的客厅"</div>
-            <span class="tag tag-red">🛍️ 购物天堂</span>
-            <span class="tag">🏛️ 历史建筑</span>
-            
-            <div class="attraction-card">
-              <div class="attraction-header">
-                
-                <div class="attraction-title">
-                  <h4>Galleria Vittorio Emanuele II</h4>
-                  <p>世界上最古老的购物中心 | 米兰客厅</p>
-                  <div class="rating">⭐ 4.7/5 (6万+评价)</div>
-                </div>
-              </div>
-              <div class="attraction-details">
-                <p><strong>🎨 亮点：</strong>宏伟的玻璃和铸铁穹顶(高47米)；地面精美的马赛克图案(都灵、佛罗伦萨、罗马、米兰徽章)；四大拱门下汇聚了Prada(1913年在此开设第一家店)、Gucci、Louis Vuitton、Versace等顶级品牌</p>
-                <p><strong>🐂 幸运仪式：</strong>在长廊中央地面上有都灵徽章(Toro)，传说用脚后跟踩着Toro的"私处"转三圈会带来好运，可以看到地面有个明显的凹陷坑</p>
-                <p><strong>☕ 咖啡馆：</strong>Caffè Camparino — 1867年开业，Campari酒的发明地；Savini — 百年历史高级餐厅；Marchesi — Prada旗下的甜品店</p>
-                <p><strong>📍 地址：</strong>Piazza del Duomo, 20123 Milano MI, Italy</p>
-                <p><strong>🚇 交通：</strong>紧邻大教堂，步行1分钟；地铁Duomo站</p>
-                <p><strong>⏱️ 建议停留：</strong>1-1.5小时(购物+咖啡)</p>
-                <p><strong>💡 贴士：</strong>早晚人较少适合拍照；奢侈品店可退税(非欧盟居民)；小偷较多注意财物；可免费参观外部和公共通道</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Item 6: 斯卡拉歌剧院 -->
-          <div class="item highlight">
-            <div class="time">14:30</div>
-            <div class="title">斯卡拉歌剧院 (Teatro alla Scala)</div>
-            <div class="subtitle">Teatro alla Scala — 世界三大歌剧院之一，歌剧圣殿</div>
-            <div class="desc">1778年开业，全球最著名的歌剧院，威尔第、普契尼等大师作品首演之地</div>
-            <span class="tag">🎭 歌剧圣殿</span>
-            <span class="tag">🏛️ 博物馆</span>
-            
-            <div class="attraction-card">
-              <div class="attraction-header">
-                
-                <div class="attraction-title">
-                  <h4>Teatro alla Scala</h4>
-                  <p>世界三大歌剧院 | 歌剧圣地</p>
-                  <div class="rating">⭐ 4.7/5 (2万+评价)</div>
-                </div>
-              </div>
-              <div class="attraction-details">
-                <p><strong>🎨 亮点：</strong>传奇的红丝绒包厢与金色装饰；完美的声学效果被誉为"世界上最完美的歌剧院"；歌剧博物馆收藏珍贵乐谱、服装和 memorabilia；舞台比观众席还要大</p>
-                <p><strong>🎭 历史：</strong>1778年首演，首演剧目为《欧罗巴的受承认》；见证过威尔第《奥赛罗》《法尔斯塔夫》、普契尼《蝴蝶夫人》《托斯卡》等无数经典首演；卡拉斯、帕瓦罗蒂等传奇歌唱家在此献唱</p>
-                <p><strong>📍 地址：</strong>Via Filodrammatici, 2, 20121 Milano MI, Italy</p>
-                <p><strong>🚇 交通：</strong>从埃马努埃莱长廊步行5分钟；地铁M1线Cordusio站或M3线Montenapoleone站</p>
-                <p><strong>⏱️ 建议停留：</strong>1-1.5小时(博物馆+参观)</p>
-                <p><strong>🎫 门票：</strong>博物馆€12(含后台参观望远镜观看)；歌剧演出票€15-250+</p>
-                <p><strong>💡 贴士：</strong>没有演出时可参观博物馆和剧院内部；可通过望远镜看到后台；演出季为12月-7月；官网提前购票；正装出席演出(夹克必备)</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Item 7: 斯福尔扎城堡 -->
-          <div class="item highlight" id="t5">
-            <div class="time">16:30</div>
-            <div class="title">斯福尔扎城堡 (Castello Sforzesco)</div>
-            <div class="subtitle">Castello Sforzesco — 米兰公爵的宏伟堡垒，达芬奇壁画所在地</div>
-            <div class="desc">15世纪由斯福尔扎家族建造的红砖城堡，现为博物馆群，藏有达芬奇未完成的天花板壁画</div>
-            <span class="tag">🏰 城堡</span>
-            <span class="tag">🎨 艺术博物馆</span>
-            
-            <div class="attraction-card">
-              <div class="attraction-header">
-                
-                <div class="attraction-title">
-                  <h4>Castello Sforzesco</h4>
-                  <p>文艺复兴城堡 | 博物馆群 | 达芬奇壁画</p>
-                  <div class="rating">⭐ 4.6/5 (3万+评价)</div>
-                </div>
-              </div>
-              <div class="attraction-details">
-                <p><strong>🎨 亮点：</strong>"Sala delle Asse"房间 — 达芬奇绘制的天花板壁画(胡桃树枝与藤蔓图案)；米开朗基罗未完成的《圣殇》(Rondanini Pietà)；丰富的艺术博物馆(古代艺术、家具、乐器、埃及和史前文物)</p>
-                <p><strong>🏰 建筑：</strong>宏伟的红砖防御工事；高耸的塔楼；内庭花园；护城河水系(现已干涸)</p>
-                <p><strong>📍 地址：</strong>Piazza Castello, 20121 Milano MI, Italy</p>
-                <p><strong>🚇 交通：</strong>从斯卡拉歌剧院步行15分钟；地铁M1线Cairoli站或Cadorna站</p>
-                <p><strong>⏱️ 建议停留：</strong>1.5-2小时</p>
-                <p><strong>🎫 门票：</strong>城堡免费；博物馆€5(周三14:00后免费)；米开朗基罗厅单独收费</p>
-                <p><strong>💡 贴士：</strong>周三下午免费是节省预算的好时机；达芬奇壁画需单独预约时段参观；城堡外观宏伟适合拍照；内部庭院可免费进入</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Item 8: 森皮奥内公园 -->
-          <div class="item highlight">
-            <div class="time">18:00</div>
-            <div class="title">森皮奥内公园 (Parco Sempione)</div>
-            <div class="subtitle">Parco Sempione — 城堡后花园，米兰市民的绿肺</div>
-            <div class="desc">斯福尔扎城堡后方的巨大城市公园，拥有和平拱门、现代艺术博物馆和宁静的湖泊</div>
-            <span class="tag">🌳 城市公园</span>
-            <span class="tag">🌅 日落</span>
-            
-            <div class="attraction-card">
-              <div class="attraction-header">
-                
-                <div class="attraction-title">
-                  <h4>Parco Sempione</h4>
-                  <p>城堡后花园 | 和平拱门 | 绿色氧吧</p>
-                  <div class="rating">⭐ 4.5/5 (1.5万+评价)</div>
-                </div>
-              </div>
-              <div class="attraction-details">
-                <p><strong>🎨 亮点：</strong>凯旋门风格的和平拱门(Arco della Pace) — 新古典主义杰作，原为拿破仑所建；森皮奥内池塘 — 可租划艇；Triennale现代艺术与设计博物馆；俯瞰城堡的最佳角度</p>
-                <p><strong>🌳 休闲：</strong>大片绿地适合野餐和休息；慢跑和骑行路径；儿童游乐场；户外咖啡馆</p>
-                <p><strong>📍 地址：</strong>Piazza Sempione, 20121 Milano MI, Italy</p>
-                <p><strong>🚇 交通：</strong>斯福尔扎城堡后门直通公园；地铁M1线Cadorna站</p>
-                <p><strong>⏱️ 建议停留：</strong>45分钟-1小时</p>
-                <p><strong>🎫 门票：</strong>公园免费；现代艺术博物馆€15</p>
-                <p><strong>💡 贴士：</strong>傍晚时分是最佳游览时间，光线柔和；和平拱门是拍照热点；本地人喜欢在此慢跑；夏季有露天活动</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Item 9: Corso Como夜生活 -->
-          <div class="item highlight" id="t6">
-            <div class="time">20:00</div>
-            <div class="title">Corso Como时尚街区</div>
-            <div class="subtitle">Corso Como — 米兰夜生活中心，买手店与时尚酒吧聚集地</div>
-            <div class="desc">时尚买手店、概念店、精品餐厅和露天酒吧，体验米兰夜生活的最佳去处</div>
-            <span class="tag tag-red">🌙 夜生活</span>
-            <span class="tag">🛍️ 买手店</span>
-            
-            <div class="attraction-card">
-              <div class="attraction-header">
-                
-                <div class="attraction-title">
-                  <h4>Corso Como</h4>
-                  <p>时尚街区 | 夜生活 | 买手店</p>
-                  <div class="rating">⭐ 4.5/5 (评价)</div>
-                </div>
-              </div>
-              <div class="attraction-details">
-                <p><strong>🛍️ 亮点：</strong>10 Corso Como — 传奇买手店，由时尚编辑Carla Sozzani创立，集画廊、书店、咖啡馆、精品店于一体；Como街上众多独立设计师店铺；概念店和生活方式商店</p>
-                <p><strong>🍸 夜生活：</strong>露天Aperitivo酒吧 — 米兰特色的餐前酒文化；精品餐厅和Trattoria；时尚夜店和Lounge；Porta Garibaldi区域的热闹氛围</p>
-                <p><strong>🍕 美食：</strong>Giaguaro — 创意意式料理；N'Ombra de Vin — 复古酒窖餐厅；各种Pizza和Aperitivo小食</p>
-                <p><strong>📍 地址：</strong>Corso Como, 20154 Milano MI, Italy</p>
-                <p><strong>🚇 交通：</strong>距离酒店步行仅5分钟！地铁M2/M5线Garibaldi站</p>
-                <p><strong>⏱️ 建议停留：</strong>2-3小时(晚餐+夜生活)</p>
-                <p><strong>💡 贴士：</strong>Aperitivo时间通常是18:00-21:00，点一杯酒即可享用自助小食；10 Corso Como值得一逛但价格较高；周末晚上非常热闹；距离酒店超近方便回房</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Summary -->
-        <div class="summary-bar">
-          <div class="summary-item"><strong>📅 日期：</strong>6月8日</div>
-          <div class="summary-item"><strong>🚶 步行：</strong>约10-12km</div>
-          <div class="summary-item"><strong>🏛️ 景点：</strong>6个核心景点</div>
-          <div class="summary-item"><strong>🎫 门票：</strong>约€40-60</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Important Notes -->
-    <div class="section">
-      <div class="section-header">
-        <h2>⚠️ 重要提示</h2>
-      </div>
-      <div class="section-body">
-        <ul style="margin:0;padding-left:20px;color:var(--muted)">
-          <li>米兰大教堂<strong>建议提前购票</strong>，屋顶Walk票经常售罄</li>
-          <li>大教堂有着装要求，<strong>肩部和膝盖需遮盖</strong>，建议带披肩</li>
-          <li>斯卡拉歌剧院如需看演出，需提前数月预订热门场次</li>
-          <li>斯福尔扎城堡博物馆<strong>周三下午免费</strong>，如恰好在周三可调整行程</li>
-          <li>Corso Como距离酒店仅5分钟步行，是完美的夜生活选择</li>
-          <li>米兰是时尚之都，注意财物安全，尤其在游客密集区域</li>
+        <p><span class="time">09:00</span> ⛪ <span class="spot">米兰大教堂 (Duomo di Milano)</span></p>
+        <ul>
+            <li>世界第二大教堂，哥特式建筑杰作</li>
+            <li>建议提前网购登顶票（楼梯 €14，电梯 €18）</li>
+            <li>屋顶平台可近距离欣赏尖塔和雕像</li>
+            <li>登顶后俯瞰米兰全景</li>
         </ul>
-      </div>
+
+        <p><span class="time">11:30</span> 🏛️ <span class="spot">埃马努埃莱二世长廊 (Galleria Vittorio Emanuele II)</span></p>
+        <ul>
+            <li>世界最古老的购物中心之一</li>
+            <li>拱形玻璃穹顶令人惊叹</li>
+            <li>Prada、Gucci、Louis Vuitton 旗舰店</li>
+            <li>中央地面有幸运公牛马赛克，踩其睾丸转圈带来好运</li>
+        </ul>
+
+        <p><span class="time">12:30</span> 🍝 <span class="spot">午餐</span></p>
+        <ul>
+            <li>推荐：米兰特色菜 Risotto alla Milanese（藏红花烩饭）</li>
+            <li>或 Cotoletta alla Milanese（米兰炸肉排）</li>
+            <li>长廊内 Luini 的 Panzerotti（炸饺子）是当地名小吃</li>
+        </ul>
+
+        <p><span class="time">14:00</span> 🎭 <span class="spot">斯卡拉歌剧院 (Teatro alla Scala)</span></p>
+        <ul>
+            <li>世界最著名的歌剧院之一</li>
+            <li>可参观剧院博物馆（约€12）</li>
+            <li>欣赏华丽的剧院内部装饰</li>
+            <li>旺季可能有演出（需提前数月预订）</li>
+        </ul>
+
+        <p><span class="time">16:00</span> 🏰 <span class="spot">斯福尔扎城堡 (Castello Sforzesco)</span></p>
+        <ul>
+            <li>米兰最重要的中世纪城堡</li>
+            <li>城堡公园是当地人休闲的好去处</li>
+            <li>内部有多个博物馆（可只参观城堡外部免费）</li>
+            <li>距离大教堂约20分钟步行</li>
+        </ul>
+
+        <p><span class="time">18:30</span> 🍽️ <span class="spot">晚餐</span></p>
+        <ul>
+            <li>推荐：Brera 艺术区餐厅</li>
+            <li>或 Corso Como 时尚区</li>
+            <li>米兰 Aperitivo（开胃酒）文化，18:00-21:00很多酒吧提供</li>
+        </ul>
+
+        <p><span class="time">20:00</span> 🌙 <span class="spot">晚间漫步</span></p>
+        <ul>
+            <li>大教堂夜景</li>
+            <li>或 Porta Garibaldi 现代建筑群</li>
+        </ul>
     </div>
-  </div>
+
+    <div class="tips">
+        <h3>💡 实用贴士</h3>
+        <ul>
+            <li>米兰大教堂必须提前网上购票，现场排队超长</li>
+            <li>登顶建议选择电梯（电梯+楼梯组合），全程楼梯很累</li>
+            <li>埃马努埃莱长廊里的东西非常贵，建议只看不买</li>
+            <li>米兰地铁很发达，买日票更划算（€7）</li>
+            <li>周二很多博物馆闭馆，请提前确认</li>
+        </ul>
+    </div>
+
+    <div class="hotel">
+        <h3>🏨 住宿信息</h3>
+        <p><strong>Duo Milan Porta Nuova (Tribute Portfolio)</strong></p>
+        <p>📍 Via Cosimo Del Fante 8, 20122 Milano</p>
+        <p>🚇 距离 Montenapoleone 地铁站步行8分钟</p>
+    </div>
 </body>
 </html>

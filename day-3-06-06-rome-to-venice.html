@@ -1,726 +1,118 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Day 3｜06-05｜Rome → Venice</title>
-  <style>
-    :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08);--accent:#dc2626}
-    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
-    .wrap{max-width:1160px;margin:0 auto;padding:24px}
-    
-    /* Hero Section */
-    .hero{background:linear-gradient(135deg,#dc2626 0%,#b91c1c 50%,#7f1d1d 100%);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
-    h1{margin:0 0 8px;font-size:28px}
-    .subtitle{margin:0;opacity:.9;font-size:16px}
-    
-    /* Map Section */
-    .map-section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px}
-    .map-title{font-size:16px;font-weight:700;margin-bottom:12px;color:var(--text);display:flex;align-items:center;gap:8px}
-    .map-container{width:100%;height:380px;border-radius:16px;overflow:hidden;background:#f3f4f6;position:relative}
-    .map-container iframe{width:100%;height:100%;border:0}
-    .map-route{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:13px;color:var(--muted)}
-    .map-route span{background:#fef2f2;padding:4px 10px;border-radius:12px;color:#991b1b}
-    
-    /* Banner Navigation */
-    .banner-nav{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px;overflow-x:auto}
-    .banner-title{font-size:14px;font-weight:700;color:var(--muted);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
-    .banner-track{display:flex;align-items:center;min-width:max-content;gap:0}
-    .banner-node{display:flex;flex-direction:column;align-items:center;text-decoration:none;position:relative;padding:0 8px}
-    .banner-node:first-child{padding-left:0}
-    .banner-node:last-child{padding-right:0}
-    .banner-time{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px;white-space:nowrap}
-    .banner-dot{width:14px;height:14px;border-radius:50%;background:var(--line);border:3px solid var(--card);box-shadow:0 0 0 2px var(--line);transition:all .2s}
-    .banner-node:hover .banner-dot{background:var(--accent);box-shadow:0 0 0 2px var(--accent)}
-    .banner-node.active .banner-dot{background:var(--accent);box-shadow:0 0 0 2px var(--accent)}
-    .banner-label{font-size:12px;color:var(--text);margin-top:8px;white-space:nowrap;font-weight:500;max-width:100px;text-align:center;line-height:1.3}
-    .banner-arrow{color:var(--line);font-size:20px;margin:0 4px;padding-bottom:20px}
-    .scroll-indicator{display:none}
-    
-    /* Cards */
-    .section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
-    .card-content{padding:20px}
-    .card-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px}
-    .card-text{color:var(--muted);font-size:14px}
-    
-    /* Timeline */
-    .timeline{margin-left:8px}
-    .item{position:relative;padding:0 0 16px 24px;border-left:2px solid #fee2e2}
-    .item:before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:999px;background:var(--accent);box-shadow:0 0 0 4px #fef2f2}
-    .item:last-child{border-left:2px solid transparent}
-    .time{color:var(--accent);font-size:13px;font-weight:800;margin-bottom:4px}
-    .title{font-size:18px;font-weight:800;margin-bottom:4px}
-    .desc{color:var(--muted);font-size:14px;margin-bottom:8px}
-    
-    /* Details */
-    details{margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fafafa;padding:10px 12px;cursor:pointer}
-    summary{cursor:pointer;font-weight:600;color:var(--accent)}
-    details[open] summary{margin-bottom:12px}
-    .detail-content{font-size:13px;color:var(--muted)}
-    .detail-content p{margin:6px 0}
-    .detail-content strong{color:var(--text)}
-    
-    /* Attraction Images */
-    .attraction-img{width:100%;border-radius:16px;margin:12px 0;box-shadow:0 4px 12px rgba(0,0,0,.1)}
-    .img-caption{font-size:12px;color:var(--muted);text-align:center;margin-top:4px;font-style:italic}
-    
-    /* Navigation */
-    .nav-links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
-    .nav-links a{color:var(--accent);text-decoration:none;font-weight:500}
-    .nav-links a:hover{text-decoration:underline}
-    
-    /* Utilities */
-    .highlight-box{background:#fef2f2;border-left:4px solid var(--accent);padding:12px 16px;border-radius:0 12px 12px 0;margin:12px 0}
-    .tag{display:inline-block;background:var(--bg);color:var(--muted);font-size:12px;padding:4px 10px;border-radius:20px;margin-right:8px}
-    .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
-    .info-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
-    .info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
-    .info-value{font-size:14px;font-weight:600;color:var(--text)}
-    
-    /* Art Badge */
-    .art-badge{background:linear-gradient(135deg,#dc2626 0%,#b91c1c 100%);color:#fff;padding:10px 14px;border-radius:12px;margin:12px 0;font-size:14px;display:flex;align-items:flex-start;gap:10px}
-    .art-badge-icon{font-size:18px}
-    .art-badge-content{flex:1}
-    .art-badge-title{font-weight:700;margin-bottom:2px}
-    .art-badge-text{opacity:.95;font-size:13px;line-height:1.5}
-    
-    /* Hotel Card */
-    .hotel-card{background:linear-gradient(135deg,#fff 0%,#fef2f2 100%);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:16px}
-    .hotel-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
-    .hotel-name{font-size:20px;font-weight:800;color:var(--text);margin:0}
-    .hotel-stars{color:#f59e0b;font-size:18px}
-    .hotel-chain{font-size:13px;color:var(--muted);background:#fee2e2;padding:4px 10px;border-radius:12px}
-    .hotel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
-    .hotel-info-item{display:flex;align-items:flex-start;gap:10px}
-    .hotel-info-icon{font-size:18px;min-width:24px;text-align:center}
-    .hotel-info-content{flex:1}
-    .hotel-info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
-    .hotel-info-value{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}
-    .hotel-amenities{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
-    .amenity-tag{background:#fff;border:1px solid #fecaca;color:#991b1b;font-size:12px;padding:6px 12px;border-radius:20px;display:flex;align-items:center;gap:6px}
-    
-    /* Transport Card */
-    .transport-card{background:linear-gradient(135deg,#fff 0%,#fef2f2 100%);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:16px}
-    .transport-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-    .transport-logo{font-size:28px}
-    .transport-title{font-size:18px;font-weight:800;margin:0}
-    .transport-subtitle{font-size:13px;color:var(--muted)}
-    .transport-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
-    .transport-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
-    .transport-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
-    .transport-value{font-size:14px;font-weight:600;color:var(--text)}
-    
-    @media(max-width:768px){
-      /* 1. 基础布局优化 */
-      .wrap{padding:16px}
-      
-      /* 2. Hero区域字体优化 */
-      .hero{padding:20px}
-      .hero h1{font-size:22px}
-      .hero .subtitle{font-size:14px}
-      
-      /* 3. Banner导航优化 */
-      .banner-nav{padding:12px}
-      .banner-node{padding:0 6px}
-      .banner-label{max-width:70px}
-      
-      /* 4. 卡片间距优化 */
-      .section{margin-bottom:14px}
-      .card-content{padding:16px}
-      .card-title{font-size:15px}
-      
-      /* 5. 时间轴优化 */
-      .timeline{margin-left:4px}
-      .item{padding:0 0 16px 20px}
-      .item .time{font-size:12px}
-      .item .title{font-size:16px}
-      
-      /* 6. 信息网格优化 - 小屏幕单列显示 */
-      .info-grid{grid-template-columns:1fr}
-      .info-item{padding:10px}
-      
-      /* 7. 电影badge优化 */
-      .movie-badge{padding:8px 12px}
-      .movie-badge-text{font-size:12px}
-      
-      /* 8. 酒店卡片优化 */
-      .hotel-card{padding:16px}
-      .hotel-name{font-size:18px}
-      .hotel-grid{grid-template-columns:1fr;gap:12px}
-      
-      /* 9. 地图区域优化 */
-      .map-section{padding:16px}
-      .map-container{height:250px}
-      
-      /* 10. 滚动提示 */
-      .scroll-indicator{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 3｜6月6日｜罗马 → 威尼斯</title>
+    <style>
+        body { font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.6; background: #f5f7fa; }
+        .header { background: linear-gradient(135deg, #1a365d, #2c5282); color: white; padding: 30px; border-radius: 12px; margin-bottom: 20px; }
+        .nav { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .nav a { color: #2c5282; text-decoration: none; font-weight: 500; }
+        .section { background: white; padding: 20px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .time { font-weight: bold; color: #d69e2e; display: inline-block; width: 60px; }
+        .spot { font-weight: 600; color: #1a365d; }
+        .tips { background: #fffaf0; border-left: 4px solid #d69e2e; padding: 15px; margin: 15px 0; }
+        h2 { color: #1a365d; border-bottom: 2px solid #d69e2e; padding-bottom: 10px; }
+        .transport { background: #e6fffa; padding: 15px; border-radius: 8px; }
+        .hotel { background: #f0fff4; padding: 15px; border-radius: 8px; }
+    </style>
 </head>
 <body>
-  <div class="wrap">
-    <!-- Hero Section -->
-    <div class="hero">
-      <h1>🎨 Day 3｜06-05｜Rome → Venice</h1>
-      <p class="subtitle">艺术宗教日 — 从文艺复兴的博尔盖塞到梵蒂冈的神圣殿堂，穿越千年文明的灵魂之旅</p>
+    <div class="nav">
+        <a href="day-2-06-05-rome.html">← Day 2</a>
+        <a href="index.html">返回主页</a>
+        <a href="day-4-06-07-venice-to-milan.html">Day 4 →</a>
+    </div>
+    
+    <div class="header">
+        <h1>🌍 Day 3｜6月6日｜罗马 → 威尼斯</h1>
+        <p>古罗马遗迹 + 晚间火车前往威尼斯</p>
     </div>
 
-    <!-- Navigation -->
-    <div class="nav-links">
-      <a href="index.html">← 返回主页</a>
-      <a href="day-2-06-04-bratislava-to-rome.html">← Day 2: Bratislava → Rome</a>
-      <a href="day-4-06-06-venice.html">Day 4: Venice → →</a>
-    </div>
-
-    <!-- Map Section - Multi-point Route -->
-    <div class="banner-nav">
-      <div class="banner-title">📍 核心景点导航</div>
-      <div class="banner-track">
-        <a href="#borghese" class="banner-node active">
-          <div class="banner-time">08:30</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">博尔盖塞美术馆</div>
-        </a>
-        <div class="banner-arrow">→</div>
-        <a href="#vatican" class="banner-node">
-          <div class="banner-time">11:30</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">梵蒂冈博物馆</div>
-        </a>
-        <div class="banner-arrow">→</div>
-        <a href="#stpeter" class="banner-node">
-          <div class="banner-time">14:00</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">圣彼得大教堂</div>
-        </a>
-        <div class="banner-arrow">→</div>
-        <a href="#santangelo" class="banner-node">
-          <div class="banner-time">15:30</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">圣天使堡</div>
-        </a>
-        <div class="banner-arrow">→</div>
-        <a href="#mestre" class="banner-node">
-          <div class="banner-time">22:42</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">威尼斯Mestre</div>
-        </a>
-      </div>
-      <div class="scroll-indicator">← 左右滑动查看更多 →</div>
-    </div>
-
-    <!-- Transport Card - Frecciarossa -->
     <div class="section">
-      <div class="card-content">
-        <div class="card-title">🚄 大交通</div>
+        <h2>🎯 今日行程概览</h2>
+        <p>酒店 → 斗兽场 → 古罗马广场 → 午餐 → 帕拉蒂尼山 → 万神殿 → 许愿池 → 火车去威尼斯</p>
+    </div>
+
+    <div class="section">
+        <h2>📍 详细安排</h2>
         
-        <div class="transport-card">
-          <div class="transport-header">
-            <span class="transport-logo">🚅</span>
-            <div>
-              <h3 class="transport-title">Frecciarossa 红箭高铁</h3>
-              <p class="transport-subtitle">意大利国家铁路Trenitalia旗舰高速列车</p>
-            </div>
-          </div>
-          
-          <div class="transport-grid">
-            <div class="transport-item">
-              <div class="transport-label">出发站</div>
-              <div class="transport-value">Roma Termini</div>
-            </div>
-            <div class="transport-item">
-              <div class="transport-label">到达站</div>
-              <div class="transport-value">Venezia Mestre</div>
-            </div>
-            <div class="transport-item">
-              <div class="transport-label">发车时间</div>
-              <div class="transport-value">18:35</div>
-            </div>
-            <div class="transport-item">
-              <div class="transport-label">到达时间</div>
-              <div class="transport-value">22:42</div>
-            </div>
-            <div class="transport-item">
-              <div class="transport-label">行驶时间</div>
-              <div class="transport-value">4小时7分钟</div>
-            </div>
-            <div class="transport-item">
-              <div class="transport-label">票价参考</div>
-              <div class="transport-value">€45-85</div>
-            </div>
-          </div>
-          
-          <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--line)">
-            <p style="margin:0;font-size:13px;color:var(--muted)">
-              <strong>💡 购票建议：</strong>强烈建议提前在 <a href="https://www.trenitalia.com" target="_blank" style="color:var(--accent)">Trenitalia官网</a> 或App购买。早鸟票(Super Economy)可享高达60%折扣。座位分为Standard、Premium、Business、Executive四档。
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Hotel Card -->
-    <div class="section">
-      <div class="card-content">
-        <div class="card-title">🏨 住宿</div>
+        <p><span class="time">07:30</span> 🍽️ <span class="spot">酒店早餐，退房存行李</span></p>
         
-        <div class="hotel-card">
-          <div class="hotel-header">
-            <h3 class="hotel-name">Best Western Plus Hotel Bologna</h3>
-            <span class="hotel-stars">⭐⭐⭐⭐</span>
-            <span class="hotel-chain">Best Western</span>
-          </div>
-          
-          <div class="hotel-grid">
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">📍</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">完整地址</div>
-                <div class="hotel-info-value">Via Piave 214, Mestre, 30171 Venice, Italy</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">📞</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">联系电话</div>
-                <div class="hotel-info-value">+39 041 926 5500</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">🚶</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">从车站前往</div>
-                <div class="hotel-info-value">距离Venezia Mestre火车站步行仅3分钟，出站台后沿Via Piave直行即达</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">⏰</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">入住/退房时间</div>
-                <div class="hotel-info-value">入住：14:00后 | 退房：11:00前（提供行李寄存服务）</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">🍽️</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">餐饮设施</div>
-                <div class="hotel-info-value">酒店餐厅提供丰富的自助早餐（6:30-10:00）；Lobby Bar供应饮品和小食</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">🚌</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">前往威尼斯本岛</div>
-                <div class="hotel-info-value">酒店门口即有公交2路/7路直达威尼斯本岛（Piazzale Roma），约15-20分钟</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">⭐</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">评分</div>
-                <div class="hotel-info-value">8.5/10 (Booking.com) - "位置绝佳，设施现代，早餐丰富"</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">🎫</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">参考房价</div>
-                <div class="hotel-info-value">€80-140/晚（含早餐），建议提前预订</div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="hotel-amenities">
-            <span class="amenity-tag">✓ 免费WiFi</span>
-            <span class="amenity-tag">✓ 空调客房</span>
-            <span class="amenity-tag">✓ 自助早餐</span>
-            <span class="amenity-tag">✓ 24小时前台</span>
-            <span class="amenity-tag">✓ 行李寄存</span>
-            <span class="amenity-tag">✓ 机场班车服务</span>
-            <span class="amenity-tag">✓ 商务中心</span>
-            <span class="amenity-tag">✓ 停车场</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Timeline Section -->
-    <div class="section">
-      <div class="card-content">
-        <div class="card-title">📍 行程安排</div>
-        <div class="timeline">
-          
-          <!-- Galleria Borghese -->
-          <div class="item" id="borghese">
-            <div class="time">08:30</div>
-            <div class="title">🎨 博尔盖塞美术馆 (Galleria Borghese)</div>
-            <div class="desc">文艺复兴艺术瑰宝，贝尼尼雕塑与卡拉瓦乔画作的殿堂</div>
-            <span class="tag">需提前预约</span>
-            <span class="tag">入场限时2小时</span>
-            <details>
-              <summary>查看详情</summary>
-              
-              <p class="img-caption">Photo: Galleria Borghese Gallery Hall | Unsplash</p>
-              
-              <div class="art-badge">
-                <span class="art-badge-icon">🎭</span>
-                <div class="art-badge-content">
-                  <div class="art-badge-title">贝尼尼雕塑三杰作</div>
-                  <div class="art-badge-text">
-                    《阿波罗与达芙妮》-  capture达芙妮化为月桂树的瞬间；《大卫》- 动态的投石瞬间；《被劫持的普罗塞庇娜》- 冥王劫走少女，手指陷入肌肤的惊人细节。
-                  </div>
-                </div>
-              </div>
-              
-              <p><strong>🎨 卡拉瓦乔画作：</strong>《手提歌利亚头的大卫》（画中歌利亚头像是卡拉瓦乔自画像）、《捧果篮的男孩》、《病中的巴克斯》</p>
-              
-              <p><strong>🎨 其他名作：</strong>提香《神圣与世俗之爱》、拉斐尔《卸担》</p>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">建筑风格</div>
-                  <div class="info-value">巴洛克别墅</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">建馆年代</div>
-                  <div class="info-value">1613-1620年</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">创始人</div>
-                  <div class="info-value">Cardinal Scipione Borghese</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">入场限制</div>
-                  <div class="info-value">每次限360人/2小时</div>
-                </div>
-              </div>
-              
-              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】Piazzale Scipione Borghese 5, 00197 Roma RM, Italy<br>
-              【交通】地铁Line A线到Spagna站或Flaminio站，步行约15分钟；或从酒店打车/公交52、53、83、160、490、495路到Pinciano/Borghese站<br>
-              【门票】€13 + 预约费€2<br>
-              【开放时间】周二至周日 9:00-19:00（周一闭馆）<br>
-              ⏱️ 建议停留：2小时（分时段入场，限2小时）</p>
-              
-              <p style="margin-top:12px"><strong>💡 预约贴士：</strong></p>
-              <ul>
-                <li>必须提前官网预约：<a href="https://galleriaborghese.beniculturali.it" target="_blank" style="color:var(--accent)">galleriaborghese.beniculturali.it</a></li>
-                <li>旺季（4-10月）建议提前2-4周预订</li>
-                <li>建议预约最早场次9:00，人流最少</li>
-                <li>入场需携带预约确认单和身份证件</li>
-                <li>地下一楼有免费寄存柜</li>
-              </ul>
-            </details>
-          </div>
-
-          <!-- Vatican Museums -->
-          <div class="item" id="vatican">
-            <div class="time">11:30</div>
-            <div class="title">🏛️ 梵蒂冈博物馆 (Vatican Museums)</div>
-            <div class="desc">世界上最伟大的艺术博物馆之一，西斯廷礼拜堂所在地</div>
-            <span class="tag">需提前预约</span>
-            <span class="tag">着装要求</span>
-            <details>
-              <summary>查看详情</summary>
-              
-              <p class="img-caption">Photo: Vatican Museums Famous Spiral Staircase | Unsplash</p>
-              
-              
-              <p class="img-caption">Photo: Sistine Chapel - Michelangelo's Ceiling | Unsplash</p>
-              
-              <div class="art-badge">
-                <span class="art-badge-icon">⛪</span>
-                <div class="art-badge-content">
-                  <div class="art-badge-title">西斯廷礼拜堂 (Sistine Chapel)</div>
-                  <div class="art-badge-text">
-                    米开朗基罗的巅峰之作：《创世纪》(Creation of Adam) 天花板上描绘上帝赋予亚当生命；祭坛墙《最后的审判》(The Last Judgment) - 耗时7年完成，220平方米，400多个人物。
-                  </div>
-                </div>
-              </div>
-              
-              <div class="art-badge">
-                <span class="art-badge-icon">🎨</span>
-                <div class="art-badge-content">
-                  <div class="art-badge-title">拉斐尔画室 (Raphael Rooms)</div>
-                  <div class="art-badge-text">
-                    《雅典学院》(The School of Athens) - 拉斐尔最著名的湿壁画，描绘古希腊哲学家群像；《圣礼之争》(Disputation of the Holy Sacrament)；《帕纳苏斯山》(The Parnassus) - 阿波罗与缪斯。
-                  </div>
-                </div>
-              </div>
-              
-              <p><strong>🗺️ 其他必看：</strong></p>
-              <ul>
-                <li><strong>地图廊(Gallery of Maps)</strong> - 40幅16世纪意大利各地区巨幅地图壁画</li>
-                <li><strong>松果庭院(Courtyard of the Pinecone)</strong> - 古罗马时期的青铜松果雕塑</li>
-                <li><strong>埃及馆(Egyptian Museum)</strong> - 木乃伊、法老雕像、纸莎草文献</li>
-                <li><strong>伊特鲁里亚馆(Etruscan Museum)</strong> - 前罗马时期意大利文明的珍宝</li>
-                <li><strong>挂毯廊(Gallery of Tapestries)</strong> - 16世纪佛兰德斯挂毯，由拉斐尔设计草图</li>
-              </ul>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">历史</div>
-                  <div class="info-value">建于1506年</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">馆藏数量</div>
-                  <div class="info-value">超过7万件</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">展厅面积</div>
-                  <div class="info-value">4.3万平方米</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">年参观人数</div>
-                  <div class="info-value">约600万</div>
-                </div>
-              </div>
-              
-              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】Viale Vaticano, 00165 Roma RM, Italy<br>
-              【交通】从博尔盖塞美术馆步行约20分钟或打车；地铁Line A线到Ottaviano站或Cipro站，步行10分钟<br>
-              【门票】€17（成人），学生/青年€8<br>
-              【开放时间】周一至周六 9:00-18:00（最后入场16:00）；周日闭馆（每月最后一个周日免费，9:00-14:00）<br>
-              ⏱️ 建议停留：3-4小时（走马观花）/ 5-6小时（深度参观）</p>
-              
-              <p style="margin-top:12px"><strong>💡 参观贴士：</strong></p>
-              <ul>
-                <li>强烈建议提前官网购票：<a href="https://museivaticani.va" target="_blank" style="color:var(--accent)">museivaticani.va</a></li>
-                <li>购买"免排队票"(Skip the Line)可节省2小时以上排队时间</li>
-                <li>西斯廷礼拜堂内禁止拍照、禁止喧哗</li>
-                <li>着装要求：肩部和膝盖必须遮盖（短裤/短裙/无袖上衣禁止入内）</li>
-                <li>可经西斯廷礼拜堂直接通往圣彼得大教堂（无需重新安检）</li>
-              </ul>
-            </details>
-          </div>
-
-          <!-- St. Peter's Basilica -->
-          <div class="item" id="stpeter">
-            <div class="time">14:00</div>
-            <div class="title">⛪ 圣彼得大教堂 (St. Peter's Basilica)</div>
-            <div class="desc">基督教世界的中心，巴洛克建筑的巅峰之作，世界上最大的教堂</div>
-            <span class="tag">免费入场</span>
-            <span class="tag">穹顶登顶需付费</span>
-            <details>
-              <summary>查看详情</summary>
-              
-              <p class="img-caption">Photo: St. Peter's Basilica Facade | Unsplash</p>
-              
-              
-              <p class="img-caption">Photo: Michelangelo's Pietà inside St. Peter's Basilica | Unsplash</p>
-              
-              <div class="art-badge">
-                <span class="art-badge-icon">🗿</span>
-                <div class="art-badge-content">
-                  <div class="art-badge-title">米开朗基罗《圣殇》(Pietà)</div>
-                  <div class="art-badge-text">
-                    创作于1498-1499年，当时米开朗基罗年仅24岁。雕塑描绘了圣母玛利亚怀抱被钉死的耶稣，表情宁静而悲痛。这是米开朗基罗唯一署名的作品（胸前的肩带上）。原作现置于防弹玻璃后保护。
-                  </div>
-                </div>
-              </div>
-              
-              <div class="art-badge">
-                <span class="art-badge-icon">⛪</span>
-                <div class="art-badge-content">
-                  <div class="art-badge-title">贝尼尼青铜华盖 (Baldacchino)</div>
-                  <div class="art-badge-text">
-                    位于教堂中央祭坛上方，高29米，由四根螺旋形铜柱支撑，使用了从万神殿掠夺来的青铜。华盖正下方是圣彼得的墓穴，只有教皇才能在此举行弥撒。
-                  </div>
-                </div>
-              </div>
-              
-              <p><strong>🏛️ 建筑亮点：</strong></p>
-              <ul>
-                <li><strong>穹顶(Dome)</strong> - 米开朗基罗71岁时接手设计，高136米，直径42米，世界最大穹顶之一。登顶可俯瞰罗马全景（需爬楼梯或电梯+楼梯）</li>
-                <li><strong>圣彼得宝座(Chair of St. Peter)</strong> - 贝尼尼设计的青铜宝座，镶嵌彩色大理石，位于后殿</li>
-                <li><strong>教皇祭坛(Papal Altar)</strong> - 只有教皇可以使用的主祭坛，位于华盖正下方</li>
-                <li><strong>地下墓穴(Grottoes)</strong> - 安葬历代教皇和皇室成员</li>
-              </ul>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">建造时间</div>
-                  <div class="info-value">1506-1626年</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">建筑师</div>
-                  <div class="info-value">米开朗基罗、拉斐尔、布拉曼特、贝尼尼</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">内部面积</div>
-                  <div class="info-value">15,160平方米</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">容量</div>
-                  <div class="info-value">6万人</div>
-                </div>
-              </div>
-              
-              <p style="margin-top:12px"><strong>🎫 穹顶登顶信息：</strong></p>
-              <ul>
-                <li><strong>电梯+楼梯</strong>：€10，电梯到一半后需爬320级台阶</li>
-                <li><strong>全程楼梯</strong>：€8，共551级台阶</li>
-                <li><strong>开放时间</strong>：8:00-17:00（夏季延长至19:00）</li>
-                <li><strong>建议</strong>：早去人少，登顶后可360°俯瞰梵蒂冈和罗马全景</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】Piazza San Pietro, 00120 Città del Vaticano<br>
-              【交通】从梵蒂冈博物馆步行10分钟（经西斯廷礼拜堂直通，无需重新安检）；或从圣天使堡步行10分钟<br>
-              【门票】教堂免费；穹顶登顶€8-10<br>
-              【开放时间】7:00-19:00（穹顶8:00-17:00/18:00）<br>
-              ⏱️ 建议停留：1.5-2小时（教堂内部）+ 45分钟（登顶）</p>
-              
-              <p style="margin-top:12px"><strong>💡 参观贴士：</strong></p>
-              <ul>
-                <li>教堂免费入场但需通过安检，旺季排队约30-60分钟</li>
-                <li>着装要求非常严格：短裤、短裙、无袖上衣、露肩装禁止入内</li>
-                <li>《圣殇》位于入口右侧第一个小堂，通常需要排队观看</li>
-                <li>弥撒期间部分区域可能关闭</li>
-                <li>周三上午教皇可能在此举行公开接见活动（需预约）</li>
-              </ul>
-            </details>
-          </div>
-
-          <!-- Castel Sant'Angelo -->
-          <div class="item" id="santangelo">
-            <div class="time">15:30</div>
-            <div class="title">🏰 圣天使堡 (Castel Sant'Angelo)</div>
-            <div class="desc">古罗马陵墓变身中世纪城堡，台伯河畔的标志性圆顶建筑</div>
-            <span class="tag">外观免费</span>
-            <span class="tag">入内€15</span>
-            <details>
-              <summary>查看详情</summary>
-              
-              <p class="img-caption">Photo: Castel Sant'Angelo and Ponte Sant'Angelo | Unsplash</p>
-              
-              
-              <p class="img-caption">Photo: Bernini's Angel Statues on Ponte Sant'Angelo | Unsplash</p>
-              
-              <div class="art-badge">
-                <span class="art-badge-icon">👼</span>
-                <div class="art-badge-content">
-                  <div class="art-badge-title">哈德良陵墓与天使传说</div>
-                  <div class="art-badge-text">
-                    原为公元139年罗马皇帝哈德良的陵墓。590年教皇格里高利一世在此看到天使显现，宣告瘟疫结束，从此得名"圣天使堡"。顶部的青铜天使像手持长矛，由18世纪雕塑家彼得罗·布拉奇创作。
-                  </div>
-                </div>
-              </div>
-              
-              <p><strong>🏛️ 建筑演变：</strong></p>
-              <ul>
-                <li><strong>古罗马时期</strong>（139年）：哈德良皇帝陵墓，圆柱形建筑，顶部有花园和四马战车雕像</li>
-                <li><strong>中世纪</strong>：改建为教皇堡垒和避难所，连接梵蒂冈的秘密通道(Passetto di Borgo)始建于1277年</li>
-                <li><strong>文艺复兴</strong>：成为教皇宫殿，装饰华丽的房间用于监禁和避难</li>
-                <li><strong>现代</strong>：现为博物馆，展示武器、壁画、教皇寓所</li>
-              </ul>
-              
-              <p><strong>🌉 圣天使桥 (Ponte Sant'Angelo)：</strong></p>
-              <p>由贝尼尼设计的10座天使雕像守护着这座通往城堡的桥梁，每座天使手持耶稣受难刑具：十字架、荆棘冠、钉子、鞭子、浸醋海绵、长矛、柱子、面纱、紫袍。桥上风景是摄影爱好者的天堂，尤其黄昏时分。</p>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">建造时间</div>
-                  <div class="info-value">公元135-139年</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">原始用途</div>
-                  <div class="info-value">哈德良皇帝陵墓</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">高度</div>
-                  <div class="info-value">48米（不含天使像）</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">天使像</div>
-                  <div class="info-value">彼得罗·布拉奇(1753)</div>
-                </div>
-              </div>
-              
-              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】Lungotevere Castello, 50, 00193 Roma RM, Italy<br>
-              【交通】从圣彼得大教堂出发，沿协和大道(Via della Conciliazione)向东步行10分钟，跨过圣天使桥即达<br>
-              【门票】€15（入内）；外观和圣天使桥免费<br>
-              【开放时间】9:00-19:30（最后入场18:30）<br>
-              ⏱️ 建议停留：20-30分钟（外观拍照）/ 1-2小时（入内参观）</p>
-              
-              <p style="margin-top:12px"><strong>💡 参观贴士：</strong></p>
-              <ul>
-                <li>城堡与桥梁的组合是罗马最著名的风景之一，傍晚时分光线最佳</li>
-                <li>如时间充裕可入内参观，内有教皇避难通道、武器博物馆、屋顶露台</li>
-                <li>屋顶露台可俯瞰台伯河、梵蒂冈和罗马全景，是拍摄圣彼得大教堂的好位置</li>
-                <li>可提前购票避免排队：<a href="https://www.castelsantangelo.beniculturali.it" target="_blank" style="color:var(--accent)">官网</a></li>
-                <li>夏季有时举办露天音乐会，可关注活动安排</li>
-              </ul>
-            </details>
-          </div>
-
-          <!-- Return to Hotel -->
-          <div class="item">
-            <div class="time">16:30</div>
-            <div class="title">🧳 返回酒店取行李</div>
-            <div class="desc">从圣天使堡区域返回酒店，收拾行李准备前往火车站</div>
-            <details>
-              <summary>查看详情</summary>
-              <p><strong>【路线建议】</strong>从圣天使堡步行至Ottaviano地铁站（约10分钟），搭乘地铁Line A线直达Termini火车站（约15分钟），酒店就在火车站旁步行5分钟</p>
-              <p><strong>【时间安排】</strong>建议17:30前到达酒店，预留45分钟收拾行李并前往车站</p>
-              <p><strong>【便利优势】</strong>酒店位于Termini火车站旁，无需担心赶不上火车，取完行李后步行3-5分钟即可到达车站</p>
-            </details>
-          </div>
-
-          <!-- Train -->
-          <div class="item">
-            <div class="time">18:35</div>
-            <div class="title">🚄 罗马火车站出发</div>
-            <div class="desc">前往Roma Termini火车站，搭乘Frecciarossa高铁前往威尼斯</div>
-            <details>
-              <summary>查看详情</summary>
-              <p><strong>【车站】</strong>Roma Termini是意大利最大的火车站，设施完善，有行李寄存、餐饮和购物</p>
-              <p><strong>【建议】</strong>提前30分钟到站，找到站台和座位。电子屏会显示列车信息</p>
-              <p><strong>【车上】</strong>Frecciarossa有免费WiFi、餐车服务，座位宽敞舒适</p>
-            </details>
-          </div>
-
-          <!-- Arrive Mestre -->
-          <div class="item" id="mestre">
-            <div class="time">22:42</div>
-            <div class="title">🌙 抵达威尼斯Mestre</div>
-            <div class="desc">入住Best Western Plus Hotel Bologna，结束充实的艺术宗教之旅</div>
-            <details>
-              <summary>查看详情</summary>
-              <p><strong>【抵达】</strong>Venezia Mestre火车站是威尼斯的大陆门户，交通便利</p>
-              <p><strong>【酒店】</strong>Best Western Plus Hotel Bologna距离车站仅3分钟步行路程，出站后沿Via Piave直行即达</p>
-              <p><strong>【晚餐】</strong>如需要，酒店周边有多家餐厅营业至深夜，或可在火车站附近快餐解决</p>
-            </details>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- Important Notes -->
-    <div class="section">
-      <div class="card-content">
-        <div class="card-title">⚠️ 重要提示</div>
-        <ul style="margin:0;padding-left:20px;color:var(--muted)">
-          <li><strong>博尔盖塞美术馆必须提前预约</strong>，临时去大概率无法入场。旺季建议提前2-4周在官网预约</li>
-          <li><strong>梵蒂冈博物馆建议购买免排队票</strong>，旺季排队可达2小时以上。官网提前购票可节省大量时间</li>
-          <li><strong>着装要求</strong>：进入教堂/博物馆要求肩部和膝盖遮盖，建议携带披肩或穿长裤/长裙。短裤、短裙、无袖上衣禁止入内</li>
-          <li><strong>火车票建议提前购买</strong>，旺季当天可能无票或价格翻倍。Trenitalia官网可购买电子票，手机出示即可</li>
-          <li><strong>下午行程紧凑</strong>，注意控制时间，确保18:00前到达火车站</li>
-          <li><strong>西斯廷礼拜堂禁止拍照</strong>，请遵守规定</li>
-          <li><strong>保管好贵重物品</strong>，热门景点周边需注意防盗</li>
+        <p><span class="time">08:30</span> 🏟️ <span class="spot">罗马斗兽场 (Colosseo)</span></p>
+        <ul>
+            <li>建议提前网上购票，含古罗马广场联票</li>
+            <li>参观时长约1.5-2小时</li>
+            <li>可租中文语音导览</li>
         </ul>
-      </div>
+
+        <p><span class="time">11:00</span> 🏛️ <span class="spot">古罗马广场 (Foro Romano)</span></p>
+        <ul>
+            <li>罗马帝国的政治中心遗址</li>
+            <li>帕拉蒂尼山（Palatine Hill）联票包含</li>
+            <li>建议穿舒适鞋子，石板路较多</li>
+        </ul>
+
+        <p><span class="time">13:00</span> 🍝 <span class="spot">午餐</span></p>
+        <ul>
+            <li>斗兽场附近餐厅</li>
+            <li>建议吃 Pizza al taglio（切片披萨）</li>
+        </ul>
+
+        <p><span class="time">14:30</span> ⛪ <span class="spot">万神殿 (Pantheon)</span></p>
+        <ul>
+            <li>免费进入，穹顶令人惊叹</li>
+            <li>拉斐尔墓在此</li>
+        </ul>
+
+        <p><span class="time">15:30</span> ⛲ <span class="spot">特雷维喷泉 (Fontana di Trevi)</span></p>
+        <ul>
+            <li>投币许愿！背对喷泉右手持币从左肩抛入</li>
+            <li>人非常多，注意财物安全</li>
+        </ul>
+
+        <p><span class="time">16:30</span> 🚂 <span class="spot">前往火车站</span></p>
+        <ul>
+            <li>回酒店取行李</li>
+            <li>前往 Roma Termini 火车站</li>
+        </ul>
     </div>
 
-  </div>
+    <div class="transport">
+        <h3>🚄 交通信息</h3>
+        <p><strong>火车：Roma Termini → Venezia Mestre</strong></p>
+        <p>⏰ 时间：16:30 - 约20:00（约3.5小时）</p>
+        <p>🎫 车次：Frecciarossa 或 Italo 高速列车</p>
+        <p>💶 票价：约€35-50（提前预订更便宜）</p>
+        <p>📍 抵达：Venezia Mestre 火车站（大陆侧）</p>
+    </div>
+
+    <div class="section">
+        <p><span class="time">20:00</span> 🌙 <span class="spot">抵达威尼斯 Mestre</span></p>
+        <ul>
+            <li>入住酒店</li>
+            <li>Mestre 区域餐厅晚餐</li>
+            <li>休息备战明日威尼斯主岛</li>
+        </ul>
+    </div>
+
+    <div class="tips">
+        <h3>💡 实用贴士</h3>
+        <ul>
+            <li>斗兽场门票务必提前购买，现场排队可能2小时以上</li>
+            <li>今日行李可以寄存在酒店，看完景点再回去取</li>
+            <li>火车票建议提前在 Trenitalia 或 Italo 官网购买</li>
+            <li>威尼斯 Mestre 住宿性价比高，去主岛火车10分钟</li>
+        </ul>
+    </div>
+
+    <div class="hotel">
+        <h3>🏨 住宿信息</h3>
+        <p><strong>Best Western Plus Hotel Bologna</strong>（或同级）</p>
+        <p>📍 Via Piave 214, 30171 Mestre, Venezia</p>
+        <p>🚂 距离 Mestre 火车站步行3分钟</p>
+        <p>🚆 去威尼斯主岛（Santa Lucia站）火车10分钟</p>
+    </div>
 </body>
 </html>
