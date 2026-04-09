@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 2｜06-04｜Bratislava → Rome</title>
+  <style>
+    :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08);--accent:#f59e0b}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+    .wrap{max-width:1160px;margin:0 auto;padding:24px}
+
+    /* Hero Section */
+    .hero{background:linear-gradient(135deg,#c41e3a,#dc2626 60%,#f87171);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
+    h1{margin:0 0 8px;font-size:28px}
+    .subtitle{margin:0;opacity:.9;font-size:16px}
+
+    /* Map Section */
+    .map-section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px}
+    .map-title{font-size:16px;font-weight:700;margin-bottom:12px;color:var(--text);display:flex;align-items:center;gap:8px}
+    .map-container{width:100%;height:380px;border-radius:16px;overflow:hidden;background:#f3f4f6;position:relative}
+    .map-container iframe{width:100%;height:100%;border:0}
+    .map-route{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:13px;color:var(--muted)}
+    .map-route span{background:#f3f4f6;padding:4px 10px;border-radius:12px}
+
+    /* Banner Navigation */
+    .banner-nav{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px;overflow-x:auto}
+    .banner-title{font-size:14px;font-weight:700;color:var(--muted);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
+    .banner-track{display:flex;align-items:center;min-width:max-content;gap:0}
+    .banner-node{display:flex;flex-direction:column;align-items:center;text-decoration:none;position:relative;padding:0 8px}
+    .banner-node:first-child{padding-left:0}
+    .banner-node:last-child{padding-right:0}
+    .banner-time{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px;white-space:nowrap}
+    .banner-dot{width:14px;height:14px;border-radius:50%;background:var(--line);border:3px solid var(--card);box-shadow:0 0 0 2px var(--line);transition:all .2s}
+    .banner-node:hover .banner-dot{background:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+    .banner-node.active .banner-dot{background:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+    .banner-label{font-size:12px;color:var(--text);margin-top:8px;white-space:nowrap;font-weight:500;max-width:80px;text-align:center;line-height:1.3}
+    .banner-arrow{color:var(--line);font-size:20px;margin:0 4px;padding-bottom:20px}
+
+    /* Cards */
+    .section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
+    .card-content{padding:20px}
+    .card-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px}
+    .card-text{color:var(--muted);font-size:14px}
+
+    /* Flight Card */
+    .flight-card{background:linear-gradient(135deg,#fef3c7 0%,#fde68a 100%);border:1px solid #f59e0b;border-radius:20px;padding:20px;margin-bottom:20px}
+    .flight-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+    .flight-number{font-size:24px;font-weight:800;color:#92400e}
+    .flight-badge{background:#f59e0b;color:#fff;font-size:12px;padding:4px 10px;border-radius:12px;font-weight:600}
+    .flight-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+    .flight-info-item{display:flex;align-items:center;gap:10px}
+    .flight-info-icon{font-size:20px}
+    .flight-info-content{flex:1}
+    .flight-info-label{font-size:11px;color:#92400e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+    .flight-info-value{font-size:14px;font-weight:700;color:#78350f}
+
+    /* Timeline */
+    .timeline{margin-left:8px}
+    .item{position:relative;padding:0 0 16px 24px;border-left:2px solid #fee2e2}
+    .item:before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:999px;background:var(--blue);box-shadow:0 0 0 4px #eff6ff}
+    .item:last-child{border-left:2px solid transparent}
+    .time{color:var(--blue);font-size:13px;font-weight:800;margin-bottom:4px}
+    .title{font-size:18px;font-weight:800;margin-bottom:4px}
+
+    /* Details */
+    details{margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fafafa;padding:10px 12px}
+    summary{cursor:pointer;font-weight:600;color:var(--blue)}
+    details[open] summary{margin-bottom:12px}
+
+    /* Attraction Images */
+    .attraction-img{width:100%;border-radius:16px;margin:12px 0;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+    .img-caption{font-size:12px;color:var(--muted);text-align:center;margin-top:4px;font-style:italic}
+
+    /* Attraction Placeholders - CSS Gradient + Emoji */
+    .attraction-placeholder{width:100%;height:220px;border-radius:16px;margin:12px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.1);position:relative;overflow:hidden}
+    .attraction-placeholder::before{content:attr(data-emoji);font-size:72px;z-index:2;text-shadow:0 4px 20px rgba(0,0,0,.3)}
+    .attraction-placeholder::after{content:attr(data-name);font-size:14px;font-weight:600;color:#fff;margin-top:12px;z-index:2;text-shadow:0 2px 8px rgba(0,0,0,.5);padding:4px 16px;background:rgba(0,0,0,.3);border-radius:20px}
+
+    /* Gradient backgrounds for different attractions */
+    .ph-pantheon{background:linear-gradient(135deg,#8B4513 0%,#D2691E 50%,#CD853F 100%)} /* 古罗马棕 */
+    .ph-navona{background:linear-gradient(135deg,#1e3a5f 0%,#2d5a87 50%,#4a7fb5 100%)} /* 广场蓝 */
+    .ph-trevi{background:linear-gradient(135deg,#00CED1 0%,#20B2AA 50%,#48D1CC 100%)} /* 喷泉青 */
+    .ph-spanish{background:linear-gradient(135deg,#FF6B6B 0%,#FFE66D 50%,#4ECDC4 100%)} /* 西班牙色彩 */
+    .ph-colosseum{background:linear-gradient(135deg,#8B7355 0%,#A0522D 50%,#CD853F 100%)} /* 斗兽场土黄 */
+    .ph-forum{background:linear-gradient(135deg,#708090 0%,#778899 50%,#B0C4DE 100%)} /* 遗址灰 */
+    .ph-orange{background:linear-gradient(135deg,#FF8C00 0%,#FFA500 50%,#FFD700 100%)} /* 橘园日落 */
+
+    /* Navigation */
+    .nav-links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+    .nav-links a{color:var(--blue);text-decoration:none;font-weight:500}
+    .nav-links a:hover{text-decoration:underline}
+
+    /* Utilities */
+    .highlight-box{background:#fef2f2;border-left:4px solid #dc2626;padding:12px 16px;border-radius:0 12px 12px 0;margin:12px 0}
+    .tag{display:inline-block;background:var(--bg);color:var(--muted);font-size:12px;padding:4px 10px;border-radius:20px;margin-right:8px}
+    .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+    .info-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
+    .info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+    .info-value{font-size:14px;font-weight:600;color:var(--text)}
+    .scroll-indicator{display:none}
+
+    /* Hotel Card */
+    .hotel-card{background:linear-gradient(135deg,#fff 0%,#f8fafc 100%);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:16px}
+    .hotel-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+    .hotel-name{font-size:20px;font-weight:800;color:var(--text);margin:0}
+    .hotel-stars{color:#f59e0b;font-size:18px}
+    .hotel-chain{font-size:13px;color:var(--muted);background:#e0e7ff;padding:4px 10px;border-radius:12px}
+    .hotel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+    .hotel-info-item{display:flex;align-items:flex-start;gap:10px}
+    .hotel-info-icon{font-size:18px;min-width:24px;text-align:center}
+    .hotel-info-content{flex:1}
+    .hotel-info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+    .hotel-info-value{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}
+    .hotel-amenities{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+    .amenity-tag{background:#ecfdf5;color:#059669;font-size:12px;padding:6px 12px;border-radius:20px;display:flex;align-items:center;gap:6px}
+
+    /* Tips Box */
+    .tips-box{background:linear-gradient(135deg,#f0fdf4 0%,#dcfce7 100%);border:1px solid #86efac;border-radius:16px;padding:16px;margin-top:12px}
+    .tips-title{font-weight:700;color:#166534;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+    .tips-list{margin:0;padding-left:20px;color:#166534}
+    .tips-list li{margin-bottom:6px}
+
+    @media(max-width:768px){
+      /* 1. 基础布局优化 */
+      .wrap{padding:16px}
+
+      /* 2. Hero区域字体优化 */
+      .hero{padding:20px}
+      .hero h1{font-size:22px}
+      .hero .subtitle{font-size:14px}
+
+      /* 3. Banner导航优化 */
+      .banner-nav{padding:12px}
+      .banner-node{padding:0 6px}
+      .banner-label{max-width:70px}
+
+      /* 4. 卡片间距优化 */
+      .section{margin-bottom:14px}
+      .card-content{padding:16px}
+      .card-title{font-size:15px}
+
+      /* 5. 时间轴优化 */
+      .timeline{margin-left:4px}
+      .item{padding:0 0 16px 20px}
+      .item .time{font-size:12px}
+      .item .title{font-size:16px}
+
+      /* 6. 信息网格优化 - 小屏幕单列显示 */
+      .info-grid{grid-template-columns:1fr}
+      .info-item{padding:10px}
+
+      /* 7. 电影badge优化 */
+      .movie-badge{padding:8px 12px}
+      .movie-badge-text{font-size:12px}
+
+      /* 8. 酒店卡片优化 */
+      .hotel-card{padding:16px}
+      .hotel-name{font-size:18px}
+      .hotel-grid{grid-template-columns:1fr;gap:12px}
+
+      /* 9. 地图区域优化 */
+      .map-section{padding:16px}
+      .map-container{height:250px}
+
+      /* 10. 滚动提示 */
+      .scroll-indicator{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Hero Section -->
+    <div class="hero">
+      <h1>🏛️ Day 2｜06-04｜Bratislava → Rome</h1>
+      <p class="subtitle">罗马高覆盖日 | 永恒之城精华暴走 | 斯洛伐克 → 意大利</p>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-links">
+      <a href="index.html">← 返回主页</a>
+      <a href="day-1-06-03-vienna-to-bratislava.html">← Day 1</a>
+      <a href="day-3-06-05-rome-to-venice.html">Day 3 →</a>
+    </div>
+
+    <!-- Flight Card -->
+    <div class="flight-card">
+      <div class="flight-header">
+        <span class="flight-number">✈️ FR4225</span>
+        <span class="flight-badge">Ryanair 瑞安航空</span>
+        <span class="flight-badge" style="background:#dc2626">已确认</span>
+      </div>
+      <div class="flight-grid">
+        <div class="flight-info-item">
+          <span class="flight-info-icon">🛫</span>
+          <div class="flight-info-content">
+            <div class="flight-info-label">出发</div>
+            <div class="flight-info-value">Bratislava (BTS) 08:00</div>
+          </div>
+        </div>
+        <div class="flight-info-item">
+          <span class="flight-info-icon">🛬</span>
+          <div class="flight-info-content">
+            <div class="flight-info-label">到达</div>
+            <div class="flight-info-value">Rome Fiumicino (FCO) 09:35</div>
+          </div>
+        </div>
+        <div class="flight-info-item">
+          <span class="flight-info-icon">⏱️</span>
+          <div class="flight-info-content">
+            <div class="flight-info-label">飞行时长</div>
+            <div class="flight-info-value">1小时35分钟</div>
+          </div>
+        </div>
+        <div class="flight-info-item">
+          <span class="flight-info-icon">🎒</span>
+          <div class="flight-info-content">
+            <div class="flight-info-label">行李</div>
+            <div class="flight-info-value">手提行李 + 优先登机</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="banner-nav">
+      <div class="banner-title">📍 行程导航</div>
+      <div class="banner-track">
+        <a href="#hotel-checkin" class="banner-node">
+          <div class="banner-time">10:00</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">酒店存行李</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#pantheon" class="banner-node">
+          <div class="banner-time">11:30</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">万神殿</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#navona" class="banner-node">
+          <div class="banner-time">12:30</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">纳沃纳广场</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#trevi" class="banner-node">
+          <div class="banner-time">14:30</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">特雷维喷泉</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#spanish" class="banner-node">
+          <div class="banner-time">15:30</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">西班牙台阶</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#colosseum" class="banner-node">
+          <div class="banner-time">16:30</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">罗马斗兽场</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#forum" class="banner-node">
+          <div class="banner-time">18:00</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">古罗马广场</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#orange" class="banner-node">
+          <div class="banner-time">19:30</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">橘园日落</div>
+        </a>
+      </div>
+      <div class="scroll-indicator">← 左右滑动查看更多 →</div>
+    </div>
+
+    <!-- Hotel Card Preview -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">🏨 住宿</div>
+        <div class="highlight-box">
+          <strong>Best Western Plus Hotel Universo</strong>
+          <span class="tag">四星级</span>
+          <span class="tag">Termini火车站旁</span>
+        </div>
+        <p class="card-text">位于罗马Termini中央火车站旁，步行5分钟即达。交通便利，步行可达斗兽场、许愿池等景点。酒店详情见页面底部。</p>
+      </div>
+    </div>
+
+    <!-- Timeline Section -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">📍 行程安排</div>
+        <div class="timeline">
+
+          <!-- Early Morning -->
+          <div class="item">
+            <div class="time">05:30</div>
+            <div class="title">🌅 起床出发</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【亮点】</strong>清晨早起前往布拉迪斯拉发机场，准备飞往永恒之城罗马。</p>
+              <p><strong>【交通】</strong>从AC Hotel Bratislava Old Town打车前往机场，约15分钟车程</p>
+              <p><strong>【建议】</strong>提前2小时到达机场办理登机手续，瑞安航空建议提前网上值机</p>
+            </details>
+          </div>
+
+          <!-- Flight -->
+          <div class="item">
+            <div class="time">08:00</div>
+            <div class="title">✈️ 航班起飞 FR4225</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【航班信息】</strong>Ryanair FR4225，布拉迪斯拉发机场(BTS) → 罗马菲乌米奇诺机场(FCO)</p>
+              <p><strong>【飞行时长】</strong>约1小时35分钟</p>
+              <p><strong>【抵达时间】</strong>09:35（罗马时间）</p>
+              <p><strong>【交通提示】</strong>从菲乌米奇诺机场前往酒店：</p>
+              <ul style="margin-top:8px">
+                <li><strong>Leonardo Express快铁</strong> - 直达Termini火车站，32分钟，€14，推荐！</li>
+                <li><strong>区域列车FL1</strong> - 停靠多个站点，约45分钟到Termini，更便宜</li>
+                <li><strong>Terravision机场大巴</strong> - 经济实惠的选择，约50分钟到Termini</li>
+              </ul>
+              <p style="margin-top:12px"><strong>💡 重要：</strong>建议先到酒店存行李再开始游览，轻装上阵更舒适！</p>
+            </details>
+          </div>
+
+          <!-- Hotel Check-in -->
+          <div class="item" id="hotel-checkin">
+            <div class="time">10:00</div>
+            <div class="title">🏨 抵达酒店存行李</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【路线】</strong>Leonardo Express快铁直达Termini火车站，32分钟，€14</p>
+              <p><strong>【到酒店】</strong>火车站步行5分钟即达 Best Western Plus Hotel Universo</p>
+              <p><strong>【存行李】</strong>一般14:00后才能入住，可先办理手续、存放行李，轻装出发游览</p>
+              <p><strong>【时间安排】</strong>09:35抵达机场 → 10:00到酒店存行李 → 10:30出发前往第一个景点</p>
+              <p><strong>【注意】</strong>如提前到达酒店，可向前台询问是否能提前入住（视房间情况而定）</p>
+            </details>
+          </div>
+
+          <!-- Pantheon -->
+          <div class="item" id="pantheon">
+            <div class="time">11:30</div>
+            <div class="title">🏛️ 万神殿 (Pantheon)</div>
+
+            <details>
+              <summary>查看详情</summary>
+
+              <div class="attraction-placeholder ph-pantheon" data-emoji="🏛️" data-name="万神殿 Pantheon"></div>
+
+              <p class="img-caption">古罗马建筑的巅峰之作，建于公元118-128年</p>
+
+              <p><strong>【亮点】</strong>古罗马建筑的巅峰之作，世界上保存最完好的古罗马建筑。建于公元118-128年，原为供奉众神的庙宇，后改为教堂。其巨大的穹顶直径43.3米，中央开有9米直径的圆孔(Oculus)，是建筑史上的奇迹。</p>
+
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">建造年代</div>
+                  <div class="info-value">公元118-128年</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">穹顶直径</div>
+                  <div class="info-value">43.3米（完美半球）</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">建筑材料</div>
+                  <div class="info-value">混凝土+砖+大理石</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">圆顶高度</div>
+                  <div class="info-value">43.3米（等于直径）</div>
+                </div>
+              </div>
+
+              <p style="margin-top:12px"><strong>🏛️ 建筑奇迹：</strong></p>
+              <ul>
+                <li><strong>穹顶设计</strong> - 世界上最大的无钢筋混凝土穹顶，保持了近1800年的纪录。穹顶自下而上逐渐变薄，顶部仅厚1.2米</li>
+                <li><strong>Oculus天眼</strong> - 9米直径的圆形开口，既是唯一的自然光源，也是建筑的象征。雨天时水会落入殿内，通过地板上的排水孔排出</li>
+                <li><strong>完美比例</strong> - 内部圆柱形空间与半球形穹顶形成完美的球体内接，直径与高度相等（43.3米）</li>
+              </ul>
+
+
+              <p class="img-caption">Raphael's Tomb in Pantheon</p>
+
+              <p style="margin-top:12px"><strong>⚰️ 拉斐尔墓：</strong></p>
+              <p>文艺复兴巨匠拉斐尔·桑西(Raffaello Sanzio, 1483-1520)长眠于此。墓前刻有拉丁文铭文："Ille hic est Raffael, timuit quo sospite vinci, rerum magna parens et moriente mori"（拉斐尔在此处安息，在他生前，大自然感到了被征服的恐惧；而他死后，又担心自己会随他一同死去）。墓旁有 his fiancée Maria Bibbiena 的墓。</p>
+
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Piazza della Rotonda, 00186 Roma RM, Italy<br>
+              【交通】从Termini火车站搭乘公交40、64、70路或地铁Line A至Barberini站再步行10分钟<br>
+              【门票】免费入场<br>
+              【开放时间】周一至周六9:00-19:30，周日9:00-18:00<br>
+              【建议停留】30-45分钟<br>
+              【最佳拍照时间】中午时分，阳光直射穿过Oculus形成光柱</p>
+            </details>
+          </div>
+
+          <!-- Piazza Navona -->
+          <div class="item" id="navona">
+            <div class="time">12:30</div>
+            <div class="title">⛲ 纳沃纳广场 (Piazza Navona)</div>
+
+            <details>
+              <summary>查看详情</summary>
+
+              <div class="attraction-placeholder ph-navona" data-emoji="⛲" data-name="纳沃纳广场 Piazza Navona"></div>
+
+              <p class="img-caption">罗马最美丽的巴洛克广场，原为古罗马竞技场遗址</p>
+
+              <p><strong>【亮点】</strong>罗马最美丽的巴洛克广场，原为古罗马图密善竞技场的遗址。广场呈长椭圆形，四周环绕着精美的宫殿和教堂，中央矗立着三座著名喷泉，是艺术家、街头艺人和游客的聚集地。</p>
+
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">历史</div>
+                  <div class="info-value">古罗马竞技场遗址</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">形状</div>
+                  <div class="info-value">长椭圆形（240×65米）</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">喷泉数</div>
+                  <div class="info-value">3座著名喷泉</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">最佳时间</div>
+                  <div class="info-value">傍晚/夜晚</div>
+                </div>
+              </div>
+
+              <p style="margin-top:12px"><strong>⛲ 四河喷泉 (Fontana dei Quattro Fiumi)：</strong></p>
+              <p>贝尼尼于1651年创作的杰作，位于广场中央。喷泉中央是一座埃及方尖碑，四周环绕着四个代表四大洲河流的巨人雕像：</p>
+              <ul>
+                <li><strong>尼罗河</strong> - 代表非洲（头部被面纱遮盖，象征当时尼罗河源头未知）</li>
+                <li><strong>恒河</strong> - 代表亚洲（手持船桨，象征航海与贸易）</li>
+                <li><strong>多瑙河</strong> - 代表欧洲（转身触摸教宗的纹章）</li>
+                <li><strong>拉普拉塔河</strong> - 代表美洲（手臂高举，惊恐状，象征财富带来的不确定性）</li>
+              </ul>
+              <p>据说贝尼尼故意让恒河雕像举起手臂遮挡视线，以避免"看到"旁边 Borromini 设计的圣阿涅塞教堂立面（两人是竞争对手）。</p>
+
+              <p style="margin-top:12px"><strong>⛲ 其他喷泉：</strong></p>
+              <ul>
+                <li><strong>摩尔人喷泉 (Fontana del Moro)</strong> - 位于广场南端，摩尔人雕像与海豚搏斗</li>
+                <li><strong>海神喷泉 (Fontana del Nettuno)</strong> - 位于广场北端，海神与章鱼的战斗场景</li>
+              </ul>
+
+
+              <p class="img-caption">Piazza Navona Overview at Sunset</p>
+
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Piazza Navona, 00186 Roma RM, Italy<br>
+              【交通】从万神殿步行约5分钟即达<br>
+              【门票】免费<br>
+              【建议停留】30-45分钟（可在此午餐）<br>
+              【注意事项】广场周围餐厅较贵，建议去附近小巷寻找更实惠的选项</p>
+            </details>
+          </div>
+
+          <!-- Lunch -->
+          <div class="item">
+            <div class="time">13:30</div>
+            <div class="title">🍽️ 午餐</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【亮点】</strong>在纳沃纳广场周边品尝正宗罗马美食。</p>
+              <p><strong>【推荐美食】</strong></p>
+              <ul>
+                <li><strong>Carbonara</strong> - 罗马经典意面，用鸡蛋、奶酪、培根和胡椒制作</li>
+                <li><strong>Cacio e Pepe</strong> - 奶酪胡椒意面，简单却极致美味</li>
+                <li><strong>Amatriciana</strong> - 番茄培根意面，源自阿马特里切</li>
+                <li><strong>Carciofi alla Romana</strong> - 罗马式炖洋蓟，春季特色</li>
+                <li><strong>Supplì</strong> - 炸饭团，内部含有奶酪拉丝</li>
+              </ul>
+              <p><strong>【建议区域】</strong>避开广场主街，去周边小巷如Via del Governo Vecchio寻找当地人光顾的餐厅</p>
+              <p><strong>【建议停留时间】</strong>60-75分钟</p>
+            </details>
+          </div>
+
+          <!-- Trevi Fountain -->
+          <div class="item" id="trevi">
+            <div class="time">14:30</div>
+            <div class="title">🌊 特雷维喷泉 (Trevi Fountain)</div>
+
+            <details>
+              <summary>查看详情</summary>
+
+              <div class="attraction-placeholder ph-trevi" data-emoji="🌊" data-name="特雷维喷泉 Trevi Fountain"></div>
+
+              <p class="img-caption">罗马最大最著名的巴洛克喷泉，建于1732-1762年</p>
+
+              <p class="img-caption">Photo: Trevi Fountain - Rome's Most Famous Fountain | Unsplash</p>
+
+              <p><strong>【亮点】</strong>罗马最大、最著名的巴洛克喷泉，也是世界上最知名的许愿池。建于1732-1762年，由尼古拉·萨尔维设计。喷泉中央是海神尼普顿驾驭贝壳战车，由两只海马牵引--一只平静（象征平静的海面），一只狂暴（象征汹涌的大海）。</p>
+
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">建造年代</div>
+                  <div class="info-value">1732-1762年</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">设计师</div>
+                  <div class="info-value">Nicola Salvi</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">高度</div>
+                  <div class="info-value">26.3米</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">宽度</div>
+                  <div class="info-value">49.15米</div>
+                </div>
+              </div>
+
+
+
+              <p style="margin-top:12px"><strong>🪙 投币许愿传说：</strong></p>
+              <p>背对喷泉，用右手从左肩向后抛出硬币：</p>
+              <ul>
+                <li><strong>第一枚硬币</strong> - 保证会再次回到罗马</li>
+                <li><strong>第二枚硬币</strong> - 找到真爱或与爱人结婚</li>
+                <li><strong>第三枚硬币</strong> - 与讨厌的人离婚或分手</li>
+              </ul>
+              <p>每天约有€3,000的硬币被投入喷泉，全部捐赠给慈善机构（用于帮助罗马的穷人）。</p>
+
+              <p style="margin-top:12px"><strong>🎬 电影关联：</strong></p>
+              <p>《罗马假日》(Roman Holiday, 1953) 中，奥黛丽·赫本饰演的安妮公主在喷泉边的理发店里剪了短发，成为影史经典。这里也是《甜蜜的生活》(La Dolce Vita) 的取景地之一。</p>
+
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Piazza di Trevi, 00187 Roma RM, Italy<br>
+              【交通】从纳沃纳广场步行约10分钟；或从Barberini地铁站步行5分钟<br>
+              【门票】免费<br>
+              【开放时间】24小时（夜间照明很美）<br>
+              【建议停留】20-30分钟（拍照+投币许愿）<br>
+              【最佳时间】清晨或深夜避开人群，夜间灯光效果极佳</p>
+            </details>
+          </div>
+
+          <!-- Spanish Steps -->
+          <div class="item" id="spanish">
+            <div class="time">15:30</div>
+            <div class="title">🌸 西班牙台阶 (Spanish Steps)</div>
+
+            <details>
+              <summary>查看详情</summary>
+
+              <div class="attraction-placeholder ph-spanish" data-emoji="🌸" data-name="西班牙台阶 Spanish Steps"></div>
+
+              <p class="img-caption">欧洲最宽的135级台阶，建于1723-1725年</p>
+
+              <p class="img-caption">Photo: Spanish Steps and Trinita dei Monti Church | Unsplash</p>
+
+              <p><strong>【亮点】</strong>欧洲最宽的台阶，共135级，连接下方的西班牙广场与上方的圣三一教堂。建于1723-1725年，由法国大使出资建造，却以"西班牙"命名（因附近是西班牙大使馆）。台阶两侧是浪漫的黄色建筑，每年春天盛开着粉色的杜鹃花。</p>
+
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">台阶数</div>
+                  <div class="info-value">135级</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">建造年代</div>
+                  <div class="info-value">1723-1725年</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">设计师</div>
+                  <div class="info-value">Francesco de Sanctis</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">特色</div>
+                  <div class="info-value">欧洲最宽台阶</div>
+                </div>
+              </div>
+
+              <p>台阶正下方的巴洛克喷泉，由贝尼尼父子设计。喷泉形状像一只即将沉没的船，水流从船体各处缓缓溢出。传说1598年台伯河泛滥，一艘船被冲到这个位置搁浅，喷泉正是为了纪念此事。</p>
+
+
+
+              <p style="margin-top:12px"><strong>🎬 《罗马假日》取景地：</strong></p>
+              <p>奥黛丽·赫本饰演的安妮公主坐在台阶上吃冰淇淋的场景，让这里成为世界闻名的浪漫地标。虽然现在禁止在台阶上吃东西（违者罚款€400），但仍可以在附近品尝冰淇淋。</p>
+
+              <p style="margin-top:12px"><strong>🛍️ 周边购物：</strong></p>
+              <p>台阶下方的孔多蒂街 (Via dei Condotti) 是罗马最著名的奢侈品购物街，汇集了Gucci、Prada、Valentino、Bulgari等顶级品牌旗舰店。</p>
+
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Piazza di Spagna, 00187 Roma RM, Italy<br>
+              【交通】从特雷维喷泉步行约10分钟；地铁Line A至Spagna站直达<br>
+              【门票】免费<br>
+              【建议停留】30-45分钟（登台阶+教堂+购物区）<br>
+              【注意事项】自2019年起，禁止在台阶上坐着或吃东西，违者罚款€250-400</p>
+            </details>
+          </div>
+
+          <!-- Colosseum -->
+          <div class="item" id="colosseum">
+            <div class="time">16:30</div>
+            <div class="title">🏟️ 罗马斗兽场 (Colosseum)</div>
+
+            <details>
+              <summary>查看详情</summary>
+
+              <img src="./images/colosseum.jpg" alt="罗马斗兽场" class="attraction-img">
+              
+              <p class="img-caption">古罗马最大角斗场，建于公元72-80年，世界新七大奇迹</p>
+
+              <p class="img-caption">Photo: The Colosseum - Icon of Ancient Rome | Unsplash</p>
+
+              <p><strong>【亮点】</strong>古罗马时期最大的圆形角斗场，也是罗马帝国建筑工程的巅峰之作。建于公元72-80年，可容纳5-8万观众。2007年被评为世界新七大奇迹之一。这里曾是角斗士搏杀、野兽狩猎和模拟海战的地方。</p>
+
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">建造年代</div>
+                  <div class="info-value">公元72-80年</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">容量</div>
+                  <div class="info-value">50,000-80,000人</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">高度</div>
+                  <div class="info-value">48米（原高）</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">荣誉</div>
+                  <div class="info-value">世界新七大奇迹</div>
+                </div>
+              </div>
+
+
+
+              <p style="margin-top:12px"><strong>🏟️ 建筑特色：</strong></p>
+              <ul>
+                <li><strong>三层拱门</strong> - 外墙原本有三层拱廊，分别采用多立克、爱奥尼亚和科林斯三种柱式</li>
+                <li><strong>地下结构 (Hypogeum)</strong> - 复杂的地下通道系统，用于关押角斗士和野兽，通过升降机升入场内</li>
+                <li><strong>遮阳篷系统</strong> - 顶部曾有一个巨大的帆布遮阳篷(velarium)，由240根桅杆支撑，可为观众遮阳</li>
+                <li><strong>快速疏散</strong> - 80个出入口设计可在15分钟内疏散全场观众</li>
+              </ul>
+
+              <p style="margin-top:12px"><strong>⚔️ 历史用途：</strong></p>
+              <ul>
+                <li><strong>角斗士对决</strong> - 最盛大的娱乐，通常是战俘、罪犯或志愿者之间的生死搏杀</li>
+                <li><strong>野兽狩猎 (Venatio)</strong> - 猎杀从非洲、亚洲运来的狮子、老虎、大象等 exotic animals</li>
+                <li><strong>模拟海战 (Naumachia)</strong> - 早期曾放水模拟海战</li>
+                <li><strong>公开处决</strong> - 将罪犯喂给野兽</li>
+              </ul>
+              <p>据估计，斗兽场开放期间约有50万人和100万只动物在此丧生。</p>
+
+              <p style="margin-top:12px"><strong>💡 参观建议：</strong></p>
+              <ul>
+                <li><strong>提前购票</strong> - 强烈建议提前在官网预约，现场排队可能长达2小时</li>
+                <li><strong>联票推荐</strong> - 购买Colosseum + Roman Forum + Palatine Hill联票 (€16)</li>
+                <li><strong>导览推荐</strong> - 地下层和角斗士通道需参加官方导览团</li>
+                <li><strong>最佳时间</strong> - 傍晚光线最美，且避开中午炎热</li>
+              </ul>
+
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Piazza del Colosseo, 1, 00184 Roma RM, Italy<br>
+              【交通】从西班牙台阶搭乘地铁Line A至Termini站，换乘Line B至Colosseo站<br>
+              【门票】€16（联票含古罗马广场和帕拉蒂尼山）<br>
+              【开放时间】8:30-19:15（夏季延长至21:00）<br>
+              【建议停留】1.5-2小时<br>
+              【夜景】斗兽场夜间灯光效果极佳，是罗马夜景标志</p>
+            </details>
+          </div>
+
+          <!-- Roman Forum -->
+          <div class="item" id="forum">
+            <div class="time">18:00</div>
+            <div class="title">🏛️ 古罗马广场 (Roman Forum)</div>
+
+            <details>
+              <summary>查看详情</summary>
+
+              <img class="attraction-img" src="https://images.pexels.com/photos/2225440/pexels-photo-2225440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="古罗马广场" style="width:100%;border-radius:12px;margin:15px 0;">
+
+              <p class="img-caption">古罗马政治商业中心，见证了罗马共和国的辉煌</p>
+
+              <p class="img-caption">Photo: Roman Forum - Heart of Ancient Rome | Unsplash</p>
+
+              <p><strong>【亮点】</strong>古罗马文明的政治、商业和宗教中心，被誉为"世界上最古老的购物中心"。这里曾是凯旋游行、选举、公共演讲、刑事审判和商业交易的场所。如今，这片废墟见证了罗马从共和国到帝国的辉煌与衰落。</p>
+
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">历史</div>
+                  <div class="info-value">公元前7世纪-公元7世纪</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">面积</div>
+                  <div class="info-value">约5公顷</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">主要遗迹</div>
+                  <div class="info-value">神庙、凯旋门、元老院</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">地位</div>
+                  <div class="info-value">古罗马文明中心</div>
+                </div>
+              </div>
+
+              <p style="margin-top:12px"><strong>🚪 提图斯凯旋门 (Arch of Titus)：</strong></p>
+              <p>公元82年建造的凯旋门，纪念提图斯皇帝镇压犹太起义并摧毁耶路撒冷第二圣殿。门内的浮雕描绘了罗马士兵抬着圣殿的 menorah（七枝烛台）和其他圣器，这是犹太人被流散的标志性图像。这座凯旋门成为后世无数凯旋门的蓝本，包括巴黎凯旋门。</p>
+
+
+              <p class="img-caption">Arch of Titus - Triumphal Arch of Ancient Rome</p>
+
+              <p style="margin-top:12px"><strong>🏛️ 主要遗迹：</strong></p>
+              <ul>
+                <li><strong>农神庙 (Temple of Saturn)</strong> - 广场最古老的庙宇之一，仅存8根花岗岩圆柱</li>
+                <li><strong>凯撒神庙 (Temple of Julius Caesar)</strong> - 纪念被刺杀的凯撒，他的骨灰安葬于此</li>
+                <li><strong>元老院 (Curia Julia)</strong> - 古罗马参议院议事厅，保存相对完好</li>
+                <li><strong>贞女之家 (House of the Vestals)</strong> - 侍奉灶神维斯塔的女祭司居所</li>
+                <li><strong>安东尼努斯和法乌斯提那神庙</strong> - 保存最完好的神庙之一</li>
+              </ul>
+
+              <p style="margin-top:12px"><strong>🌅 日落美景：</strong></p>
+              <p>从广场北端的维纳斯和罗马神庙附近可以俯瞰整个广场遗迹，日落时分金光洒在古老的石头上，氛围感极佳。</p>
+
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Via della Salara Vecchia, 5/6, 00186 Roma RM, Italy<br>
+              【交通】紧邻斗兽场，步行2分钟<br>
+              【门票】含在斗兽场联票中（€16）<br>
+              【开放时间】8:30-19:00<br>
+              【建议停留】1-1.5小时<br>
+              【参观建议】建议从帕拉蒂尼山入口进入，从高处俯瞰广场全景，再步行下山参观</p>
+            </details>
+          </div>
+
+          <!-- Giardino degli Aranci -->
+          <div class="item" id="orange">
+            <div class="time">19:30</div>
+            <div class="title">🍊 橘园日落 (Giardino degli Aranci)</div>
+
+            <details>
+              <summary>查看详情</summary>
+
+              <div class="attraction-placeholder ph-orange" data-emoji="🍊" data-name="橘园日落 Giardino degli Aranci"></div>
+
+              <p class="img-caption">阿文提诺山上的秘密花园，俯瞰罗马全景的绝佳地点</p>
+
+              <p class="img-caption">Photo: Giardino degli Aranci - Orange Garden on Aventine Hill</p>
+
+              <p><strong>【亮点】</strong>位于阿文提诺山(Aventine Hill)顶端的宁静花园，是罗马看日落的最佳秘密地点之一。花园里种植着苦橙树，在春天散发着迷人的花香。从花园尽头的观景台可以俯瞰整个罗马城和圣彼得大教堂的圆顶。</p>
+
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">位置</div>
+                  <div class="info-value">阿文提诺山顶</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">特色</div>
+                  <div class="info-value">苦橙树园</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">景观</div>
+                  <div class="info-value">罗马全景+圣彼得圆顶</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">最佳时间</div>
+                  <div class="info-value">日落前1小时</div>
+                </div>
+              </div>
+
+              <p style="margin-top:12px"><strong>🍊 橘园历史：</strong></p>
+              <p>花园由多米尼加修士在13世纪建立，种植的苦橙树至今仍是其标志。虽然果实苦涩不宜食用，但花香极为迷人。传说圣多明我亲手种下了第一棵橙树。</p>
+
+
+              <p class="img-caption">View from Aventine Hill Overlooking Rome</p>
+
+              <p style="margin-top:12px"><strong>🔑 骑士团钥匙孔 (Keyhole of Rome)：</strong></p>
+              <p>橘园附近的马耳他骑士团别墅(Villa del Priorato)大门上有一个著名的钥匙孔。透过钥匙孔望去，可以看到一条绿树成荫的小径尽头，完美框住的圣彼得大教堂圆顶。这是罗马最浪漫的"秘密"之一，经常需要排队观看。</p>
+
+              <p style="margin-top:12px"><strong>⛪ 圣萨比纳大殿：</strong></p>
+              <p>橘园旁边是圣萨比纳大殿(Basilica di Santa Sabina)，建于公元422-432年，是罗马保存最好的早期基督教教堂之一。教堂的木门上刻有圣经场景的精美木雕，其中最著名的是"善良的牧羊人"。</p>
+
+              <p style="margin-top:12px"><strong>🌅 日落体验：</strong></p>
+              <p>花园尽头的露台是欣赏日落的绝佳位置。当夕阳西沉，整个罗马城被染成金黄色，圣彼得大教堂的圆顶在远处闪闪发光。这里是拍摄罗马天际线的最佳地点之一，游客相对较少，氛围宁静浪漫。</p>
+
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Piazza Pietro d'Illiria, 00153 Roma RM, Italy<br>
+              【交通】从古罗马广场步行约15分钟；或搭乘公交23、280路至Aventino/Circo Massimo站<br>
+              【门票】免费<br>
+              【开放时间】7:00-21:00（夏季延长至22:00）<br>
+              【建议停留】45-60分钟（观赏日落+散步）<br>
+              【最佳时间】日落前1小时到达，抢占最佳观景台位置</p>
+            </details>
+          </div>
+
+          <!-- Return to Hotel -->
+          <div class="item">
+            <div class="time">20:30</div>
+            <div class="title">🌙 返回酒店</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【亮点】</strong>结束充实的罗马暴走日，返回酒店休息。</p>
+              <p><strong>【酒店位置】</strong>Best Western Plus Hotel Universo 位于罗马Termini火车站附近，距离橘园约20分钟地铁或30分钟步行路程。</p>
+              <p><strong>【晚餐建议】</strong>可在酒店附近享用晚餐，或体验罗马夜生活。</p>
+            </details>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Hotel Details Section -->
+    <div class="section" id="hotel-details">
+      <div class="card-content">
+        <div class="card-title">🏨 酒店详情</div>
+
+        <div class="hotel-card">
+          <div class="hotel-header">
+            <h3 class="hotel-name">Best Western Plus Hotel Universo</h3>
+            <span class="hotel-stars">⭐⭐⭐⭐</span>
+            <span class="hotel-chain">Best Western Plus</span>
+          </div>
+
+          <div class="hotel-grid">
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📍</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">完整地址</div>
+                <div class="hotel-info-value">Via Principe Amedeo 5/B, 00185 Roma RM, Italy</div>
+              </div>
+            </div>
+
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📞</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">联系电话</div>
+                <div class="hotel-info-value">+39 06 444 101</div>
+              </div>
+            </div>
+
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🚇</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">最近地铁站</div>
+                <div class="hotel-info-value">Termini 中央火车站 - 步行约300米；Line A/B/C 地铁交汇</div>
+              </div>
+            </div>
+
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🚶</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">从机场前往</div>
+                <div class="hotel-info-value">Leonardo Express快铁直达Termini火车站，步行5分钟即达酒店</div>
+              </div>
+            </div>
+
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">⏰</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">入住/退房时间</div>
+                <div class="hotel-info-value">入住：14:00后 | 退房：11:00前</div>
+              </div>
+            </div>
+
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🍽️</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">餐饮设施</div>
+                <div class="hotel-info-value">酒店餐厅提供丰盛自助早餐；周边餐厅、咖啡馆众多</div>
+              </div>
+            </div>
+
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🏛️</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">周边景点</div>
+                <div class="hotel-info-value">距斗兽场步行10分钟；距古罗马广场步行10分钟；距许愿池步行15分钟；距万神殿步行20分钟</div>
+              </div>
+            </div>
+
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🛏️</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">房间特色</div>
+                <div class="hotel-info-value">现代化装修，配备空调、迷你吧、卫星电视、保险箱</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hotel-amenities">
+            <span class="amenity-tag">✓ 免费WiFi</span>
+            <span class="amenity-tag">✓ 空调</span>
+            <span class="amenity-tag">✓ 健身房</span>
+            <span class="amenity-tag">✓ 迷你吧</span>
+            <span class="amenity-tag">✓ 卫星电视</span>
+            <span class="amenity-tag">✓ 自助早餐</span>
+            <span class="amenity-tag">✓ 保险箱</span>
+            <span class="amenity-tag">✓ 24小时前台</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tips Section -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">💡 实用贴士</div>
+        <div class="tips-box">
+          <div class="tips-title">🎫 门票预约提醒</div>
+          <ul class="tips-list">
+            <li><strong>罗马斗兽场</strong> - 强烈建议提前在官网预约，现场排队可达2小时，购买含古罗马广场的联票最划算</li>
+            <li><strong>万神殿</strong> - 自2023年7月起收取€5门票，建议提前预约时段</li>
+            <li><strong>梵蒂冈博物馆</strong>（次日行程）- 务必提前预订，旺季需提前数周</li>
+          </ul>
+        </div>
+
+        <div style="margin-top:16px;color:var(--muted);padding-left:20px">
+          <ul>
+            <li>罗马大部分景点步行可达，但景点之间距离不短，建议穿舒适的步行鞋</li>
+            <li>特雷维喷泉和西班牙台阶常年游客众多，建议清晨或深夜前往避开人群</li>
+            <li>罗马夏季炎热（6月已很热），记得随身携带水和防晒霜</li>
+            <li>许多喷泉的水是可饮用的（标注"acqua potabile"），可以带水瓶接水</li>
+            <li>罗马扒手较多，特别在热门景点和公共交通上，注意保管贵重物品</li>
+            <li>餐厅通常会收取€1-3的coperto（座位费），面包和瓶装水通常额外收费</li>
+            <li>橘园日落是拍摄罗马全景的绝佳地点，建议日落前1小时到达占位</li>
+            <li>骑士团钥匙孔可能需要排队，如果时间紧张可略过</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>html>

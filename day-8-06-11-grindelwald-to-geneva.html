@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 8｜06-10｜Grindelwald → Geneva</title>
+  <style>
+    :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08);--accent:#f59e0b}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+    .wrap{max-width:1160px;margin:0 auto;padding:24px}
+    
+    /* Hero Section */
+    .hero{background:linear-gradient(135deg,#0ea5e9,#2563eb 60%,#6366f1);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
+    h1{margin:0 0 8px;font-size:28px}
+    .subtitle{margin:0;opacity:.9;font-size:16px}
+    
+    /* Map Section */
+    .map-section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px}
+    .map-title{font-size:16px;font-weight:700;margin-bottom:12px;color:var(--text);display:flex;align-items:center;gap:8px}
+    .map-container{width:100%;height:350px;border-radius:16px;overflow:hidden;background:#f3f4f6;position:relative}
+    .map-container iframe{width:100%;height:100%;border:0}
+    .map-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);background:linear-gradient(135deg,#e5e7eb 0%,#f3f4f6 100%)}
+    .map-placeholder svg{width:48px;height:48px;margin-bottom:12px;opacity:.5}
+    .map-route{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:13px;color:var(--muted)}
+    .map-route span{background:#f3f4f6;padding:4px 10px;border-radius:12px}
+    
+    /* Banner Navigation */
+    .banner-nav{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px;overflow-x:auto}
+    .banner-title{font-size:14px;font-weight:700;color:var(--muted);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
+    .banner-track{display:flex;align-items:center;min-width:max-content;gap:0}
+    .banner-node{display:flex;flex-direction:column;align-items:center;text-decoration:none;position:relative;padding:0 8px}
+    .banner-node:first-child{padding-left:0}
+    .banner-node:last-child{padding-right:0}
+    .banner-time{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px;white-space:nowrap}
+    .banner-dot{width:14px;height:14px;border-radius:50%;background:var(--line);border:3px solid var(--card);box-shadow:0 0 0 2px var(--line);transition:all .2s}
+    .banner-node:hover .banner-dot{background:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+    .banner-node.active .banner-dot{background:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+    .banner-label{font-size:12px;color:var(--text);margin-top:8px;white-space:nowrap;font-weight:500;max-width:80px;text-align:center;line-height:1.3}
+    .banner-arrow{color:var(--line);font-size:20px;margin:0 4px;padding-bottom:20px}
+    
+    /* Cards */
+    .section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
+    .card-content{padding:20px}
+    .card-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px}
+    .card-text{color:var(--muted);font-size:14px}
+    
+    /* Timeline */
+    .timeline{margin-left:8px}
+    .item{position:relative;padding:0 0 16px 24px;border-left:2px solid #dbeafe}
+    .item:before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:999px;background:var(--blue);box-shadow:0 0 0 4px #eff6ff}
+    .item:last-child{border-left:2px solid transparent}
+    .time{color:var(--blue);font-size:13px;font-weight:800;margin-bottom:4px}
+    .title{font-size:18px;font-weight:800;margin-bottom:4px}
+    
+    /* Details */
+    details{margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fafafa;padding:10px 12px}
+    summary{cursor:pointer;font-weight:600;color:var(--blue)}
+    details[open] summary{margin-bottom:12px}
+    
+    /* Attraction Images */
+    .attraction-img{width:100%;border-radius:16px;margin:12px 0;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+    .img-caption{font-size:12px;color:var(--muted);text-align:center;margin-top:4px;font-style:italic}
+    
+    /* Navigation */
+    .nav-links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+    .nav-links a{color:var(--blue);text-decoration:none;font-weight:500}
+    .nav-links a:hover{text-decoration:underline}
+    
+    /* Utilities */
+    .highlight-box{background:#eff6ff;border-left:4px solid var(--blue);padding:12px 16px;border-radius:0 12px 12px 0;margin:12px 0}
+    .tag{display:inline-block;background:var(--bg);color:var(--muted);font-size:12px;padding:4px 10px;border-radius:20px;margin-right:8px}
+    .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+    .info-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
+    .info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+    .info-value{font-size:14px;font-weight:600;color:var(--text)}
+    .scroll-indicator{display:none}
+    
+    /* Hotel Card */
+    .hotel-card{background:linear-gradient(135deg,#fff 0%,#f8fafc 100%);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:16px}
+    .hotel-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+    .hotel-name{font-size:20px;font-weight:800;color:var(--text);margin:0}
+    .hotel-stars{color:#f59e0b;font-size:18px}
+    .hotel-chain{font-size:13px;color:var(--muted);background:#e0e7ff;padding:4px 10px;border-radius:12px}
+    .hotel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+    .hotel-info-item{display:flex;align-items:flex-start;gap:10px}
+    .hotel-info-icon{font-size:18px;min-width:24px;text-align:center}
+    .hotel-info-content{flex:1}
+    .hotel-info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+    .hotel-info-value{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}
+    .hotel-amenities{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+    .amenity-tag{background:#ecfdf5;color:#059669;font-size:12px;padding:6px 12px;border-radius:20px;display:flex;align-items:center;gap:6px}
+
+    /* Swiss Badge */
+    .swiss-badge{background:linear-gradient(135deg,#ef4444 0%,#dc2626 100%);color:#fff;padding:10px 14px;border-radius:12px;margin:12px 0;font-size:14px;display:flex;align-items:flex-start;gap:10px}
+    .swiss-badge-icon{font-size:18px}
+    .swiss-badge-content{flex:1}
+    .swiss-badge-title{font-weight:700;margin-bottom:2px}
+    .swiss-badge-text{opacity:.95;font-size:13px;line-height:1.5}
+    
+    @media(max-width:768px){
+      /* 1. 基础布局优化 */
+      .wrap{padding:16px}
+      
+      /* 2. Hero区域字体优化 */
+      .hero{padding:20px}
+      .hero h1{font-size:22px}
+      .hero .subtitle{font-size:14px}
+      
+      /* 3. Banner导航优化 */
+      .banner-nav{padding:12px}
+      .banner-node{padding:0 6px}
+      .banner-label{max-width:70px}
+      
+      /* 4. 卡片间距优化 */
+      .section{margin-bottom:14px}
+      .card-content{padding:16px}
+      .card-title{font-size:15px}
+      
+      /* 5. 时间轴优化 */
+      .timeline{margin-left:4px}
+      .item{padding:0 0 16px 20px}
+      .item .time{font-size:12px}
+      .item .title{font-size:16px}
+      
+      /* 6. 信息网格优化 - 小屏幕单列显示 */
+      .info-grid{grid-template-columns:1fr}
+      .info-item{padding:10px}
+      
+      /* 7. 电影badge优化 */
+      .movie-badge{padding:8px 12px}
+      .movie-badge-text{font-size:12px}
+      
+      /* 8. 酒店卡片优化 */
+      .hotel-card{padding:16px}
+      .hotel-name{font-size:18px}
+      .hotel-grid{grid-template-columns:1fr;gap:12px}
+      
+      /* 9. 地图区域优化 */
+      .map-section{padding:16px}
+      .map-container{height:250px}
+      
+      /* 10. 滚动提示 */
+      .scroll-indicator{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Hero Section -->
+    <div class="hero">
+      <h1>🏔️ Day 8｜06-10｜Grindelwald → Geneva</h1>
+      <p class="subtitle">缓冲日 | 阿尔卑斯山巅到日内瓦湖畔的城市切换</p>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-links">
+      <a href="index.html">← 返回主页</a>
+      <a href="day-7-06-09-milan-to-grindelwald.html">← Day 7</a>
+      <a href="day-9-06-11-geneva-to-paris.html">Day 9 →</a>
+    </div>
+
+    <!-- Map Section -->
+    <div class="banner-nav">
+      <div class="banner-title">📍 行程导航</div>
+      <div class="banner-track">
+        <a href="#grindelwald" class="banner-node active">
+          <div class="banner-time">08:30</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">Grindelwald晨景</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#train" class="banner-node">
+          <div class="banner-time">10:47</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">瑞士铁路穿越</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#lake" class="banner-node">
+          <div class="banner-time">16:00</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">日内瓦湖</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#fountain" class="banner-node">
+          <div class="banner-time">17:00</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">大喷泉</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#un" class="banner-node">
+          <div class="banner-time">18:00</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">联合国总部</div>
+        </a>
+      </div>
+      <div class="scroll-indicator">← 左右滑动查看更多 →</div>
+    </div>
+
+    <!-- Transport Card -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">🚄 大交通</div>
+        <div class="highlight-box">
+          <strong>Grindelwald → Geneva</strong><br>
+          <span style="font-size:20px;font-weight:800;color:var(--blue)">10:47 - 14:30</span>
+          <span class="tag">约3小时43分</span>
+          <span class="tag">瑞士铁路</span>
+          <span class="tag">全程风景</span>
+        </div>
+        <p class="card-text">从阿尔卑斯山区乘坐瑞士联邦铁路(SBB/CFF)前往日内瓦，途经因特拉肯、图恩湖、伯尔尼和洛桑，穿越沃州葡萄园，最后抵达日内瓦湖畔的国际都市。</p>
+      </div>
+    </div>
+
+    <!-- Hotel Card Preview -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">🏨 住宿</div>
+        <div class="highlight-box">
+          <strong>Aparthotel Adagio Genève Mont-Blanc</strong>
+          <span class="tag">雅高旗下</span>
+          <span class="tag">公寓式酒店</span>
+          <span class="tag">距日内瓦湖500米</span>
+        </div>
+        <p class="card-text">雅高集团旗下精品公寓酒店，提供带小厨房的宽敞客房，紧邻日内瓦湖畔，步行即可到达大喷泉和老城。酒店详情见页面底部。</p>
+      </div>
+    </div>
+
+    <!-- Timeline Section -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">📍 行程安排</div>
+        <div class="timeline">
+          
+          <!-- Grindelwald Morning -->
+          <div class="item" id="grindelwald">
+            <div class="time">08:30</div>
+            <div class="title">🏔️ Grindelwald小镇晨景</div>
+            <details>
+              <summary>查看详情</summary>
+              
+              <p class="img-caption">Photo: Eiger North Face at Sunrise | Unsplash</p>
+              
+              <p><strong>【亮点】</strong>清晨的Grindelwald是摄影师的天堂。艾格峰(Eiger)北壁在晨曦中呈现出金色的光芒，小镇的木屋错落有致地分布在山坡上，远处的阿尔卑斯群山层峦叠嶂。这是离开阿尔卑斯前最后的晨间漫步。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">海拔</div>
+                  <div class="info-value">1,034米</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">艾格峰高度</div>
+                  <div class="info-value">3,967米</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">最佳观赏时间</div>
+                  <div class="info-value">06:00-09:00</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">特色体验</div>
+                  <div class="info-value">山间咖啡+晨曦</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🌄 艾格峰晨曦：</strong></p>
+              <ul>
+                <li><strong>金色时刻</strong> - 清晨6-8点，第一缕阳光照射在艾格峰北壁，整座山峰呈现金黄色，是摄影的绝佳时机</li>
+                <li><strong>最佳机位</strong> - Hotel Central Wolter附近的草地、Grindelwald火车站观景台、First缆车站下方</li>
+                <li><strong>拍摄建议</strong> - 使用长焦镜头压缩山峰与小镇的空间感，三脚架固定拍摄延时视频</li>
+              </ul>
+              
+              
+              <p class="img-caption">Photo: Alpine Village Morning | Unsplash</p>
+              
+              <p style="margin-top:12px"><strong>🏡 小镇漫步路线：</strong></p>
+              <ul>
+                <li><strong>Dorfstraße主街</strong> - Grindelwald最繁华的街道，两侧是典型的瑞士木屋建筑，清晨时分游客稀少</li>
+                <li><strong>Pfingstegg缆车站</strong> - 从缆车站平台可俯瞰整个小镇和山谷，是看艾格峰的最佳视角之一</li>
+                <li><strong>Grindelwald教堂</strong> - 小镇标志性的白色教堂，背后是雄伟的阿尔卑斯山脉</li>
+                <li><strong>徒步小径</strong> - 沿小镇边缘的步道散步，呼吸清新的山间空气</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>☕ 早餐推荐：</strong></p>
+              <ul>
+                <li><strong>Bäckerei Konditorei Röthlisberger</strong> - 当地著名的烘焙店，新鲜出炉的瑞士面包和咖啡</li>
+                <li><strong>Hotel Central Wolter早餐</strong> - 在酒店享用瑞士传统早餐，远眺艾格峰</li>
+                <li><strong>Café 56</strong> - 主街旁的温馨咖啡馆，户外座位正对山景</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>💡 实用信息：</strong></p>
+              <p>【停留时间】约1.5小时（08:30-10:00）<br>
+              【建议】建议早起拍摄，光线最佳；穿着保暖，清晨气温较低<br>
+              【寄存】退房后可将行李寄存在酒店前台</p>
+            </details>
+          </div>
+
+          <!-- Swiss Train Journey -->
+          <div class="item" id="train">
+            <div class="time">10:47</div>
+            <div class="title">🚂 瑞士铁路穿越之旅</div>
+            <details>
+              <summary>查看详情</summary>
+              
+              <p class="img-caption">Photo: Swiss Train through Alps | Unsplash</p>
+              
+              <div class="swiss-badge">
+                <span class="swiss-badge-icon">🇨🇭</span>
+                <div class="swiss-badge-content">
+                  <div class="swiss-badge-title">瑞士景观列车</div>
+                  <div class="swiss-badge-text">
+                    瑞士拥有世界上最发达的铁路系统之一，准时率高达99.2%。Grindelwald到Geneva的线路虽然不是专门的景观列车，但沿途风景同样令人惊叹。
+                  </div>
+                </div>
+              </div>
+              
+              <p><strong>【亮点】</strong>这段约3.5小时的火车旅程是瑞士风景的浓缩版。从阿尔卑斯山区出发，经过因特拉肯、图恩湖畔的宁静小镇、首都伯尔尼，穿越沃州连绵的葡萄园，最终抵达日内瓦湖畔。窗外风景如画，堪称移动的明信片。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">总时长</div>
+                  <div class="info-value">3小时43分钟</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">换乘次数</div>
+                  <div class="info-value">2-3次</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">线路类型</div>
+                  <div class="info-value">瑞士联邦铁路(SBB)</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">推荐座位</div>
+                  <div class="info-value">左侧靠窗(北向)</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🗺️ 途经站点与风景：</strong></p>
+              
+              <p><strong>1. Grindelwald → Interlaken Ost (约35分钟)</strong></p>
+              <ul>
+                <li>列车缓缓驶离阿尔卑斯山区，窗外是连绵的山谷和瀑布</li>
+                <li>经过Zweilütschinen，这里是Lütschine河分叉的交汇点</li>
+                <li>到达因特拉肯，位于图恩湖和布里恩茨湖之间</li>
+              </ul>
+              
+              
+              <p class="img-caption">Photo: Lake Thun with Alps | Unsplash</p>
+              
+              <p><strong>2. Interlaken → Thun → Bern (约1小时)</strong></p>
+              <ul>
+                <li><strong>图恩湖(Lake Thun)</strong> - 列车沿图恩湖西岸行驶，湖水呈现宝石蓝色，远处是少女峰、艾格峰和僧侣峰</li>
+                <li><strong>图恩小镇</strong> - 中世纪风格的湖畔小镇，可见图恩城堡</li>
+                <li><strong>伯尔尼(Bern)</strong> - 瑞士首都，列车经过阿勒河峡谷，可远眺伯尔尼老城</li>
+              </ul>
+              
+              <p><strong>3. Bern → Fribourg → Lausanne (约1小时)</strong></p>
+              <ul>
+                <li>列车驶入法语区，窗外风景从山地变为丘陵</li>
+                <li><strong>沃州葡萄园(Lavaux)</strong> - 联合国世界文化遗产，梯田式葡萄园沿日内瓦湖山坡而建，是瑞士最著名的葡萄酒产区</li>
+                <li>可看到当地农民在葡萄园中劳作，风景如画</li>
+              </ul>
+              
+              
+              <p class="img-caption">Photo: Lavaux Vineyards - UNESCO World Heritage | Unsplash</p>
+              
+              <p><strong>4. Lausanne → Geneva (约40分钟)</strong></p>
+              <ul>
+                <li>沿日内瓦湖北岸行驶，湖面波光粼粼</li>
+                <li>远处可看到法国境内的阿尔卑斯山脉和勃朗峰</li>
+                <li>接近日内瓦时，城市建筑逐渐增多</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>💡 乘车建议：</strong></p>
+              <ul>
+                <li>提前在SBB官网或APP查询时刻表，预订座位（虽然非强制，但建议预订以确保靠窗座位）</li>
+                <li>选择左侧靠窗座位（北向），可以看到图恩湖和葡萄园</li>
+                <li>准备好相机或手机，图恩湖段和葡萄园段风景最佳</li>
+                <li>列车上提供免费WiFi，可在SBB APP上实时查看列车位置和换乘信息</li>
+                <li>餐车提供简餐和饮料，或可在车站购买三明治带上车</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>🎫 票务信息：</strong></p>
+              <ul>
+                <li>瑞士通票(Swiss Travel Pass)可免费乘坐这段线路</li>
+                <li>单程票价约75-90瑞士法郎（二等座）</li>
+                <li>提前购票可能有优惠</li>
+              </ul>
+            </details>
+          </div>
+
+          <!-- Arrive Geneva -->
+          <div class="item">
+            <div class="time">14:30</div>
+            <div class="title">🏛️ 抵达日内瓦</div>
+        
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【亮点】</strong>欢迎来到日内瓦——瑞士第二大城市、国际组织总部之都！日内瓦位于日内瓦湖西南端，被汝拉山脉和阿尔卑斯山脉环绕，是一座国际化的宜居城市。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">人口</div>
+                  <div class="info-value">约20万（都会区50万）</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">官方语言</div>
+                  <div class="info-value">法语</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">国际组织</div>
+                  <div class="info-value">联合国、红十字等</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">特色</div>
+                  <div class="info-value">国际都市+湖光山色</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🚉 从车站到酒店：</strong></p>
+              <p>Geneva Cornavin火车站位于市中心，前往Aparthotel Adagio可搭乘：<br>
+              - 公交车：2、6、9路等至"Mont-Blanc"站<br>
+              - 步行：约20分钟沿Rue du Mont-Blanc前往<br>
+              - 出租车：约10瑞士法郎</p>
+            </details>
+          </div>
+
+          <!-- Lake Geneva -->
+          <div class="item" id="lake">
+            <div class="time">16:00</div>
+            <div class="title">🦢 Lake Geneva 日内瓦湖</div>
+            <details>
+              <summary>查看详情</summary>
+              
+              <p class="img-caption">Photo: Lake Geneva and Alps | Unsplash</p>
+              
+              <p><strong>【亮点】</strong>日内瓦湖(Lac Léman)是欧洲最大的高山湖泊，也是阿尔卑斯山脉最大的湖泊。湖水呈现迷人的深蓝色，湖畔有优雅的天鹅游弋，远处是连绵的阿尔卑斯山脉，背景中甚至可以看到法国境内的勃朗峰(Mont Blanc)。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">面积</div>
+                  <div class="info-value">582平方公里</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">最深处</div>
+                  <div class="info-value">310米</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">周长</div>
+                  <div class="info-value">约172公里</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">跨越国境</div>
+                  <div class="info-value">瑞士+法国</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🦢 湖畔体验：</strong></p>
+              <ul>
+                <li><strong>天鹅与野鸟</strong> - 日内瓦湖畔栖息着大量野生天鹅，它们优雅地在湖中游弋，是日内瓦最具代表性的景象之一</li>
+                <li><strong>Promenade des Anglais</strong> - 沿湖的英式步道，是散步、慢跑、骑行的绝佳场所</li>
+                <li><strong>Parc des Eaux-Vives</strong> - 湖畔公园，有大片草坪和百年古树，可在此野餐或休憩</li>
+                <li><strong>英式花园(Jardin Anglais)</strong> - 著名的花钟(Flower Clock)所在地，每小时准点报时</li>
+              </ul>
+              
+              
+              <p class="img-caption">Photo: Swans on Lake Geneva | Unsplash</p>
+              
+              <p style="margin-top:12px"><strong>🌊 湖水特征：</strong></p>
+              <ul>
+                <li>日内瓦湖是冰川湖，湖水清澈见底，呈现独特的深蓝宝石色</li>
+                <li>夏季湖水温度约20-22°C，有人游泳或划桨板</li>
+                <li>湖中有定期运营的游船，可乘船游览或前往洛桑、蒙特勒等城市</li>
+                <li>湖畔有许多浴场(Bains des Pâquis是当地人最爱的天然浴场)</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>🚢 游船体验：</strong></p>
+              <ul>
+                <li><strong>CGN游船</strong> - 日内瓦湖航运公司运营，可乘坐复古蒸汽船或现代游船</li>
+                <li><strong>日内瓦湖巡游</strong> - 约1小时环湖游览，可从不同角度欣赏城市和湖泊</li>
+                <li><strong>前往其他城镇</strong> - 可乘船前往洛桑(约3.5小时)、蒙特勒(约4小时)，享受悠闲的水上旅程</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Quai du Mont-Blanc 周边<br>
+              【交通】从酒店步行约5-10分钟即达<br>
+              【停留时间】30-45分钟（湖边散步+拍照）<br>
+              【最佳时间】傍晚时分，光线柔和，天鹅活跃</p>
+            </details>
+          </div>
+
+          <!-- Jet d'Eau -->
+          <div class="item" id="fountain">
+            <div class="time">17:00</div>
+            <div class="title">⛲ Jet d'Eau 大喷泉</div>
+            <details>
+              <summary>查看详情</summary>
+              
+              <p class="img-caption">Photo: Jet d'Eau - Geneva's Icon | Unsplash</p>
+              
+              <p><strong>【亮点】</strong>大喷泉(Jet d'Eau)是日内瓦最著名的地标，也是世界上最大的人工喷泉之一。水柱高达140米，喷水量达500升/秒，远远就能看到一道白色水柱直冲云霄，是日内瓦的城市名片。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">水柱高度</div>
+                  <div class="info-value">140米</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">喷射速度</div>
+                  <div class="info-value">200公里/小时</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">喷水量</div>
+                  <div class="info-value">500升/秒</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">建造年份</div>
+                  <div class="info-value">1891年（最初）/ 1951年（重建）</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>💧 历史与原理：</strong></p>
+              <ul>
+                <li><strong>起源</strong> - 1886年最初是为了释放水力发电厂的多余压力而建</li>
+                <li><strong>演变</strong> - 1891年移至现在位置，成为旅游景点；1951年重建并提升至140米</li>
+                <li><strong>工作原理</strong> - 使用两台1,360马力的水泵，将湖水以200公里/小时的速度喷射</li>
+                <li><strong>水量</strong> - 空中同时存在约7,000升水</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>📸 拍摄建议：</strong></p>
+              <ul>
+                <li><strong>最佳机位</strong> - Quai Gustave-Ador步道、Bains des Pâquis码头、英式花园</li>
+                <li><strong>最佳时间</strong> - 晴朗的早晨或傍晚，可拍到彩虹；黄昏时喷泉会打灯</li>
+                <li><strong>创意拍摄</strong> - 走到喷泉脚下的石堤上，感受水雾扑面（小心相机）</li>
+                <li><strong>背景构图</strong> - 以阿尔卑斯山脉或老城建筑为背景</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>🌈 特别提示：</strong></p>
+              <ul>
+                <li>喷泉会根据风速自动关闭，风速过大时(>70公里/小时)或结冰时会暂停</li>
+                <li>每天黄昏后喷泉会打灯，呈现梦幻效果</li>
+                <li>可以走到喷泉下方的石堤上近距离感受，但会全身湿透</li>
+                <li>想走进水柱的建议带防水装备或换洗衣物</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Quai Gustave-Ador, 1207 Genève<br>
+              【交通】从日内瓦湖沿岸步行即达，距花钟约5分钟<br>
+              【开放时间】一般为09:00-23:15（随季节调整）<br>
+              【门票】免费<br>
+              【停留时间】20-30分钟</p>
+            </details>
+          </div>
+
+          <!-- Palais des Nations -->
+          <div class="item" id="un">
+            <div class="time">18:00</div>
+            <div class="title">🏛️ Palais des Nations 联合国总部</div>
+            <details>
+              <summary>查看详情</summary>
+              
+              <p class="img-caption">Photo: Palais des Nations - UN Headquarters | Unsplash</p>
+              
+              <p><strong>【亮点】</strong>万国宫(Palais des Nations)是联合国欧洲总部所在地，也是世界上最重要的国际会议中心之一。这座新古典主义建筑群坐落在日内瓦湖畔的Ariana公园中，见证了无数改变世界的历史时刻。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">建造年份</div>
+                  <div class="info-value">1929-1938年</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">建筑面积</div>
+                  <div class="info-value">38万平方米</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">会议室数量</div>
+                  <div class="info-value">34间</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">日均会议</div>
+                  <div class="info-value">约8,000人参与</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🏛️ 建筑特色：</strong></p>
+              <ul>
+                <li><strong>新古典主义风格</strong> - 由瑞士建筑师Julien Flegenheimer设计，融合古典与现代元素</li>
+                <li><strong>Assembly Hall</strong> - 大会堂可容纳2,000人，是联合国大会会议的举办地</li>
+                <li><strong>Council Chamber</strong> - 安理会会议厅，墙壁覆盖着象征和平的蓝色皮革</li>
+                <li><strong> Human Rights and Alliance of Civilizations Room</strong> - 人权厅，天花板由西班牙艺术家米罗设计</li>
+                <li><strong>公园内雕塑</strong> - 园区内有多国赠送的艺术品和雕塑</li>
+              </ul>
+              
+              
+              <p class="img-caption">Photo: Broken Chair - Symbol of Landmine Ban | Unsplash</p>
+              
+              <p style="margin-top:12px"><strong>🪑 断腿木椅(Broken Chair)：</strong></p>
+              <ul>
+                <li><strong>创作背景</strong> - 1997年由瑞士艺术家Daniel Berset设计，高12米，是反对地雷和集束炸弹的国际象征</li>
+                <li><strong>象征意义</strong> - 断腿代表地雷受害者，呼吁关注战争对平民的伤害</li>
+                <li><strong>位置</strong> - 位于万国宫正门前广场，是游客必拍的标志性雕塑</li>
+                <li><strong>历史</strong> - 最初为"国际反地雷组织"活动而设，后成为永久性地标</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>🌍 参观内容：</strong></p>
+              <ul>
+                <li><strong>导览参观</strong> - 跟随官方导游参观大会堂、会议室、长廊等，了解联合国历史和工作</li>
+                <li><strong>历史走廊</strong> - 展示联合国历史照片和纪念品的长廊</li>
+                <li><strong>艺术品收藏</strong> - 各国赠送的礼物和艺术品，包括中国赠送的"长城"挂毯</li>
+                <li><strong>Ariana公园</strong> - 美丽的湖畔公园，可远眺勃朗峰和日内瓦湖</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>💡 参观建议：</strong></p>
+              <ul>
+                <li>建议参加官方导览团(约1小时)，需提前官网预约</li>
+                <li>携带护照或身份证件，入场需安检</li>
+                <li>18:00后可能只能参观外部区域和断腿木椅，建议17:00前到达</li>
+                <li>园区内的"红厅"(Salle des Pas Perdus)是大理石长廊，非常适合拍照</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Palais des Nations, 1211 Genève<br>
+              【交通】搭乘公交车5、8、11、22、28路至"Nations"站；或从湖边搭乘F、V线水上巴士<br>
+              【导览时间】周一至周五 10:00-12:00, 14:00-16:00（需预约）<br>
+              【门票】导览约16瑞士法郎/人<br>
+              【停留时间】1-1.5小时</p>
+            </details>
+          </div>
+
+          <!-- Dinner -->
+          <div class="item">
+            <div class="time">20:00</div>
+            <div class="title">🍽️ 晚餐</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【亮点】</strong>日内瓦是国际化的美食之都，从米其林餐厅到街边小店应有尽有。推荐品尝瑞士传统美食或国际料理。</p>
+              
+              <p style="margin-top:12px"><strong>🧀 瑞士美食推荐：</strong></p>
+              <ul>
+                <li><strong>奶酪火锅(Fondue)</strong> - 瑞士国菜，用格鲁耶尔和埃曼塔尔奶酪融化后蘸面包吃</li>
+                <li><strong>拉克莱特(Raclette)</strong> - 半硬奶酪融化后刮在土豆、腌菜和洋葱上</li>
+                <li><strong>苏黎世小牛肉(Zürcher Geschnetzeltes)</strong> - 奶油蘑菇牛肉配薯饼(Rösti)</li>
+                <li><strong>瑞士巧克力</strong> - 日内瓦有许多顶级巧克力店，如Auer、Rohr</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>📍 推荐区域：</strong></p>
+              <p>【老城(Rue du Rhône周边)</strong> - 传统瑞士餐厅和酒吧<br>
+              【Carouge区</strong> - 波西米亚风格区域，创意餐厅聚集地<br>
+              【Paquis区</strong> - 多元文化区域，各国美食</p>
+            </details>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Hotel Details Section -->
+    <div class="section" id="hotel-details">
+      <div class="card-content">
+        <div class="card-title">🏨 酒店详情</div>
+        
+        <div class="hotel-card">
+          <div class="hotel-header">
+            <h3 class="hotel-name">Aparthotel Adagio Genève Mont-Blanc</h3>
+            <span class="hotel-stars">⭐⭐⭐</span>
+            <span class="hotel-chain">雅高旗下</span>
+          </div>
+          
+          <div class="hotel-grid">
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📍</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">完整地址</div>
+                <div class="hotel-info-value">Rue du Mont-Blanc 22, 1201 Genève, Switzerland</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📞</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">联系电话</div>
+                <div class="hotel-info-value">+41 22 716 22 00</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🚶</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">从车站前往</div>
+                <div class="hotel-info-value">距离Geneva Cornavin火车站约1公里，步行约12分钟；或搭乘公交车2、6路至"Mont-Blanc"站</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">⏰</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">入住/退房时间</div>
+                <div class="hotel-info-value">入住：15:00后 | 退房：11:00前</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🏠</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">房型设施</div>
+                <div class="hotel-info-value">公寓式客房，配备小厨房(含冰箱、微波炉、餐具)、独立起居区、私人浴室、空调</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🏋️</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">酒店设施</div>
+                <div class="hotel-info-value">24小时前台、自助洗衣房、健身房、自助早餐(额外收费)、行李寄存</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🏛️</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">周边景点</div>
+                <div class="hotel-info-value">距日内瓦湖步行5分钟；距大喷泉步行10分钟；距老城步行15分钟；距联合国总部公交15分钟</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🚌</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">交通便利</div>
+                <div class="hotel-info-value">位于Mont-Blanc大道，多条公交线路经过，步行可达湖边和购物区</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="hotel-amenities">
+            <span class="amenity-tag">✓ 公寓式客房</span>
+            <span class="amenity-tag">✓ 小厨房</span>
+            <span class="amenity-tag">✓ 免费WiFi</span>
+            <span class="amenity-tag">✓ 自助洗衣</span>
+            <span class="amenity-tag">✓ 24小时前台</span>
+            <span class="amenity-tag">✓ 健身中心</span>
+            <span class="amenity-tag">✓ 家庭友好</span>
+            <span class="amenity-tag">✓ 长住优惠</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tips Section -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">💡 实用贴士</div>
+        <ul style="color:var(--muted);padding-left:20px">
+          <li><strong>🚌 日内瓦公交免费卡</strong> - 入住日内瓦酒店可获得免费公共交通卡(Geneva Transport Card)，覆盖公交车、有轨电车、火车和水上巴士，有效期覆盖整个住宿期间。前台办理入住时领取。</li>
+          <li>瑞士联邦铁路(SBB)非常准时，建议提前10分钟到站即可</li>
+          <li>日内瓦与Grindelwald有1小时时差（日内瓦使用中欧夏令时CEST）</li>
+          <li>日内瓦是法语区，但英语普及率很高，旅游区基本无障碍</li>
+          <li>瑞士使用瑞士法郎(CHF)，但欧元在旅游区也广泛接受（汇率可能不划算）</li>
+          <li>大喷泉可能因天气原因关闭，建议提前查看官网状态</li>
+          <li>万国宫参观需携带身份证件，提前官网预约导览</li>
+          <li>日内瓦物价较高，可在Coop或Migros超市购买简餐和零食</li>
+          <li>湖畔天鹅虽美丽，但请勿投喂，也不要靠得太近</li>
+          <li>夏季日内瓦湖区域蚊虫较多，建议携带驱蚊用品</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

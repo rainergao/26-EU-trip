@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 7｜06-09｜Milan → Grindelwald</title>
+  <style>
+    :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08);--accent:#f59e0b}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+    .wrap{max-width:1160px;margin:0 auto;padding:24px}
+    
+    /* Hero Section */
+    .hero{background:linear-gradient(135deg,#16a34a,#22c55e 60%,#4ade80);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
+    h1{margin:0 0 8px;font-size:28px}
+    .subtitle{margin:0;opacity:.9;font-size:16px}
+    
+    /* Map Section */
+    .map-section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px}
+    .map-title{font-size:16px;font-weight:700;margin-bottom:12px;color:var(--text);display:flex;align-items:center;gap:8px}
+    .map-container{width:100%;height:350px;border-radius:16px;overflow:hidden;background:#f3f4f6;position:relative}
+    .map-container iframe{width:100%;height:100%;border:0}
+    .map-route{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:13px;color:var(--muted)}
+    .map-route span{background:#f3f4f6;padding:4px 10px;border-radius:12px}
+    
+    /* Banner Navigation */
+    .banner-nav{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px;overflow-x:auto}
+    .banner-title{font-size:14px;font-weight:700;color:var(--muted);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
+    .banner-track{display:flex;align-items:center;min-width:max-content;gap:0}
+    .banner-node{display:flex;flex-direction:column;align-items:center;text-decoration:none;position:relative;padding:0 8px}
+    .banner-node:first-child{padding-left:0}
+    .banner-node:last-child{padding-right:0}
+    .banner-time{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px;white-space:nowrap}
+    .banner-dot{width:14px;height:14px;border-radius:50%;background:var(--line);border:3px solid var(--card);box-shadow:0 0 0 2px var(--line);transition:all .2s}
+    .banner-node:hover .banner-dot{background:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+    .banner-node.active .banner-dot{background:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+    .banner-label{font-size:12px;color:var(--text);margin-top:8px;white-space:nowrap;font-weight:500;max-width:80px;text-align:center;line-height:1.3}
+    .banner-arrow{color:var(--line);font-size:20px;margin:0 4px;padding-bottom:20px}
+    
+    /* Cards */
+    .section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
+    .card-content{padding:20px}
+    .card-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px}
+    .card-text{color:var(--muted);font-size:14px}
+    
+    /* Timeline */
+    .timeline{margin-left:8px}
+    .item{position:relative;padding:0 0 16px 24px;border-left:2px solid #dcfce7}
+    .item:before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:999px;background:#16a34a;box-shadow:0 0 0 4px #f0fdf4}
+    .item:last-child{border-left:2px solid transparent}
+    .time{color:#16a34a;font-size:13px;font-weight:800;margin-bottom:4px}
+    .title{font-size:18px;font-weight:800;margin-bottom:4px}
+    
+    /* Details */
+    details{margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fafafa;padding:10px 12px}
+    summary{cursor:pointer;font-weight:600;color:#16a34a}
+    details[open] summary{margin-bottom:12px}
+    
+    /* Attraction Images */
+    .attraction-img{width:100%;border-radius:16px;margin:12px 0;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+    .img-caption{font-size:12px;color:var(--muted);text-align:center;margin-top:4px;font-style:italic}
+    
+    /* Navigation */
+    .nav-links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+    .nav-links a{color:var(--blue);text-decoration:none;font-weight:500}
+    .nav-links a:hover{text-decoration:underline}
+    
+    /* Utilities */
+    .highlight-box{background:#f0fdf4;border-left:4px solid #16a34a;padding:12px 16px;border-radius:0 12px 12px 0;margin:12px 0}
+    .tag{display:inline-block;background:var(--bg);color:var(--muted);font-size:12px;padding:4px 10px;border-radius:20px;margin-right:8px}
+    .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+    .info-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
+    .info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+    .info-value{font-size:14px;font-weight:600;color:var(--text)}
+    .scroll-indicator{display:none}
+    
+    /* Hotel Card */
+    .hotel-card{background:linear-gradient(135deg,#fff 0%,#f8fafc 100%);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:16px}
+    .hotel-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+    .hotel-name{font-size:20px;font-weight:800;color:var(--text);margin:0}
+    .hotel-stars{color:#f59e0b;font-size:18px}
+    .hotel-chain{font-size:13px;color:var(--muted);background:#dcfce7;padding:4px 10px;border-radius:12px}
+    .hotel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+    .hotel-info-item{display:flex;align-items:flex-start;gap:10px}
+    .hotel-info-icon{font-size:18px;min-width:24px;text-align:center}
+    .hotel-info-content{flex:1}
+    .hotel-info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+    .hotel-info-value{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}
+    .hotel-amenities{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+    .amenity-tag{background:#f0fdf4;color:#16a34a;font-size:12px;padding:6px 12px;border-radius:20px;display:flex;align-items:center;gap:6px}
+    
+    /* Transport Card */
+    .transport-card{background:linear-gradient(135deg,#fefce8 0%,#fef9c3 100%);border:1px solid #facc15;border-radius:20px;padding:20px;margin-top:16px}
+    .transport-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+    .transport-icon{font-size:32px}
+    .transport-title{font-size:18px;font-weight:800;color:var(--text);margin:0}
+    .transport-subtitle{font-size:13px;color:var(--muted)}
+    .transport-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+    .transport-item{background:#fff;border:1px solid #facc15;border-radius:12px;padding:12px}
+    .transport-item-icon{font-size:20px;margin-bottom:8px}
+    .transport-item-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+    .transport-item-text{font-size:12px;color:var(--muted);line-height:1.4}
+    
+    /* Attraction Section */
+    .attraction-section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
+    .attraction-header{background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;padding:20px}
+    .attraction-header h2{margin:0;font-size:20px;font-weight:800}
+    .attraction-header p{margin:4px 0 0;opacity:.9;font-size:14px}
+    .attraction-content{padding:20px}
+    
+    /* Mountain Badge */
+    .mountain-badge{background:linear-gradient(135deg,#1e40af 0%,#3b82f6 100%);color:#fff;padding:10px 14px;border-radius:12px;margin:12px 0;font-size:14px;display:flex;align-items:flex-start;gap:10px}
+    .mountain-badge-icon{font-size:18px}
+    .mountain-badge-content{flex:1}
+    .mountain-badge-title{font-weight:700;margin-bottom:2px}
+    .mountain-badge-text{opacity:.95;font-size:13px;line-height:1.5}
+    
+    @media(max-width:768px){
+      /* 1. 基础布局优化 */
+      .wrap{padding:16px}
+      
+      /* 2. Hero区域字体优化 */
+      .hero{padding:20px}
+      .hero h1{font-size:22px}
+      .hero .subtitle{font-size:14px}
+      
+      /* 3. Banner导航优化 */
+      .banner-nav{padding:12px}
+      .banner-node{padding:0 6px}
+      .banner-label{max-width:70px}
+      
+      /* 4. 卡片间距优化 */
+      .section{margin-bottom:14px}
+      .card-content{padding:16px}
+      .card-title{font-size:15px}
+      
+      /* 5. 时间轴优化 */
+      .timeline{margin-left:4px}
+      .item{padding:0 0 16px 20px}
+      .item .time{font-size:12px}
+      .item .title{font-size:16px}
+      
+      /* 6. 信息网格优化 - 小屏幕单列显示 */
+      .info-grid{grid-template-columns:1fr}
+      .info-item{padding:10px}
+      
+      /* 7. 电影badge优化 */
+      .movie-badge{padding:8px 12px}
+      .movie-badge-text{font-size:12px}
+      
+      /* 8. 酒店卡片优化 */
+      .hotel-card{padding:16px}
+      .hotel-name{font-size:18px}
+      .hotel-grid{grid-template-columns:1fr;gap:12px}
+      
+      /* 9. 地图区域优化 */
+      .map-section{padding:16px}
+      .map-container{height:250px}
+      
+      /* 10. 滚动提示 */
+      .scroll-indicator{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Hero Section -->
+    <div class="hero">
+      <h1>🏔️ Day 7｜06-09｜Milan → Grindelwald</h1>
+      <p class="subtitle">自然高潮日｜意大利 → 瑞士｜艾格峰脚下的童话小镇</p>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-links">
+      <a href="day-6-06-08-milan.html">← Day 6</a>
+      <a href="index.html">返回主页</a>
+      <a href="day-8-06-10-grindelwald-to-geneva.html">Day 8 →</a>
+    </div>
+
+    <!-- Map Section -->
+    <div class="banner-nav">
+      <div class="banner-title">📍 行程导航</div>
+      <div class="banner-track">
+        <a href="#departure" class="banner-node">
+          <div class="banner-time">07:20</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">米兰出发</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#spiez" class="banner-node">
+          <div class="banner-time">09:40</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">Spiez</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#grindelwald" class="banner-node active">
+          <div class="banner-time">11:00</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">格林德瓦</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#first" class="banner-node">
+          <div class="banner-time">11:30</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">First山</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#bachalpsee" class="banner-node">
+          <div class="banner-time">13:00</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">Bachalpsee</div>
+        </a>
+      </div>
+      <div class="scroll-indicator">← 左右滑动查看更多 →</div>
+    </div>
+
+    <!-- Transport Card -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">🚄 大交通</div>
+        <div class="highlight-box">
+          <strong>🇨🇭 瑞士铁路 Swiss Travel System</strong><br>
+          <span style="font-size:20px;font-weight:800;color:#16a34a">07:20 - 11:00</span>
+          <span class="tag">约3小时40分钟</span>
+          <span class="tag">黄金列车线</span>
+          <span class="tag">布里恩茨湖</span>
+        </div>
+        <p class="card-text">从米兰中央火车站出发，经Domodossola进入瑞士，穿越著名的黄金列车线路，沿途欣赏阿尔卑斯山麓、布里恩茨湖和少女峰地区的壮丽景色。</p>
+        
+        <div class="transport-card">
+          <div class="transport-header">
+            <span class="transport-icon">🎫</span>
+            <div>
+              <h3 class="transport-title">瑞士铁路通票使用提示</h3>
+              <p class="transport-subtitle">Swiss Travel Pass 让你的瑞士之旅更加便捷</p>
+            </div>
+          </div>
+          <div class="transport-grid">
+            <div class="transport-item">
+              <div class="transport-item-icon">✓</div>
+              <div class="transport-item-title">全境免费乘坐</div>
+              <div class="transport-item-text">包含火车、巴士、游船及大部分城市交通</div>
+            </div>
+            <div class="transport-item">
+              <div class="transport-item-icon">🏔️</div>
+              <div class="transport-item-title">登山铁路优惠</div>
+              <div class="transport-item-text">First山缆车半价（原价64CHF，通票价32CHF）</div>
+            </div>
+            <div class="transport-item">
+              <div class="transport-item-icon">🚢</div>
+              <div class="transport-item-title">游船免费</div>
+              <div class="transport-item-text">图恩湖、布里恩茨湖游船全程免费</div>
+            </div>
+            <div class="transport-item">
+              <div class="transport-item-icon">🏛️</div>
+              <div class="transport-item-title">博物馆免费</div>
+              <div class="transport-item-text">超过500家博物馆免费入场</div>
+            </div>
+            <div class="transport-item">
+              <div class="transport-item-icon">📱</div>
+              <div class="transport-item-title">手机激活</div>
+              <div class="transport-item-text">购买后通过SBB App激活，出示二维码即可</div>
+            </div>
+            <div class="transport-item">
+              <div class="transport-item-icon">💺</div>
+              <div class="transport-item-title">座位预订</div>
+              <div class="transport-item-text">黄金列车景观位建议提前预订（约5CHF）</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hotel Card Preview -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">🏨 住宿</div>
+        <div class="highlight-box">
+          <strong>Hotel Central Wolter</strong>
+          <span class="tag">传统瑞士酒店</span>
+          <span class="tag">镇中心位置</span>
+          <span class="tag">艾格峰景观</span>
+        </div>
+        <p class="card-text">位于Grindelwald镇中心的百年传统酒店，拥有欣赏艾格峰北壁的绝佳视野。酒店详情见页面底部。</p>
+      </div>
+    </div>
+
+    <!-- Swiss Railway Scenery Section -->
+    <div class="attraction-section">
+      <div class="attraction-header">
+        <h2>🚂 瑞士铁路风景</h2>
+        <p>黄金列车线 · 布里恩茨湖 · 阿尔卑斯山麓</p>
+      </div>
+      <div class="attraction-content">
+        
+        <p class="img-caption">Photo: Golden Pass Line through Swiss Alps | Unsplash</p>
+        
+        <div class="mountain-badge">
+          <span class="mountain-badge-icon">🌟</span>
+          <div class="mountain-badge-content">
+            <div class="mountain-badge-title">黄金列车 Golden Pass Line</div>
+            <div class="mountain-badge-text">
+              被认为是瑞士最美丽的火车线路之一，连接卢塞恩与蒙特勒。你的路线将经过其中最美的一段——因特拉肯至卢塞恩段，全程约2小时，穿越湖泊、山谷和雪山。
+            </div>
+          </div>
+        </div>
+        
+        <p><strong>【路线亮点】</strong>从米兰出发，经过Simplon隧道的壮观景色后进入瑞士境内。在Spiez换乘时，可以欣赏到图恩湖和布里恩茨湖之间的绝美风光。从因特拉肯到Grindelwald的支线火车沿途可眺望少女峰、僧侣峰和艾格峰三座4000米级山峰。</p>
+        
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label">全景车窗</div>
+            <div class="info-value">特等舱VIP座位</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">最佳座位</div>
+            <div class="info-value">右侧靠窗(米兰方向)</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">途经湖泊</div>
+            <div class="info-value">布里恩茨湖、图恩湖</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">景观指数</div>
+            <div class="info-value">⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+        
+        
+        <p class="img-caption">Photo: Lake Brienz - Turquoise Alpine Lake | Unsplash</p>
+        
+        <p style="margin-top:12px"><strong>🏞️ 布里恩茨湖 Lake Brienz</strong></p>
+        <p>瑞士最纯净的湖泊之一，因富含矿物质而呈现独特的绿松石色。火车沿湖行驶约30分钟，可欣赏湖畔传统木屋、瀑布和悬崖。建议坐在列车右侧拍摄布里恩茨湖全景。</p>
+        
+        <p style="margin-top:12px"><strong>📸 拍照提示：</strong></p>
+        <ul>
+          <li>列车经过布里恩茨湖时（约10:00-10:30），准备好相机捕捉湖景</li>
+          <li>经过Giessbach瀑布时可看到瀑布直泻入湖的壮观景象</li>
+          <li>接近Interlaken时，少女峰群峰开始显现</li>
+          <li>从Interlaken到Grindelwald的支线风景更佳，建议选择右侧座位</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Grindelwald Town Section -->
+    <div class="attraction-section">
+      <div class="attraction-header">
+        <h2>🏔️ Grindelwald小镇</h2>
+        <p>艾格峰脚下的童话小镇 · 阿尔卑斯山门户</p>
+      </div>
+      <div class="attraction-content">
+        
+        <p class="img-caption">Photo: Grindelwald Village and Eiger North Face | Unsplash</p>
+        
+        <div class="mountain-badge">
+          <span class="mountain-badge-icon">⛰️</span>
+          <div class="mountain-badge-content">
+            <div class="mountain-badge-title">艾格峰 Eiger</div>
+            <div class="mountain-badge-text">
+              海拔3,967米，阿尔卑斯山最著名的山峰之一。其北壁(Eiger North Face)是登山者的终极挑战，高度约1,800米的垂直岩壁被称为"Mordwand"(谋杀墙)。从Grindelwald镇中心即可欣赏到这一壮观的自然奇观。
+            </div>
+          </div>
+        </div>
+        
+        <p><strong>【小镇亮点】</strong>Grindelwald是瑞士伯尔尼高地最受欢迎的度假胜地之一，海拔1,034米。小镇被雄伟的阿尔卑斯山峰环绕，北临韦特峰(Wetterhorn)，东接谢雷格峰(Schreckhorn)，南侧则是著名的艾格峰(Eiger)和少女峰(Jungfrau)。冬季这里是滑雪天堂，夏季则是徒步和登山的绝佳起点。</p>
+        
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label">海拔</div>
+            <div class="info-value">1,034米</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">居民</div>
+            <div class="info-value">约3,800人</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">特色</div>
+            <div class="info-value">阿尔卑斯木屋建筑</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">最佳季节</div>
+            <div class="info-value">6-9月徒步/12-3月滑雪</div>
+          </div>
+        </div>
+        
+        
+        <p class="img-caption">Photo: Traditional Swiss Chalets in Grindelwald | Unsplash</p>
+        
+        <p style="margin-top:12px"><strong>🏘️ 小镇漫步推荐：</strong></p>
+        <ul>
+          <li><strong>Dorfstrasse主街</strong> - 小镇最主要的街道，两侧是传统的瑞士木屋、餐厅和商店</li>
+          <li><strong>Pfingstegg缆车</strong> - 另一个观景选择，可俯瞰整个山谷</li>
+          <li><strong>冰川峡谷</strong> - 步行可达的冰川侵蚀形成的峡谷，有木栈道</li>
+          <li><strong>教堂广场</strong> - 小镇中心，欣赏典型的瑞士乡村教堂</li>
+        </ul>
+        
+        <p style="margin-top:12px"><strong>🍽️ 美食推荐：</strong></p>
+        <ul>
+          <li><strong>奶酪火锅(Fondue)</strong> - 瑞士国菜，用格鲁耶尔和埃曼塔尔奶酪制作</li>
+          <li><strong>拉克雷特(Raclette)</strong> - 融化奶酪配土豆和小黄瓜</li>
+          <li><strong>Bircher Muesli</strong> - 瑞士传统早餐麦片，由燕麦、水果和酸奶制成</li>
+          <li><strong>瑞士巧克力</strong> - Lindt、Cailler等品牌在当地价格更优惠</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- First Mountain Section -->
+    <div class="attraction-section">
+      <div class="attraction-header">
+        <h2>🚠 First山</h2>
+        <p>缆车 · 悬崖步道Cliff Walk · 阿尔卑斯全景</p>
+      </div>
+      <div class="attraction-content">
+        
+        <p class="img-caption">Photo: First Mountain Cable Car with Eiger View | Unsplash</p>
+        
+        <div class="mountain-badge">
+          <span class="mountain-badge-icon">🚡</span>
+          <div class="mountain-badge-content">
+            <div class="mountain-badge-title">First缆车</div>
+            <div class="mountain-badge-text">
+              Firstbahn缆车从Grindelwald镇中心(海拔1,034米)出发，约25分钟抵达First山顶(海拔2,168米)。缆车采用大型全景吊舱，每舱可容纳6人，沿途可欣赏艾格峰北壁的震撼景色。建议坐在上行方向的右侧以获得最佳视野。
+            </div>
+          </div>
+        </div>
+        
+        <p><strong>【First山亮点】</strong>First是Grindelwald周边最受欢迎的日游山峰之一，海拔2,168米。相比昂贵的少女峰(Jungfraujoch约200CHF)，First提供同样壮丽的阿尔卑斯全景，但价格更亲民(缆车往返64CHF，通票半价32CHF)。山顶还有悬崖步道、天空步道和山地卡丁车等刺激活动。</p>
+        
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label">海拔</div>
+            <div class="info-value">2,168米</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">缆车时长</div>
+            <div class="info-value">约25分钟</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">运营时间</div>
+            <div class="info-value">08:00-17:30</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">票价</div>
+            <div class="info-value">往返64CHF/通票32CHF</div>
+          </div>
+        </div>
+        
+        
+        <p class="img-caption">Photo: First Cliff Walk - Suspended Walkway | Unsplash</p>
+        
+        <p style="margin-top:12px"><strong>🌉 Cliff Walk 悬崖步道</strong></p>
+        <p>First山顶最著名的景点，一条约40米长的悬空步道从山顶餐厅向外延伸，末端是一个悬空的观景平台。步道由钢架和玻璃构成，脚下是数百米的深渊，直面艾格峰北壁。即使是胆小的人也能安全体验，因为步道结构非常稳固。这里是拍摄"勇敢者照片"的最佳地点！</p>
+        
+        <p style="margin-top:12px"><strong>🎢 First山顶活动：</strong></p>
+        <ul>
+          <li><strong>First Glider</strong> - 滑翔体验，俯卧在滑翔翼上感受飞行（需额外付费）</li>
+          <li><strong>First Flyer</strong> - 高空滑索，以80km/h的速度滑下（需额外付费）</li>
+          <li><strong>Mountain Cart</strong> - 山地卡丁车，从Schreckfeld骑回Bort（推荐！）</li>
+          <li><strong>Trotti Bike</strong> - 滑板车下山，从Bort骑回镇中心</li>
+          <li><strong>Berggasthaus First</strong> - 山顶餐厅，享用传统瑞士美食和饮品</li>
+        </ul>
+        
+        <p style="margin-top:12px"><strong>💡 游玩建议：</strong></p>
+        <ul>
+          <li>上午乘坐缆车上山，此时天气通常较稳定</li>
+          <li>山顶气温比山下低约8-10°C，记得带外套</li>
+          <li>Cliff Walk无需额外费用，但旺季可能需要排队</li>
+          <li>如果时间充裕，可以体验Mountain Cart下山（约1小时）</li>
+          <li>山顶有免费WiFi，可以实时分享照片</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bachalpsee Section -->
+    <div class="attraction-section">
+      <div class="attraction-header">
+        <h2>🌊 Bachalpsee徒步</h2>
+        <p>高山湖泊 · 艾格峰倒影 · 经典瑞士风景</p>
+      </div>
+      <div class="attraction-content">
+        
+        <p class="img-caption">Photo: Bachalpsee with Eiger Reflection | Unsplash</p>
+        
+        <div class="mountain-badge">
+          <span class="mountain-badge-icon">🥾</span>
+          <div class="mountain-badge-content">
+            <div class="mountain-badge-title">Bachalpsee徒步</div>
+            <div class="mountain-badge-text">
+              从First山顶到Bachalpsee湖的单程徒步约3公里，耗时50-60分钟。这是一段相对轻松的徒步路线，沿途经过高山草甸，可以近距离欣赏阿尔卑斯野花和山羊。Bachalpsee海拔2,265米，是拍摄艾格峰倒影的经典机位，被无数明信片采用。
+            </div>
+          </div>
+        </div>
+        
+        <p><strong>【徒步亮点】</strong>Bachalpsee是瑞士最美丽的山间湖泊之一，位于First山北侧。从First缆车站出发，沿着清晰标记的山路行走，穿过高山草甸和碎石坡，最终抵达这个宁静的高山湖泊。天气晴朗时，湖面如镜，完美倒映出艾格峰、维特峰和福尔肯峰的壮丽景色。</p>
+        
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label">单程距离</div>
+            <div class="info-value">3公里</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">徒步时间</div>
+            <div class="info-value">单程50-60分钟</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">海拔变化</div>
+            <div class="info-value">+97米(轻微上升)</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">难度</div>
+            <div class="info-value">⭐⭐ 中等偏易</div>
+          </div>
+        </div>
+        
+        
+        <p class="img-caption">Photo: Alpine Hiking Trail to Bachalpsee | Unsplash</p>
+        
+        <p style="margin-top:12px"><strong>🥾 徒步路线详情：</strong></p>
+        <ul>
+          <li><strong>起点</strong> - First缆车站(海拔2,168米)，出口处有路线指示牌</li>
+          <li><strong>第一段</strong> - 沿宽阔的山路前行，经过Wilseregg高山草甸，约15分钟</li>
+          <li><strong>第二段</strong> - 穿越碎石坡，路面略微崎岖但标记清晰，约20分钟</li>
+          <li><strong>第三段</strong> - 最后的缓坡上升，抵达Bachalpsee(海拔2,265米)，约20分钟</li>
+          <li><strong>返程</strong> - 原路返回约45-50分钟，全程下坡较轻松</li>
+        </ul>
+        
+        <p style="margin-top:12px"><strong>📸 拍摄建议：</strong></p>
+        <ul>
+          <li><strong>最佳时间</strong> - 上午10:00-12:00，此时湖面最平静，倒影最清晰</li>
+          <li><strong>下午光线</strong> - 14:00后艾格峰可能会被云层遮挡，建议上午完成徒步</li>
+          <li><strong>湖边有多个拍摄点</strong> - 北侧湖边可拍三峰全景，南侧湖边可拍艾格峰特写</li>
+          <li><strong>带三脚架</strong> - 如需拍摄完美的倒影照片，三脚架是必须的</li>
+        </ul>
+        
+        <p style="margin-top:12px"><strong>🎒 装备建议：</strong></p>
+        <ul>
+          <li>登山鞋或防滑运动鞋（碎石路段需要）</li>
+          <li>防晒霜和太阳镜（高海拔紫外线强）</li>
+          <li>防风外套（山顶风大，气温较低）</li>
+          <li>充足的水和小食（沿途无补给点）</li>
+          <li>相机/手机充满电（风景太美，电量消耗快）</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Timeline Section -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">📍 行程安排</div>
+        <div class="timeline">
+          
+          <!-- Departure -->
+          <div class="item" id="departure">
+            <div class="time">07:20</div>
+            <div class="title">🚄 米兰中央火车站出发</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【亮点】</strong>从意大利时尚之都出发，开启瑞士阿尔卑斯山之旅！米兰中央火车站是欧洲最宏伟的火车站之一，本身就是新艺术建筑的杰作。</p>
+              <p><strong>【地址】</strong>Piazza Duca d'Aosta, 20124 Milano MI, Italy</p>
+              <p><strong>【交通方式】</strong>EC列车(EuroCity)前往瑞士方向</p>
+              <p><strong>【建议】</strong>提前30分钟到达，找到正确的站台。通票持有者需在SBB App上激活车票。</p>
+            </details>
+          </div>
+
+          <!-- Spiez -->
+          <div class="item" id="spiez">
+            <div class="time">09:40</div>
+            <div class="title">🌊 抵达Spiez施皮茨</div>
+            <details>
+              <summary>查看详情</summary>
+              
+              <p class="img-caption">Photo: Spiez Castle and Lake Thun | Unsplash</p>
+              
+              <p><strong>【亮点】</strong>Spiez是伯尔尼高地的一个迷人小镇，位于图恩湖畔。火车站位于山坡高处，可以俯瞰整个湖泊和Spiez城堡。这里是从意大利方向进入瑞士的必经换乘点。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">海拔</div>
+                  <div class="info-value">607米</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">换乘时间</div>
+                  <div class="info-value">约20分钟</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">看点</div>
+                  <div class="info-value">图恩湖全景</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">下一站</div>
+                  <div class="info-value">Grindelwald</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>💡 换乘提示：</strong>在Spiez换乘前往Interlaken Ost的列车，然后在Interlaken Ost换乘前往Grindelwald的支线火车。全程约1小时20分钟。</p>
+            </details>
+          </div>
+
+          <!-- Grindelwald Arrival -->
+          <div class="item" id="grindelwald">
+            <div class="time">11:00</div>
+            <div class="title">🏔️ 抵达Grindelwald格林德瓦</div>
+        
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【亮点】</strong>欢迎来到艾格峰脚下的童话小镇！Grindelwald是伯尔尼高地最著名的度假胜地之一，拥有典型的瑞士阿尔卑斯风情。</p>
+              <p><strong>【地址】</strong>Grindelwald, 3818 Grindelwald, Switzerland</p>
+              <p><strong>【建议】</strong>如果时间允许，可以在镇中心快速吃一个简餐或打包食物，因为First山顶的食物选择有限且价格较高。</p>
+            </details>
+          </div>
+
+          <!-- First Mountain -->
+          <div class="item" id="first">
+            <div class="time">11:30</div>
+            <div class="title">🚠 上First山 + Cliff Walk</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【亮点】</strong>乘坐全景缆车前往海拔2,168米的First山顶，体验著名的Cliff Walk悬崖步道，直面艾格峰北壁的震撼。</p>
+              <p><strong>【地址】</strong>Firstbahn, Dorfstrasse 187, 3818 Grindelwald</p>
+              <p><strong>【交通方式】</strong>Firstbahn缆车，约25分钟</p>
+              <p><strong>【停留时间】</strong>45-60分钟（含Cliff Walk）</p>
+            </details>
+          </div>
+
+          <!-- Bachalpsee Hike -->
+          <div class="item" id="bachalpsee">
+            <div class="time">13:00</div>
+            <div class="title">🥾 徒步Bachalpsee</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【亮点】</strong>从First山顶徒步前往Bachalpsee高山湖泊，拍摄经典的艾格峰倒影照片。这是瑞士最美丽的山间湖泊之一。</p>
+              <p><strong>【路线】</strong>单程3公里，约50-60分钟</p>
+              <p><strong>【难度】</strong>中等偏易，海拔上升约97米</p>
+              <p><strong>【停留时间】</strong>2-2.5小时（含往返和拍照）</p>
+            </details>
+          </div>
+
+          <!-- Return -->
+          <div class="item">
+            <div class="time">16:30</div>
+            <div class="title">🚠 下山</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【亮点】</strong>从First山顶乘缆车返回Grindelwald镇中心。如果时间充裕，可以尝试Mountain Cart或Trotti Bike下山。</p>
+              <p><strong>【缆车时间】</strong>约25分钟</p>
+              <p><strong>【可选】</strong>Mountain Cart卡丁车下山（额外费用，约1小时）</p>
+            </details>
+          </div>
+
+          <!-- Check-in -->
+          <div class="item">
+            <div class="time">18:00</div>
+            <div class="title">🏨 入住酒店</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【亮点】</strong>入住Grindelwald镇中心的Hotel Central Wolter，欣赏艾格峰北壁的壮丽景色，享受瑞士传统酒店的温馨服务。</p>
+              <p><strong>【建议】</strong>晚餐可以尝试酒店餐厅或镇上的传统瑞士餐厅，品尝奶酪火锅或拉克雷特。</p>
+            </details>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Hotel Details Section -->
+    <div class="section" id="hotel-details">
+      <div class="card-content">
+        <div class="card-title">🏨 酒店详情</div>
+        
+        <div class="hotel-card">
+          <div class="hotel-header">
+            <h3 class="hotel-name">Hotel Central Wolter</h3>
+            <span class="hotel-stars">⭐⭐⭐</span>
+            <span class="hotel-chain">传统瑞士酒店</span>
+          </div>
+          
+          <div class="hotel-grid">
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📍</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">完整地址</div>
+                <div class="hotel-info-value">Dorfstrasse 93, 3818 Grindelwald, Switzerland</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📞</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">联系电话</div>
+                <div class="hotel-info-value">+41 33 854 50 10</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🚶</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">从车站前往</div>
+                <div class="hotel-info-value">距离Grindelwald火车站约500米，步行约7分钟</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🚠</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">距First缆车</div>
+                <div class="hotel-info-value">约350米，步行约5分钟即达Firstbahn缆车站</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">⏰</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">入住/退房时间</div>
+                <div class="hotel-info-value">入住：15:00后 | 退房：11:00前</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🏔️</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">景观</div>
+                <div class="hotel-info-value">部分客房可欣赏艾格峰北壁壮丽景色</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🍽️</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">餐饮</div>
+                <div class="hotel-info-value">酒店餐厅供应瑞士传统美食和欧式早餐</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🌐</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">官网</div>
+                <div class="hotel-info-value">www.centralwolter.ch</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="hotel-amenities">
+            <span class="amenity-tag">✓ 百年历史酒店</span>
+            <span class="amenity-tag">✓ 艾格峰景观</span>
+            <span class="amenity-tag">✓ 免费WiFi</span>
+            <span class="amenity-tag">✓ 含早餐</span>
+            <span class="amenity-tag">✓ 传统瑞士餐厅</span>
+            <span class="amenity-tag">✓ 镇中心位置</span>
+            <span class="amenity-tag">✓ 滑雪储物柜</span>
+            <span class="amenity-tag">✓ 无障碍设施</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tips Section -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">💡 实用贴士</div>
+        <ul style="color:var(--muted);padding-left:20px">
+          <li><strong>天气</strong> - 高山天气多变，建议查看MeteoSwiss天气预报。如遇恶劣天气，Bachalpsee徒步可能取消</li>
+          <li><strong>通票激活</strong> - 瑞士通票需在首次使用前激活，可在SBB App或车站售票处完成</li>
+          <li><strong>座位预订</strong> - 黄金列车景观座位建议提前预订，费用约5-8CHF</li>
+          <li><strong>现金</strong> - 瑞士广泛使用瑞士法郎(CHF)，但大部分地方也接受欧元（汇率可能不划算）</li>
+          <li><strong>高反</strong> - First山海拔2,168米，Bachalpsee 2,265米，一般不会有明显高原反应</li>
+          <li><strong>防晒</strong> - 高海拔紫外线强烈，务必涂抹防晒霜并佩戴太阳镜</li>
+          <li><strong>鞋履</strong> - Bachalpsee徒步路段有碎石，建议穿防滑运动鞋或登山鞋</li>
+          <li><strong>午餐</strong> - First山顶有餐厅但价格较高，可在Grindelwald镇中心超市购买简餐带上山</li>
+          <li><strong>缆车</strong> - 注意最后一班下山缆车时间（通常17:30），错过需步行约3小时下山</li>
+          <li><strong>美景时段</strong> - 上午通常是天气最稳定、视野最清晰的时间段，建议早起上山</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

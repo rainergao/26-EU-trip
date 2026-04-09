@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 1｜06-03｜Vienna → Rome</title>
+  <style>
+    :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08);--accent:#f59e0b}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+    .wrap{max-width:1160px;margin:0 auto;padding:24px}
+    
+    /* Hero Section */
+    .hero{background:linear-gradient(135deg,#1d4ed8,#2563eb 60%,#60a5fa);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
+    h1{margin:0 0 8px;font-size:28px}
+    .subtitle{margin:0;opacity:.9;font-size:16px}
+    
+    /* Map Section */
+    .map-section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px}
+    .map-title{font-size:16px;font-weight:700;margin-bottom:12px;color:var(--text);display:flex;align-items:center;gap:8px}
+    .map-container{width:100%;height:350px;border-radius:16px;overflow:hidden;background:#f3f4f6;position:relative}
+    .map-container iframe{width:100%;height:100%;border:0}
+    .map-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);background:linear-gradient(135deg,#e5e7eb 0%,#f3f4f6 100%)}
+    .map-placeholder svg{width:48px;height:48px;margin-bottom:12px;opacity:.5}
+    .map-route{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:13px;color:var(--muted)}
+    .map-route span{background:#f3f4f6;padding:4px 10px;border-radius:12px}
+    
+    /* Banner Navigation */
+    .banner-nav{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px;overflow-x:auto}
+    .banner-title{font-size:14px;font-weight:700;color:var(--muted);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
+    .banner-track{display:flex;align-items:center;min-width:max-content;gap:0}
+    .banner-node{display:flex;flex-direction:column;align-items:center;text-decoration:none;position:relative;padding:0 8px}
+    .banner-node:first-child{padding-left:0}
+    .banner-node:last-child{padding-right:0}
+    .banner-time{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px;white-space:nowrap}
+    .banner-dot{width:14px;height:14px;border-radius:50%;background:var(--line);border:3px solid var(--card);box-shadow:0 0 0 2px var(--line);transition:all .2s}
+    .banner-node:hover .banner-dot{background:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+    .banner-node.active .banner-dot{background:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+    .banner-label{font-size:12px;color:var(--text);margin-top:8px;white-space:nowrap;font-weight:500;max-width:80px;text-align:center;line-height:1.3}
+    .banner-arrow{color:var(--line);font-size:20px;margin:0 4px;padding-bottom:20px}
+    
+    /* Cards */
+    .section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
+    .card-content{padding:20px}
+    .card-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px}
+    .card-text{color:var(--muted);font-size:14px}
+    
+    /* Timeline */
+    .timeline{margin-left:8px}
+    .item{position:relative;padding:0 0 16px 24px;border-left:2px solid #dbeafe}
+    .item:before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:999px;background:var(--blue);box-shadow:0 0 0 4px #eff6ff}
+    .item:last-child{border-left:2px solid transparent}
+    .time{color:var(--blue);font-size:13px;font-weight:800;margin-bottom:4px}
+    .title{font-size:18px;font-weight:800;margin-bottom:4px}
+    
+    /* Details */
+    details{margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fafafa;padding:10px 12px}
+    summary{cursor:pointer;font-weight:600;color:var(--blue)}
+    details[open] summary{margin-bottom:12px}
+    
+    /* Attraction Images */
+    .attraction-img{width:100%;border-radius:16px;margin:12px 0;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+    .img-caption{font-size:12px;color:var(--muted);text-align:center;margin-top:4px;font-style:italic}
+    
+    /* Navigation */
+    .nav-links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+    .nav-links a{color:var(--blue);text-decoration:none;font-weight:500}
+    .nav-links a:hover{text-decoration:underline}
+    
+    /* Utilities */
+    .highlight-box{background:#eff6ff;border-left:4px solid var(--blue);padding:12px 16px;border-radius:0 12px 12px 0;margin:12px 0}
+    .tag{display:inline-block;background:var(--bg);color:var(--muted);font-size:12px;padding:4px 10px;border-radius:20px;margin-right:8px}
+    .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+    .info-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
+    .info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+    .info-value{font-size:14px;font-weight:600;color:var(--text)}
+    .scroll-indicator{display:none}
+    
+    /* Movie Badge */
+    .movie-badge{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:10px 14px;border-radius:12px;margin:12px 0;font-size:14px;display:flex;align-items:flex-start;gap:10px}
+    .movie-badge-icon{font-size:18px}
+    .movie-badge-content{flex:1}
+    .movie-badge-title{font-weight:700;margin-bottom:2px}
+    .movie-badge-text{opacity:.95;font-size:13px;line-height:1.5}
+    
+    /* Hotel Card */
+    .hotel-card{background:linear-gradient(135deg,#fff 0%,#f8fafc 100%);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:16px}
+    .hotel-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+    .hotel-name{font-size:20px;font-weight:800;color:var(--text);margin:0}
+    .hotel-stars{color:#f59e0b;font-size:18px}
+    .hotel-chain{font-size:13px;color:var(--muted);background:#e0e7ff;padding:4px 10px;border-radius:12px}
+    .hotel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+    .hotel-info-item{display:flex;align-items:flex-start;gap:10px}
+    .hotel-info-icon{font-size:18px;min-width:24px;text-align:center}
+    .hotel-info-content{flex:1}
+    .hotel-info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+    .hotel-info-value{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}
+    .hotel-amenities{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+    .amenity-tag{background:#ecfdf5;color:#059669;font-size:12px;padding:6px 12px;border-radius:20px;display:flex;align-items:center;gap:6px}
+    
+    @media(max-width:768px){
+      /* 1. 基础布局优化 */
+      .wrap{padding:16px}
+      
+      /* 2. Hero区域字体优化 */
+      .hero{padding:20px}
+      .hero h1{font-size:22px}
+      .hero .subtitle{font-size:14px}
+      
+      /* 3. Banner导航优化 */
+      .banner-nav{padding:12px}
+      .banner-node{padding:0 6px}
+      .banner-label{max-width:70px}
+      
+      /* 4. 卡片间距优化 */
+      .section{margin-bottom:14px}
+      .card-content{padding:16px}
+      .card-title{font-size:15px}
+      
+      /* 5. 时间轴优化 */
+      .timeline{margin-left:4px}
+      .item{padding:0 0 16px 20px}
+      .item .time{font-size:12px}
+      .item .title{font-size:16px}
+      
+      /* 6. 信息网格优化 - 小屏幕单列显示 */
+      .info-grid{grid-template-columns:1fr}
+      .info-item{padding:10px}
+      
+      /* 7. 电影badge优化 */
+      .movie-badge{padding:8px 12px}
+      .movie-badge-text{font-size:12px}
+      
+      /* 8. 酒店卡片优化 */
+      .hotel-card{padding:16px}
+      .hotel-name{font-size:18px}
+      .hotel-grid{grid-template-columns:1fr;gap:12px}
+      
+      /* 9. 地图区域优化 */
+      .map-section{padding:16px}
+      .map-container{height:250px}
+      
+      /* 10. 滚动提示 */
+      .scroll-indicator{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Hero Section -->
+    <div class="hero">
+      <h1>🌍 Day 1｜06-03｜Vienna → Rome</h1>
+      <p class="subtitle">首日轻松+老城精华压缩 | 奥地利 → 意大利</p>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-links">
+      <a href="index.html">← 返回主页</a>
+      <a href="day-2-06-04-bratislava-to-rome.html">Day 2 →</a>
+    </div>
+
+
+    <!-- Banner Navigation -->
+    <div class="banner-nav">
+      <div class="banner-title">📍 行程导航</div>
+      <div class="banner-track">
+        <a href="#arrival" class="banner-node">
+          <div class="banner-time">07:25</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">维也纳机场</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#mitte" class="banner-node">
+          <div class="banner-time">08:30</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">Wien Mitte</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#cafe" class="banner-node active">
+          <div class="banner-time">09:30</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">中央咖啡馆</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#hofburg" class="banner-node">
+          <div class="banner-time">10:30</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">霍夫堡</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#cathedral" class="banner-node">
+          <div class="banner-time">11:30</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">斯蒂芬大教堂</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#belvedere" class="banner-node">
+          <div class="banner-time">14:00</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">美景宫</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#bratislava" class="banner-node">
+          <div class="banner-time">21:10</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">Rome</div>
+        </a>
+      </div>
+      <div class="scroll-indicator">← 左右滑动查看更多 →</div>
+    </div>
+
+    <!-- Transport Card -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">🚄 大交通</div>
+        <div class="highlight-box">
+          <strong>Vienna Hbf → Rome hl.st</strong><br>
+          <span style="font-size:20px;font-weight:800;color:var(--blue)">20:14 - 21:10</span>
+          <span class="tag">约56分钟</span>
+          <span class="tag">跨境列车</span><br>
+          <span style="font-size:13px;color:var(--muted);margin-top:8px;display:block">
+            🚆 车次: <strong>RJ 72 (Railjet 72)</strong> 或 <strong>EC 172</strong>｜
+            💶 票价: €11-15起(提前预订)｜
+            🎫 购票: <a href="https://www.oebb.at" target="_blank">ÖBB官网</a> / <a href="https://www.regiojet.com" target="_blank">RegioJet</a> / 车站自动售票机｜
+            💺 座位: 建议提前预订座位(€3-5)，旺季可能满员
+          </span>
+        </div>
+        <p class="card-text">从维也纳中央火车站出发，前往罗马主火车站，跨越奥匈帝国昔日的边界，进入意大利首都。</p>
+      </div>
+    </div>
+
+    <!-- Hotel Card Preview -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">🏨 住宿</div>
+        <div class="highlight-box">
+          <strong>AC Hotel Rome Old Town</strong>
+          <span class="tag">万豪旗下4星</span>
+          <span class="tag">距老城广场500米</span>
+        </div>
+        <p class="card-text">万豪旗下精品酒店，位于罗马老城区核心位置，步行即可到达老城广场和罗马城堡。酒店详情见页面底部。</p>
+      </div>
+    </div>
+
+    <!-- Timeline Section -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">📍 行程安排</div>
+        <div class="timeline">
+          
+          <!-- Arrival -->
+          <div class="item" id="arrival">
+            <div class="time">07:25</div>
+            <div class="title">✈️ 抵达维也纳机场</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【亮点】</strong>开启中欧之旅！维也纳国际机场(VIE)是奥地利最大的机场，设施完善，入境手续便捷。</p>
+              <p><strong>【地址】</strong>1300 Flughafen Wien, Austria</p>
+              <p><strong>【交通方式】</strong>搭乘CAT机场快线(City Airport Train)或S7城市快铁前往市中心Wien Mitte站，约16-25分钟</p>
+              <p><strong>【建议停留时间】</strong>30分钟（入境+取行李）</p>
+            </details>
+          </div>
+
+          <!-- Luggage Storage -->
+          <div class="item" id="mitte">
+            <div class="time">08:30</div>
+            <div class="title">🧳 进城(Wien Mitte寄存行李)</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【亮点】</strong>Wien Mitte是维也纳重要的交通枢纽，连接机场快线和地铁U3/U4线，设有行李寄存柜方便游客轻装游览。</p>
+              <p><strong>【地址】</strong>Landstraßer Hauptstraße 1B, 1030 Wien</p>
+              <p><strong>【交通方式】</strong>机场快线CAT直达或S7城市快铁</p>
+              <p><strong>【建议停留时间】</strong>15分钟</p>
+            </details>
+          </div>
+
+          <!-- Café Central -->
+          <div class="item" id="cafe">
+            <div class="time">09:30</div>
+            <div class="title">☕ Café Central（中央咖啡馆）</div>
+            <details>
+              <summary>查看详情</summary>
+              
+              <p class="img-caption">Photo: Café Central Vienna | Unsplash</p>
+              
+              <div class="movie-badge">
+                <span class="movie-badge-icon">🎬</span>
+                <div class="movie-badge-content">
+                  <div class="movie-badge-title">《爱在黎明破晓前》Before Sunrise</div>
+                  <div class="movie-badge-text">
+                    虽然Café Central本身不是电影取景地，但它完美呈现了维也纳咖啡馆文化的精髓。真正的"电话游戏"场景拍摄于不远处的 <strong>Café Sperl</strong> (Gumpendorfer Straße 11)。Café Central所在区域正是Jesse和Céline漫步的市中心地带，感受电影氛围的绝佳起点。
+                  </div>
+                </div>
+              </div>
+              
+              <p><strong>【亮点】</strong>维也纳最著名的咖啡馆之一，被誉为"世界十大最美咖啡馆"。建于1860年，曾是弗洛伊德、托洛茨基、希特勒等名人聚会的场所。新文艺复兴风格装饰，穹顶精美，氛围优雅。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">历史</div>
+                  <div class="info-value">始建于1860年</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">建筑风格</div>
+                  <div class="info-value">新文艺复兴</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">名人足迹</div>
+                  <div class="info-value">弗洛伊德、托洛茨基</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">必点美食</div>
+                  <div class="info-value">Melange、萨赫蛋糕</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🍰 必点美食：</strong></p>
+              <ul>
+                <li><strong>Melange</strong> - 维也纳经典咖啡，类似卡布奇诺但更奶香浓郁</li>
+                <li><strong>萨赫蛋糕(Sachertorte)</strong> - 奥地利国宝级甜点，巧克力蛋糕配杏子酱</li>
+                <li><strong>苹果卷(Apfelstrudel)</strong> - 传统维也纳甜点，薄面皮包裹肉桂苹果</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Herrengasse 14, 1010 Wien, Austria<br>
+              【交通】从Wien Mitte站搭乘地铁U3线至Herrengasse站，步行3分钟即达<br>
+              【停留时间】45-60分钟（品咖啡+甜点）</p>
+            </details>
+          </div>
+
+          <!-- Hofburg Palace -->
+          <div class="item" id="hofburg">
+            <div class="time">10:30</div>
+            <div class="title">🏛️ 霍夫堡皇宫</div>
+            <details>
+              <summary>查看详情</summary>
+              
+              <p class="img-caption">Photo: Hofburg Palace | Unsplash</p>
+              
+              <div class="movie-badge">
+                <span class="movie-badge-icon">🎬</span>
+                <div class="movie-badge-content">
+                  <div class="movie-badge-title">《爱在黎明破晓前》电影关联</div>
+                  <div class="movie-badge-text">
+                    霍夫堡皇宫附近的 <strong>Maria Theresien Platz</strong> 是Jesse和Céline漫步经过的场景之一。他们从火车站出发后穿过的第一个大型广场，电影中可以看到远处的自然历史博物馆和艺术史博物馆。
+                  </div>
+                </div>
+              </div>
+              
+              <p><strong>【亮点】</strong>哈布斯堡王朝的冬宫，欧洲最宏伟的皇宫建筑群之一。自1279年以来一直是奥地利统治者的居所，见证了600年帝国辉煌。玛丽亚·特蕾莎、茜茜公主、弗朗茨·约瑟夫皇帝都曾在此居住。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">历史</div>
+                  <div class="info-value">始于13世纪</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">建筑风格</div>
+                  <div class="info-value">巴洛克+新古典</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">面积</div>
+                  <div class="info-value">24万平方米</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">房间数</div>
+                  <div class="info-value">超过2600间</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🏛️ 主要展馆：</strong></p>
+              <ul>
+                <li><strong>皇家公寓(Imperial Apartments)</strong> - 皇帝弗朗茨·约瑟夫和伊丽莎白皇后的私人居所，保留原始家具和装饰</li>
+                <li><strong>茜茜公主博物馆(Sisi Museum)</strong> - 展示伊丽莎白皇后的传奇一生，包括她的礼服、珠宝和个人物品</li>
+                <li><strong>银器馆(Silver Collection)</strong> - 展出哈布斯堡王朝精美的餐具收藏，包括可容纳千人的晚宴餐具</li>
+                <li><strong>西班牙骑术学校</strong> - 观看著名的利皮扎马马术表演（需单独预约）</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>💡 参观建议：</strong></p>
+              <ul>
+                <li>建议购买联票（Imperial Tour包含公寓+茜茜博物馆+银器馆）</li>
+                <li>提前在官网预订，避免排队</li>
+                <li>语音导览约60分钟，建议预留90分钟深度参观</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Michaelerkuppel, 1010 Wien, Austria<br>
+              【交通】从中央咖啡馆步行约10分钟，或搭乘地铁U3线至Herrengasse站再步行5分钟<br>
+              【停留时间】60-90分钟</p>
+            </details>
+          </div>
+
+          <!-- St. Stephen's Cathedral -->
+          <div class="item" id="cathedral">
+            <div class="time">11:30</div>
+            <div class="title">⛪ 斯蒂芬大教堂</div>
+            <details>
+              <summary>查看详情</summary>
+              <p class="img-caption">Photo: St. Stephen's Cathedral (Stephansdom) | Pexels</p>
+              
+              <div class="movie-badge">
+                <span class="movie-badge-icon">🎬</span>
+                <div class="movie-badge-content">
+                  <div class="movie-badge-title">《爱在黎明破晓前》取景地</div>
+                  <div class="movie-badge-text">
+                    距离大教堂仅5分钟步行路程的 <strong>Kleines Café</strong> (Franziskanerplatz 3) 是电影中的经典场景——Jesse和Céline坐在户外座位，遇到一位为Céline看手相的算命女士。这个小广场紧邻方济各会修道院，氛围与电影中别无二致。
+                  </div>
+                </div>
+              </div>
+              
+              <p><strong>【亮点】</strong>维也纳的地标性建筑，哥特式建筑的杰作。自12世纪起历经800年建造，是维也纳的象征。高136米的南塔是城市最高点，彩色屋顶由23万块琉璃瓦拼成哈布斯堡双头鹰徽章。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">建造时间</div>
+                  <div class="info-value">12-15世纪</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">建筑风格</div>
+                  <div class="info-value">哥特式</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">南塔高度</div>
+                  <div class="info-value">136.4米</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">屋顶面积</div>
+                  <div class="info-value">23万块琉璃瓦</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🏰 南塔 vs 北塔：</strong></p>
+              <ul>
+                <li><strong>南塔(Südturm)</strong> - 高136.4米，哥特式建筑巅峰。需攀登343级螺旋台阶登顶，无电梯。登顶后可360°俯瞰维也纳老城全景</li>
+                <li><strong>北塔(Nordturm)</strong> - 较矮，可乘电梯登顶。这里是著名的"普默林"大钟所在地，也是欣赏屋顶彩色琉璃瓦的最佳视角</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>⚰️ 地下墓穴(Katakomben)：</strong></p>
+              <p>教堂地下有哈布斯堡家族成员的内脏安葬处（心脏在奥古斯丁教堂，遗体在卡普奇纳教堂）。还可看到罗马时期的地基和地下礼拜堂。需预约导览参观。</p>
+              
+              <p style="margin-top:12px"><strong>🎵 音乐传统：</strong></p>
+              <p>莫扎特曾在此担任管风琴师，海顿在此唱诗班演唱。每周日12:00的弥撒常有现场演奏。</p>
+              
+              <p style="margin-top:12px"><strong>💡 参观建议：</strong></p>
+              <ul>
+                <li>教堂内部免费参观</li>
+                <li>登顶需购票：南塔约6欧元（爬楼梯），北塔约6欧元（电梯）</li>
+                <li>地下墓穴导览约6欧元，约30分钟</li>
+                <li>清晨或傍晚光线最美，适合拍照</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Stephansplatz 3, 1010 Wien, Austria<br>
+              【交通】从霍夫堡皇宫步行约15分钟穿过Graben购物街，或搭乘地铁U1/U3线至Stephansplatz站直达<br>
+              【停留时间】45-60分钟</p>
+            </details>
+          </div>
+
+          <!-- Lunch -->
+          <div class="item">
+            <div class="time">12:30</div>
+            <div class="title">🍽️ 午餐</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【亮点】</strong>在斯蒂芬广场周边品尝维也纳传统美食，推荐炸肉排(Wiener Schnitzel)、清炖牛肉(Tafelspitz)或维也纳香肠。</p>
+              <p><strong>【推荐区域】</strong>Stephansplatz周边或Rotenturmstraße美食街</p>
+              <p><strong>【建议停留时间】</strong>60-75分钟</p>
+            </details>
+          </div>
+
+          <!-- Belvedere Gardens -->
+          <div class="item" id="belvedere">
+            <div class="time">14:00</div>
+            <div class="title">🌸 美景宫花园</div>
+        
+            <details>
+              <summary>查看详情</summary>
+              
+              <p class="img-caption">Photo: Belvedere Gardens | Unsplash</p>
+              
+              <div class="movie-badge">
+                <span class="movie-badge-icon">🎬</span>
+                <div class="movie-badge-content">
+                  <div class="movie-badge-title">《爱在黎明破晓前》电影关联</div>
+                  <div class="movie-badge-text">
+                    虽然美景宫不是直接的取景地，但Jesse和Céline在电影中探讨艺术、生活和爱情的话题与这里的艺术氛围完美契合。附近的 <strong>Prater公园</strong> 和 <strong>Riesenrad摩天轮</strong> 才是电影中最浪漫的取景地——两人在摩天轮上分享了第一个吻。如果时间充裕，可以考虑将美景宫换成Prater摩天轮体验！
+                  </div>
+                </div>
+              </div>
+              
+              <p><strong>【亮点】</strong>巴洛克园林的杰作，由军事统帅欧根亲王于18世纪初建造。对称的喷泉、修剪整齐的绿篱、雕像和花圃构成完美的几何图案。即使不进入宫殿，花园本身也是拍照圣地。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">建造年代</div>
+                  <div class="info-value">1712-1723年</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">建筑师</div>
+                  <div class="info-value">卢卡斯·冯·希尔德布兰特</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">花园面积</div>
+                  <div class="info-value">超过17公顷</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">名画收藏</div>
+                  <div class="info-value">克里姆特《吻》</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🏛️ 上宫 vs 下宫：</strong></p>
+              <ul>
+                <li><strong>上美景宫(Oberes Belvedere)</strong> - 较大的宫殿，现为奥地利国家美术馆。收藏有克里姆特《吻》、埃贡·席勒等维也纳分离派名作，还有莫奈、梵高等印象派大师作品</li>
+                <li><strong>下美景宫(Unteres Belvedere)</strong> - 较小的宫殿，曾是欧根亲王的私人居所。以精美的壁画和马赛克装饰闻名，还有奥地利中世纪艺术收藏</li>
+              </ul>
+              
+              
+              <p class="img-caption">Gustav Klimt - "The Kiss" (1907-1908) | Photo: Belvedere Museum</p>
+              
+              <p style="margin-top:12px"><strong>🎨 克里姆特《吻》(Der Kuss)：</strong></p>
+              <p>这幅创作于1907-1908年的作品是维也纳分离派的代表作，也是奥地利最著名的艺术品。画中使用了大量金箔，灵感来自拜占庭马赛克。位于上美景宫二楼主展厅，是必看之作。</p>
+              
+              <p style="margin-top:12px"><strong>🌳 花园设计：</strong></p>
+              <p>花园由法国景观设计师多米尼克·吉拉德设计，融合了法式几何园林和英式风景园林元素。特色包括：</p>
+              <ul>
+                <li><strong>大喷泉</strong> - 位于上宫前方，是花园的视觉中心</li>
+                <li><strong>斯芬克斯雕像</strong> - 守护着宫殿入口的神秘守护者</li>
+                <li><strong>凯旋门</strong> - 花园尽头的标志性建筑，俯瞰维也纳城</li>
+                <li><strong>温室花园</strong> - 季节性花卉展示</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>💡 参观建议：</strong></p>
+              <ul>
+                <li>花园免费开放，是散步和拍照的好地方</li>
+                <li>上宫门票约16欧元，含《吻》等名作</li>
+                <li>两宫联票约24欧元，建议艺术爱好者购买</li>
+                <li>建议从花园漫步至上宫，沿途欣赏几何园林美景</li>
+                <li>春天(4-5月)和秋天(9-10月)花园最美</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Prinz Eugen-Straße 27, 1030 Wien, Austria<br>
+              【交通】从斯蒂芬大教堂搭乘地铁U1线至Südtiroler Platz-Hauptbahnhof站，换乘 tram O线或18路至Schloss Belvedere站；或搭乘D线有轨电车直达<br>
+              【停留时间】2-3小时（花园漫步+可选参观宫殿）</p>
+            </details>
+          </div>
+
+          <!-- Retrieve Luggage -->
+          <div class="item">
+            <div class="time">17:30</div>
+            <div class="title">🧳 取行李</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【亮点】</strong>返回Wien Mitte取回寄存的行李，准备前往火车站。</p>
+              <p><strong>【地址】</strong>Wien Mitte车站</p>
+              <p><strong>【交通方式】</strong>从美景宫搭乘有轨电车D线或O线转地铁U3线至Wien Mitte</p>
+              <p><strong>【建议停留时间】</strong>15分钟</p>
+            </details>
+          </div>
+
+          <!-- Train to Rome -->
+          <div class="item">
+            <div class="time">20:14</div>
+            <div class="title">🚄 火车前往Rome</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【亮点】</strong>乘坐跨境列车从维也纳前往罗马，这是世界上最短的国际首都连线之一。沿途欣赏多瑙河沿岸风光。</p>
+              <p><strong>【出发站】</strong>Wien Hauptbahnhof (维也纳中央火车站)</p>
+              <p><strong>【到达站】</strong>Rome hlavná stanica (罗马主火车站)</p>
+              <p><strong>【建议】</strong>提前15分钟到站，无需提前太久</p>
+            </details>
+          </div>
+
+          <!-- Arrive Rome -->
+          <div class="item" id="bratislava">
+            <div class="time">21:10</div>
+            <div class="title">🌙 抵达Rome</div>
+            <details>
+              <summary>查看详情</summary>
+              
+              <p class="img-caption">Photo: Rome Old Town & Castle | Unsplash</p>
+              
+              <p><strong>【亮点】</strong>欢迎来到意大利首都！罗马是欧洲最年轻的国家首都之一（1993年独立），也是唯一与两个邻国（奥地利、匈牙利）接壤的国家首都。老城虽小但精致，拥有众多历史建筑和独特的"不明飞行物"风格桥塔。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">人口</div>
+                  <div class="info-value">约43万</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">货币</div>
+                  <div class="info-value">欧元(EUR)</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">语言</div>
+                  <div class="info-value">意大利语</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">特色</div>
+                  <div class="info-value">UFO桥塔</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🌃 夜生活建议：</strong></p>
+              <p>入住后如果时间允许，可在老城夜游。推荐去Hlavné námestie（主广场）欣赏 Roland喷泉和旧市政厅，或沿着多瑙河散步欣赏城堡夜景。</p>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Rome hlavná stanica, Predstaničné námestie 1, 811 09 Rome<br>
+              【交通】从火车站步行或搭乘出租车前往AC Hotel（约15分钟车程）<br>
+              【建议】入住后可在老城夜游</p>
+            </details>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Hotel Details Section -->
+    <div class="section" id="hotel-details">
+      <div class="card-content">
+        <div class="card-title">🏨 酒店详情</div>
+        
+        <div class="hotel-card">
+          <div class="hotel-header">
+            <h3 class="hotel-name">AC Hotel Rome Old Town</h3>
+            <span class="hotel-stars">⭐⭐⭐⭐</span>
+            <span class="hotel-chain">万豪旗下</span>
+          </div>
+          
+          <div class="hotel-grid">
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📍</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">完整地址</div>
+                <div class="hotel-info-value">Vysoká 2A, Staré Mesto, Rome 811 06, Slovakia</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📞</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">联系电话</div>
+                <div class="hotel-info-value">+421 2/2002 8500</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🚶</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">从车站前往</div>
+                <div class="hotel-info-value">距离Rome hl.st火车站约1.2公里，步行约15分钟；或搭乘出租车约5分钟</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">⏰</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">入住/退房时间</div>
+                <div class="hotel-info-value">入住：15:00后 | 退房：12:00前（提供延迟退房服务）</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🍽️</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">餐饮设施</div>
+                <div class="hotel-info-value">AC Lounge提供欧陆式早餐；大堂酒吧供应西班牙风味小吃和鸡尾酒</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🏋️</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">健身设施</div>
+                <div class="hotel-info-value">24小时健身中心，配有可欣赏老城景观的露台</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🏛️</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">周边景点</div>
+                <div class="hotel-info-value">距老城广场步行5分钟；距罗马城堡步行15分钟；距圣马丁大教堂步行8分钟</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🚌</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">交通便利</div>
+                <div class="hotel-info-value">距Hodžovo nám公交枢纽仅260米，可便捷前往全城各地</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="hotel-amenities">
+            <span class="amenity-tag">✓ 2021年新开业</span>
+            <span class="amenity-tag">✓ 202间客房</span>
+            <span class="amenity-tag">✓ 免费WiFi</span>
+            <span class="amenity-tag">✓ 欧陆式早餐</span>
+            <span class="amenity-tag">✓ 24小时健身中心</span>
+            <span class="amenity-tag">✓ 会议设施</span>
+            <span class="amenity-tag">✓ 宠物友好</span>
+            <span class="amenity-tag">✓ 自助停车</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tips Section -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">💡 实用贴士</div>
+        <ul style="color:var(--muted);padding-left:20px">
+          <li>维也纳机场到市区CAT快线约12欧元，S7约4.2欧元，时间差距不大建议选S7</li>
+          <li>霍夫堡皇宫和茜茜公主博物馆可购买联票，提前网上预订避免排队</li>
+          <li>斯蒂芬大教堂登顶需额外购票，电梯登顶约6欧元</li>
+          <li>前往罗马的火车票可在ÖBB App购买，约11-15欧元</li>
+          <li>罗马使用欧元，与维也纳无时差</li>
+          <li>美景宫花园免费，宫殿内部需购票</li>
+          <li>中央咖啡馆建议提前预约，避免长时间等位</li>
+          <li>🎬 《爱在黎明破晓前》粉丝可在维也纳多留半天，专门探访电影中的取景地：Kleines Café（算命场景）、Wiener Riesenrad摩天轮（初吻场景）、Café Sperl（电话游戏场景）</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
