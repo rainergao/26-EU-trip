@@ -16,6 +16,16 @@
         h2 { color: #1a365d; border-bottom: 2px solid #d69e2e; padding-bottom: 10px; }
         .transport { background: #e6fffa; padding: 15px; border-radius: 8px; }
         .hotel { background: #f0fff4; padding: 15px; border-radius: 8px; }
+        
+        /* Details */
+        details{margin-top:10px;border:1px solid #e2e8f0;border-radius:14px;background:#fafafa;padding:10px 12px}
+        summary{cursor:pointer;font-weight:600;color:#2c5282}
+        details[open] summary{margin-bottom:12px}
+        
+        .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+        .info-item{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:12px}
+        .info-label{font-size:11px;color:#718096;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+        .info-value{font-size:14px;font-weight:600;color:#1a365d}
     </style>
 </head>
 <body>
@@ -41,60 +51,196 @@
         <p><span class="time">07:30</span> 🍽️ <span class="spot">酒店早餐，退房存行李</span></p>
         
         <p><span class="time">08:30</span> 🏟️ <span class="spot">罗马斗兽场 (Colosseo)</span></p>
-        <ul>
-            <li>建议提前网上购票，含古罗马广场联票</li>
-            <li>参观时长约1.5-2小时</li>
-            <li>可租中文语音导览</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>古罗马帝国的象征，世界新七大奇迹之一。建于公元72-80年，可容纳5万观众，是角斗士决斗和公共娱乐的场所。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">地址</div>
+                    <div class="info-value">Piazza del Colosseo, 1, 00184 Roma</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">开放时间</div>
+                    <div class="info-value">08:30-19:00</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">门票价格</div>
+                    <div class="info-value">€16（含古罗马广场联票）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">参观时长</div>
+                    <div class="info-value">1.5-2小时</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>📱 预约攻略：</strong>强烈建议提前网上购票！现场排队可能2小时以上。也可购买 Roma Pass 免排队。</p>
+            <p><strong>🚇 交通方式：</strong>地铁B线Colosseo站，出站即见。</p>
+            <p><strong>💡 小贴士：</strong>建议早上8:30第一批入场人最少。可租用中文语音导览（€5.5）。</p>
+        </details>
 
         <p><span class="time">11:00</span> 🏛️ <span class="spot">古罗马广场 (Foro Romano)</span></p>
-        <ul>
-            <li>罗马帝国的政治中心遗址</li>
-            <li>帕拉蒂尼山（Palatine Hill）联票包含</li>
-            <li>建议穿舒适鞋子，石板路较多</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>古罗马帝国的政治、商业和宗教中心遗址。神庙、凯旋门、元老院遗址见证了昔日辉煌。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">地址</div>
+                    <div class="info-value">Via della Salara Vecchia, 5/6, 00186 Roma</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">开放时间</div>
+                    <div class="info-value">08:30-19:00</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">门票价格</div>
+                    <div class="info-value">包含在斗兽场联票内</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">参观时长</div>
+                    <div class="info-value">1-1.5小时</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>帕拉蒂尼山（Palatine Hill）包含在联票内，是传说中罗马建城者罗慕路斯的居住地。</p>
+        </details>
 
         <p><span class="time">13:00</span> 🍝 <span class="spot">午餐</span></p>
-        <ul>
-            <li>斗兽场附近餐厅</li>
-            <li>建议吃 Pizza al taglio（切片披萨）</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【推荐】</strong>斗兽场附近餐厅或 Pizza al taglio（切片披萨）</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">推荐</div>
+                    <div class="info-value">Pizza al taglio</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">价格</div>
+                    <div class="info-value">€3-8/片</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>Pizza al taglio 是按重量计价的切片披萨，方便快速，适合赶路时吃。</p>
+        </details>
 
         <p><span class="time">14:30</span> ⛪ <span class="spot">万神殿 (Pantheon)</span></p>
-        <ul>
-            <li>免费进入，穹顶令人惊叹</li>
-            <li>拉斐尔墓在此</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>古罗马建筑的巅峰，保存最完好的古罗马建筑。穹顶直径43.3米，中间有圆形开口，是建筑史上的奇迹。拉斐尔墓在此。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">地址</div>
+                    <div class="info-value">Piazza della Rotonda, 00186 Roma</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">开放时间</div>
+                    <div class="info-value">09:00-18:45（周日12:00起）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">门票价格</div>
+                    <div class="info-value">免费</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">参观时长</div>
+                    <div class="info-value">30-45分钟</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>🚇 交通方式：</strong>从斗兽场区域步行约15分钟，或公交64路。</p>
+            <p><strong>💡 小贴士：</strong>穹顶开口是唯一光源，雨天可见雨水落下。11:00和14:00阳光直射入殿内最美。</p>
+        </details>
 
         <p><span class="time">15:30</span> ⛲ <span class="spot">特雷维喷泉 (Fontana di Trevi)</span></p>
-        <ul>
-            <li>投币许愿！背对喷泉右手持币从左肩抛入</li>
-            <li>人非常多，注意财物安全</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>巴洛克喷泉的杰作，高26米，宽20米。传说投币许愿可以重返罗马。每年游客投入硬币约€150万，用于慈善。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">地址</div>
+                    <div class="info-value">Piazza di Trevi, 00187 Roma</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">开放时间</div>
+                    <div class="info-value">全天开放</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">门票价格</div>
+                    <div class="info-value">免费</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">参观时长</div>
+                    <div class="info-value">15-30分钟</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>🚇 交通方式：</strong>从万神殿步行约10分钟，或地铁A线Barberini站。</p>
+            <p><strong>💡 小贴士：</strong>投币方法：背对喷泉，右手持币从左肩抛入。人非常多，注意财物安全。</p>
+        </details>
 
         <p><span class="time">16:30</span> 🚂 <span class="spot">前往火车站</span></p>
-        <ul>
-            <li>回酒店取行李</li>
-            <li>前往 Roma Termini 火车站</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【路线】</strong>从许愿池区域返回酒店取行李，然后前往 Roma Termini 火车站。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">车站地址</div>
+                    <div class="info-value">Piazza dei Cinquecento, 00185 Roma</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">建议到达</div>
+                    <div class="info-value">发车前30分钟</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>🚇 交通方式：</strong>地铁A/B线Termini站，或从酒店步行。</p>
+        </details>
     </div>
 
     <div class="transport">
         <h3>🚄 交通信息</h3>
         <p><strong>火车：Roma Termini → Venezia Mestre</strong></p>
-        <p>⏰ 时间：16:30 - 约20:00（约3.5小时）</p>
-        <p>🎫 车次：Frecciarossa 或 Italo 高速列车</p>
-        <p>💶 票价：约€35-50（提前预订更便宜）</p>
-        <p>📍 抵达：Venezia Mestre 火车站（大陆侧）</p>
+        <details>
+            <summary>查看详情</summary>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">发车时间</div>
+                    <div class="info-value">约16:30-17:00</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">到达时间</div>
+                    <div class="info-value">约20:00</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">车程</div>
+                    <div class="info-value">约3.5小时</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">车次</div>
+                    <div class="info-value">Frecciarossa / Italo</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">票价</div>
+                    <div class="info-value">€35-50（提前预订更便宜）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">到达站</div>
+                    <div class="info-value">Venezia Mestre（大陆侧）</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>📱 预约攻略：</strong>建议在 Trenitalia 或 Italo 官网提前购买，越早越便宜。</p>
+        </details>
     </div>
 
     <div class="section">
         <p><span class="time">20:00</span> 🌙 <span class="spot">抵达威尼斯 Mestre</span></p>
-        <ul>
-            <li>入住酒店</li>
-            <li>Mestre 区域餐厅晚餐</li>
-            <li>休息备战明日威尼斯主岛</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【Mestre介绍】</strong>威尼斯大陆侧的主要城镇，比主岛住宿性价比高，去主岛火车仅需10分钟。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">去主岛方式</div>
+                    <div class="info-value">火车10分钟到Santa Lucia</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">火车票价</div>
+                    <div class="info-value">€1.35</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>Mestre 区域餐厅晚餐，休息备战明日威尼斯主岛。</p>
+        </details>
     </div>
 
     <div class="tips">

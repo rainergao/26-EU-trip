@@ -16,6 +16,16 @@
         h2 { color: #1a365d; border-bottom: 2px solid #d69e2e; padding-bottom: 10px; }
         .transport { background: #e6fffa; padding: 15px; border-radius: 8px; }
         .hotel { background: #f0fff4; padding: 15px; border-radius: 8px; }
+        
+        /* Details */
+        details{margin-top:10px;border:1px solid #e2e8f0;border-radius:14px;background:#fafafa;padding:10px 12px}
+        summary{cursor:pointer;font-weight:600;color:#2c5282}
+        details[open] summary{margin-bottom:12px}
+        
+        .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+        .info-item{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:12px}
+        .info-label{font-size:11px;color:#718096;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+        .info-value{font-size:14px;font-weight:600;color:#1a365d}
     </style>
 </head>
 <body>
@@ -41,70 +51,248 @@
         <p><span class="time">07:30</span> 🍽️ <span class="spot">酒店早餐</span></p>
         
         <p><span class="time">08:30</span> 🚆 <span class="spot">前往威尼斯主岛</span></p>
-        <ul>
-            <li>从 Mestre 乘火车到 Venezia Santa Lucia（10分钟）</li>
-            <li>或乘 ACTV 巴士/电车到罗马广场，再步行进站</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【路线】</strong>从 Mestre 乘火车到 Venezia Santa Lucia，这是最便捷的方式。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">车程</div>
+                    <div class="info-value">约10分钟</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">票价</div>
+                    <div class="info-value">€1.35</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">班次</div>
+                    <div class="info-value">约10分钟一班</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">替代方案</div>
+                    <div class="info-value">ACTV巴士+步行</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>火车是最快最便捷的方式，下车即进入主岛核心区域。</p>
+        </details>
 
         <p><span class="time">09:00</span> 🚤 <span class="spot">大运河 Vaporetto</span></p>
-        <ul>
-            <li>推荐乘坐1号线水上巴士，从火车站到圣马可广场</li>
-            <li>约45分钟，沿途欣赏大运河风光</li>
-            <li>单程票 €9.5，日票 €25</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>威尼斯大运河（Grand Canal）呈反S型贯穿全城，是威尼斯最主要的水道。沿岸分布着100多座精美建筑，包括12-18世纪的贵族府邸。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">水上巴士</div>
+                    <div class="info-value">Vaporetto 1号线</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">路线</div>
+                    <div class="info-value">火车站→圣马可广场</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">时长</div>
+                    <div class="info-value">约45分钟</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">票价</div>
+                    <div class="info-value">单程€9.5 / 日票€25</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>1号线沿途经过里亚托桥、学院桥等景点，是最好的运河观光方式。右侧座位风景更佳。</p>
+        </details>
 
         <p><span class="time">10:00</span> ⛪ <span class="spot">圣马可广场 (Piazza San Marco)</span></p>
-        <ul>
-            <li>欧洲最美客厅，又称"鸽子广场"</li>
-            <li>圣马可大教堂（外观/内部参观）</li>
-            <li>钟楼（Campanile）登顶俯瞰威尼斯</li>
-            <li>注意：广场上的咖啡厅价格昂贵</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>拿破仑称它为"欧洲最美的客厅"，是威尼斯唯一的广场。四周被圣马可大教堂、总督宫、钟楼和新老行政官邸大楼环绕。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">地址</div>
+                    <div class="info-value">Piazza San Marco, 30100 Venezia</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">钟楼门票</div>
+                    <div class="info-value">€10（电梯登顶）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">登顶时长</div>
+                    <div class="info-value">约15分钟</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">最佳时间</div>
+                    <div class="info-value">上午避开人群</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>📱 预约攻略：</strong>钟楼可在现场购票，建议上午早点去排队较少。</p>
+            <p><strong>💡 小贴士：</strong>广场上的咖啡厅价格昂贵（一杯咖啡€10+），建议拍照后去小巷用餐。钟楼登顶可360度俯瞰威尼斯全景。</p>
+        </details>
 
         <p><span class="time">12:00</span> 🏰 <span class="spot">总督宫 (Palazzo Ducale)</span></p>
-        <ul>
-            <li>威尼斯共和国时期的政治中心</li>
-            <li>叹息桥（Pont dei Sospiri）连接总督宫与监狱</li>
-            <li>建议提前购票，含免排队通道</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>威尼斯共和国时期的政治中心，哥特式建筑的杰作。叹息桥连接总督宫与监狱，囚犯们在这里发出最后的叹息。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">地址</div>
+                    <div class="info-value">San Marco 1, 30124 Venezia</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">开放时间</div>
+                    <div class="info-value">09:00-19:00</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">门票价格</div>
+                    <div class="info-value">€25（含免排队）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">参观时长</div>
+                    <div class="info-value">1.5-2小时</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>📱 预约攻略：</strong>强烈建议提前网上购票！现场排队可能1小时以上。官网：palazzoducale.visitmuve.it</p>
+            <p><strong>💡 小贴士：</strong>必看：黄金楼梯、议事厅（丁托列托《天堂》）、叹息桥、监狱。秘密行程（Secret Itineraries）需额外预约。</p>
+        </details>
 
         <p><span class="time">13:30</span> 🍝 <span class="spot">午餐</span></p>
-        <ul>
-            <li>推荐：墨鱼面（Spaghetti al Nero di Seppia）</li>
-            <li>远离圣马可广场的餐厅价格更合理</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【推荐】</strong>威尼斯特色美食</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">推荐菜品</div>
+                    <div class="info-value">Spaghetti al Nero di Seppia（墨鱼面）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">其他特色</div>
+                    <div class="info-value">Sarde in Saor（酸甜沙丁鱼）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">人均消费</div>
+                    <div class="info-value">€20-35</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">建议</div>
+                    <div class="info-value">远离圣马可广场</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>圣马可广场周边餐厅价格虚高，往小巷深处走能找到更实惠的当地餐厅。墨鱼面是威尼斯必尝美食。</p>
+        </details>
 
         <p><span class="time">15:00</span> 🌉 <span class="spot">里亚托桥 (Ponte di Rialto)</span></p>
-        <ul>
-            <li>威尼斯最古老的大桥</li>
-            <li>桥上两侧是商店，可买纪念品</li>
-            <li>在桥上拍大运河经典照片</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>威尼斯最古老、最著名的大桥，建于1591年。桥两侧是密集的市场和商店，是拍摄大运河经典照片的最佳地点。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">地址</div>
+                    <div class="info-value">Sestiere San Polo, 30125 Venezia</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">建造年份</div>
+                    <div class="info-value">1591年</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">桥长</div>
+                    <div class="info-value">48米</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">特色</div>
+                    <div class="info-value">两侧商店、拱廊</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>桥上人流拥挤，拍照建议在桥下或桥两侧。周边有新鲜鱼市场（上午开放）和纪念品商店。</p>
+        </details>
 
         <p><span class="time">16:00</span> 🛶 <span class="spot">贡多拉体验（可选）</span></p>
-        <ul>
-            <li>约 €80-100/船，30分钟</li>
-            <li>可拼船分摊费用</li>
-            <li>小巷水道更有韵味</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>贡多拉是威尼斯最具代表性的交通工具，已有1000多年历史。船夫穿着条纹衫，在狭窄水道中穿行。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">价格</div>
+                    <div class="info-value">€80-100/船/30分钟</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">载客量</div>
+                    <div class="info-value">最多6人</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">拼船</div>
+                    <div class="info-value">可与他人分摊费用</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">路线</div>
+                    <div class="info-value">小巷水道更有韵味</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>价格由威尼斯市政府统一定价，但可以议价或选择 shorter route。傍晚时分最有情调。</p>
+        </details>
 
         <p><span class="time">17:30</span> 🚆 <span class="spot">返回 Mestre 取行李</span></p>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【路线】</strong>从圣马可广场区域步行或乘船返回 Santa Lucia 火车站，乘火车返回 Mestre。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">方式1</div>
+                    <div class="info-value">步行至火车站（约30分钟）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">方式2</div>
+                    <div class="info-value">Vaporetto 1号线（约20分钟）</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>预留足够时间返回，威尼斯小巷容易迷路。</p>
+        </details>
     </div>
 
     <div class="transport">
         <h3>🚄 交通信息</h3>
         <p><strong>火车：Venezia Mestre → Milano Centrale</strong></p>
-        <p>⏰ 时间：19:00 - 约20:45（约1小时45分）</p>
-        <p>🎫 车次：Frecciarossa 高速列车</p>
-        <p>💶 票价：约€35-50</p>
+        <details>
+            <summary>查看详情</summary>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">发车时间</div>
+                    <div class="info-value">约19:00</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">到达时间</div>
+                    <div class="info-value">约20:45</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">车程</div>
+                    <div class="info-value">约1小时45分</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">车次</div>
+                    <div class="info-value">Frecciarossa 高速列车</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">票价</div>
+                    <div class="info-value">€35-50</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>📱 预约攻略：</strong>建议在 Trenitalia 或 Italo 官网提前购买。</p>
+        </details>
     </div>
 
     <div class="section">
         <p><span class="time">20:45</span> 🌙 <span class="spot">抵达米兰</span></p>
-        <ul>
-            <li>入住米兰酒店</li>
-            <li>附近简单晚餐</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【米兰中央火车站】</strong>欧洲最大的火车站之一，本身就是新艺术风格的建筑杰作。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">车站规模</div>
+                    <div class="info-value">欧洲最大之一</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">建筑年份</div>
+                    <div class="info-value">1931年落成</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>入住米兰酒店，附近简单晚餐。</p>
+        </details>
     </div>
 
     <div class="tips">

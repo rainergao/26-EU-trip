@@ -15,6 +15,16 @@
         .tips { background: #fffaf0; border-left: 4px solid #d69e2e; padding: 15px; margin: 15px 0; }
         h2 { color: #1a365d; border-bottom: 2px solid #d69e2e; padding-bottom: 10px; }
         .hotel { background: #f0fff4; padding: 15px; border-radius: 8px; }
+        
+        /* Details */
+        details{margin-top:10px;border:1px solid #e2e8f0;border-radius:14px;background:#fafafa;padding:10px 12px}
+        summary{cursor:pointer;font-weight:600;color:#2c5282}
+        details[open] summary{margin-bottom:12px}
+        
+        .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+        .info-item{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:12px}
+        .info-label{font-size:11px;color:#718096;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+        .info-value{font-size:14px;font-weight:600;color:#1a365d}
     </style>
 </head>
 <body>
@@ -41,42 +51,144 @@
         <p><span class="time">08:00</span> 🍽️ <span class="spot">酒店早餐</span></p>
         
         <p><span class="time">09:00</span> 🎨 <span class="spot">博尔盖塞博物馆 (Galleria Borghese)</span></p>
-        <ul>
-            <li>强烈推荐！贝尼尼雕塑杰作收藏地</li>
-            <li>需提前网上预约，每次参观限时2小时</li>
-            <li>重点：《阿波罗与达芙妮》《普鲁托与普洛塞尔皮娜》</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>世界顶级的艺术博物馆，收藏有大量贝尼尼雕塑杰作和卡拉瓦乔画作。《阿波罗与达芙妮》和《普鲁托与普洛塞尔皮娜》是镇馆之宝。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">地址</div>
+                    <div class="info-value">Piazzale Scipione Borghese 5, 00197 Roma</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">开放时间</div>
+                    <div class="info-value">09:00-19:00（周二闭馆）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">门票价格</div>
+                    <div class="info-value">€13 + €2预约费</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">参观时长</div>
+                    <div class="info-value">限时2小时</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>📱 预约攻略：</strong>必须提前网上预订！每天限流，每次参观限时2小时。建议提前2-4周预订。官网：galleriaborghese.beniculturali.it</p>
+            <p><strong>🚇 交通方式：</strong>地铁A线Spagna站，步行约15分钟穿过Villa Borghese公园。</p>
+            <p><strong>💡 小贴士：</strong>必看作品：《阿波罗与达芙妮》《普鲁托与普洛塞尔皮娜》《大卫》（贝尼尼）、卡拉瓦乔《捧果篮的男孩》。</p>
+        </details>
 
         <p><span class="time">12:00</span> 🍝 <span class="spot">午餐</span></p>
-        <ul>
-            <li>推荐：博物馆附近或西班牙阶梯区域</li>
-            <li>尝试正宗罗马意面：Carbonara 或 Cacio e Pepe</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【推荐】</strong>博物馆附近或西班牙阶梯区域</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">推荐菜品</div>
+                    <div class="info-value">Carbonara / Cacio e Pepe</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">人均消费</div>
+                    <div class="info-value">€15-25</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>罗马特色意面：Carbonara（培根蛋面）和 Cacio e Pepe（奶酪胡椒面）。</p>
+        </details>
 
         <p><span class="time">14:00</span> 🏛️ <span class="spot">梵蒂冈博物馆 (Musei Vaticani)</span></p>
-        <ul>
-            <li>必看：西斯廷礼拜堂（米开朗基罗《创世纪》）</li>
-            <li>拉斐尔画室、地图廊</li>
-            <li>提前网上购票，避免排长队</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>世界上最大的博物馆之一，拥有70000多件藏品。西斯廷礼拜堂的米开朗基罗《创世纪》天顶画是西方艺术史上最伟大的杰作之一。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">地址</div>
+                    <div class="info-value">Viale Vaticano, 00165 Roma</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">开放时间</div>
+                    <div class="info-value">09:00-18:00（周日闭馆）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">门票价格</div>
+                    <div class="info-value">€17（成人）/ €8（学生）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">参观时长</div>
+                    <div class="info-value">3-4小时</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>📱 预约攻略：</strong>强烈建议提前网上购票！现场排队可能2小时以上。官网：museivaticani.va</p>
+            <p><strong>🚇 交通方式：</strong>地铁A线Ottaviano站，步行10分钟。</p>
+            <p><strong>💡 小贴士：</strong>必看：西斯廷礼拜堂（《创世纪》《最后的审判》）、拉斐尔画室（《雅典学院》）、地图廊、松果庭院。</p>
+        </details>
 
         <p><span class="time">17:00</span> ⛪ <span class="spot">圣彼得大教堂 (Basilica di San Pietro)</span></p>
-        <ul>
-            <li>免费进入，登顶需购票（电梯+楼梯 €10）</li>
-            <li>教堂内：米开朗基罗《圣殇》</li>
-            <li>登顶可俯瞰梵蒂冈全景</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>世界最大的教堂，文艺复兴建筑的巅峰之作。米开朗基罗设计的穹顶和圣彼得广场是建筑史上的杰作。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">地址</div>
+                    <div class="info-value">Piazza San Pietro, 00120 Città del Vaticano</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">开放时间</div>
+                    <div class="info-value">07:00-19:00</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">门票价格</div>
+                    <div class="info-value">教堂免费，登顶€10（电梯+楼梯）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">参观时长</div>
+                    <div class="info-value">1-1.5小时</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>🚇 交通方式：</strong>从梵蒂冈博物馆出口步行约15分钟，或地铁A线Ottaviano站。</p>
+            <p><strong>💡 小贴士：</strong>必看：米开朗基罗《圣殇》（Pieta）、青铜华盖、圣彼得宝座。登顶需爬551级台阶，可俯瞰梵蒂冈全景。</p>
+        </details>
 
         <p><span class="time">19:00</span> 🏰 <span class="spot">圣天使堡 & 圣天使桥</span></p>
-        <ul>
-            <li>外观拍照即可，桥上雕塑精美</li>
-            <li>日落时分景色最佳</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>古罗马皇帝哈德良的陵墓，后改为城堡和监狱。圣天使桥上的十座天使雕像由贝尼尼设计，是罗马最美的桥梁。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">地址</div>
+                    <div class="info-value">Lungotevere Castello 50, 00193 Roma</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">开放时间</div>
+                    <div class="info-value">09:00-19:30</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">门票价格</div>
+                    <div class="info-value">€15（外部免费）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">参观时长</div>
+                    <div class="info-value">外观15分钟/内部1小时</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>🚇 交通方式：</strong>从圣彼得大教堂步行约15分钟。</p>
+            <p><strong>💡 小贴士：</strong>日落时分景色最佳，桥上拍圣彼得大教堂背景绝佳。时间紧张可只外观拍照。</p>
+        </details>
 
         <p><span class="time">20:00</span> 🍽️ <span class="spot">晚餐</span></p>
-        <ul>
-            <li>特拉斯提弗列区（Trastevere）传统餐厅</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【推荐】</strong>特拉斯提弗列区（Trastevere）传统餐厅</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">区域特色</div>
+                    <div class="info-value">传统罗马美食、夜生活</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">人均消费</div>
+                    <div class="info-value">€20-35</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>Trastevere区小巷众多，氛围浪漫，适合晚餐后漫步。</p>
+        </details>
     </div>
 
     <div class="tips">

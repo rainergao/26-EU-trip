@@ -16,6 +16,16 @@
         h2 { color: #1a365d; border-bottom: 2px solid #d69e2e; padding-bottom: 10px; }
         .transport { background: #e6fffa; padding: 15px; border-radius: 8px; }
         .hotel { background: #f0fff4; padding: 15px; border-radius: 8px; }
+        
+        /* Details */
+        details{margin-top:10px;border:1px solid #e2e8f0;border-radius:14px;background:#fafafa;padding:10px 12px}
+        summary{cursor:pointer;font-weight:600;color:#2c5282}
+        details[open] summary{margin-bottom:12px}
+        
+        .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+        .info-item{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:12px}
+        .info-label{font-size:11px;color:#718096;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+        .info-value{font-size:14px;font-weight:600;color:#1a365d}
     </style>
 </head>
 <body>
@@ -38,66 +48,223 @@
     <div class="transport">
         <h3>🚄 交通信息</h3>
         <p><strong>火车：Milano Centrale → Grindelwald</strong></p>
-        <p>⏰ 时间：约07:20出发 - 约13:30抵达（约6小时，含换乘）</p>
-        <p>🎫 路线：米兰 → 施皮茨(Spiez) → 因特拉肯 → 格林德瓦</p>
-        <p>💶 票价：约€60-80（Swiss Travel Pass 可省）</p>
-        <p>📱 购票：SBB官网 或 Trenitalia</p>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【路线】</strong>米兰 → 施皮茨(Spiez) → 因特拉肯 → 格林德瓦</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">发车时间</div>
+                    <div class="info-value">约07:20</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">抵达时间</div>
+                    <div class="info-value">约13:30</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">总时长</div>
+                    <div class="info-value">约6小时（含换乘）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">票价</div>
+                    <div class="info-value">€60-80 / Swiss Travel Pass 免费</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>📱 购票：</strong>SBB官网(sbb.ch) 或 Trenitalia</p>
+            <p><strong>💡 小贴士：</strong>Swiss Travel Pass 可省大量费用，连续3天约 CHF 232。</p>
+        </details>
     </div>
 
     <div class="section">
         <h2>📍 详细安排</h2>
         
         <p><span class="time">06:00</span> 🌅 <span class="spot">早起退房</span></p>
-        <ul>
-            <li>提前准备好行李</li>
-            <li>早餐可打包或车站解决</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【准备】</strong>早班火车需要提前准备。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">建议起床</div>
+                    <div class="info-value">05:30</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">早餐</div>
+                    <div class="info-value">打包或车站解决</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">建议到达车站</div>
+                    <div class="info-value">发车前30分钟</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>提前准备好行李，避免早上匆忙。</p>
+        </details>
         
         <p><span class="time">07:20</span> 🚄 <span class="spot">火车出发</span></p>
-        <ul>
-            <li>乘坐早班火车前往瑞士</li>
-            <li>沿途欣赏从意大利平原到阿尔卑斯山的风景变化</li>
-            <li>在施皮茨或伯尔尼换乘</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【路线亮点】</strong>从米兰出发，经过Simplon隧道进入瑞士，沿途欣赏从意大利平原到阿尔卑斯山的风景变化。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">途经</div>
+                    <div class="info-value">施皮茨、伯尔尼、因特拉肯</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">换乘</div>
+                    <div class="info-value">施皮茨或伯尔尼</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">黄金列车线</div>
+                    <div class="info-value">因特拉肯→格林德瓦段</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">风景</div>
+                    <div class="info-value">阿尔卑斯山、布里恩茨湖</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>右侧座位风景更佳，可以欣赏布里恩茨湖和阿尔卑斯山景色。</p>
+        </details>
 
         <p><span class="time">13:30</span> 🏔️ <span class="spot">抵达格林德瓦</span></p>
-        <ul>
-            <li>入住并简短休整</li>
-            <li>在镇上购买午餐或野餐食物</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【小镇介绍】</strong>Grindelwald是瑞士伯尔尼高地最著名的度假胜地，海拔1,034米，被艾格峰、少女峰等4000米级山峰环绕。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">海拔</div>
+                    <div class="info-value">1,034米</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">特色</div>
+                    <div class="info-value">艾格峰北壁、梦幻山坡</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">主要景点</div>
+                    <div class="info-value">First山、少女峰</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">货币</div>
+                    <div class="info-value">瑞士法郎(CHF)</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>入住后可在镇上购买午餐或野餐食物，瑞士超市物价相对餐厅便宜很多。</p>
+        </details>
 
         <p><span class="time">15:00</span> 🚠 <span class="spot">First山缆车</span></p>
-        <ul>
-            <li>乘坐 Firstbahn 缆车上山（约25分钟）</li>
-            <li>往返票价约 CHF 64</li>
-            <li>Swiss Travel Pass 可享50%折扣</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>Firstbahn缆车从Grindelwald镇中心出发，约25分钟抵达First山顶（2,168米），沿途可欣赏艾格峰北壁的震撼景色。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">地址</div>
+                    <div class="info-value">Firstbahn, Dorfstrasse 187, 3818 Grindelwald</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">运营时间</div>
+                    <div class="info-value">08:00-18:00（夏季）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">往返票价</div>
+                    <div class="info-value">CHF 64 / 通票半价 CHF 32</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">缆车时长</div>
+                    <div class="info-value">约25分钟</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>📱 预约攻略：</strong>可在官网提前购票，也可现场购买。</p>
+            <p><strong>💡 小贴士：</strong>建议坐在上行方向右侧以获得最佳视野。Swiss Travel Pass可享50%折扣。</p>
+        </details>
 
         <p><span class="time">15:30</span> 🌉 <span class="spot">Cliff Walk 悬崖步道</span></p>
-        <ul>
-            <li>欧洲海拔最高的悬空步道</li>
-            <li>挑战胆量，俯瞰山谷</li>
-            <li>免费进入</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>欧洲海拔最高的悬空步道，位于First山顶。步道从山顶餐厅向外延伸约40米，末端是悬空观景平台，直面艾格峰北壁。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">海拔</div>
+                    <div class="info-value">2,168米</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">门票</div>
+                    <div class="info-value">免费（含缆车票内）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">步道长度</div>
+                    <div class="info-value">约40米</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">特色</div>
+                    <div class="info-value">玻璃地面、悬空平台</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>这里是拍摄"勇敢者照片"的最佳地点！即使是胆小的人也能安全体验，结构非常稳固。</p>
+        </details>
 
         <p><span class="time">17:00</span> 🏔️ <span class="spot">First山顶观景台</span></p>
-        <ul>
-            <li>360度阿尔卑斯山全景</li>
-            <li>远眺艾格峰北壁</li>
-            <li>如果体力允许，可徒步至 Bachalpsee（约1小时）</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>360度阿尔卑斯山全景，远眺艾格峰北壁、维特峰、僧侣峰和少女峰。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">海拔</div>
+                    <div class="info-value">2,168米</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">视野</div>
+                    <div class="info-value">360度阿尔卑斯全景</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">可见山峰</div>
+                    <div class="info-value">艾格峰、僧侣峰、少女峰</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">徒步</div>
+                    <div class="info-value">至Bachalpsee约1小时</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>如果时间充裕且体力允许，可徒步至Bachalpsee（高山湖泊），是拍摄艾格峰倒影的经典机位。</p>
+        </details>
 
         <p><span class="time">18:30</span> 🚠 <span class="spot">缆车下山</span></p>
-        <ul>
-            <li>注意最后一班缆车时间（通常18:30或19:00）</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【注意事项】</strong>注意最后一班下山缆车时间！</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">夏季末班</div>
+                    <div class="info-value">约18:30-19:00</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">错过后果</div>
+                    <div class="info-value">徒步下山2-3小时</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>建议提前15分钟到达缆车站，避免错过末班车。</p>
+        </details>
 
         <p><span class="time">19:30</span> 🍽️ <span class="spot">晚餐</span></p>
-        <ul>
-            <li>格林德瓦镇上餐厅</li>
-            <li>推荐瑞士奶酪火锅（Fondue）或薯饼（Rösti）</li>
-            <li>或购买超市食材在酒店简单解决（瑞士餐厅较贵）</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【推荐】</strong>格林德瓦镇上餐厅或超市</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">瑞士国菜</div>
+                    <div class="info-value">Fondue（奶酪火锅）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">特色菜</div>
+                    <div class="info-value">Rösti（薯饼）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">餐厅人均</div>
+                    <div class="info-value">CHF 30-50</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">超市</div>
+                    <div class="info-value">Coop / Migros</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>瑞士物价非常高！餐厅人均CHF 30-50，超市购物相对便宜，可在酒店简单解决。</p>
+        </details>
     </div>
 
     <div class="tips">

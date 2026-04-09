@@ -15,6 +15,16 @@
         .tips { background: #fffaf0; border-left: 4px solid #d69e2e; padding: 15px; margin: 15px 0; }
         h2 { color: #1a365d; border-bottom: 2px solid #d69e2e; padding-bottom: 10px; }
         .hotel { background: #f0fff4; padding: 15px; border-radius: 8px; }
+        
+        /* Details */
+        details{margin-top:10px;border:1px solid #e2e8f0;border-radius:14px;background:#fafafa;padding:10px 12px}
+        summary{cursor:pointer;font-weight:600;color:#2c5282}
+        details[open] summary{margin-bottom:12px}
+        
+        .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+        .info-item{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:12px}
+        .info-label{font-size:11px;color:#718096;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+        .info-value{font-size:14px;font-weight:600;color:#1a365d}
     </style>
 </head>
 <body>
@@ -41,56 +51,170 @@
         <p><span class="time">08:00</span> 🍽️ <span class="spot">酒店早餐</span></p>
         
         <p><span class="time">09:00</span> ⛪ <span class="spot">米兰大教堂 (Duomo di Milano)</span></p>
-        <ul>
-            <li>世界第二大教堂，哥特式建筑杰作</li>
-            <li>建议提前网购登顶票（楼梯 €14，电梯 €18）</li>
-            <li>屋顶平台可近距离欣赏尖塔和雕像</li>
-            <li>登顶后俯瞰米兰全景</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>世界第二大教堂，哥特式建筑的巅峰之作。历时6个世纪建造完成，拥有135座尖塔和3400座雕像，内部可容4万人。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">地址</div>
+                    <div class="info-value">Piazza del Duomo, 20122 Milano</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">开放时间</div>
+                    <div class="info-value">08:00-19:00</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">登顶票价</div>
+                    <div class="info-value">楼梯€14 / 电梯€18</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">教堂内部</div>
+                    <div class="info-value">免费</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>📱 预约攻略：</strong>必须提前网上购票！现场排队超长。官网：duomomilano.it</p>
+            <p><strong>🚇 交通方式：</strong>地铁M1/M3线Duomo站，出站即见。</p>
+            <p><strong>💡 小贴士：</strong>建议购买电梯票，全程楼梯很累。屋顶平台可近距离欣赏尖塔和金色圣母像。周二到周四人较少。</p>
+        </details>
 
         <p><span class="time">11:30</span> 🏛️ <span class="spot">埃马努埃莱二世长廊 (Galleria Vittorio Emanuele II)</span></p>
-        <ul>
-            <li>世界最古老的购物中心之一</li>
-            <li>拱形玻璃穹顶令人惊叹</li>
-            <li>Prada、Gucci、Louis Vuitton 旗舰店</li>
-            <li>中央地面有幸运公牛马赛克，踩其睾丸转圈带来好运</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>世界上最古老的购物中心之一，建于1865-1877年。十字形的拱廊由玻璃和铸铁构成，被誉为"米兰的客厅"。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">地址</div>
+                    <div class="info-value">Piazza del Duomo, 20123 Milano</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">开放时间</div>
+                    <div class="info-value">24小时开放（商店10:00-20:00）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">特色品牌</div>
+                    <div class="info-value">Prada、Gucci、LV旗舰店</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">建筑特色</div>
+                    <div class="info-value">玻璃穹顶、马赛克地面</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>中央地面有幸运公牛马赛克，传说踩其睾丸转圈会带来好运。长廊内 Luini 的 Panzerotti（炸饺子）是当地名小吃。</p>
+        </details>
 
         <p><span class="time">12:30</span> 🍝 <span class="spot">午餐</span></p>
-        <ul>
-            <li>推荐：米兰特色菜 Risotto alla Milanese（藏红花烩饭）</li>
-            <li>或 Cotoletta alla Milanese（米兰炸肉排）</li>
-            <li>长廊内 Luini 的 Panzerotti（炸饺子）是当地名小吃</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【推荐】</strong>米兰特色美食</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">特色菜1</div>
+                    <div class="info-value">Risotto alla Milanese（藏红花烩饭）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">特色菜2</div>
+                    <div class="info-value">Cotoletta alla Milanese（米兰炸肉排）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">小吃</div>
+                    <div class="info-value">Panzerotti（炸饺子）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">推荐地点</div>
+                    <div class="info-value">Luini（长廊内）</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>长廊内餐厅价格较高，可往Brera区寻找性价比更高的选择。</p>
+        </details>
 
         <p><span class="time">14:00</span> 🎭 <span class="spot">斯卡拉歌剧院 (Teatro alla Scala)</span></p>
-        <ul>
-            <li>世界最著名的歌剧院之一</li>
-            <li>可参观剧院博物馆（约€12）</li>
-            <li>欣赏华丽的剧院内部装饰</li>
-            <li>旺季可能有演出（需提前数月预订）</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>世界最著名的歌剧院之一，1778年开幕。无数歌剧大师如威尔第、普契尼的作品在此首演。剧院博物馆展示了丰富的歌剧历史。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">地址</div>
+                    <div class="info-value">Via Filodrammatici 2, 20121 Milano</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">开放时间</div>
+                    <div class="info-value">09:00-17:30（演出日不同）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">博物馆门票</div>
+                    <div class="info-value">€12</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">参观时长</div>
+                    <div class="info-value">约1小时</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>📱 预约攻略：</strong>如需观看演出，需提前数月预订。博物馆可现场购票。</p>
+            <p><strong>🚇 交通方式：</strong>从长廊步行约5分钟。</p>
+            <p><strong>💡 小贴士：</strong>博物馆内可以透过窗户看到剧院内部，华丽的红金装饰令人叹为观止。</p>
+        </details>
 
         <p><span class="time">16:00</span> 🏰 <span class="spot">斯福尔扎城堡 (Castello Sforzesco)</span></p>
-        <ul>
-            <li>米兰最重要的中世纪城堡</li>
-            <li>城堡公园是当地人休闲的好去处</li>
-            <li>内部有多个博物馆（可只参观城堡外部免费）</li>
-            <li>距离大教堂约20分钟步行</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>米兰最重要的中世纪城堡，曾是斯福尔扎家族的居所。城堡内设有多个博物馆，收藏有米开朗基罗的遗作《圣殇》Rondanini。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">地址</div>
+                    <div class="info-value">Piazza Castello, 20121 Milano</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">城堡外部</div>
+                    <div class="info-value">免费</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">博物馆门票</div>
+                    <div class="info-value">€5</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">开放时间</div>
+                    <div class="info-value">07:00-19:30</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>🚇 交通方式：</strong>从斯卡拉歌剧院步行约15分钟，或地铁M1/M2线Cadorna站。</p>
+            <p><strong>💡 小贴士：</strong>城堡公园（Parco Sempione）是当地人休闲的好去处，适合散步拍照。城堡外部已非常壮观，时间紧张可不进入博物馆。</p>
+        </details>
 
         <p><span class="time">18:30</span> 🍽️ <span class="spot">晚餐</span></p>
-        <ul>
-            <li>推荐：Brera 艺术区餐厅</li>
-            <li>或 Corso Como 时尚区</li>
-            <li>米兰 Aperitivo（开胃酒）文化，18:00-21:00很多酒吧提供</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【推荐区域】</strong></p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Brera区</div>
+                    <div class="info-value">艺术氛围餐厅</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Corso Como</div>
+                    <div class="info-value">时尚区酒吧</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Aperitivo</div>
+                    <div class="info-value">开胃酒文化</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">时间</div>
+                    <div class="info-value">18:00-21:00</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong>米兰的Aperitivo文化：18:00-21:00很多酒吧提供免费自助小吃，点一杯鸡尾酒（约€10）即可享受。</p>
+        </details>
 
         <p><span class="time">20:00</span> 🌙 <span class="spot">晚间漫步</span></p>
-        <ul>
-            <li>大教堂夜景</li>
-            <li>或 Porta Garibaldi 现代建筑群</li>
-        </ul>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【推荐】</strong></p>
+            <ul>
+                <li><strong>大教堂夜景</strong> - 灯光下的米兰大教堂别有一番韵味</li>
+                <li><strong>Porta Garibaldi</strong> - 现代建筑群，欣赏新米兰天际线</li>
+                <li><strong>Navigli运河区</strong> - 夜生活丰富，酒吧餐厅林立</li>
+            </ul>
+        </details>
     </div>
 
     <div class="tips">

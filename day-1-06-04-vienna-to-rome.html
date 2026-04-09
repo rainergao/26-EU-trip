@@ -12,6 +12,16 @@
         .timeline { background: #f7fafc; padding: 20px; border-radius: 8px; }
         .timeline-item { padding: 10px 0; border-bottom: 1px solid #e2e8f0; }
         .time { font-weight: bold; color: #d69e2e; }
+        
+        /* Details */
+        details{margin-top:10px;border:1px solid #e2e8f0;border-radius:14px;background:#fafafa;padding:10px 12px}
+        summary{cursor:pointer;font-weight:600;color:#2c5282}
+        details[open] summary{margin-bottom:12px}
+        
+        .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+        .info-item{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:12px}
+        .info-label{font-size:11px;color:#718096;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+        .info-value{font-size:14px;font-weight:600;color:#1a365d}
     </style>
 </head>
 <body>
@@ -24,18 +34,254 @@
         <p>成都出发，经维也纳转机，当晚抵达罗马</p>
     </div>
     <div class="timeline">
-        <div class="timeline-item"><span class="time">07:25</span> ✈️ 抵达维也纳机场</div>
-        <div class="timeline-item"><span class="time">08:30</span> 🧳 进城(Wien Mitte寄存行李)</div>
-        <div class="timeline-item"><span class="time">09:30</span> ☕ 中央咖啡馆 Café Central</div>
-        <div class="timeline-item"><span class="time">10:30</span> 🏛️ 霍夫堡皇宫</div>
-        <div class="timeline-item"><span class="time">11:30</span> ⛪ 斯蒂芬大教堂</div>
-        <div class="timeline-item"><span class="time">12:30</span> 🍽️ 午餐</div>
-        <div class="timeline-item"><span class="time">14:00</span> 🌸 美景宫花园</div>
-        <div class="timeline-item"><span class="time">17:30</span> 🧳 取行李，前往机场</div>
-        <div class="timeline-item"><span class="time">18:05</span> ✈️ 航班 FR7191 飞往罗马</div>
-        <div class="timeline-item"><span class="time">21:10</span> 🌙 抵达罗马，入住酒店</div>
+        <div class="timeline-item">
+            <span class="time">07:25</span> ✈️ <strong>抵达维也纳机场</strong>
+            <details>
+                <summary>查看详情</summary>
+                <p><strong>【亮点】</strong>维也纳国际机场是奥地利最大的机场，现代化设施完善，是前往东欧和中欧的重要枢纽。</p>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">机场代码</div>
+                        <div class="info-value">VIE</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">距市区</div>
+                        <div class="info-value">约18公里</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">机场到市区</div>
+                        <div class="info-value">CAT快线16分钟/地铁S7</div>
+                    </div>
+                </div>
+                <p style="margin-top:12px"><strong>💡 小贴士：</strong>出关后跟随"Exit"标识前往行李提取区，如需进城请前往CAT或S7站台。</p>
+            </details>
+        </div>
+        <div class="timeline-item">
+            <span class="time">08:30</span> 🧳 <strong>进城(Wien Mitte寄存行李)</strong>
+            <details>
+                <summary>查看详情</summary>
+                <p><strong>【亮点】</strong>Wien Mitte是维也纳市中心的重要交通枢纽，连接CAT机场快线和多条地铁线路，是寄存行李的理想地点。</p>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">地址</div>
+                        <div class="info-value">Landstraßer Hauptstraße 1B, 1030 Wien</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">寄存价格</div>
+                        <div class="info-value">€4-6/件/天</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">营业时间</div>
+                        <div class="info-value">06:00-22:00</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">交通方式</div>
+                        <div class="info-value">CAT快线直达</div>
+                    </div>
+                </div>
+                <p style="margin-top:12px"><strong>💡 小贴士：</strong>寄存行李后轻装游览，记得保留好寄存凭证。</p>
+            </details>
+        </div>
+        <div class="timeline-item">
+            <span class="time">09:30</span> ☕ <strong>中央咖啡馆 Café Central</strong>
+            <details>
+                <summary>查看详情</summary>
+                <p><strong>【亮点】</strong>维也纳最著名的传统咖啡馆，开业于1876年，曾是弗洛伊德、托洛茨基等名人的聚集地。新哥特式穹顶和典雅装潢令人叹为观止。</p>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">地址</div>
+                        <div class="info-value">Herrengasse 14, 1010 Wien</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">营业时间</div>
+                        <div class="info-value">07:30-22:00</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">人均消费</div>
+                        <div class="info-value">€8-15</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">推荐</div>
+                        <div class="info-value">维也纳咖啡+苹果卷</div>
+                    </div>
+                </div>
+                <p style="margin-top:12px"><strong>💡 小贴士：</strong>上午时分游客较少，建议早点到达。必点传统甜点Apple Strudel（苹果卷）。</p>
+            </details>
+        </div>
+        <div class="timeline-item">
+            <span class="time">10:30</span> 🏛️ <strong>霍夫堡皇宫</strong>
+            <details>
+                <summary>查看详情</summary>
+                <p><strong>【亮点】</strong>哈布斯堡王朝的皇宫，占地24万平方米，拥有2600多个房间。茜茜公主博物馆、银器馆和皇家公寓是主要看点。</p>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">地址</div>
+                        <div class="info-value">Michaelerkuppel, 1010 Wien</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">开放时间</div>
+                        <div class="info-value">09:00-17:30</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">门票价格</div>
+                        <div class="info-value">€17.50（茜茜联票）</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">参观时长</div>
+                        <div class="info-value">1-1.5小时</div>
+                    </div>
+                </div>
+                <p style="margin-top:12px"><strong>📱 预约攻略：</strong>建议提前在官网预约，避免排队。</p>
+                <p><strong>🚇 交通方式：</strong>地铁U3线Herrengasse站或U1/U3线Stephansplatz站。</p>
+                <p><strong>💡 小贴士：</strong>时间有限可以只参观外观和英雄广场，免费。</p>
+            </details>
+        </div>
+        <div class="timeline-item">
+            <span class="time">11:30</span> ⛪ <strong>斯蒂芬大教堂</strong>
+            <details>
+                <summary>查看详情</summary>
+                <p><strong>【亮点】</strong>维也纳的地标建筑，哥特式建筑的杰作，拥有南塔（136米）和北塔，彩色屋顶由23万块彩瓦拼成哈布斯堡双头鹰图案。</p>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">地址</div>
+                        <div class="info-value">Stephansplatz 3, 1010 Wien</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">开放时间</div>
+                        <div class="info-value">06:00-22:00</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">门票价格</div>
+                        <div class="info-value">教堂免费，南塔€5.5</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">参观时长</div>
+                        <div class="info-value">30-45分钟</div>
+                    </div>
+                </div>
+                <p style="margin-top:12px"><strong>🚇 交通方式：</strong>地铁U1/U3线Stephansplatz站，出站即达。</p>
+                <p><strong>💡 小贴士：</strong>教堂内部免费参观，登顶需付费。彩色屋顶是拍照亮点。</p>
+            </details>
+        </div>
+        <div class="timeline-item">
+            <span class="time">12:30</span> 🍽️ <strong>午餐</strong>
+            <details>
+                <summary>查看详情</summary>
+                <p><strong>【推荐】</strong>Stephansplatz周边的奥地利传统餐厅</p>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">推荐菜品</div>
+                        <div class="info-value">Wiener Schnitzel（炸猪排）</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">人均消费</div>
+                        <div class="info-value">€15-25</div>
+                    </div>
+                </div>
+                <p style="margin-top:12px"><strong>💡 小贴士：</strong>广场周边餐厅价格较高，可往小巷中寻找性价比更高的选择。</p>
+            </details>
+        </div>
+        <div class="timeline-item">
+            <span class="time">14:00</span> 🌸 <strong>美景宫花园</strong>
+            <details>
+                <summary>查看详情</summary>
+                <p><strong>【亮点】</strong>巴洛克式宫殿和花园，分为上美景宫和下美景宫，收藏有克里姆特《吻》等名作。花园免费开放，是维也纳人休闲的好去处。</p>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">地址</div>
+                        <div class="info-value">Prinz Eugen-Straße 27, 1030 Wien</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">花园开放时间</div>
+                        <div class="info-value">06:00-日落</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">博物馆门票</div>
+                        <div class="info-value">€16（上美景宫）</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">参观时长</div>
+                        <div class="info-value">花园30分钟/博物馆1-2小时</div>
+                    </div>
+                </div>
+                <p style="margin-top:12px"><strong>🚇 交通方式：</strong>电车D线Schloss Belvedere站或地铁U1线Südtirolerplatz站。</p>
+                <p><strong>💡 小贴士：</strong>时间紧张可只游览花园（免费），喷泉和花坛非常出片。</p>
+            </details>
+        </div>
+        <div class="timeline-item">
+            <span class="time">17:30</span> 🧳 <strong>取行李，前往机场</strong>
+            <details>
+                <summary>查看详情</summary>
+                <p><strong>【路线】</strong>从美景宫返回Wien Mitte取行李，然后乘CAT快线前往机场。</p>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">CAT车程</div>
+                        <div class="info-value">16分钟</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">班次</div>
+                        <div class="info-value">每30分钟一班</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">票价</div>
+                        <div class="info-value">€14.9单程</div>
+                    </div>
+                </div>
+                <p style="margin-top:12px"><strong>💡 小贴士：</strong>建议17:00开始返回，预留足够时间办理退税和值机。</p>
+            </details>
+        </div>
+        <div class="timeline-item">
+            <span class="time">18:05</span> ✈️ <strong>航班 FR7191 飞往罗马</strong>
+            <details>
+                <summary>查看详情</summary>
+                <p><strong>【航班信息】</strong>瑞安航空 FR7191 维也纳→罗马</p>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">起飞时间</div>
+                        <div class="info-value">18:05</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">抵达时间</div>
+                        <div class="info-value">21:10</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">飞行时长</div>
+                        <div class="info-value">约1小时5分钟</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">抵达机场</div>
+                        <div class="info-value">罗马菲乌米奇诺(FCO)</div>
+                    </div>
+                </div>
+                <p style="margin-top:12px"><strong>💡 小贴士：</strong>瑞安航空为廉航，注意行李尺寸和重量限制。提前网上值机可节省费用。</p>
+            </details>
+        </div>
+        <div class="timeline-item">
+            <span class="time">21:10</span> 🌙 <strong>抵达罗马，入住酒店</strong>
+            <details>
+                <summary>查看详情</summary>
+                <p><strong>【机场到市区】</strong>菲乌米奇诺机场到市区约30-40分钟。</p>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">机场快线</div>
+                        <div class="info-value">Leonardo Express €14</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">区域列车</div>
+                        <div class="info-value">€8，停靠站多</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">出租车</div>
+                        <div class="info-value">固定价€48到市中心</div>
+                    </div>
+                </div>
+                <p style="margin-top:12px"><strong>🏨 住宿信息</strong></p>
+                <p><strong>Best Western Plus Hotel Universo</strong></p>
+                <p>📍 Via Principe Amedeo 5/B, 00185 Roma</p>
+                <p>🚇 距离 Termini 火车站步行5分钟</p>
+                <p><strong>💡 小贴士：</strong>晚间抵达建议乘坐机场快线或出租车，安全便捷。</p>
+            </details>
+        </div>
     </div>
-    <h3>🏨 住宿</h3>
-    <p><strong>Best Western Plus Hotel Universo</strong></p>
 </body>
 </html>
