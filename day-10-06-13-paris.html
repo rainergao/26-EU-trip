@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Day 10｜06-13｜Paris 核心文化日</title>
+  <title>Day 10｜06-13｜Paris 博物馆日</title>
   <style>
     :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08);--accent:#f59e0b}
     body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
@@ -13,16 +13,6 @@
     .hero{background:linear-gradient(135deg,#1e3a8a,#3b82f6 50%,#60a5fa);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
     h1{margin:0 0 8px;font-size:28px}
     .subtitle{margin:0;opacity:.9;font-size:16px}
-    
-    /* Map Section */
-    .map-section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px}
-    .map-title{font-size:16px;font-weight:700;margin-bottom:12px;color:var(--text);display:flex;align-items:center;gap:8px}
-    .map-container{width:100%;height:350px;border-radius:16px;overflow:hidden;background:#f3f4f6;position:relative}
-    .map-container iframe{width:100%;height:100%;border:0}
-    .map-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);background:linear-gradient(135deg,#e5e7eb 0%,#f3f4f6 100%)}
-    .map-placeholder svg{width:48px;height:48px;margin-bottom:12px;opacity:.5}
-    .map-route{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:13px;color:var(--muted)}
-    .map-route span{background:#f3f4f6;padding:4px 10px;border-radius:12px}
     
     /* Banner Navigation */
     .banner-nav{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px;overflow-x:auto}
@@ -110,48 +100,25 @@
     .masterpiece-desc{font-size:12px;color:var(--muted);line-height:1.5}
     
     @media(max-width:768px){
-      /* 1. 基础布局优化 */
       .wrap{padding:16px}
-      
-      /* 2. Hero区域字体优化 */
       .hero{padding:20px}
       .hero h1{font-size:22px}
       .hero .subtitle{font-size:14px}
-      
-      /* 3. Banner导航优化 */
       .banner-nav{padding:12px}
       .banner-node{padding:0 6px}
       .banner-label{max-width:70px}
-      
-      /* 4. 卡片间距优化 */
       .section{margin-bottom:14px}
       .card-content{padding:16px}
       .card-title{font-size:15px}
-      
-      /* 5. 时间轴优化 */
       .timeline{margin-left:4px}
       .item{padding:0 0 16px 20px}
       .item .time{font-size:12px}
       .item .title{font-size:16px}
-      
-      /* 6. 信息网格优化 - 小屏幕单列显示 */
       .info-grid{grid-template-columns:1fr}
       .info-item{padding:10px}
-      
-      /* 7. 电影badge优化 */
-      .movie-badge{padding:8px 12px}
-      .movie-badge-text{font-size:12px}
-      
-      /* 8. 酒店卡片优化 */
       .hotel-card{padding:16px}
       .hotel-name{font-size:18px}
       .hotel-grid{grid-template-columns:1fr;gap:12px}
-      
-      /* 9. 地图区域优化 */
-      .map-section{padding:16px}
-      .map-container{height:250px}
-      
-      /* 10. 滚动提示 */
       .scroll-indicator{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
     }
   </style>
@@ -160,18 +127,18 @@
   <div class="wrap">
     <!-- Hero Section -->
     <div class="hero">
-      <h1>🎨 Day 10｜06-13｜Paris 核心文化日</h1>
-      <p class="subtitle">艺术朝圣之旅｜卢浮宫三宝 · 圣母院 Gothic · 圣礼拜堂彩窗 · 塞纳河畔漫步</p>
+      <h1>🎨 Day 10｜06-13｜Paris 博物馆日</h1>
+      <p class="subtitle">印象派朝圣之旅｜卢浮宫三宝 · 奥赛梵高星空 · 莎士比亚书店 · 左岸漫步</p>
     </div>
 
     <!-- Navigation -->
     <div class="nav-links">
       <a href="index.html">← 返回主页</a>
-      <a href="day-9-06-11-geneva-to-paris.html">← Day 9</a>
-      <a href="day-11-06-13-paris-to-vienna.html">Day 11 →</a>
+      <a href="day-9-06-12-geneva-to-paris.html">← Day 9</a>
+      <a href="day-11-06-14-paris-to-vienna.html">Day 11 →</a>
     </div>
 
-    <!-- Map Section -->
+    <!-- Banner Navigation -->
     <div class="banner-nav">
       <div class="banner-title">📍 行程导航</div>
       <div class="banner-track">
@@ -181,26 +148,32 @@
           <div class="banner-label">卢浮宫</div>
         </a>
         <div class="banner-arrow">→</div>
-        <a href="#notredame" class="banner-node">
-          <div class="banner-time">14:00</div>
+        <a href="#orse" class="banner-node">
+          <div class="banner-time">13:30</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">巴黎圣母院</div>
+          <div class="banner-label">奥赛博物馆</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#shakespeare" class="banner-node">
+          <div class="banner-time">16:00</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">莎士比亚书店</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#leftbank" class="banner-node">
+          <div class="banner-time">17:00</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">左岸漫步</div>
         </a>
         <div class="banner-arrow">→</div>
         <a href="#saintechapelle" class="banner-node">
-          <div class="banner-time">15:00</div>
+          <div class="banner-time">19:00</div>
           <div class="banner-dot"></div>
           <div class="banner-label">圣礼拜堂</div>
         </a>
         <div class="banner-arrow">→</div>
-        <a href="#seine" class="banner-node">
-          <div class="banner-time">17:30</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">塞纳河</div>
-        </a>
-        <div class="banner-arrow">→</div>
         <a href="#hotel" class="banner-node">
-          <div class="banner-time">22:30</div>
+          <div class="banner-time">21:00</div>
           <div class="banner-dot"></div>
           <div class="banner-label">返回酒店</div>
         </a>
@@ -250,28 +223,24 @@
                 <div class="attraction-title">👑 卢浮宫三宝</div>
                 <div class="masterpiece-grid">
                   <div class="masterpiece-card">
-                    
                     <div class="masterpiece-content">
                       <div class="masterpiece-name">🎨 Mona Lisa 蒙娜丽莎</div>
                       <div class="masterpiece-desc">达·芬奇杰作，神秘微笑背后的艺术巅峰。1503-1519年间创作，尺寸77×53cm。被盗经历让其成为世界最著名画作。</div>
                     </div>
                   </div>
                   <div class="masterpiece-card">
-                    
                     <div class="masterpiece-content">
                       <div class="masterpiece-name">🏛️ Winged Victory 胜利女神</div>
                       <div class="masterpiece-desc">公元前190年的古希腊雕塑，发现于萨莫色雷斯岛。高2.75米，展现胜利女神从海风吹拂的船上降临的动态之美。</div>
                     </div>
                   </div>
                   <div class="masterpiece-card">
-                    
                     <div class="masterpiece-content">
                       <div class="masterpiece-name">🗿 Venus de Milo 断臂维纳斯</div>
                       <div class="masterpiece-desc">公元前130-100年的古希腊雕塑，高2.02米。1820年在希腊米洛斯岛被发现，是古典美学的永恒象征。</div>
                     </div>
                   </div>
                   <div class="masterpiece-card">
-                    
                     <div class="masterpiece-content">
                       <div class="masterpiece-name">🔺 Glass Pyramid 玻璃金字塔</div>
                       <div class="masterpiece-desc">贝聿铭1989年设计，高21米，由673块玻璃组成。现代建筑与古典宫殿的完美融合，是卢浮宫的当代标志。</div>
@@ -302,116 +271,276 @@
               <p>【地址】Rue de Rivoli, 75001 Paris<br>
               【交通】地铁1/7号线至Palais Royal - Musée du Louvre站<br>
               【建议时长】3-4小时（精选路线），全天（深度参观）<br>
-              【预约入口】见页面底部"卢浮宫预约攻略"</p>
+              【预约入口】见页面底部"博物馆预约攻略"</p>
             </details>
           </div>
 
           <!-- Lunch -->
           <div class="item">
-            <div class="time">12:30 - 14:00</div>
+            <div class="time">12:30 - 13:30</div>
             <div class="title">🍽️ 午餐</div>
             <details>
               <summary>查看详情</summary>
-              <p><strong>【推荐区域】</strong>卢浮宫周边或前往圣母院途中</p>
+              <p><strong>【推荐区域】</strong>卢浮宫周边或前往奥赛博物馆途中</p>
               <p style="margin-top:8px"><strong>🍴 推荐选择：</strong></p>
               <ul>
                 <li><strong>卢浮宫内 Café Marly：</strong>可边用餐边欣赏玻璃金字塔和杜乐丽花园，氛围绝佳</li>
                 <li><strong>卢浮宫地下商场 Carrousel du Louvre：</strong>快餐、简餐、咖啡厅选择丰富</li>
-                <li><strong>拉丁区 Rue de Buci：</strong>传统法式小餐馆，价格实惠</li>
-                <li><strong>圣日耳曼德佩区：</strong>文艺气息浓厚，花神咖啡馆、双叟咖啡馆所在区域</li>
+                <li><strong>杜乐丽花园旁：</strong>户外用餐，感受巴黎人的悠闲午后</li>
+                <li><strong>奥赛博物馆餐厅：</strong>原火车站大钟下的餐厅，本身就是艺术品</li>
               </ul>
-              <p style="margin-top:8px"><strong>💡 贴士：</strong>卢浮宫附近餐厅价格较高，步行10分钟到拉丁区或玛黑区能找到性价比更好的选择。</p>
+              <p style="margin-top:8px"><strong>💡 贴士：</strong>奥赛博物馆的餐厅位于原火车站大钟下方，是网红打卡点，建议提前预订或错峰用餐。</p>
             </details>
           </div>
 
-          <!-- Notre-Dame de Paris -->
-          <div class="item" id="notredame">
-            <div class="time">14:00 - 15:00</div>
-            <div class="title">⛪ Notre-Dame de Paris 巴黎圣母院</div>
-        
+          <!-- Musée d'Orsay -->
+          <div class="item" id="orse">
+            <div class="time">13:30 - 16:00</div>
+            <div class="title">🖼️ Musée d'Orsay 奥赛博物馆</div>
             <details>
               <summary>查看详情</summary>
               
-              <p class="img-caption">Photo: Notre-Dame Cathedral Gothic Facade | Unsplash</p>
+              <p class="img-caption">Photo: Musée d'Orsay and Giant Clock | Unsplash</p>
               
-              <p><strong>【亮点】</strong>巴黎圣母院(Cathédrale Notre-Dame de Paris)是哥特式建筑的巅峰之作，也是法国最著名的教堂之一。维克多·雨果的同名小说让这座教堂成为浪漫与悲剧的象征。2019年大火后，修复工程正在如火如荼地进行。</p>
+              <p><strong>【亮点】</strong>奥赛博物馆(Musée d'Orsay)被誉为"印象派的殿堂"，收藏了世界上最重要的印象派和后印象派艺术作品。博物馆建筑本身也极具特色——由原奥赛火车站改造而成，保留了巨大的玻璃穹顶和工业时代的金色大钟。</p>
               
               <div class="info-grid">
                 <div class="info-item">
-                  <div class="info-label">建造时间</div>
-                  <div class="info-value">1163-1345年（历时180年）</div>
+                  <div class="info-label">地址</div>
+                  <div class="info-value">1 Rue de la Légion d'Honneur, 75007 Paris</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">建筑风格</div>
-                  <div class="info-value">法国哥特式</div>
+                  <div class="info-label">开放时间</div>
+                  <div class="info-value">09:30-18:00（周四至21:45）</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">塔楼高度</div>
-                  <div class="info-value">69米</div>
+                  <div class="info-label">门票</div>
+                  <div class="info-value">€16（在线预订）</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">地位</div>
-                  <div class="info-value">联合国教科文组织世界遗产</div>
+                  <div class="info-label">闭馆日</div>
+                  <div class="info-value">周一</div>
                 </div>
               </div>
               
-              <p style="margin-top:12px"><strong>🏛️ 哥特式建筑特色：</strong></p>
+              <div class="attraction-highlight">
+                <div class="attraction-title">🎨 必看 Masterpieces</div>
+                <div class="masterpiece-grid">
+                  <div class="masterpiece-card">
+                    <div class="masterpiece-content">
+                      <div class="masterpiece-name">🌌 Van Gogh《星空》</div>
+                      <div class="masterpiece-desc">梵高1889年杰作，漩涡状的夜空充满了动感与情感，是后印象派的标志性作品</div>
+                    </div>
+                  </div>
+                  <div class="masterpiece-card">
+                    <div class="masterpiece-content">
+                      <div class="masterpiece-name">🌸 Monet《睡莲》</div>
+                      <div class="masterpiece-desc">莫奈晚年睡莲系列，光影与色彩的完美融合，开创了印象派的全新境界</div>
+                    </div>
+                  </div>
+                  <div class="masterpiece-card">
+                    <div class="masterpiece-content">
+                      <div class="masterpiece-name">💃 Renoir《煎饼磨坊的舞会》</div>
+                      <div class="masterpiece-desc">雷诺阿1876年名作，捕捉了蒙马特露天舞厅的欢乐氛围，光影斑驳的杰作</div>
+                    </div>
+                  </div>
+                  <div class="masterpiece-card">
+                    <div class="masterpiece-content">
+                      <div class="masterpiece-name">🎭 Manet《草地上的午餐》</div>
+                      <div class="masterpiece-desc">马奈1863年争议之作，打破了传统绘画的禁忌，是印象派运动的先驱</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🏛️ 建筑特色：</strong></p>
               <ul>
-                <li><strong>西立面双塔：</strong>标志性的69米高双塔，南塔为大钟楼所在地</li>
-                <li><strong>玫瑰花窗(Rose Window)：</strong>直径13米的巨大彩色玻璃窗，阳光透过时呈现神秘的光影效果</li>
-                <li><strong>滴水嘴兽(Gargoyles)：</strong>屋顶边缘的怪兽雕塑，兼具排水功能与装饰效果</li>
-                <li><strong>石像鬼(Chimerae)：</strong>著名的"思提志"(Stryge)俯瞰巴黎，是雨果小说《钟楼怪人》的灵感来源</li>
-                <li><strong>飞扶壁(Flying Buttresses)：</strong>哥特式建筑的创新结构，支撑高耸的拱顶</li>
+                <li><strong>原火车站改造：</strong>1900年建成的奥赛火车站于1986年改造为博物馆，是工业建筑改造的典范</li>
+                <li><strong>玻璃穹顶：</strong>巨大的玻璃天花板让自然光洒入展厅，为印象派画作提供了完美的展示环境</li>
+                <li><strong>金色大钟：</strong>位于5楼的巨型时钟是网红打卡点，透过钟面可看到塞纳河和蒙马特</li>
+                <li><strong>中央大厅：</strong>保留了火车站的开阔空间，雕塑作品在此陈列，气势恢宏</li>
               </ul>
               
-              <div class="attraction-highlight">
-                <div class="attraction-title">🌹 玫瑰花窗 (Rose Window)</div>
-                
-                <p class="img-caption">Photo: Notre-Dame Rose Window | Unsplash</p>
-                
-                <p>西立面的玫瑰花窗是哥特式彩色玻璃的杰作，直径13米，由数百块彩色玻璃组成，描绘了圣经故事。阳光透过时，内部会被五彩斑斓的光影笼罩，令人屏息。</p>
-                <p style="margin-top:8px"><strong>彩色玻璃主题：</strong>中央为圣母与圣婴，周围环绕着旧约先知和国王。整体设计遵循严格的宗教象征主义，每种颜色都有特定含义。</p>
-              </div>
+              <p style="margin-top:12px"><strong>🖼️ 主要收藏：</strong></p>
+              <ul>
+                <li><strong>印象派（5楼）：</strong>莫奈、雷诺阿、德加、毕沙罗、西斯莱</li>
+                <li><strong>后印象派（5楼）：</strong>梵高、塞尚、高更、修拉</li>
+                <li><strong>现实主义（0楼/2楼）：</strong>库尔贝、米勒、杜米埃</li>
+                <li><strong>象征主义与新艺术（2楼）：</strong>莫罗、布格罗、家具与装饰艺术</li>
+              </ul>
               
-              <div class="attraction-highlight">
-                <div class="attraction-title">🔔 钟楼怪人 (The Hunchback of Notre-Dame)</div>
-                
-                <p class="img-caption">Photo: Notre-Dame Bell Towers | Unsplash</p>
-                
-                <p>维克多·雨果1831年出版的小说《巴黎圣母院》让这座教堂名扬世界。故事中的"钟楼怪人"卡西莫多(Quasimodo)是圣母院的敲钟人，他暗恋吉普赛少女爱斯梅拉达(Esmeralda)。</p>
-                <p style="margin-top:8px"><strong>历史背景：</strong>雨果写作本书时，圣母院正处于破败状态，小说唤起了法国人对这座历史建筑的保护意识，最终促成了19世纪的修复工程。</p>
-                <p style="margin-top:8px"><strong>南塔大钟：</strong>重达13吨的"埃玛纽埃尔"(Emmanuel)大钟，卡西莫多敲钟的场景即在此。</p>
-              </div>
-              
-              <div class="tips-box">
-                <div class="tips-title">⚠️ 修复工程提醒</div>
-                <ul class="tips-list">
-                  <li>2019年4月15日，圣母院遭遇严重火灾，尖顶倒塌</li>
-                  <li>目前修复工程进行中，内部不对外开放参观</li>
-                  <li>外部可正常参观拍照，西立面和双塔保持完好</li>
-                  <li>预计2024年12月重新开放（请关注官方最新消息）</li>
-                  <li>修复期间，广场上的临时装置艺术也是独特体验</li>
-                </ul>
-              </div>
+              <p style="margin-top:12px"><strong>💡 参观建议：</strong></p>
+              <ul>
+                <li>建议从5楼开始参观，这里是印象派精华所在</li>
+                <li>金色大钟位于5楼咖啡馆旁，拍照需排队</li>
+                <li>周四延长开放至21:45，傍晚人流较少</li>
+                <li>博物馆餐厅位于2楼大钟下方，需提前预约</li>
+              </ul>
               
               <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】6 Parvis Notre-Dame - Place Jean-Paul II, 75004 Paris<br>
-              【交通】地铁4号线至Cité站，或RER B/C线至Saint-Michel - Notre-Dame站<br>
-              【修复期间】外观可参观，内部暂不开放<br>
-              【停留时间】30-45分钟（外观）</p>
+              <p>【地址】1 Rue de la Légion d'Honneur, 75007 Paris<br>
+              【交通】RER C线至Musée d'Orsay站，或地铁12号线至Solférino站<br>
+              【门票】€16（在线预订），18-25岁欧盟居民免费<br>
+              【建议时长】2.5-3小时<br>
+              【与卢浮宫距离】步行约15分钟，可沿塞纳河右岸漫步</p>
+            </details>
+          </div>
+
+          <!-- Shakespeare and Company -->
+          <div class="item" id="shakespeare">
+            <div class="time">16:00 - 17:00</div>
+            <div class="title">📚 Shakespeare & Company 莎士比亚书店</div>
+            <details>
+              <summary>查看详情</summary>
+              
+              <p class="img-caption">Photo: Shakespeare and Company Bookstore | Unsplash</p>
+              
+              <p><strong>【亮点】</strong>莎士比亚书店(Shakespeare and Company)是巴黎最具传奇色彩的英文书店，也是电影《爱在日落黄昏时》(Before Sunset)的取景地。这家1919年创立的书店曾是海明威、乔伊斯等"迷惘的一代"作家的聚集地，如今仍是文学爱好者的朝圣地。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">地址</div>
+                  <div class="info-value">37 Rue de la Bûcherie, 75005 Paris</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">开放时间</div>
+                  <div class="info-value">10:00-20:00</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">入场</div>
+                  <div class="info-value">免费</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">电影取景</div>
+                  <div class="info-value">《爱在日落黄昏时》</div>
+                </div>
+              </div>
+              
+              <div class="attraction-highlight">
+                <div class="attraction-title">🎬 《爱在日落黄昏时》打卡</div>
+                
+                <p class="img-caption">Photo: Before Sunset Movie Scene at Shakespeare & Co | Unsplash</p>
+                
+                <p>2004年电影《爱在日落黄昏时》(Before Sunset)中，杰西和塞琳娜在巴黎重逢，最终来到莎士比亚书店。影片中杰西在此举办新书发布会，而现实中的书店也经常举办文学活动和读书会。</p>
+                
+                <p style="margin-top:12px"><strong>🎭 电影同款机位：</strong></p>
+                <ul>
+                  <li><strong>书店外立面：</strong>绿色招牌和藤蔓覆盖的外墙是标志性画面</li>
+                  <li><strong>二楼阅读区：</strong>木质楼梯和二楼的小窗户是电影中出现多次的场景</li>
+                  <li><strong>打字机：</strong>店内保留着老式打字机，可体验"作家"的感觉</li>
+                  <li><strong>窗外塞纳河：</strong>从书店窗户望出去就是圣母院和塞纳河</li>
+                </ul>
+                
+                <p style="margin-top:12px"><strong>💕 浪漫氛围：</strong>书店内堆满了二手书，空气中弥漫着旧纸张和咖啡的香气。二楼设有舒适的阅读角，是感受巴黎文艺气息的最佳场所。</p>
+              </div>
+              
+              <div class="attraction-highlight">
+                <div class="attraction-title">📖 历史渊源</div>
+                
+                <p><strong>第一代书店（1919-1941）：</strong>由美国女性西尔维亚·比奇(Sylvia Beach)创立，出版了乔伊斯的《尤利西斯》，是海明威、菲茨杰拉德等"迷惘的一代"的聚会场所。</p>
+                
+                <p style="margin-top:8px"><strong>第二代书店（1951至今）：</strong>乔治·惠特曼(George Whitman)在原址附近重新开业，延续了文学沙龙的 tradition，并为"风滚草"(Tumbleweeds)——年轻作家提供免费住宿。</p>
+              </div>
+              
+              <p style="margin-top:12px"><strong>💡 打卡建议：</strong></p>
+              <ul>
+                <li>建议工作日上午或傍晚前往，避开周末人流高峰</li>
+                <li>店内禁止拍照（二楼阅读区除外），请尊重规定</li>
+                <li>可购买盖有书店印章的书籍作为纪念</li>
+                <li>书店旁边就是塞纳河，可在河边长椅上阅读新买的书</li>
+                <li>附近还有著名的巴黎圣母院，可一并安排</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】37 Rue de la Bûcherie, 75005 Paris<br>
+              【交通】地铁4号线至Saint-Michel站，或RER B/C线至Saint-Michel - Notre-Dame站<br>
+              【开放时间】10:00-20:00（建议提前确认）<br>
+              【停留时间】30-45分钟<br>
+              【邻近景点】巴黎圣母院（步行3分钟）、塞纳河（步行1分钟）</p>
+            </details>
+          </div>
+
+          <!-- Left Bank Walk -->
+          <div class="item" id="leftbank">
+            <div class="time">17:00 - 18:30</div>
+            <div class="title">🌊 Left Bank 左岸漫步 & 塞纳河</div>
+            <details>
+              <summary>查看详情</summary>
+              
+              <p class="img-caption">Photo: Seine River and Left Bank at Sunset | Unsplash</p>
+              
+              <p><strong>【亮点】</strong>从莎士比亚书店出发，沿着塞纳河左岸(Rive Gauche)漫步，感受巴黎最文艺的气息。这里是存在主义哲学家的沉思之地，也是海明威笔下"流动的盛宴"的核心场景。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">区域</div>
+                  <div class="info-value">拉丁区 + 圣日耳曼德佩</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">特色</div>
+                  <div class="info-value">文艺咖啡馆 + 二手书店</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">推荐路线</div>
+                  <div class="info-value">莎士比亚书店→圣路易岛→双叟咖啡馆</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">步行时间</div>
+                  <div class="info-value">约30-45分钟</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>☕ 必访咖啡馆：</strong></p>
+              <ul>
+                <li><strong>Café de Flore 花神咖啡馆：</strong>萨特和波伏娃的"办公室"，存在主义哲学的诞生地，建于1887年</li>
+                <li><strong>Les Deux Magots 双叟咖啡馆：</strong>海明威、毕加索常去的地方，曾获诺贝尔文学奖，店名源自两个中国商人雕像</li>
+                <li><strong>Le Procope 普罗可布咖啡馆：</strong>巴黎最古老的咖啡馆（1686年），伏尔泰、拿破仑都曾光顾</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>🌉 沿途经过：</strong></p>
+              <ul>
+                <li><strong>圣路易岛(Île Saint-Louis)：</strong>塞纳河上的宁静小岛，遍布精品店和冰淇淋店</li>
+                <li><strong>新桥(Pont Neuf)：</strong>巴黎最古老的桥，连接西岱岛与两岸</li>
+                <li><strong>艺术桥(Pont des Arts)：</strong>著名的"爱情锁"桥（现已禁止挂锁）</li>
+                <li><strong>bouquinistes：</strong>塞纳河畔的绿色书箱，售卖旧书和版画，是巴黎独特的风景线</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>💡 漫步建议：</strong></p>
+              <ul>
+                <li>傍晚时分最佳，金色阳光洒在塞纳河上，是巴黎最浪漫的时刻</li>
+                <li>可在花神或双叟点一杯咖啡，感受巴黎人的悠闲午后</li>
+                <li>沿街有许多复古商店和画廊，适合慢慢探索</li>
+                <li>圣路易岛的Berthillon冰淇淋是巴黎最佳，不容错过</li>
+              </ul>
+            </details>
+          </div>
+
+          <!-- Dinner -->
+          <div class="item">
+            <div class="time">18:30 - 19:00</div>
+            <div class="title">🍽️ 晚餐</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【推荐选择】</strong></p>
+              <ul>
+                <li><strong>拉丁区(Latin Quarter)：</strong>圣米歇尔大道周边，学生区价格亲民</li>
+                <li><strong>圣日耳曼德佩(Saint-Germain-des-Prés)：</strong>高端餐厅区，米其林选择多</li>
+                <li><strong>左岸小酒馆：</strong>体验地道的法式bistro文化</li>
+              </ul>
+              <p style="margin-top:8px"><strong>💡 贴士：</strong>左岸餐厅较右岸更文艺，许多餐厅有户外座位，可边用餐边欣赏街景。</p>
             </details>
           </div>
 
           <!-- Sainte-Chapelle -->
           <div class="item" id="saintechapelle">
-            <div class="time">15:00 - 17:00</div>
-            <div class="title">🌈 Sainte-Chapelle 圣礼拜堂</div>
+            <div class="time">19:00 - 20:00</div>
+            <div class="title">🌈 Sainte-Chapelle 圣礼拜堂（晚间专场）</div>
             <details>
               <summary>查看详情</summary>
               
-              <p class="img-caption">Photo: Sainte-Chapelle Stained Glass Windows | Unsplash</p>
+              <p class="img-caption">Photo: Sainte-Chapelle Stained Glass at Sunset | Unsplash</p>
               
-              <p><strong>【亮点】</strong>圣礼拜堂(Sainte-Chapelle)是巴黎最精美、最神秘的中世纪建筑之一，被誉为"彩绘玻璃的圣殿"。这座13世纪的皇家礼拜堂以其高达15米的彩色玻璃窗闻名于世，描绘了新约全书的故事，宛如一本"石头上的圣经"。</p>
+              <p><strong>【亮点】</strong>傍晚时分的圣礼拜堂别有韵味，夕阳透过15米高的彩绘玻璃窗洒入，整个教堂沐浴在金色与斑斓的光影中。这是巴黎最神秘、最神圣的体验之一。</p>
               
               <div class="info-grid">
                 <div class="info-item">
@@ -432,164 +561,84 @@
                 </div>
               </div>
               
-              <p style="margin-top:12px"><strong>🏛️ 建筑结构：</strong></p>
-              <ul>
-                <li><strong>下层礼拜堂：</strong>供宫廷仆役使用，装饰相对朴素，有精美的壁画和雕塑</li>
-                <li><strong>上层礼拜堂：</strong>供王室成员使用，拥有世界上最精美的彩绘玻璃窗群，15扇窗户共描绘了1113幅圣经场景</li>
-                <li><strong>15米彩窗：</strong>从地板直达拱顶的彩绘玻璃，阳光透射时创造出神圣的"光之洗礼"效果</li>
-              </ul>
+              <p style="margin-top:12px"><strong>🌈 傍晚彩绘玻璃：</strong></p>
+              <p>傍晚时分，夕阳从西侧窗户斜射入教堂，15扇彩绘玻璃窗被点亮，1113幅圣经场景在光影中栩栩如生。蓝色与红色的玻璃在金色阳光下呈现出梦幻般的效果，被誉为"光之洗礼"。</p>
               
-              <div class="attraction-highlight">
-                <div class="attraction-title">🌈 彩色玻璃窗 (Vitraux)</div>
-                
-                <p class="img-caption">Photo: Sainte-Chapelle Upper Chapel Stained Glass | Unsplash</p>
-                
-                <p>圣礼拜堂的15扇彩绘玻璃窗是13世纪艺术的巅峰之作，保存了70%的原始玻璃。这些窗户以蓝色和红色为主色调，按顺时针方向阅读，完整呈现从创世纪到耶稣复活的新约故事。</p>
-                
-                <p style="margin-top:12px"><strong>彩绘玻璃窗内容：</strong></p>
-                <ul>
-                  <li><strong>东侧中央窗：</strong>耶稣受难与复活（最精美）</li>
-                  <li><strong>北侧7扇窗：</strong>旧约故事（创世纪、出埃及记等）</li>
-                  <li><strong>南侧7扇窗：</strong>耶稣生平（诞生、传道、神迹）</li>
-                  <li><strong>玫瑰花窗：</strong>末日审判（15世纪增补）</li>
-                </ul>
-                
-                <p style="margin-top:12px"><strong>最佳观赏时间：</strong>晴天下午3-5点，阳光直射彩绘玻璃窗，内部会沐浴在斑斓的光影中。</p>
-              </div>
-              
-              <div class="attraction-highlight">
-                <div class="attraction-title">👑 圣物储藏室</div>
-                <p>圣礼拜堂最初是为了收藏路易九世从君士坦丁堡购买的耶稣受难圣物而建，包括荆棘冠冕、十字架碎片等。这些圣物如今保存在附近的巴黎圣母院宝库中。</p>
-                <p style="margin-top:8px"><strong>历史意义：</strong>路易九世是法国唯一被册封为圣徒的国王（圣路易），他购买圣物使巴黎成为中世纪基督教的重要朝圣地。</p>
-              </div>
-              
-              <p style="margin-top:12px"><strong>🎫 门票信息：</strong></p>
-              <ul>
-                <li>成人票：€11.50</li>
-                <li>18-25岁欧盟居民：免费</li>
-                <li>18岁以下：免费</li>
-                <li>巴黎博物馆通票：免费</li>
-              </ul>
+              <p style="margin-top:12px"><strong>🎵 音乐演出：</strong></p>
+              <p>圣礼拜堂经常举办古典音乐会，弦乐四重奏或独奏在彩绘玻璃环绕下演奏，是巴黎最独特的音乐体验之一。建议提前查询演出安排并预订门票。</p>
               
               <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
               <p>【地址】8 Boulevard du Palais, 75001 Paris<br>
               【交通】地铁4号线至Cité站，步行3分钟<br>
-              【开放时间】09:00-17:00（夏季延长至19:00）<br>
+              【晚间开放】夏季延长至19:00或更晚，请提前查询<br>
               【建议时长】45-60分钟<br>
-              【贴士】与巴黎古监狱(Conciergerie)联票更划算</p>
+              【贴士】傍晚人流较少，可静心欣赏彩绘玻璃</p>
             </details>
           </div>
 
-          <!-- Seine River -->
-          <div class="item" id="seine">
-            <div class="time">17:30 - 20:00</div>
-            <div class="title">🌊 Seine River 塞纳河漫步 / 游船</div>
+          <!-- Notre-Dame de Paris -->
+          <div class="item" id="notredame">
+            <div class="time">20:00 - 20:30</div>
+            <div class="title">⛪ Notre-Dame de Paris 巴黎圣母院（外观夜景）</div>
             <details>
               <summary>查看详情</summary>
               
-              <p class="img-caption">Photo: Seine River and Paris Bridges | Unsplash</p>
+              <p class="img-caption">Photo: Notre-Dame Cathedral at Night | Unsplash</p>
               
-              <p><strong>【亮点】</strong>塞纳河(La Seine)是巴黎的母亲河，也是这座城市的灵魂所在。河岸两侧被列为联合国教科文组织世界遗产，沿途经过卢浮宫、奥赛博物馆、巴黎圣母院、埃菲尔铁塔等标志性建筑。黄昏时分的塞纳河是巴黎最浪漫的体验之一。</p>
+              <p><strong>【亮点】</strong>夜幕下的巴黎圣母院别有一番韵味。虽然内部仍在修复中，但灯光照亮下的哥特式立面依然壮观。从莎士比亚书店步行3分钟即可到达，是左岸漫步的完美终点。</p>
               
               <div class="info-grid">
                 <div class="info-item">
-                  <div class="info-label">全长</div>
-                  <div class="info-value">776公里</div>
+                  <div class="info-label">建造时间</div>
+                  <div class="info-value">1163-1345年</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">巴黎段</div>
-                  <div class="info-value">约13公里</div>
+                  <div class="info-label">建筑风格</div>
+                  <div class="info-value">法国哥特式</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">桥梁数量</div>
-                  <div class="info-value">37座（巴黎市内）</div>
+                  <div class="info-label">现状</div>
+                  <div class="info-value">修复中，外观可参观</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">UNESCO遗产</div>
-                  <div class="info-value">1991年列入</div>
+                  <div class="info-label">门票</div>
+                  <div class="info-value">外观免费</div>
                 </div>
               </div>
               
-              <div class="attraction-highlight">
-                <div class="attraction-title">🚢 塞纳河游船 (Bateaux Mouches)</div>
-                
-                <p class="img-caption">Photo: Seine River Cruise at Sunset | Unsplash</p>
-                
-                <p>乘坐玻璃顶游船沿塞纳河游览是感受巴黎的绝佳方式。1小时的航程经过巴黎最精华的地段，语音导览介绍两岸建筑的历史故事。</p>
-                
-                <p style="margin-top:12px"><strong>游船信息：</strong></p>
-                <ul>
-                  <li><strong>票价：</strong>成人€15，4-13岁€7</li>
-                  <li><strong>航程：</strong>约1小时</li>
-                  <li><strong>出发码头：</strong>Alma桥附近（Pont de l'Alma）</li>
-                  <li><strong>最佳时间：</strong>日落前后（19:00-20:00），可同时欣赏日景和夜景</li>
-                  <li><strong>班次：</strong>每30分钟一班，夏季至22:30</li>
-                </ul>
-                
-                <p style="margin-top:12px"><strong>沿途经过：</strong></p>
-                <p>埃菲尔铁塔 → 荣军院 → 奥赛博物馆 → 卢浮宫 → 巴黎圣母院 → 圣路易岛 → 市政厅 → 阿拉伯世界学院 → 新桥 → 协和广场</p>
-              </div>
+              <p style="margin-top:12px"><strong>🌙 夜景特色：</strong></p>
+              <ul>
+                <li><strong>西立面灯光：</strong>夜晚灯光照亮双塔和玫瑰花窗，比白天更显神秘</li>
+                <li><strong>广场氛围：</strong>圣母院前广场是巴黎人聚集的地方，夜晚常有街头艺人表演</li>
+                <li><strong>塞纳河倒影：</strong>从桥上望去，圣母院的灯光倒映在塞纳河中</li>
+              </ul>
               
-              <div class="attraction-highlight">
-                <div class="attraction-title">☕ 左岸咖啡馆漫步</div>
-                
-                <p class="img-caption">Photo: Traditional Parisian Cafe on Left Bank | Unsplash</p>
-                
-                <p>如果不乘船，沿着塞纳河岸漫步也是一种享受。尤其是左岸(Left Bank/Rive Gauche)，这里是巴黎的知识分子和艺术家聚集地，遍布着百年咖啡馆和书店。</p>
-                
-                <p style="margin-top:12px"><strong>🍷 著名咖啡馆：</strong></p>
-                <ul>
-                  <li><strong>Café de Flore 花神咖啡馆：</strong>萨特和波伏娃的"办公室"，存在主义哲学的诞生地</li>
-                  <li><strong>Les Deux Magots 双叟咖啡馆：</strong>海明威、毕加索常去的地方，曾获诺贝尔文学奖</li>
-                  <li><strong>Café de la Paix 和平咖啡馆：</strong>位于歌剧院旁，历史最悠久的咖啡馆之一</li>
-                </ul>
-                
-                <p style="margin-top:12px"><strong>📚 莎士比亚书店：</strong></p>
-                <p>位于圣母院对岸的莎士比亚书店(Shakespeare and Company)是英语文学爱好者的圣地。这家1919年创立的书店曾是海明威、乔伊斯等"迷惘的一代"作家的聚集地。如今的书店是1951年重建的，仍保留着波西米亚的氛围。</p>
-              </div>
-              
-              <div class="attraction-highlight">
-                <div class="attraction-title">🌉 必看桥梁</div>
-                <ul>
-                  <li><strong>Pont Neuf 新桥：</strong>巴黎最古老的桥（1607年建成），连接西岱岛与两岸</li>
-                  <li><strong>Pont des Arts 艺术桥：</strong>著名的"爱情锁"桥（现已禁止挂锁），连接卢浮宫与法兰西学院</li>
-                  <li><strong>Pont Alexandre III 亚历山大三世桥：</strong>最华丽的桥，新艺术风格灯柱和镀金雕塑</li>
-                  <li><strong>Pont de Bir-Hakeim 比尔哈凯姆桥：</strong>《盗梦空间》取景地，双层设计（行人和地铁）</li>
+              <div class="tips-box">
+                <div class="tips-title">⚠️ 修复工程提醒</div>
+                <ul class="tips-list">
+                  <li>2019年4月15日，圣母院遭遇严重火灾，尖顶倒塌</li>
+                  <li>目前修复工程进行中，预计2024年12月重新开放</li>
+                  <li>外部可正常参观拍照，西立面和双塔保持完好</li>
+                  <li>广场上的临时装置艺术也是独特体验</li>
                 </ul>
               </div>
               
               <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【推荐路线】从圣母院出发，沿左岸向西漫步至奥赛博物馆或荣军院<br>
-              【游船码头】Port de la Conférence, Pont de l'Alma, 75008 Paris<br>
-              【最佳时间】日落前1小时开始漫步，可同时欣赏日景和夜景<br>
-              【停留时间】2-3小时（含游船或咖啡馆小憩）</p>
-            </details>
-          </div>
-
-          <!-- Dinner -->
-          <div class="item">
-            <div class="time">20:00</div>
-            <div class="title">🍽️ 晚餐</div>
-            <details>
-              <summary>查看详情</summary>
-              <p><strong>【推荐选择】</strong></p>
-              <ul>
-                <li><strong>拉丁区(Latin Quarter)：</strong>圣米歇尔大道周边，学生区价格亲民，选择多样</li>
-                <li><strong>玛黑区(Le Marais)：</strong>时尚街区，众多精品餐厅和酒吧</li>
-                <li><strong>圣日耳曼德佩(Saint-Germain-des-Prés)：</strong>高端餐厅区，米其林选择多</li>
-                <li><strong>塞纳河畔：</strong>多家餐厅可边用餐边欣赏河景</li>
-              </ul>
+              <p>【地址】6 Parvis Notre-Dame - Place Jean-Paul II, 75004 Paris<br>
+              【交通】从莎士比亚书店步行3分钟<br>
+              【停留时间】20-30分钟（外观）<br>
+              【贴士】夜晚拍摄需带三脚架或使用夜景模式</p>
             </details>
           </div>
 
           <!-- Hotel Return -->
           <div class="item" id="hotel">
-            <div class="time">22:30</div>
+            <div class="time">21:00</div>
             <div class="title">🏨 返回酒店</div>
             <details>
               <summary>查看详情</summary>
-              <p><strong>【从塞纳河返回】</strong></p>
-              <p>搭乘地铁1号线或RER A线至Charles de Gaulle-Étoile站，步行5分钟即达酒店。夜晚的香榭丽舍大道灯火辉煌，是巴黎夜生活的中心。</p>
+              <p><strong>【从圣母院返回】</strong></p>
+              <p>搭乘地铁4号线至Châtelet站，换乘1号线至Charles de Gaulle-Étoile站，步行5分钟即达酒店。全程约30分钟。</p>
             </details>
           </div>
 
@@ -671,13 +720,34 @@
       </div>
     </div>
 
-    <!-- Louvre Tips Section -->
+    <!-- Museum Tips Section -->
     <div class="section">
       <div class="card-content">
-        <div class="card-title">🎫 卢浮宫预约入口攻略</div>
+        <div class="card-title">🎫 博物馆预约攻略（卢浮宫+奥赛）</div>
         
-        <div class="tips-box" style="background:linear-gradient(135deg,#dbeafe 0%,#eff6ff 100%);border-color:#60a5fa">
-          <div class="tips-title" style="color:#1e40af">📱 官方预约渠道</div>
+        <div class="tips-box" style="background:linear-gradient(135deg,#fce7f3 0%,#fdf2f8 100%);border-color:#f9a8d4">
+          <div class="tips-title" style="color:#9d174d">📍 两馆联游路线</div>
+          <ul class="tips-list" style="color:#831843">
+            <li><strong>上午：</strong>卢浮宫（09:00-12:30）- 德农馆蒙娜丽莎→胜利女神→萨里馆断臂维纳斯</li>
+            <li><strong>午餐：</strong>卢浮宫地下商场或杜乐丽花园旁（12:30-13:30）</li>
+            <li><strong>下午：</strong>奥赛博物馆（13:30-16:00）- 5楼印象派精华→梵高《星空》→金色大钟</li>
+            <li><strong>步行：</strong>沿塞纳河左岸步行15分钟至莎士比亚书店</li>
+            <li><strong>傍晚：</strong>左岸漫步→圣礼拜堂→圣母院夜景</li>
+          </ul>
+        </div>
+        
+        <div class="tips-box" style="margin-top:12px;background:linear-gradient(135deg,#fef3c7 0%,#fffbeb 100%)">
+          <div class="tips-title">🎫 奥赛博物馆预约</div>
+          <ul class="tips-list">
+            <li><strong>官方网站：</strong>musee-orsay.fr → Tickets → Online booking</li>
+            <li><strong>门票价格：</strong>€16（在线预订），周四延长至21:45</li>
+            <li><strong>免费时段：</strong>每月第一个周日免费（需预约）</li>
+            <li><strong>博物馆通票：</strong>Paris Museum Pass包含奥赛</li>
+          </ul>
+        </div>
+        
+        <div class="tips-box" style="margin-top:12px;background:linear-gradient(135deg,#dbeafe 0%,#eff6ff 100%);border-color:#60a5fa">
+          <div class="tips-title" style="color:#1e40af">📱 卢浮宫预约渠道</div>
           <ul class="tips-list" style="color:#1e3a8a">
             <li><strong>官方网站：</strong>tickets.louvre.fr（最可靠）</li>
             <li><strong>官方APP：</strong>下载"Louvre"官方APP购票</li>
@@ -689,31 +759,31 @@
         <div class="tips-box" style="margin-top:12px;background:linear-gradient(135deg,#fef3c7 0%,#fffbeb 100%)">
           <div class="tips-title">⏰ 预约时间选择</div>
           <ul class="tips-list">
-            <li><strong>最佳时段：</strong>09:00开馆即入，人最少，可优先看蒙娜丽莎</li>
-            <li><strong>避开高峰：</strong>周三、周五开馆至21:45，傍晚人流较少</li>
-            <li><strong>避开日期：</strong>周一、周二（部分展厅关闭），法国公众假期</li>
-            <li><strong>每月第一个周五：</strong>18:00后26岁以下免费（需预约）</li>
+            <li><strong>卢浮宫最佳：</strong>09:00开馆即入，人最少，可优先看蒙娜丽莎</li>
+            <li><strong>奥赛最佳：</strong>周四延长至21:45，傍晚人流较少，金色大钟拍照更佳</li>
+            <li><strong>避开日期：</strong>周一（奥赛闭馆）、周二（卢浮宫闭馆）</li>
+            <li><strong>每月第一个周日：</strong>奥赛免费开放（需预约）</li>
           </ul>
         </div>
         
         <div class="tips-box" style="margin-top:12px;background:linear-gradient(135deg,#d1fae5 0%,#ecfdf5 100%);border-color:#6ee7b7">
           <div class="tips-title" style="color:#065f46">🚪 入口选择（重要！）</div>
           <ul class="tips-list" style="color:#064e3b">
-            <li><strong>金字塔主入口：</strong>最显眼但排队最长，不推荐</li>
+            <li><strong>卢浮宫金字塔主入口：</strong>最显眼但排队最长，不推荐</li>
             <li><strong>🌟 卡鲁塞尔入口(Carrousel du Louvre)：</strong>强烈推荐！位于地下商场，排队最短，99%的人不知道</li>
             <li><strong>里沃利街入口(Porte des Lions)：</strong>侧门，人流量中等</li>
-            <li><strong>团体入口：</strong>预约团体票可走专门通道</li>
+            <li><strong>奥赛入口：</strong>主入口位于塞纳河畔，已预约游客可走快速通道</li>
           </ul>
         </div>
         
         <div class="tips-box" style="margin-top:12px;background:linear-gradient(135deg,#fce7f3 0%,#fdf2f8 100%);border-color:#f9a8d4">
           <div class="tips-title" style="color:#9d174d">💡 参观贴士</div>
           <ul class="tips-list" style="color:#831843">
-            <li><strong>下载地图：</strong>卢浮宫APP内有中文地图，面积太大容易迷路</li>
-            <li><strong>优先路线：</strong>蒙娜丽莎（德农馆1层）→ 胜利女神（德农馆顶层）→ 断臂维纳斯（萨里馆0层）</li>
+            <li><strong>下载地图：</strong>卢浮宫和奥赛APP都有中文地图</li>
+            <li><strong>卢浮宫优先路线：</strong>蒙娜丽莎（德农馆1层）→ 胜利女神（德农馆顶层）→ 断臂维纳斯（萨里馆0层）</li>
+            <li><strong>奥赛优先路线：</strong>直接上5楼，印象派精华全在这里</li>
             <li><strong>蒙娜丽莎：</strong>排队可能长达30-60分钟，建议一开馆就直奔</li>
             <li><strong>穿着建议：</strong>博物馆内温度较低，建议带件薄外套</li>
-            <li><strong>餐饮：</strong>馆内餐厅价格较高，可在地下商场用餐后再入馆</li>
             <li><strong>行李：</strong>大包需寄存，入口旁有免费储物柜</li>
           </ul>
         </div>
@@ -728,18 +798,18 @@
     <!-- Tips Section -->
     <div class="section">
       <div class="card-content">
-        <div class="card-title">💡 巴黎核心文化日贴士</div>
+        <div class="card-title">💡 巴黎博物馆日贴士</div>
         <ul style="color:var(--muted);padding-left:20px">
-          <li><strong>预约必备：</strong>卢浮宫必须提前预约！当天现场几乎买不到票</li>
-          <li><strong>舒适鞋履：</strong>今日步行约3-4公里，卢浮宫内也需大量行走</li>
-          <li><strong>巴黎博物馆通票：</strong>如计划参观2个以上收费博物馆，通票更划算</li>
-          <li><strong>圣母院现状：</strong>修复期间内部不开放，但外观和广场仍可参观</li>
-          <li><strong>圣礼拜堂最佳时间：</strong>晴天下午3-5点，彩绘玻璃效果最佳</li>
-          <li><strong>塞纳河游船：</strong>日落前后（19:00-20:00）最能感受浪漫氛围</li>
-          <li><strong>左岸漫步：</strong>莎士比亚书店、花神咖啡馆是文学爱好者的朝圣地</li>
+          <li><strong>预约必备：</strong>卢浮宫和奥赛必须提前预约！当天现场几乎买不到票</li>
+          <li><strong>两馆联票：</strong>购买Paris Museum Pass（€78/4天）可免排队进入卢浮宫、奥赛、圣礼拜堂</li>
+          <li><strong>舒适鞋履：</strong>今日步行约5-6公里，两馆内也需大量行走</li>
+          <li><strong>奥赛必看：</strong>梵高《星空》、莫奈《睡莲》、雷诺阿《煎饼磨坊的舞会》都在5楼</li>
+          <li><strong>金色大钟：</strong>奥赛5楼咖啡馆旁的巨型时钟是网红打卡点，拍照需排队</li>
+          <li><strong>莎士比亚书店：</strong>《爱在日落黄昏时》取景地，店内禁止拍照（二楼阅读区除外）</li>
+          <li><strong>左岸漫步：</strong>从奥赛到莎士比亚书店沿塞纳河步行约15分钟，风景优美</li>
+          <li><strong>圣礼拜堂最佳时间：</strong>傍晚时分（19:00左右），夕阳透过彩绘玻璃效果最佳</li>
+          <li><strong>花神/双叟咖啡馆：</strong>萨特、海明威常去的地方，人均€8-15，体验巴黎文艺氛围</li>
           <li><strong>安全防范：</strong>热门景点需防范扒手，贵重物品放在胸前包</li>
-          <li><strong>餐厅预订：</strong>晚餐建议提前预订，尤其是周五晚上</li>
-          <li><strong>地铁末班：</strong>巴黎地铁约凌晨1:00收班，注意时间安排</li>
         </ul>
       </div>
     </div>
