@@ -1,476 +1,187 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Day 7｜06-10｜Grindelwald → Geneva</title>
-  <style>
-    :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08);--accent:#f59e0b}
-    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
-    .wrap{max-width:1160px;margin:0 auto;padding:24px}
-    
-    /* Hero Section */
-    .hero{background:linear-gradient(135deg,#16a34a,#0ea5e9);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
-    h1{margin:0 0 8px;font-size:28px}
-    .subtitle{margin:0;opacity:.9;font-size:16px}
-    
-    /* Banner Navigation */
-    .banner-nav{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px;overflow-x:auto}
-    .banner-title{font-size:14px;font-weight:700;color:var(--muted);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
-    .banner-track{display:flex;align-items:center;min-width:max-content;gap:0}
-    .banner-node{display:flex;flex-direction:column;align-items:center;text-decoration:none;position:relative;padding:0 8px}
-    .banner-node:first-child{padding-left:0}
-    .banner-node:last-child{padding-right:0}
-    .banner-time{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px;white-space:nowrap}
-    .banner-dot{width:14px;height:14px;border-radius:50%;background:var(--line);border:3px solid var(--card);box-shadow:0 0 0 2px var(--line);transition:all .2s}
-    .banner-node:hover .banner-dot{background:var(--blue);box-shadow:0 0 0 2px var(--blue)}
-    .banner-node.active .banner-dot{background:var(--blue);box-shadow:0 0 0 2px var(--blue)}
-    .banner-label{font-size:12px;color:var(--text);margin-top:8px;white-space:nowrap;font-weight:500;max-width:80px;text-align:center;line-height:1.3}
-    .banner-arrow{color:var(--line);font-size:20px;margin:0 4px;padding-bottom:20px}
-    
-    /* Cards */
-    .section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
-    .card-content{padding:20px}
-    .card-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px}
-    .card-text{color:var(--muted);font-size:14px}
-    
-    /* Timeline */
-    .timeline{margin-left:8px}
-    .item{position:relative;padding:0 0 16px 24px;border-left:2px solid #dcfce7}
-    .item:before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:999px;background:#16a34a;box-shadow:0 0 0 4px #f0fdf4}
-    .item:last-child{border-left:2px solid transparent}
-    .time{color:#16a34a;font-size:13px;font-weight:800;margin-bottom:4px}
-    .title{font-size:18px;font-weight:800;margin-bottom:4px}
-    
-    /* Details */
-    details{margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fafafa;padding:10px 12px}
-    summary{cursor:pointer;font-weight:600;color:#16a34a}
-    details[open] summary{margin-bottom:12px}
-    
-    /* Navigation */
-    .nav-links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
-    .nav-links a{color:var(--blue);text-decoration:none;font-weight:500}
-    .nav-links a:hover{text-decoration:underline}
-    
-    /* Utilities */
-    .highlight-box{background:#f0fdf4;border-left:4px solid #16a34a;padding:12px 16px;border-radius:0 12px 12px 0;margin:12px 0}
-    .tag{display:inline-block;background:var(--bg);color:var(--muted);font-size:12px;padding:4px 10px;border-radius:20px;margin-right:8px}
-    .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
-    .info-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
-    .info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
-    .info-value{font-size:14px;font-weight:600;color:var(--text)}
-    .scroll-indicator{display:none}
-    
-    /* Hotel Card */
-    .hotel-card{background:linear-gradient(135deg,#fff 0%,#f8fafc 100%);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:16px}
-    .hotel-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
-    .hotel-name{font-size:20px;font-weight:800;color:var(--text);margin:0}
-    .hotel-stars{color:#f59e0b;font-size:18px}
-    .hotel-chain{font-size:13px;color:var(--muted);background:#dcfce7;padding:4px 10px;border-radius:12px}
-    .hotel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
-    .hotel-info-item{display:flex;align-items:flex-start;gap:10px}
-    .hotel-info-icon{font-size:18px;min-width:24px;text-align:center}
-    .hotel-info-content{flex:1}
-    .hotel-info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
-    .hotel-info-value{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}
-    .hotel-amenities{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
-    .amenity-tag{background:#f0fdf4;color:#16a34a;font-size:12px;padding:6px 12px;border-radius:20px;display:flex;align-items:center;gap:6px}
-    
-    /* Transport Card */
-    .transport-card{background:linear-gradient(135deg,#fefce8 0%,#fef9c3 100%);border:1px solid #facc15;border-radius:20px;padding:20px;margin-top:16px}
-    .transport-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-    .transport-icon{font-size:32px}
-    .transport-title{font-size:18px;font-weight:800;color:var(--text);margin:0}
-    .transport-subtitle{font-size:13px;color:var(--muted)}
-    .transport-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
-    .transport-item{background:#fff;border:1px solid #facc15;border-radius:12px;padding:12px}
-    .transport-item-icon{font-size:20px;margin-bottom:8px}
-    .transport-item-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
-    .transport-item-text{font-size:12px;color:var(--muted);line-height:1.4}
-    
-    /* Attraction Section */
-    .attraction-section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
-    .attraction-header{background:linear-gradient(135deg,#0ea5e9,#2563eb);color:#fff;padding:20px}
-    .attraction-header h2{margin:0;font-size:20px;font-weight:800}
-    .attraction-header p{margin:4px 0 0;opacity:.9;font-size:14px}
-    .attraction-content{padding:20px}
-    
-    /* Swiss Badge */
-    .swiss-badge{background:linear-gradient(135deg,#ef4444 0%,#dc2626 100%);color:#fff;padding:10px 14px;border-radius:12px;margin:12px 0;font-size:14px;display:flex;align-items:flex-start;gap:10px}
-    .swiss-badge-icon{font-size:18px}
-    .swiss-badge-content{flex:1}
-    .swiss-badge-title{font-weight:700;margin-bottom:2px}
-    .swiss-badge-text{opacity:.95;font-size:13px;line-height:1.5}
-    
-    @media(max-width:768px){
-      .wrap{padding:16px}
-      .hero{padding:20px}
-      .hero h1{font-size:22px}
-      .hero .subtitle{font-size:14px}
-      .banner-nav{padding:12px}
-      .banner-node{padding:0 6px}
-      .banner-label{max-width:70px}
-      .section{margin-bottom:14px}
-      .card-content{padding:16px}
-      .card-title{font-size:15px}
-      .timeline{margin-left:4px}
-      .item{padding:0 0 16px 20px}
-      .item .time{font-size:12px}
-      .item .title{font-size:16px}
-      .info-grid{grid-template-columns:1fr}
-      .info-item{padding:10px}
-      .hotel-card{padding:16px}
-      .hotel-name{font-size:18px}
-      .hotel-grid{grid-template-columns:1fr;gap:12px}
-      .scroll-indicator{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 7｜06月10日｜格林德瓦 阿尔卑斯徒步日</title>
+    <style>
+        :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08);--accent:#f59e0b}
+        body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+        .wrap{max-width:1160px;margin:0 auto;padding:24px}
+        .hero{background:linear-gradient(135deg,#16a34a,#22c55e 60%,#4ade80);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
+        h1{margin:0 0 8px;font-size:28px}
+        .subtitle{margin:0;opacity:.9;font-size:16px}
+        .nav-links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+        .nav-links a{color:var(--blue);text-decoration:none;font-weight:500}
+        .section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
+        .card-content{padding:20px}
+        .card-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px}
+        .timeline{margin-left:8px}
+        .item{position:relative;padding:0 0 16px 24px;border-left:2px solid #dcfce7}
+        .item:before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:999px;background:#16a34a;box-shadow:0 0 0 4px #f0fdf4}
+        .item:last-child{border-left:2px solid transparent}
+        .time{color:#16a34a;font-size:13px;font-weight:800;margin-bottom:4px}
+        .title{font-size:18px;font-weight:800;margin-bottom:4px}
+        details{margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fafafa;padding:10px 12px}
+        summary{cursor:pointer;font-weight:600;color:#16a34a}
+        details[open] summary{margin-bottom:12px}
+        .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+        .info-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
+        .info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+        .info-value{font-size:14px;font-weight:600;color:var(--text)}
+        .highlight-box{background:#f0fdf4;border-left:4px solid #16a34a;padding:12px 16px;border-radius:0 12px 12px 0;margin:12px 0}
+    </style>
 </head>
 <body>
-  <div class="wrap">
-    <!-- Hero Section -->
-    <div class="hero">
-      <h1>🚄 Day 7｜06-10｜Grindelwald → Geneva</h1>
-      <p class="subtitle">阿尔卑斯晨景 → 日内瓦湖畔｜从山间小镇到国际都市</p>
-    </div>
-
-    <!-- Navigation -->
-    <div class="nav-links">
-      <a href="day-6-06-09-milan-to-grindelwald.html">← Day 6</a>
-      <a href="index.html">返回主页</a>
-      <a href="day-8-06-11-geneva-to-paris.html">Day 8 →</a>
-    </div>
-
-    <!-- Banner Navigation -->
-    <div class="banner-nav">
-      <div class="banner-title">📍 行程导航</div>
-      <div class="banner-track">
-        <a href="#morning" class="banner-node">
-          <div class="banner-time">08:30</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">格林德瓦晨景</div>
-        </a>
-        <div class="banner-arrow">→</div>
-        <a href="#train" class="banner-node active">
-          <div class="banner-time">10:47</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">火车去日内瓦</div>
-        </a>
-        <div class="banner-arrow">→</div>
-        <a href="#geneva" class="banner-node">
-          <div class="banner-time">14:30</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">抵达日内瓦</div>
-        </a>
-        <div class="banner-arrow">→</div>
-        <a href="#lake" class="banner-node">
-          <div class="banner-time">16:00</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">日内瓦湖</div>
-        </a>
-        <div class="banner-arrow">→</div>
-        <a href="#un" class="banner-node">
-          <div class="banner-time">18:00</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">联合国总部</div>
-        </a>
-      </div>
-      <div class="scroll-indicator">← 左右滑动查看更多 →</div>
-    </div>
-
-    <!-- Transport Card -->
-    <div class="section">
-      <div class="card-content">
-        <div class="card-title">🚄 大交通</div>
-        <div class="highlight-box">
-          <strong>🇨🇭 Grindelwald → Geneva Cornavin</strong><br>
-          <span style="font-size:20px;font-weight:800;color:#16a34a">10:47 - 14:30</span>
-          <span class="tag">约3小时43分钟</span>
-          <span class="tag">瑞士铁路</span>
-          <span class="tag">黄金列车线</span>
+    <div class="wrap">
+        <div class="nav-links">
+            <a href="day-6-06-09-milan-to-grindelwald.html">← Day 6</a>
+            <a href="index.html">返回主页</a>
+            <a href="day-8-06-11-geneva-to-paris.html">Day 8 →</a>
         </div>
-        <p class="card-text">从格林德瓦出发，经因特拉肯、伯尔尼，穿越瑞士中部壮丽山川，抵达法语区的日内瓦。沿途可欣赏图恩湖、布里恩茨湖和阿尔卑斯山麓的绝美风光。</p>
-        
-        <div class="transport-card">
-          <div class="transport-header">
-            <span class="transport-icon">🎫</span>
-            <div>
-              <h3 class="transport-title">瑞士铁路通票使用提示</h3>
-              <p class="transport-subtitle">Swiss Travel Pass 让你的瑞士之旅更加便捷</p>
-            </div>
-          </div>
-          <div class="transport-grid">
-            <div class="transport-item">
-              <div class="transport-item-icon">✓</div>
-              <div class="transport-item-title">全境免费乘坐</div>
-              <div class="transport-item-text">包含火车、巴士、游船及大部分城市交通</div>
-            </div>
-            <div class="transport-item">
-              <div class="transport-item-icon">🚢</div>
-              <div class="transport-item-title">日内瓦湖游船</div>
-              <div class="transport-item-text">免费乘坐日内瓦湖游船（通票包含）</div>
-            </div>
-            <div class="transport-item">
-              <div class="transport-item-icon">🏛️</div>
-              <div class="transport-item-title">博物馆免费</div>
-              <div class="transport-item-text">超过500家博物馆免费入场</div>
-            </div>
-            <div class="transport-item">
-              <div class="transport-item-icon">📱</div>
-              <div class="transport-item-title">手机激活</div>
-              <div class="transport-item-text">购买后通过SBB App激活，出示二维码即可</div>
-            </div>
-          </div>
+
+        <div class="hero">
+            <h1>🏔️ Day 7｜06月10日｜格林德瓦 阿尔卑斯徒步日</h1>
+            <p class="subtitle">自然高潮日｜First山｜Bachalpsee｜艾格峰北壁｜梦幻山坡</p>
         </div>
-      </div>
-    </div>
 
-    <!-- Timeline Section -->
-    <div class="section">
-      <div class="card-content">
-        <div class="card-title">📍 行程安排</div>
-        <div class="timeline">
-          
-          <!-- Morning Grindelwald -->
-          <div class="item" id="morning">
-            <div class="time">08:30</div>
-            <div class="title">🏔️ 格林德瓦晨景</div>
-            <details>
-              <summary>查看详情</summary>
-              <p><strong>【亮点】</strong>清晨的格林德瓦是拍摄"梦幻山坡"的最佳时段。当第一缕阳光洒在阿尔卑斯山坡上，绿色草甸与远处的雪山形成绝美的画面。</p>
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">推荐地点</div>
-                  <div class="info-value">梦幻山坡 Dorfstrasse</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">最佳时间</div>
-                  <div class="info-value">08:00-09:00</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">光线条件</div>
-                  <div class="info-value">柔和晨光</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">停留时间</div>
-                  <div class="info-value">约1小时</div>
-                </div>
-              </div>
-              <p style="margin-top:12px"><strong>💡 小贴士：</strong>早上游客稀少，可拍到无人的梦幻山坡经典画面。建议带上广角镜头。</p>
-            </details>
-          </div>
-
-          <!-- Hotel Check-out -->
-          <div class="item">
-            <div class="time">09:30</div>
-            <div class="title">🏨 酒店退房</div>
-            <details>
-              <summary>查看详情</summary>
-              <p><strong>【退房】</strong>办理退房手续，寄存行李或直接携带前往火车站。</p>
-              <p><strong>【早餐】</strong>如时间允许，可在酒店或镇上享用最后一顿瑞士早餐。</p>
-            </details>
-          </div>
-
-          <!-- Train to Geneva -->
-          <div class="item" id="train">
-            <div class="time">10:47</div>
-            <div class="title">🚄 火车前往日内瓦</div>
-            <details>
-              <summary>查看详情</summary>
-              <p><strong>【路线】</strong>Grindelwald → Interlaken Ost → Bern → Geneva</p>
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">出发时间</div>
-                  <div class="info-value">10:47</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">抵达时间</div>
-                  <div class="info-value">14:30</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">总时长</div>
-                  <div class="info-value">约3小时43分</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">换乘次数</div>
-                  <div class="info-value">1-2次</div>
-                </div>
-              </div>
-              <p style="margin-top:12px"><strong>🚉 途经站点：</strong></p>
-              <ul>
-                <li><strong>Interlaken Ost</strong> - 因特拉肯东站，少女峰地区的门户</li>
-                <li><strong>Bern</strong> - 瑞士首都伯尔尼，可短暂停留欣赏老城</li>
-                <li><strong>Lausanne</strong> - 洛桑，奥林匹克总部所在地</li>
-              </ul>
-              <p style="margin-top:12px"><strong>💡 乘车建议：</strong>选择左侧座位可欣赏图恩湖和日内瓦湖的美景。</p>
-            </details>
-          </div>
-
-          <!-- Arrive Geneva -->
-          <div class="item" id="geneva">
-            <div class="time">14:30</div>
-            <div class="title">🏛️ 抵达日内瓦</div>
-            <details>
-              <summary>查看详情</summary>
-              <p><strong>【亮点】</strong>欢迎来到日内瓦——瑞士第二大城市，联合国欧洲总部所在地，也是世界外交和人道主义的中心。</p>
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">人口</div>
-                  <div class="info-value">约20万（都会区50万）</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">官方语言</div>
-                  <div class="info-value">法语</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">特色</div>
-                  <div class="info-value">外交之都+钟表之都</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">货币</div>
-                  <div class="info-value">瑞士法郎(CHF)</div>
-                </div>
-              </div>
-              <p style="margin-top:12px"><strong>【车站】</strong>Geneva Cornavin是日内瓦中央火车站，位于市中心，交通非常便利。</p>
-            </details>
-          </div>
-
-          <!-- Geneva Lake -->
-          <div class="item" id="lake">
-            <div class="time">16:00</div>
-            <div class="title">🌊 日内瓦湖 + 大喷泉 Jet d'Eau</div>
-            <details>
-              <summary>查看详情</summary>
-              
-              <p><strong>【亮点】</strong>日内瓦湖(Lac Léman)是西欧最大的湖泊之一，湖畔风景如画。大喷泉(Jet d'Eau)是日内瓦的标志性景观，水柱高达140米，是城市的象征。</p>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">湖泊面积</div>
-                  <div class="info-value">582平方公里</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">喷泉高度</div>
-                  <div class="info-value">140米</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">喷水量</div>
-                  <div class="info-value">500升/秒</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">运营时间</div>
-                  <div class="info-value">10:00-22:00</div>
-                </div>
-              </div>
-              
-              <p style="margin-top:12px"><strong>📸 拍照建议：</strong></p>
-              <ul>
-                <li>英国花园(Jardin Anglais)是拍摄喷泉的最佳位置</li>
-                <li>花钟(L'Horloge Fleurie)也在英国花园内，直径5米</li>
-                <li>傍晚时分光线柔和，可拍到喷泉彩虹</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】Quai Gustave-Ador, 1207 Genève<br>
-              【门票】免费<br>
-              【停留时间】约1.5小时</p>
-            </details>
-          </div>
-
-          <!-- UN Headquarters -->
-          <div class="item" id="un">
-            <div class="time">18:00</div>
-            <div class="title">🏛️ 联合国总部（外观）</div>
-            <details>
-              <summary>查看详情</summary>
-              
-              <div class="swiss-badge">
-                <span class="swiss-badge-icon">🇺🇳</span>
-                <div class="swiss-badge-content">
-                  <div class="swiss-badge-title">万国宫 Palais des Nations</div>
-                  <div class="swiss-badge-text">
-                    联合国欧洲总部所在地，是世界上最重要的国际会议中心之一。本日仅外观参观，无需预约。
-                  </div>
-                </div>
-              </div>
-              
-              <p><strong>【亮点】</strong>万国宫是日内瓦最著名的建筑之一，也是联合国在欧洲的总部。由于时间有限，本日仅进行外观参观。如需入内参观，需提前预约导览（约2小时）。</p>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">建造年份</div>
-                  <div class="info-value">1929-1938年</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">建筑面积</div>
-                  <div class="info-value">38万平方米</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">断腿木椅</div>
-                  <div class="info-value">广场前12米高</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">门票</div>
-                  <div class="info-value">外观免费</div>
-                </div>
-              </div>
-              
-              <p style="margin-top:12px"><strong>🪑 断腿木椅 Broken Chair：</strong></p>
-              <p>联合国总部门前广场的标志性雕塑，高12米，是反对地雷和集束炸弹的国际象征。是必拍的日内瓦地标。</p>
-              
-              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】Palais des Nations, 1211 Genève<br>
-              【交通】公交车5、8、11、22、28路至"Nations"站<br>
-              【停留时间】约30-45分钟（外观+拍照）</p>
-            </details>
-          </div>
-
-          <!-- Dinner -->
-          <div class="item">
-            <div class="time">19:00</div>
-            <div class="title">🍽️ 晚餐</div>
-            <details>
-              <summary>查看详情</summary>
-              <p><strong>【推荐区域】</strong>日内瓦老城(Vieille-Ville)或湖畔餐厅</p>
-              <ul>
-                <li><strong>瑞士特色：</strong>奶酪火锅(Fondue)、拉克雷特(Raclette)</li>
-                <li><strong>法语区特色：</strong>可尝试法式料理</li>
-                <li><strong>湖畔餐厅：</strong>可一边用餐一边欣赏湖景</li>
-              </ul>
-            </details>
-          </div>
-
-          <!-- Hotel Check-in -->
-          <div class="item">
-            <div class="time">20:30</div>
-            <div class="title">🏨 入住酒店</div>
-            <details>
-              <summary>查看详情</summary>
-              <p><strong>【住宿】</strong>日内瓦市中心酒店</p>
-              <p>【建议】选择靠近火车站或湖边的酒店，方便次日游览日内瓦老城后前往巴黎。</p>
-            </details>
-          </div>
-
+        <div class="section">
+            <div class="card-content">
+                <div class="card-title">🎯 今日行程概览</div>
+                <p>艾格峰日出 → 梦幻山坡 → First山缆车 → Cliff Walk → Bachalpsee徒步 → 小镇漫步</p>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Tips Section -->
-    <div class="section">
-      <div class="card-content">
-        <div class="card-title">💡 实用贴士</div>
-        <ul style="color:var(--muted);padding-left:20px">
-          <li><strong>火车座位：</strong>从格林德瓦到日内瓦，选择左侧座位可欣赏湖泊美景</li>
-          <li><strong>行李寄存：</strong>日内瓦火车站有行李寄存柜，如需轻装游览可使用</li>
-          <li><strong>联合国参观：</strong>本日仅外观，如需入内需提前在visit.un.org预约（约2小时）</li>
-          <li><strong>语言：</strong>日内瓦是法语区，但英语普及率较高</li>
-          <li><strong>货币：</strong>瑞士使用瑞士法郎(CHF)，部分地方接受欧元但汇率可能不划算</li>
-          <li><strong>大喷泉：</strong>如遇大风天气可能关闭，可提前查看官网</li>
-          <li><strong>明日行程：</strong>次日早上游览日内瓦老城和圣彼得大教堂，中午12:15乘坐TGV前往巴黎</li>
-        </ul>
-      </div>
-    </div>
+        <div class="section">
+            <div class="card-content">
+                <div class="card-title">📍 详细时间安排</div>
+                
+                <div class="timeline">
+                    <div class="item">
+                        <div class="time">06:30</div>
+                        <div class="title">🌅 艾格峰北壁日出</div>
+                        <p>金色时刻，拍摄艾格峰北壁的壮丽景色。</p>
+                        <details>
+                            <summary>📸 最佳拍摄点</summary>
+                            <p><strong>Hotel Belvedere附近</strong>或<strong>梦幻山坡</strong>是拍摄艾格峰日出的最佳位置。</p>
+                        </details>
+                    </div>
 
-  </div>
+                    <div class="item">
+                        <div class="time">08:00</div>
+                        <div class="title">🍳 酒店早餐</div>
+                        <p>享用丰盛的瑞士早餐，为徒步储备能量。</p>
+                    </div>
+
+                    <div class="item">
+                        <div class="time">09:00</div>
+                        <div class="title">🏔️ 梦幻山坡拍照</div>
+                        <p>上午光线最佳，拍摄经典的格林德瓦梦幻山坡。</p>
+                        <div class="highlight-box">
+                            <strong>📸 经典机位</strong>：火车站往山上走的小路上，可拍到错落有致的木屋和背后的艾格峰。
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="time">10:00</div>
+                        <div class="title">🚶 小镇漫步</div>
+                        <p>在Dorfstraße主街逛逛，感受阿尔卑斯小镇的悠闲氛围。</p>
+                    </div>
+
+                    <div class="item">
+                        <div class="time">12:00</div>
+                        <div class="title">🍽️ 午餐</div>
+                        <p>在镇上享用午餐，推荐尝试瑞士Rösti或简餐。</p>
+                    </div>
+
+                    <div class="item">
+                        <div class="time">13:30</div>
+                        <div class="title">🚠 First山缆车</div>
+                        <p>乘坐缆车前往First山顶（2,168米）。</p>
+                        <details>
+                            <summary>🎫 缆车信息</summary>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <div class="info-label">票价</div>
+                                    <div class="info-value">往返CHF 64（Swiss Pass半价）</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">时长</div>
+                                    <div class="info-value">约25分钟</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">运营</div>
+                                    <div class="info-value">08:00-18:00</div>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="item">
+                        <div class="time">14:00</div>
+                        <div class="title">🌉 Cliff Walk悬崖步道</div>
+                        <p>欧洲海拔最高的悬空步道，直面艾格峰北壁。</p>
+                    </div>
+
+                    <div class="item">
+                        <div class="time">15:00</div>
+                        <div class="title">🏔️ First山顶观景台</div>
+                        <p>360°阿尔卑斯全景，远眺少女峰、僧侣峰。</p>
+                    </div>
+
+                    <div class="item">
+                        <div class="time">16:00</div>
+                        <div class="title">🥾 Bachalpsee徒步</div>
+                        <p>单程约50分钟，拍摄艾格峰倒影的经典机位。</p>
+                        <details>
+                            <summary>🗺️ 徒步详情</summary>
+                            <p><strong>距离</strong>：单程3公里，往返6公里</p>
+                            <p><strong>时间</strong>：单程50分钟，往返约2小时</p>
+                            <p><strong>难度</strong>：中等，部分路段有碎石</p>
+                            <p><strong>最佳时间</strong>：上午10-12点，湖面最平静</p>
+                        </details>
+                    </div>
+
+                    <div class="item">
+                        <div class="time">17:30</div>
+                        <div class="title">🚠 缆车下山</div>
+                        <p>返回格林德瓦镇。注意最后一班缆车时间！</p>
+                    </div>
+
+                    <div class="item">
+                        <div class="time">18:30</div>
+                        <div class="title">🍽️ 晚餐</div>
+                        <p>推荐奶酪火锅Fondue，庆祝完美的徒步日。</p>
+                    </div>
+
+                    <div class="item">
+                        <div class="time">20:00</div>
+                        <div class="title">🌙 酒店休息</div>
+                        <p>为明天的日内瓦之旅养精蓄锐。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="card-content">
+                <div class="card-title">💡 今日贴士</div>
+                <ul>
+                    <li><strong>早起看日出</strong>：6月的日出约05:30，06:30是黄金时刻</li>
+                    <li><strong>带足干粮</strong>：Bachalpsee徒步需要自带午餐/零食</li>
+                    <li><strong>注意缆车末班</strong>：夏季约18:00-18:30，别错过</li>
+                    <li><strong>穿着建议</strong>：徒步鞋、防风外套、防晒霜</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="card-content">
+                <div class="card-title">🏨 住宿信息</div>
+                <p><strong>Hotel Central Wolter</strong></p>
+                <p>📍 Dorfstrasse 187, 3818 Grindelwald</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

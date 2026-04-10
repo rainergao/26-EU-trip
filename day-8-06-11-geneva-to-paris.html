@@ -1,630 +1,140 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Day 8｜06-11｜Geneva老城 → Paris</title>
-  <style>
-    :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08);--accent:#f59e0b}
-    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
-    .wrap{max-width:1160px;margin:0 auto;padding:24px}
-    
-    /* Hero Section */
-    .hero{background:linear-gradient(135deg,#0ea5e9,#2563eb 60%,#6366f1);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
-    h1{margin:0 0 8px;font-size:28px}
-    .subtitle{margin:0;opacity:.9;font-size:16px}
-    
-    /* Banner Navigation */
-    .banner-nav{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px;overflow-x:auto}
-    .banner-title{font-size:14px;font-weight:700;color:var(--muted);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
-    .banner-track{display:flex;align-items:center;min-width:max-content;gap:0}
-    .banner-node{display:flex;flex-direction:column;align-items:center;text-decoration:none;position:relative;padding:0 8px}
-    .banner-node:first-child{padding-left:0}
-    .banner-node:last-child{padding-right:0}
-    .banner-time{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px;white-space:nowrap}
-    .banner-dot{width:14px;height:14px;border-radius:50%;background:var(--line);border:3px solid var(--card);box-shadow:0 0 0 2px var(--line);transition:all .2s}
-    .banner-node:hover .banner-dot{background:var(--blue);box-shadow:0 0 0 2px var(--blue)}
-    .banner-node.active .banner-dot{background:var(--blue);box-shadow:0 0 0 2px var(--blue)}
-    .banner-label{font-size:12px;color:var(--text);margin-top:8px;white-space:nowrap;font-weight:500;max-width:80px;text-align:center;line-height:1.3}
-    .banner-arrow{color:var(--line);font-size:20px;margin:0 4px;padding-bottom:20px}
-    
-    /* Cards */
-    .section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
-    .card-content{padding:20px}
-    .card-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px}
-    .card-text{color:var(--muted);font-size:14px}
-    
-    /* Timeline */
-    .timeline{margin-left:8px}
-    .item{position:relative;padding:0 0 16px 24px;border-left:2px solid #dbeafe}
-    .item:before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:999px;background:var(--blue);box-shadow:0 0 0 4px #eff6ff}
-    .item:last-child{border-left:2px solid transparent}
-    .time{color:var(--blue);font-size:13px;font-weight:800;margin-bottom:4px}
-    .title{font-size:18px;font-weight:800;margin-bottom:4px}
-    
-    /* Details */
-    details{margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fafafa;padding:10px 12px}
-    summary{cursor:pointer;font-weight:600;color:var(--blue)}
-    details[open] summary{margin-bottom:12px}
-    
-    /* Navigation */
-    .nav-links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
-    .nav-links a{color:var(--blue);text-decoration:none;font-weight:500}
-    .nav-links a:hover{text-decoration:underline}
-    
-    /* Utilities */
-    .highlight-box{background:#eff6ff;border-left:4px solid var(--blue);padding:12px 16px;border-radius:0 12px 12px 0;margin:12px 0}
-    .tag{display:inline-block;background:var(--bg);color:var(--muted);font-size:12px;padding:4px 10px;border-radius:20px;margin-right:8px}
-    .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
-    .info-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
-    .info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
-    .info-value{font-size:14px;font-weight:600;color:var(--text)}
-    .scroll-indicator{display:none}
-    
-    /* Transport Card */
-    .transport-card{background:linear-gradient(135deg,#fefce8 0%,#fff 100%);border:1px solid #fcd34d;border-radius:20px;padding:20px;margin-top:16px}
-    .transport-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
-    .transport-title{font-size:18px;font-weight:800;color:var(--text);margin:0}
-    .transport-type{font-size:13px;color:#b45309;background:#fef3c7;padding:4px 10px;border-radius:12px}
-    .transport-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
-    .transport-info-item{display:flex;align-items:flex-start;gap:10px}
-    .transport-info-icon{font-size:18px;min-width:24px;text-align:center}
-    .transport-info-content{flex:1}
-    .transport-info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
-    .transport-info-value{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}
-    .transport-tips{margin-top:16px;padding-top:16px;border-top:1px solid #fcd34d}
-    .tip-item{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;font-size:13px;color:#92400e}
-    .tip-icon{font-size:16px}
-    
-    /* Hotel Card */
-    .hotel-card{background:linear-gradient(135deg,#fff 0%,#f8fafc 100%);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:16px}
-    .hotel-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
-    .hotel-name{font-size:20px;font-weight:800;color:var(--text);margin:0}
-    .hotel-stars{color:#f59e0b;font-size:18px}
-    .hotel-chain{font-size:13px;color:var(--muted);background:#e0e7ff;padding:4px 10px;border-radius:12px}
-    .hotel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
-    .hotel-info-item{display:flex;align-items:flex-start;gap:10px}
-    .hotel-info-icon{font-size:18px;min-width:24px;text-align:center}
-    .hotel-info-content{flex:1}
-    .hotel-info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
-    .hotel-info-value{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}
-    .hotel-amenities{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
-    .amenity-tag{background:#ecfdf5;color:#059669;font-size:12px;padding:6px 12px;border-radius:20px;display:flex;align-items:center;gap:6px}
-
-    /* Attraction highlight */
-    .attraction-highlight{background:linear-gradient(135deg,#eff6ff 0%,#fff 100%);border:1px solid #bfdbfe;border-radius:20px;padding:20px;margin-top:16px}
-    .attraction-title{font-size:18px;font-weight:800;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px}
-    
-    @media(max-width:768px){
-      .wrap{padding:16px}
-      .hero{padding:20px}
-      .hero h1{font-size:22px}
-      .hero .subtitle{font-size:14px}
-      .banner-nav{padding:12px}
-      .banner-node{padding:0 6px}
-      .banner-label{max-width:70px}
-      .section{margin-bottom:14px}
-      .card-content{padding:16px}
-      .card-title{font-size:15px}
-      .timeline{margin-left:4px}
-      .item{padding:0 0 16px 20px}
-      .item .time{font-size:12px}
-      .item .title{font-size:16px}
-      .info-grid{grid-template-columns:1fr}
-      .info-item{padding:10px}
-      .hotel-card{padding:16px}
-      .hotel-name{font-size:18px}
-      .hotel-grid{grid-template-columns:1fr;gap:12px}
-      .scroll-indicator{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 8｜06月11日｜格林德瓦晨景 → 日内瓦</title>
+    <style>
+        :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08);--accent:#f59e0b}
+        body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+        .wrap{max-width:1160px;margin:0 auto;padding:24px}
+        .hero{background:linear-gradient(135deg,#3b82f6,#60a5fa);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
+        h1{margin:0 0 8px;font-size:28px}
+        .subtitle{margin:0;opacity:.9;font-size:16px}
+        .nav-links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+        .nav-links a{color:var(--blue);text-decoration:none;font-weight:500}
+        .section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
+        .card-content{padding:20px}
+        .card-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px}
+        .timeline{margin-left:8px}
+        .item{position:relative;padding:0 0 16px 24px;border-left:2px solid #dbeafe}
+        .item:before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:999px;background:#3b82f6;box-shadow:0 0 0 4px #eff6ff}
+        .item:last-child{border-left:2px solid transparent}
+        .time{color:#3b82f6;font-size:13px;font-weight:800;margin-bottom:4px}
+        .title{font-size:18px;font-weight:800;margin-bottom:4px}
+        details{margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fafafa;padding:10px 12px}
+        summary{cursor:pointer;font-weight:600;color:#3b82f6}
+        details[open] summary{margin-bottom:12px}
+        .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+        .info-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
+        .info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+        .info-value{font-size:14px;font-weight:600;color:var(--text)}
+    </style>
 </head>
 <body>
-  <div class="wrap">
-    <!-- Hero Section -->
-    <div class="hero">
-      <h1>🌍 Day 8｜06-11｜Geneva老城 → Paris</h1>
-      <p class="subtitle">瑞士老城晨韵｜TGV穿越法瑞边境｜巴黎浪漫初夜</p>
-    </div>
-
-    <!-- Navigation -->
-    <div class="nav-links">
-      <a href="day-7-06-10-grindelwald.html">← Day 7</a>
-      <a href="index.html">返回主页</a>
-      <a href="day-9-06-12-geneva-to-paris.html">Day 9 →</a>
-    </div>
-
-    <!-- Banner Navigation -->
-    <div class="banner-nav">
-      <div class="banner-title">📍 行程导航</div>
-      <div class="banner-track">
-        <a href="#oldtown" class="banner-node">
-          <div class="banner-time">Morning</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">日内瓦老城</div>
-        </a>
-        <div class="banner-arrow">→</div>
-        <a href="#cathedral" class="banner-node">
-          <div class="banner-time">Morning</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">圣彼得大教堂</div>
-        </a>
-        <div class="banner-arrow">→</div>
-        <a href="#tgv" class="banner-node active">
-          <div class="banner-time">12:15</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">TGV去巴黎</div>
-        </a>
-        <div class="banner-arrow">→</div>
-        <a href="#paris" class="banner-node">
-          <div class="banner-time">16:30</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">凯旋门</div>
-        </a>
-        <div class="banner-arrow">→</div>
-        <a href="#eiffel" class="banner-node">
-          <div class="banner-time">21:00</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">埃菲尔铁塔</div>
-        </a>
-      </div>
-      <div class="scroll-indicator">← 左右滑动查看更多 →</div>
-    </div>
-
-    <!-- Transport Card -->
-    <div class="section">
-      <div class="card-content">
-        <div class="card-title">🚄 大交通</div>
-        <div class="highlight-box">
-          <strong>Geneva Cornavin → Paris Gare de Lyon</strong><br>
-          <span style="font-size:20px;font-weight:800;color:var(--blue)">12:15 - 16:30</span>
-          <span class="tag">约3小时15分</span>
-          <span class="tag">TGV Lyria</span>
-          <span class="tag">直达高速</span>
+    <div class="wrap">
+        <div class="nav-links">
+            <a href="day-7-06-10-grindelwald.html">← Day 7</a>
+            <a href="index.html">返回主页</a>
+            <a href="day-9-06-12-geneva-to-paris.html">Day 9 →</a>
         </div>
-        <p class="card-text">乘坐TGV Lyria高速列车从日内瓦直达巴黎，穿越法瑞边境，途经第戎、里昂等地，一路向北抵达浪漫之都巴黎。</p>
-        
-        <div class="transport-card">
-          <div class="transport-header">
-            <h3 class="transport-title">🎫 TGV Lyria 购票提示</h3>
-            <span class="transport-type">强烈建议提前购买</span>
-          </div>
-          
-          <div class="transport-grid">
-            <div class="transport-info-item">
-              <span class="transport-info-icon">🌐</span>
-              <div class="transport-info-content">
-                <div class="transport-info-label">购票官网</div>
-                <div class="transport-info-value">SNCF Connect (sncf-connect.com)</div>
-              </div>
-            </div>
-            
-            <div class="transport-info-item">
-              <span class="transport-info-icon">⏰</span>
-              <div class="transport-info-content">
-                <div class="transport-info-label">提前购票建议</div>
-                <div class="transport-info-value">建议提前30-90天预订，可享早鸟票价</div>
-              </div>
-            </div>
-            
-            <div class="transport-info-item">
-              <span class="transport-info-icon">💶</span>
-              <div class="transport-info-content">
-                <div class="transport-info-label">票价参考</div>
-                <div class="transport-info-value">早鸟票 €29-49 | 普通票 €60-120</div>
-              </div>
-            </div>
-            
-            <div class="transport-info-item">
-              <span class="transport-info-icon">📍</span>
-              <div class="transport-info-content">
-                <div class="transport-info-label">出发车站</div>
-                <div class="transport-info-value">Genève Cornavin</div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="transport-tips">
-            <div class="tip-item">
-              <span class="tip-icon">💡</span>
-              <span><strong>座位选择：</strong>推荐选择左侧座位，沿途可欣赏勃朗峰和阿尔卑斯山景</span>
-            </div>
-            <div class="tip-item">
-              <span class="tip-icon">💡</span>
-              <span><strong>无需太早：</strong>开车前20-30分钟到达即可，无需安检</span>
-            </div>
-          </div>
+
+        <div class="hero">
+            <h1>🚄 Day 8｜06月11日｜格林德瓦晨景 → 日内瓦</h1>
+            <p class="subtitle">告别阿尔卑斯｜前往国际都市｜日内瓦湖畔｜联合国总部</p>
         </div>
-      </div>
-    </div>
 
-    <!-- Hotel Card Preview -->
-    <div class="section">
-      <div class="card-content">
-        <div class="card-title">🏨 住宿</div>
-        <div class="highlight-box">
-          <strong>Le Méridien Paris Arc de Triomphe</strong>
-          <span class="tag">艾美酒店</span>
-          <span class="tag">五星</span>
-          <span class="tag">距凯旋门步行5分钟</span>
+        <div class="section">
+            <div class="card-content">
+                <div class="card-title">🎯 今日行程概览</div>
+                <p>格林德瓦晨景 → 火车去日内瓦 → 日内瓦湖 → 大喷泉 → 联合国总部外观</p>
+            </div>
         </div>
-        <p class="card-text">位于巴黎第17区，紧邻凯旋门和香榭丽舍大道，是探索巴黎的理想据点。</p>
-      </div>
-    </div>
 
-    <!-- Timeline Section -->
-    <div class="section">
-      <div class="card-content">
-        <div class="card-title">📍 行程安排</div>
-        <div class="timeline">
-          
-          <!-- Geneva Old Town -->
-          <div class="item" id="oldtown">
-            <div class="time">Morning</div>
-            <div class="title">🏛️ 日内瓦老城 Vieille-Ville</div>
-        
-            <details>
-              <summary>查看详情</summary>
-              
-              <p><strong>【亮点】</strong>日内瓦老城位于罗纳河与莱芒湖之间的小山坡上，是这座城市的历史核心。鹅卵石铺就的街道、古老的建筑、宁静的氛围，完美展现了瑞士法语区的独特魅力。</p>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">历史</div>
-                  <div class="info-value">2000多年历史</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">特色</div>
-                  <div class="info-value">鹅卵石街道+古老建筑</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">主要景点</div>
-                  <div class="info-value">圣彼得大教堂</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">门票</div>
-                  <div class="info-value">免费漫步</div>
-                </div>
-              </div>
-              
-              <p style="margin-top:12px"><strong>🚶 老城漫步路线：</strong></p>
-              <ul>
-                <li><strong>Bourg-de-Four广场</strong> - 老城中心，周围是露天咖啡馆</li>
-                <li><strong>特雷耶阶梯(Treille)</strong> - 154阶的台阶，可俯瞰城市</li>
-                <li><strong>老城小巷</strong> - 探索隐藏的艺术画廊和古董店</li>
-                <li><strong>市政厅</strong> - 16世纪建筑，宗教改革的重要场所</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】Vieille-Ville, 1204 Genève<br>
-              【交通】从火车站步行约15分钟，或搭乘有轨电车<br>
-              【停留时间】约1.5-2小时</p>
-            </details>
-          </div>
-
-          <!-- St. Pierre Cathedral -->
-          <div class="item" id="cathedral">
-            <div class="time">Morning</div>
-            <div class="title">⛪ St. Pierre Cathedral 圣彼得大教堂</div>
-        
-            <details>
-              <summary>查看详情</summary>
-              
-              <div class="attraction-highlight">
-                <div class="attraction-title">⛪ 圣彼得大教堂</div>
+        <div class="section">
+            <div class="card-content">
+                <div class="card-title">📍 详细时间安排</div>
                 
-                <p><strong>【亮点】</strong>圣彼得大教堂是日内瓦的地标建筑，始建于12世纪，融合了罗马式和哥特式风格。这里是宗教改革领袖约翰·加尔文(John Calvin)于1536-1564年间宣讲布道的地方。</p>
-                
-                <div class="info-grid">
-                  <div class="info-item">
-                    <div class="info-label">建造时间</div>
-                    <div class="info-value">12-15世纪</div>
-                  </div>
-                  <div class="info-item">
-                    <div class="info-label">建筑风格</div>
-                    <div class="info-value">罗马式+哥特式</div>
-                  </div>
-                  <div class="info-item">
-                    <div class="info-label">宗教意义</div>
-                    <div class="info-value">新教改革发源地</div>
-                  </div>
-                  <div class="info-item">
-                    <div class="info-label">门票</div>
-                    <div class="info-value">教堂免费，塔楼€5</div>
-                  </div>
-                </div>
-                
-                <p style="margin-top:12px"><strong>🏰 北塔登顶：</strong></p>
-                <p>攀登157级螺旋台阶到达北塔顶部，可360°俯瞰日内瓦全城：一边是波光粼粼的莱芒湖(Lake Geneva)和著名的Jet d'Eau大喷泉，另一边是勃朗峰(Mont Blanc)的雪峰。</p>
-                
-                <p style="margin-top:12px"><strong>📜 考古遗址：</strong></p>
-                <p>教堂地下有令人惊叹的考古遗址，展示了从罗马时期到中世纪的层层叠叠的历史遗迹。</p>
-              </div>
-              
-              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】Place du Bourg-de-Four 24, 1204 Genève<br>
-              【开放时间】10:00-17:30<br>
-              【停留时间】45-60分钟</p>
-            </details>
-          </div>
+                <div class="timeline">
+                    <div class="item">
+                        <div class="time">08:30</div>
+                        <div class="title">🌅 格林德瓦晨景（最后机会）</div>
+                        <p>最后一次欣赏梦幻山坡晨景，告别阿尔卑斯。</p>
+                    </div>
 
-          <!-- TGV Journey -->
-          <div class="item" id="tgv">
-            <div class="time">12:15</div>
-            <div class="title">🚄 TGV Lyria 前往巴黎</div>
-            <details>
-              <summary>查看详情</summary>
-              
-              <p><strong>【亮点】</strong>乘坐TGV Lyria高速列车从日内瓦出发，穿越法瑞边境，经过第戎、里昂，一路向北抵达巴黎。列车设施现代，座位宽敞，可在餐车享用简餐。</p>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">出发</div>
-                  <div class="info-value">12:15 Geneva Cornavin</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">抵达</div>
-                  <div class="info-value">16:30 Paris Gare de Lyon</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">时长</div>
-                  <div class="info-value">3小时15分钟</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">类型</div>
-                  <div class="info-value">直达高速列车</div>
-                </div>
-              </div>
-              
-              <p style="margin-top:12px"><strong>🗺️ 途经路线：</strong></p>
-              <ul>
-                <li><strong>日内瓦 → 布雷斯地区布尔格</strong> - 离开瑞士，进入法国境内</li>
-                <li><strong>第戎(Dijon)</strong> - 勃艮第大区首府</li>
-                <li><strong>里昂(Lyon)</strong> - 法国第三大城市，美食之都</li>
-                <li><strong>巴黎方向</strong> - 穿越法国中部平原</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>💡 乘车建议：</strong></p>
-              <ul>
-                <li>提前在SNCF官网或APP预订座位</li>
-                <li>车厢内提供免费WiFi</li>
-                <li>餐车提供简餐、饮料和咖啡</li>
-                <li>可欣赏沿途法国乡村风光</li>
-              </ul>
-            </details>
-          </div>
+                    <div class="item">
+                        <div class="time">09:00</div>
+                        <div class="title">🍳 酒店早餐</div>
+                        <p>享用最后一顿瑞士早餐。</p>
+                    </div>
 
-          <!-- Arrive Paris - Arc de Triomphe -->
-          <div class="item" id="paris">
-            <div class="time">16:30</div>
-            <div class="title">🌟 Arc de Triomphe 凯旋门</div>
-        
-            <details>
-              <summary>查看详情</summary>
-              
-              <p><strong>【亮点】</strong>凯旋门(Arc de Triomphe de l'Étoile)是巴黎最具标志性的建筑之一，也是世界上最大的一座凯旋门。位于香榭丽舍大道西端的戴高乐广场中央。</p>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">建造时间</div>
-                  <div class="info-value">1806-1836年</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">高度</div>
-                  <div class="info-value">50米</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">门票</div>
-                  <div class="info-value">€13（登顶）</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">无名烈士墓</div>
-                  <div class="info-value">永恒之火</div>
-                </div>
-              </div>
-              
-              <p style="margin-top:12px"><strong>🏛️ 建筑特色：</strong></p>
-              <ul>
-                <li><strong>四大浮雕：</strong>《马赛曲》《胜利》《和平》《抵抗》</li>
-                <li><strong>无名烈士墓：</strong>拱门下方，永恒之火自1923年起从未熄灭</li>
-                <li><strong>屋顶观景：</strong>可攀登284级台阶到达顶部平台，俯瞰十二条大道</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】Place Charles de Gaulle, 75008 Paris<br>
-              【交通】地铁1/2/6号线至Charles de Gaulle-Étoile站<br>
-              【停留时间】60-90分钟</p>
-            </details>
-          </div>
+                    <div class="item">
+                        <div class="time">10:00</div>
+                        <div class="title">🧳 退房 + 前往火车站</div>
+                        <p>退房，步行前往Grindelwald火车站。</p>
+                    </div>
 
-          <!-- Champs-Élysées -->
-          <div class="item">
-            <div class="time">18:00</div>
-            <div class="title">🛍️ Champs-Élysées 香榭丽舍大道</div>
-            <details>
-              <summary>查看详情</summary>
-              
-              <p><strong>【亮点】</strong>香榭丽舍大道(Avenue des Champs-Élysées)被誉为"世界上最美丽的大道"，长1.9公里，从凯旋门延伸至协和广场。这里是巴黎奢华与优雅的代名词。</p>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">全长</div>
-                  <div class="info-value">1.91公里</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">宽度</div>
-                  <div class="info-value">70米</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">昵称</div>
-                  <div class="info-value">La plus belle avenue</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">始建</div>
-                  <div class="info-value">17世纪</div>
-                </div>
-              </div>
-              
-              <p style="margin-top:12px"><strong>🛍️ 顶级购物：</strong></p>
-              <ul>
-                <li><strong>路易威登旗舰店(LV)</strong> - 全球最大的旗舰店之一</li>
-                <li><strong>迪奥(Dior)、香奈儿(Chanel)</strong> - 法国顶级奢侈品牌</li>
-                <li><strong>Ladurée</strong> - 百年马卡龙名店</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>💡 漫步建议：</strong></p>
-              <p>从凯旋门出发向东步行至协和广场，全程约25分钟。傍晚时分最佳，可在街边咖啡馆坐看华灯初上。</p>
-              
-              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】Avenue des Champs-Élysées, 75008 Paris<br>
-              【停留时间】2-3小时</p>
-            </details>
-          </div>
+                    <div class="item">
+                        <div class="time">10:47</div>
+                        <div class="title">🚄 火车前往日内瓦</div>
+                        <p>Grindelwald → Geneva，约3小时。</p>
+                        <details>
+                            <summary>🗺️ 火车路线</summary>
+                            <p>Grindelwald (10:47) → Interlaken Ost → Bern → Geneva (14:00)</p>
+                        </details>
+                    </div>
 
-          <!-- Eiffel Tower -->
-          <div class="item" id="eiffel">
-            <div class="time">21:00</div>
-            <div class="title">🗼 Eiffel Tower 埃菲尔铁塔（夜景+闪灯秀）</div>
-        
-            <details>
-              <summary>查看详情</summary>
-              
-              <p><strong>【亮点】</strong>埃菲尔铁塔(La Tour Eiffel)是巴黎乃至法国的象征。夜幕降临后，铁塔披上金色的灯光外衣，每小时整点的闪灯秀(Scintillation)更是令人心醉的梦幻时刻。</p>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">建造时间</div>
-                  <div class="info-value">1887-1889年</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">高度</div>
-                  <div class="info-value">330米</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">闪灯时间</div>
-                  <div class="info-value">每整点5分钟</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">灯泡数量</div>
-                  <div class="info-value">20,000个</div>
-                </div>
-              </div>
-              
-              <p style="margin-top:12px"><strong>✨ 闪灯秀(Scintillation)：</strong></p>
-              <p>每晚日落后至凌晨1:00，每到整点时分，铁塔上的2万个灯泡会同时闪烁5分钟，创造出令人震撼的璀璨效果。</p>
-              
-              <p style="margin-top:12px"><strong>🌃 最佳观赏点：</strong></p>
-              <ul>
-                <li><strong>特罗卡德罗广场(Trocadéro)</strong> - 最经典的角度，正对铁塔</li>
-                <li><strong>战神广场(Champ de Mars)</strong> - 位于铁塔正下方</li>
-                <li><strong>塞纳河游船</strong> - 从河上欣赏铁塔倒影</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>💡 夜游建议：</strong></p>
-              <ul>
-                <li>无需登塔，在特罗卡德罗观赏夜景和闪灯秀即可</li>
-                <li>21:00或22:00整点的闪灯秀最为壮观</li>
-                <li>可携带香槟和野餐垫，在战神广场享受铁塔下的浪漫时刻</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】Champ de Mars, 5 Avenue Anatole France, 75007 Paris<br>
-              【交通】地铁6号线至Bir-Hakeim站<br>
-              【闪灯秀时间】日落后至凌晨1:00，每整点5分钟<br>
-              【停留时间】60-90分钟（夜景观赏）</p>
-            </details>
-          </div>
+                    <div class="item">
+                        <div class="time">14:00</div>
+                        <div class="title">🏛️ 抵达日内瓦</div>
+                        <p>入住Aparthotel Adagio，稍作休息。</p>
+                    </div>
 
-          <!-- Hotel -->
-          <div class="item">
-            <div class="time">22:30</div>
-            <div class="title">🏨 入住酒店</div>
-            <details>
-              <summary>查看详情</summary>
-              <p><strong>【亮点】</strong>入住位于凯旋门旁的Le Méridien Paris Arc de Triomphe酒店，结束精彩的一天。</p>
-              <p><strong>【从铁塔前往】</strong>搭乘地铁6号线至Charles de Gaulle-Étoile站，步行5分钟即达酒店</p>
-            </details>
-          </div>
+                    <div class="item">
+                        <div class="time">16:00</div>
+                        <div class="title">🦢 日内瓦湖漫步</div>
+                        <p>沿湖漫步，看优雅的天鹅，远眺阿尔卑斯山。</p>
+                    </div>
 
+                    <div class="item">
+                        <div class="time">17:00</div>
+                        <div class="title">⛲ 大喷泉 Jet d'Eau</div>
+                        <p>日内瓦地标，140米高水柱，世界最大人工喷泉之一。</p>
+                    </div>
+
+                    <div class="item">
+                        <div class="time">18:00</div>
+                        <div class="title">🏛️ 联合国总部（外观）</div>
+                        <p>万国宫外观参观，断腿木椅拍照。</p>
+                        <details>
+                            <summary>ℹ️ 参观说明</summary>
+                            <p>本日仅外观参观（约30-45分钟）。如需入内，需提前预约导览（2小时）。</p>
+                            <p>预约网站：visit.un.org</p>
+                        </details>
+                    </div>
+
+                    <div class="item">
+                        <div class="time">19:00</div>
+                        <div class="title">🍽️ 晚餐</div>
+                        <p>在日内瓦老城享用晚餐。</p>
+                    </div>
+
+                    <div class="item">
+                        <div class="time">21:00</div>
+                        <div class="title">🌙 酒店休息</div>
+                        <p>明天前往巴黎，早点休息。</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Hotel Details Section -->
-    <div class="section" id="hotel-details">
-      <div class="card-content">
-        <div class="card-title">🏨 酒店详情</div>
-        
-        <div class="hotel-card">
-          <div class="hotel-header">
-            <h3 class="hotel-name">Le Méridien Paris Arc de Triomphe</h3>
-            <span class="hotel-stars">⭐⭐⭐⭐⭐</span>
-            <span class="hotel-chain">艾美酒店（万豪旗下）</span>
-          </div>
-          
-          <div class="hotel-grid">
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">📍</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">完整地址</div>
-                <div class="hotel-info-value">81 Avenue de Wagram, 75017 Paris, France</div>
-              </div>
+        <div class="section">
+            <div class="card-content">
+                <div class="card-title">🏨 住宿信息</div>
+                <p><strong>Aparthotel Adagio Geneve Mont-Blanc</strong></p>
+                <p>📍 Rue du Mont-Blanc, Geneva</p>
             </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">🚶</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">从凯旋门前往</div>
-                <div class="hotel-info-value">步行约5分钟，距离约400米</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">🚇</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">最近地铁站</div>
-                <div class="hotel-info-value">Charles de Gaulle-Étoile（地铁1/2/6号线）</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">⏰</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">入住/退房时间</div>
-                <div class="hotel-info-value">入住：15:00后 | 退房：12:00前</div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="hotel-amenities">
-            <span class="amenity-tag">✓ 五星豪华酒店</span>
-            <span class="amenity-tag">✓ 118间客房</span>
-            <span class="amenity-tag">✓ 免费WiFi</span>
-            <span class="amenity-tag">✓ 24小时礼宾服务</span>
-            <span class="amenity-tag">✓ 24小时健身中心</span>
-            <span class="amenity-tag">✓ 餐厅及酒吧</span>
-          </div>
         </div>
-      </div>
     </div>
-
-    <!-- Tips Section -->
-    <div class="section">
-      <div class="card-content">
-        <div class="card-title">💡 实用贴士</div>
-        <ul style="color:var(--muted);padding-left:20px">
-          <li><strong>🚄 TGV票务：</strong>建议提前在SNCF Connect APP购买，支持电子票</li>
-          <li><strong>⏰ 时间把控：</strong>上午游览老城，11:30前到达火车站，12:15火车不等人！</li>
-          <li><strong>🧳 行李建议：</strong>可在日内瓦火车站寄存行李，轻装游览老城</li>
-          <li><strong>🍽️ 午餐：</strong>时间紧张，建议在车站购买三明治或车上用餐</li>
-          <li><strong>💶 货币切换：</strong>离开瑞士前可花掉剩余的瑞士法郎，巴黎使用欧元</li>
-          <li><strong>🔌 充电：</strong>TGV座位有插座，记得带上转换插头</li>
-          <li><strong>📸 埃菲尔铁塔：</strong>21:00整点闪灯秀不要错过！</li>
-          <li><strong>🗼 凯旋门登顶：</strong>建议使用地下通道进入，切勿穿越环岛</li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
 </body>
 </html>

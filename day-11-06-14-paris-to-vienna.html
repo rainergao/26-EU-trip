@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Day 11｜06-14｜Vienna → Shanghai 返程</title>
+  <title>Day 11｜06-14｜Vienna → Shanghai</title>
   <style>
     :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08);--accent:#f59e0b}
     body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
     .wrap{max-width:1160px;margin:0 auto;padding:24px}
     
     /* Hero Section */
-    .hero{background:linear-gradient(135deg,#1d4ed8,#2563eb 60%,#60a5fa);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
+    .hero{background:linear-gradient(135deg,#dc2626,#ef4444 50%,#f87171);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
     h1{margin:0 0 8px;font-size:28px}
     .subtitle{margin:0;opacity:.9;font-size:16px}
     
@@ -61,35 +61,56 @@
     .info-value{font-size:14px;font-weight:600;color:var(--text)}
     .scroll-indicator{display:none}
     
+    /* Hotel Card */
+    .hotel-card{background:linear-gradient(135deg,#fff 0%,#f8fafc 100%);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:16px}
+    .hotel-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+    .hotel-name{font-size:20px;font-weight:800;color:var(--text);margin:0}
+    .hotel-stars{color:#f59e0b;font-size:18px}
+    .hotel-chain{font-size:13px;color:var(--muted);background:#e0e7ff;padding:4px 10px;border-radius:12px}
+    .hotel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+    .hotel-info-item{display:flex;align-items:flex-start;gap:10px}
+    .hotel-info-icon{font-size:18px;min-width:24px;text-align:center}
+    .hotel-info-content{flex:1}
+    .hotel-info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+    .hotel-info-value{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}
+    .hotel-amenities{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+    .amenity-tag{background:#ecfdf5;color:#059669;font-size:12px;padding:6px 12px;border-radius:20px;display:flex;align-items:center;gap:6px}
+    
     /* Flight Card */
-    .flight-card{background:linear-gradient(135deg,#eff6ff 0%,#fff 100%);border:1px solid #bfdbfe;border-radius:20px;padding:20px;margin-top:16px}
+    .flight-card{background:linear-gradient(135deg,#fef2f2 0%,#fff 100%);border:1px solid #fecaca;border-radius:20px;padding:20px;margin-top:16px}
     .flight-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px}
     .flight-route{display:flex;align-items:center;gap:12px;font-size:20px;font-weight:800;color:var(--text)}
-    .flight-route .arrow{color:var(--blue);font-size:24px}
-    .flight-number{font-size:13px;color:var(--blue);background:#dbeafe;padding:4px 10px;border-radius:12px}
-    .flight-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
-    .flight-info-item{background:#fff;border:1px solid #e0e7ff;border-radius:12px;padding:16px;text-align:center}
-    .flight-info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
-    .flight-info-value{font-size:16px;font-weight:700;color:var(--text)}
-    .flight-info-sub{font-size:12px;color:var(--muted);margin-top:2px}
+    .flight-route .arrow{color:#dc2626;font-size:24px}
+    .flight-number{font-size:13px;color:#dc2626;background:#fee2e2;padding:4px 10px;border-radius:12px}
     .flight-timeline{display:flex;align-items:center;justify-content:center;gap:20px;margin:20px 0;padding:20px;background:#f8fafc;border-radius:16px}
     .flight-point{text-align:center}
-    .flight-point-time{font-size:24px;font-weight:800;color:var(--blue)}
+    .flight-point-time{font-size:24px;font-weight:800;color:#dc2626}
     .flight-point-code{font-size:14px;color:var(--muted);margin-top:4px}
     .flight-duration{text-align:center}
-    .flight-duration-line{width:100px;height:2px;background:var(--blue);position:relative;margin:8px 0}
+    .flight-duration-line{width:120px;height:2px;background:#dc2626;position:relative;margin:8px 0}
     .flight-duration-line::after{content:"✈️";position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:16px;background:#f8fafc;padding:0 8px}
     .flight-duration-text{font-size:12px;color:var(--muted)}
     
-    /* Success box */
-    .success-box{background:#f0fdf4;border-left:4px solid #22c55e;padding:12px 16px;border-radius:0 12px 12px 0;margin:12px 0}
-    .success-box strong{color:#15803d}
+    /* Attraction highlight */
+    .attraction-highlight{background:linear-gradient(135deg,#eff6ff 0%,#fff 100%);border:1px solid #bfdbfe;border-radius:20px;padding:20px;margin-top:16px}
+    .attraction-title{font-size:18px;font-weight:800;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+    
+    /* Checklist */
+    .checklist-box{background:linear-gradient(135deg,#fef9c3 0%,#fefce8 100%);border:1px solid #fde047;border-radius:16px;padding:20px;margin-top:16px}
+    .checklist-title{font-size:16px;font-weight:700;color:#854d0e;margin-bottom:12px}
+    .checklist-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;font-size:14px;color:#713f12}
+    .checklist-checkbox{width:18px;height:18px;border:2px solid #ca8a04;border-radius:4px;flex-shrink:0;margin-top:2px}
+    
+    /* Tips */
+    .tips-box{background:linear-gradient(135deg,#eff6ff 0%,#fff 100%);border:1px solid #bfdbfe;border-radius:16px;padding:16px;margin-top:12px}
+    .tips-title{font-size:14px;font-weight:700;color:#1e40af;margin-bottom:8px}
+    .tips-list{margin:0;padding-left:18px;color:#1e3a8a}
+    .tips-list li{margin-bottom:6px;font-size:13px}
     
     /* Completion box */
-    .completion-box{background:linear-gradient(135deg,#fef3c7 0%,#fff 100%);border:1px solid #fbbf24;border-radius:20px;padding:24px;margin-top:20px;text-align:center}
-    .completion-icon{font-size:48px;margin-bottom:12px}
-    .completion-title{font-size:20px;font-weight:800;color:var(--text);margin-bottom:8px}
-    .completion-text{color:var(--muted);font-size:14px}
+    .completion-box{background:linear-gradient(135deg,#dcfce7 0%,#f0fdf4 100%);border:1px solid #86efac;border-radius:20px;padding:24px;margin-top:20px;text-align:center}
+    .completion-title{font-size:22px;font-weight:800;color:#166534;margin-bottom:12px}
+    .completion-text{color:#166534;font-size:14px;line-height:1.8}
     
     @media(max-width:768px){
       .wrap{padding:16px}
@@ -108,6 +129,12 @@
       .item .title{font-size:16px}
       .info-grid{grid-template-columns:1fr}
       .info-item{padding:10px}
+      .hotel-card{padding:16px}
+      .hotel-name{font-size:18px}
+      .hotel-grid{grid-template-columns:1fr;gap:12px}
+      .flight-point-time{font-size:20px}
+      .flight-duration-line{width:80px}
+      .scroll-indicator{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
     }
   </style>
 </head>
@@ -115,42 +142,36 @@
   <div class="wrap">
     <!-- Hero Section -->
     <div class="hero">
-      <h1>🏠 Day 11｜06-14｜Vienna → Shanghai 返程</h1>
-      <p class="subtitle">返程日｜维也纳机场酒店 → 维也纳机场 → 返回上海｜旅程圆满结束</p>
+      <h1>🛫 Day 11｜06-14｜Vienna → Shanghai</h1>
+      <p class="subtitle">欧洲之旅圆满结束｜音乐之都起飞｜返回上海</p>
     </div>
 
     <!-- Navigation -->
     <div class="nav-links">
-      <a href="index.html">← 返回主页</a>
       <a href="day-10-06-13-paris.html">← Day 10</a>
+      <a href="index.html">返回主页</a>
     </div>
 
     <!-- Banner Navigation -->
     <div class="banner-nav">
       <div class="banner-title">📍 行程导航</div>
       <div class="banner-track">
-        <a href="#hotel" class="banner-node active">
-          <div class="banner-time">09:00</div>
+        <a href="#morning" class="banner-node active">
+          <div class="banner-time">Morning</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">机场酒店</div>
+          <div class="banner-label">维也纳机场</div>
         </a>
         <div class="banner-arrow">→</div>
-        <a href="#airport" class="banner-node">
+        <a href="#checkin" class="banner-node">
           <div class="banner-time">10:45</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">机场值机</div>
+          <div class="banner-label">值机登机</div>
         </a>
         <div class="banner-arrow">→</div>
         <a href="#flight" class="banner-node">
           <div class="banner-time">12:45</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">VIE→CTU</div>
-        </a>
-        <div class="banner-arrow">→</div>
-        <a href="#home" class="banner-node">
-          <div class="banner-time">次日</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">抵达上海</div>
+          <div class="banner-label">起飞回上海</div>
         </a>
       </div>
       <div class="scroll-indicator">← 左右滑动查看更多 →</div>
@@ -161,10 +182,10 @@
       <div class="card-content">
         <div class="card-title">✈️ 返程航班信息</div>
         <div class="highlight-box">
-          <strong>Vienna International Airport (VIE) → Chengdu Tianfu International Airport (TFU)</strong><br>
-          <span style="font-size:20px;font-weight:800;color:var(--blue)">维也纳 → 成都</span>
-          <span class="tag">约9-10小时</span>
-          <span class="tag">直飞/中转</span>
+          <strong>Vienna International Airport (VIE) → Shanghai Pudong (PVG)</strong><br>
+          <span style="font-size:20px;font-weight:800;color:#dc2626">维也纳 → 上海</span>
+          <span class="tag">约10-11小时</span>
+          <span class="tag">约8600公里</span>
         </div>
         
         <div class="flight-card">
@@ -172,9 +193,9 @@
             <div class="flight-route">
               <span>VIE</span>
               <span class="arrow">✈️</span>
-              <span>CTU</span>
+              <span>PVG</span>
             </div>
-            <span class="flight-number">返程航班</span>
+            <span class="flight-number">洲际长途航班</span>
           </div>
           
           <div class="flight-timeline">
@@ -184,37 +205,30 @@
             </div>
             <div class="flight-duration">
               <div class="flight-duration-line"></div>
-              <div class="flight-duration-text">约9-10小时</div>
+              <div class="flight-duration-text">约10-11小时</div>
             </div>
             <div class="flight-point">
-              <div class="flight-point-time">次日</div>
-              <div class="flight-point-code">TFU 成都天府</div>
+              <div class="flight-point-time">次日06:00+</div>
+              <div class="flight-point-code">PVG 上海</div>
             </div>
           </div>
           
-          <div class="flight-grid">
-            <div class="flight-info-item">
-              <div class="flight-info-label">出发机场</div>
-              <div class="flight-info-value">维也纳国际机场</div>
-              <div class="flight-info-sub">Flughafen Wien</div>
+          <div class="info-grid">
+            <div class="info-item">
+              <div class="info-label">出发机场</div>
+              <div class="info-value">维也纳机场 (VIE)</div>
             </div>
-            
-            <div class="flight-info-item">
-              <div class="flight-info-label">到达机场</div>
-              <div class="flight-info-value">成都天府机场</div>
-              <div class="flight-info-sub">Chengdu Tianfu</div>
+            <div class="info-item">
+              <div class="info-label">到达机场</div>
+              <div class="info-value">上海浦东 (PVG)</div>
             </div>
-            
-            <div class="flight-info-item">
-              <div class="flight-info-label">建议到达时间</div>
-              <div class="flight-info-value">10:45前</div>
-              <div class="flight-info-sub">提前2小时</div>
+            <div class="info-item">
+              <div class="info-label">飞行距离</div>
+              <div class="info-value">约8600公里</div>
             </div>
-            
-            <div class="flight-info-item">
-              <div class="flight-info-label">航空公司</div>
-              <div class="flight-info-value">四川航空/国航</div>
-              <div class="flight-info-sub">或中转航班</div>
+            <div class="info-item">
+              <div class="info-label">时差</div>
+              <div class="info-value">+6小时（上海快）</div>
             </div>
           </div>
         </div>
@@ -224,120 +238,190 @@
     <!-- Timeline Section -->
     <div class="section">
       <div class="card-content">
-        <div class="card-title">📍 返程安排</div>
+        <div class="card-title">📍 最后一天行程</div>
         <div class="timeline">
           
-          <!-- Hotel -->
-          <div class="item" id="hotel">
-            <div class="time">09:00</div>
-            <div class="title">🏨 酒店退房 & 早餐</div>
+          <!-- Morning at Airport -->
+          <div class="item" id="morning">
+            <div class="time">Morning</div>
+            <div class="title">🌅 维也纳机场清晨</div>
+        
             <details>
               <summary>查看详情</summary>
-              <p>Moxy Vienna Airport 酒店退房，享用酒店提供的轻食早餐或咖啡。</p>
-              <p>步行约5分钟即可到达维也纳机场航站楼，非常便利。</p>
+              
+              <p><strong>【亮点】</strong>在机场酒店享用早餐，整理行李，办理退房手续。</p>
+              
+              <div class="tips-box">
+                <div class="tips-title">🕐 建议时间安排</div>
+                <ul class="tips-list">
+                  <li><strong>07:00-08:00:</strong> 享用早餐（Moxy酒店轻食吧）</li>
+                  <li><strong>08:00-09:00:</strong> 整理行李，检查遗漏物品</li>
+                  <li><strong>09:00-09:30:</strong> 退房，步行至航站楼</li>
+                  <li><strong>09:30-10:00:</strong> 前往航空公司柜台办理值机</li>
+                </ul>
+              </div>
             </details>
           </div>
 
-          <!-- Airport Check-in -->
-          <div class="item" id="airport">
+          <!-- Check-in -->
+          <div class="item" id="checkin">
             <div class="time">10:45</div>
-            <div class="title">✈️ 维也纳机场 值机手续</div>
+            <div class="title">🎫 办理值机与登机</div>
             <details>
               <summary>查看详情</summary>
               
-              <p><strong>【值机流程】</strong></p>
-              <ul>
-                <li>前往对应航空公司值机柜台</li>
-                <li>出示护照办理登机牌</li>
-                <li>托运行李（如有）</li>
-                <li>获取登机牌后前往安检</li>
-              </ul>
+              <p><strong>【亮点】</strong>国际航班建议提前2小时到达机场办理值机手续。</p>
               
-              <p style="margin-top:12px"><strong>【安检须知】</strong></p>
-              <ul>
-                <li>液体需放入透明袋，单瓶不超过100ml</li>
-                <li>电子设备（笔记本、平板）需单独取出</li>
-                <li>外套、皮带、金属物品需通过安检</li>
-              </ul>
+              <div class="attraction-highlight">
+                <div class="attraction-title">🛂 值机流程</div>
+                
+                <p><strong>1. 值机柜台：</strong></p>
+                <ul>
+                  <li>找到对应航空公司值机柜台</li>
+                  <li>出示护照和电子机票</li>
+                  <li>托运行李（注意重量限制）</li>
+                  <li>领取登机牌</li>
+                </ul>
+                
+                <p style="margin-top:12px"><strong>2. 安检出境：</strong></p>
+                <ul>
+                  <li>通过安检（取出电子设备、液体单独检查）</li>
+                  <li>边检出境（出示护照、登机牌）</li>
+                  <li>进入国际候机区</li>
+                </ul>
+                
+                <p style="margin-top:12px"><strong>3. 候机购物：</strong></p>
+                <ul>
+                  <li>免税店最后采购机会</li>
+                  <li>维也纳机场特色：莫扎特巧克力、水晶饰品</li>
+                </ul>
+              </div>
               
-              <p style="margin-top:12px"><strong>【免税店购物】</strong></p>
-              <ul>
-                <li>奥地利特色：莫扎特巧克力、施华洛世奇水晶</li>
-                <li>欧洲化妆品：比国内价格优惠</li>
-                <li>葡萄酒：奥地利白葡萄酒品质优良</li>
-              </ul>
+              <div class="checklist-box">
+                <div class="checklist-title">✅ 登机前检查清单</div>
+                <div class="checklist-item">
+                  <div class="checklist-checkbox"></div>
+                  <span>护照原件</span>
+                </div>
+                <div class="checklist-item">
+                  <div class="checklist-checkbox"></div>
+                  <span>登机牌</span>
+                </div>
+                <div class="checklist-item">
+                  <div class="checklist-checkbox"></div>
+                  <span>手机+充电宝</span>
+                </div>
+                <div class="checklist-item">
+                  <div class="checklist-checkbox"></div>
+                  <span>长途飞行必备：颈枕、眼罩、耳塞</span>
+                </div>
+                <div class="checklist-item">
+                  <div class="checklist-checkbox"></div>
+                  <span>常用药品（晕机药、感冒药等）</span>
+                </div>
+                <div class="checklist-item">
+                  <div class="checklist-checkbox"></div>
+                  <span>保湿护肤品（机舱干燥）</span>
+                </div>
+              </div>
             </details>
           </div>
 
-          <!-- Flight -->
+          <!-- Departure -->
           <div class="item" id="flight">
             <div class="time">12:45</div>
-            <div class="title">✈️ 航班起飞 VIE → CTU</div>
+            <div class="title">🛫 起飞回上海</div>
             <details>
               <summary>查看详情</summary>
               
-              <p><strong>【航班信息】</strong></p>
-              <ul>
-                <li>起飞时间：12:45（当地时间）</li>
-                <li>飞行时长：约9-10小时（直飞）或更长（中转）</li>
-                <li>目的地：成都天府国际机场</li>
-              </ul>
+              <p><strong>【亮点】</strong>从维也纳起飞，飞越中亚、中国西北，最终抵达上海。这是一段约10-11小时的长途飞行。</p>
               
-              <p style="margin-top:12px"><strong>【飞行小贴士】</strong></p>
-              <ul>
-                <li>长途飞行建议穿着舒适宽松的衣服</li>
-                <li>准备好颈枕、眼罩、耳塞等助眠用品</li>
-                <li>适时起身活动，避免久坐</li>
-                <li>多喝水，保持身体水分</li>
-                <li>调整手表时间，开始适应北京时间</li>
-              </ul>
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">飞行时长</div>
+                  <div class="info-value">约10-11小时</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">预计到达</div>
+                  <div class="info-value">次日早晨（上海时间）</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">飞行方向</div>
+                  <div class="info-value">向东飞行</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">时差调整</div>
+                  <div class="info-value">建议机上按目的地时间作息</div>
+                </div>
+              </div>
+              
+              <div class="tips-box">
+                <div class="tips-title">💺 长途飞行舒适建议</div>
+                <ul class="tips-list">
+                  <li><strong>座位选择：</strong>靠窗方便睡觉，靠走廊方便走动</li>
+                  <li><strong>穿着舒适：</strong>宽松衣物，便于在座位上调整姿势</li>
+                  <li><strong>定时活动：</strong>每2-3小时起身走动，预防深静脉血栓</li>
+                  <li><strong>保持水分：</strong>多喝水，避免酒精和咖啡因</li>
+                  <li><strong>机上娱乐：</strong>下载电影/音乐，准备书籍</li>
+                </ul>
+              </div>
             </details>
           </div>
 
-          <!-- Arrival -->
-          <div class="item" id="home">
-            <div class="time">次日</div>
-            <div class="title">🏠 抵达成都 旅程圆满结束</div>
-            <details>
-              <summary>查看详情</summary>
-              
-              <p><strong>【入境流程】</strong></p>
-              <ul>
-                <li>填写入境健康申报（如需）</li>
-                <li>通过边检入境</li>
-                <li>提取托运行李</li>
-                <li>通过海关检查</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>【从天府机场返回市区】</strong></p>
-              <ul>
-                <li>地铁18号线：约45-60分钟到达市区</li>
-                <li>机场大巴：多条线路通往市区各方向</li>
-                <li>出租车/网约车：约1-1.5小时，费用约150-200元</li>
-              </ul>
-            </details>
-          </div>
         </div>
       </div>
     </div>
 
-    <!-- Completion Section -->
+    <!-- Hotel Card Section -->
     <div class="section">
       <div class="card-content">
-        <div class="completion-box">
-          <div class="completion-icon">🎉</div>
-          <div class="completion-title">欧洲12天深度之旅圆满结束</div>
-          <div class="completion-text">
-            感谢您跟随我们一起完成这次穿越中欧与西欧的精彩旅程！<br>
-            从维也纳到罗马，从威尼斯到米兰，从瑞士阿尔卑斯到巴黎浪漫街头，<br>
-            愿这段美好的回忆永远珍藏！
-          </div>
+        <div class="card-title">🏨 昨晚住宿回顾</div>
+        <div class="highlight-box">
+          <strong>Moxy Vienna Airport</strong>
+          <span class="tag">万豪旗下</span>
+          <span class="tag">机场步行5分钟</span>
         </div>
         
-        <div class="success-box" style="margin-top:16px">
-          <strong>✅ 行程统计：</strong><br>
-          📅 12天11晚 | 🌍 5个国家 | 🏙️ 8座城市 | ✈️ 3段飞行<br>
-          🇦🇹 奥地利 · 🇮🇹 意大利 · 🇨🇭 瑞士 · 🇫🇷 法国
+        <div class="hotel-card">
+          <div class="hotel-header">
+            <h3 class="hotel-name">Moxy Vienna Airport</h3>
+            <span class="hotel-stars">⭐⭐⭐</span>
+            <span class="hotel-chain">万豪旗下时尚酒店</span>
+          </div>
+          
+          <div class="hotel-grid">
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📍</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">地址</div>
+                <div class="hotel-info-value">Ausfahrtsstraße 4, 1300 Schwechat, Austria</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🚶</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">距航站楼</div>
+                <div class="hotel-info-value">步行约5分钟，约300米</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">⏰</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">退房时间</div>
+                <div class="hotel-info-value">12:00前</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🍽️</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">早餐</div>
+                <div class="hotel-info-value">24小时轻食吧供应</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -345,17 +429,26 @@
     <!-- Tips Section -->
     <div class="section">
       <div class="card-content">
-        <div class="card-title">💡 返程贴士</div>
+        <div class="card-title">💡 返程实用贴士</div>
+        
         <ul style="color:var(--muted);padding-left:20px">
-          <li><strong>提前值机：</strong>起飞前24小时可在航空公司官网办理网上值机，节省机场时间</li>
-          <li><strong>行李检查：</strong>确认托运行李额度，超重行李费用较高</li>
-          <li><strong>退税：</strong>如在欧洲购物需退税，提前预留时间办理退税手续</li>
-          <li><strong>纪念品：</strong>维也纳机场可购买莫扎特巧克力、奥地利水晶等伴手礼</li>
-          <li><strong>时差调整：</strong>飞行期间尽量按目的地时间作息，减少时差影响</li>
-          <li><strong>重要物品：</strong>护照、登机牌、贵重物品随身携带</li>
-          <li><strong>电子设备：</strong>手机、充电宝确保有电，国际漫游或提前购买流量包</li>
-          <li><strong>欢迎回家：</strong>11天的精彩旅程，期待下一次出发！</li>
+          <li><strong>提前2小时：</strong>国际航班建议提前2小时到达机场办理手续</li>
+          <li><strong>退税商品：</strong>如还有未退税商品，需在机场海关盖章后托运</li>
+          <li><strong>液体限制：</strong>随身携带液体每瓶不超过100ml，总量不超过1L</li>
+          <li><strong>电子设备：</strong>笔记本电脑、平板需单独取出过安检</li>
+          <li><strong>机上睡眠：</strong>起飞后可按上海时间调整作息，有助于倒时差</li>
+          <li><strong>到达上海：</strong>次日早晨抵达后，通过边检、提取行李即可出关</li>
         </ul>
+      </div>
+    </div>
+
+    <!-- Completion Section -->
+    <div class="completion-box">
+      <div class="completion-title">🎉 欧洲之旅圆满结束！</div>
+      <div class="completion-text">
+        11天的欧洲之旅从米兰开始，经过瑞士格林德瓦、日内瓦，<br>
+        再到浪漫之都巴黎，最后在维也纳画上圆满句号。<br>
+        感谢一路相伴，期待下次旅程！
       </div>
     </div>
 
