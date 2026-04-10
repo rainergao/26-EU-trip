@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Day 11｜06-14｜Paris → Vienna</title>
+  <title>Day 11｜06-14｜Vienna → Shanghai 返程</title>
   <style>
     :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08);--accent:#f59e0b}
     body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
@@ -13,16 +13,6 @@
     .hero{background:linear-gradient(135deg,#1d4ed8,#2563eb 60%,#60a5fa);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
     h1{margin:0 0 8px;font-size:28px}
     .subtitle{margin:0;opacity:.9;font-size:16px}
-    
-    /* Map Section */
-    .map-section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px}
-    .map-title{font-size:16px;font-weight:700;margin-bottom:12px;color:var(--text);display:flex;align-items:center;gap:8px}
-    .map-container{width:100%;height:350px;border-radius:16px;overflow:hidden;background:#f3f4f6;position:relative}
-    .map-container iframe{width:100%;height:100%;border:0}
-    .map-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);background:linear-gradient(135deg,#e5e7eb 0%,#f3f4f6 100%)}
-    .map-placeholder svg{width:48px;height:48px;margin-bottom:12px;opacity:.5}
-    .map-route{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:13px;color:var(--muted)}
-    .map-route span{background:#f3f4f6;padding:4px 10px;border-radius:12px}
     
     /* Banner Navigation */
     .banner-nav{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px;overflow-x:auto}
@@ -57,10 +47,6 @@
     summary{cursor:pointer;font-weight:600;color:var(--blue)}
     details[open] summary{margin-bottom:12px}
     
-    /* Attraction Images */
-    .attraction-img{width:100%;border-radius:16px;margin:12px 0;box-shadow:0 4px 12px rgba(0,0,0,.1)}
-    .img-caption{font-size:12px;color:var(--muted);text-align:center;margin-top:4px;font-style:italic}
-    
     /* Navigation */
     .nav-links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
     .nav-links a{color:var(--blue);text-decoration:none;font-weight:500}
@@ -74,36 +60,6 @@
     .info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
     .info-value{font-size:14px;font-weight:600;color:var(--text)}
     .scroll-indicator{display:none}
-    
-    /* Transport Card */
-    .transport-card{background:linear-gradient(135deg,#fffbeb 0%,#fff 100%);border:1px solid #fcd34d;border-radius:20px;padding:20px;margin-top:16px}
-    .transport-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
-    .transport-title{font-size:18px;font-weight:800;color:var(--text);margin:0}
-    .transport-type{font-size:13px;color:#b45309;background:#fef3c7;padding:4px 10px;border-radius:12px}
-    .transport-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
-    .transport-info-item{display:flex;align-items:flex-start;gap:10px}
-    .transport-info-icon{font-size:18px;min-width:24px;text-align:center}
-    .transport-info-content{flex:1}
-    .transport-info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
-    .transport-info-value{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}
-    .transport-tips{margin-top:16px;padding-top:16px;border-top:1px solid #fcd34d}
-    .tip-item{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;font-size:13px;color:#92400e}
-    .tip-icon{font-size:16px}
-    
-    /* Hotel Card */
-    .hotel-card{background:linear-gradient(135deg,#fff 0%,#f8fafc 100%);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:16px}
-    .hotel-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
-    .hotel-name{font-size:20px;font-weight:800;color:var(--text);margin:0}
-    .hotel-stars{color:#f59e0b;font-size:18px}
-    .hotel-chain{font-size:13px;color:var(--muted);background:#e0e7ff;padding:4px 10px;border-radius:12px}
-    .hotel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
-    .hotel-info-item{display:flex;align-items:flex-start;gap:10px}
-    .hotel-info-icon{font-size:18px;min-width:24px;text-align:center}
-    .hotel-info-content{flex:1}
-    .hotel-info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
-    .hotel-info-value{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}
-    .hotel-amenities{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
-    .amenity-tag{background:#ecfdf5;color:#059669;font-size:12px;padding:6px 12px;border-radius:20px;display:flex;align-items:center;gap:6px}
     
     /* Flight Card */
     .flight-card{background:linear-gradient(135deg,#eff6ff 0%,#fff 100%);border:1px solid #bfdbfe;border-radius:20px;padding:20px;margin-top:16px}
@@ -125,62 +81,33 @@
     .flight-duration-line::after{content:"✈️";position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:16px;background:#f8fafc;padding:0 8px}
     .flight-duration-text{font-size:12px;color:var(--muted)}
     
-    /* Attraction highlight */
-    .attraction-highlight{background:linear-gradient(135deg,#eff6ff 0%,#fff 100%);border:1px solid #bfdbfe;border-radius:20px;padding:20px;margin-top:16px}
-    .attraction-title{font-size:18px;font-weight:800;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px}
-    
-    /* Warning box */
-    .warning-box{background:#fef2f2;border-left:4px solid #ef4444;padding:12px 16px;border-radius:0 12px 12px 0;margin:12px 0}
-    .warning-box strong{color:#b91c1c}
-    
     /* Success box */
     .success-box{background:#f0fdf4;border-left:4px solid #22c55e;padding:12px 16px;border-radius:0 12px 12px 0;margin:12px 0}
     .success-box strong{color:#15803d}
     
+    /* Completion box */
+    .completion-box{background:linear-gradient(135deg,#fef3c7 0%,#fff 100%);border:1px solid #fbbf24;border-radius:20px;padding:24px;margin-top:20px;text-align:center}
+    .completion-icon{font-size:48px;margin-bottom:12px}
+    .completion-title{font-size:20px;font-weight:800;color:var(--text);margin-bottom:8px}
+    .completion-text{color:var(--muted);font-size:14px}
+    
     @media(max-width:768px){
-      /* 1. 基础布局优化 */
       .wrap{padding:16px}
-      
-      /* 2. Hero区域字体优化 */
       .hero{padding:20px}
       .hero h1{font-size:22px}
       .hero .subtitle{font-size:14px}
-      
-      /* 3. Banner导航优化 */
       .banner-nav{padding:12px}
       .banner-node{padding:0 6px}
       .banner-label{max-width:70px}
-      
-      /* 4. 卡片间距优化 */
       .section{margin-bottom:14px}
       .card-content{padding:16px}
       .card-title{font-size:15px}
-      
-      /* 5. 时间轴优化 */
       .timeline{margin-left:4px}
       .item{padding:0 0 16px 20px}
       .item .time{font-size:12px}
       .item .title{font-size:16px}
-      
-      /* 6. 信息网格优化 - 小屏幕单列显示 */
       .info-grid{grid-template-columns:1fr}
       .info-item{padding:10px}
-      
-      /* 7. 电影badge优化 */
-      .movie-badge{padding:8px 12px}
-      .movie-badge-text{font-size:12px}
-      
-      /* 8. 酒店卡片优化 */
-      .hotel-card{padding:16px}
-      .hotel-name{font-size:18px}
-      .hotel-grid{grid-template-columns:1fr;gap:12px}
-      
-      /* 9. 地图区域优化 */
-      .map-section{padding:16px}
-      .map-container{height:250px}
-      
-      /* 10. 滚动提示 */
-      .scroll-indicator{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
     }
   </style>
 </head>
@@ -188,43 +115,42 @@
   <div class="wrap">
     <!-- Hero Section -->
     <div class="hero">
-      <h1>✈️ Day 11｜06-14｜Paris → Vienna</h1>
-      <p class="subtitle">返程日｜巴黎艺术高地 → 戴高乐机场 → 维也纳｜旅程尾声</p>
+      <h1>🏠 Day 11｜06-14｜Vienna → Shanghai 返程</h1>
+      <p class="subtitle">返程日｜维也纳机场酒店 → 维也纳机场 → 返回上海｜旅程圆满结束</p>
     </div>
 
     <!-- Navigation -->
     <div class="nav-links">
       <a href="index.html">← 返回主页</a>
       <a href="day-10-06-13-paris.html">← Day 10</a>
-      <a href="day-12-06-14-vienna-return.html">Day 12 →</a>
     </div>
 
-    <!-- Map Section -->
+    <!-- Banner Navigation -->
     <div class="banner-nav">
       <div class="banner-title">📍 行程导航</div>
       <div class="banner-track">
-        <a href="#montmartre" class="banner-node active">
-          <div class="banner-time">08:30</div>
+        <a href="#hotel" class="banner-node active">
+          <div class="banner-time">09:00</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">蒙马特高地</div>
+          <div class="banner-label">机场酒店</div>
         </a>
         <div class="banner-arrow">→</div>
-        <a href="#cdg" class="banner-node">
-          <div class="banner-time">13:30</div>
+        <a href="#airport" class="banner-node">
+          <div class="banner-time">10:45</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">戴高乐机场</div>
+          <div class="banner-label">机场值机</div>
         </a>
         <div class="banner-arrow">→</div>
         <a href="#flight" class="banner-node">
-          <div class="banner-time">17:30</div>
+          <div class="banner-time">12:45</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">CDG→VIE</div>
+          <div class="banner-label">VIE→CTU</div>
         </a>
         <div class="banner-arrow">→</div>
-        <a href="#hotel" class="banner-node">
-          <div class="banner-time">20:00</div>
+        <a href="#home" class="banner-node">
+          <div class="banner-time">次日</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">维也纳机场酒店</div>
+          <div class="banner-label">抵达上海</div>
         </a>
       </div>
       <div class="scroll-indicator">← 左右滑动查看更多 →</div>
@@ -233,77 +159,62 @@
     <!-- Flight Card Section -->
     <div class="section">
       <div class="card-content">
-        <div class="card-title">✈️ 航班信息</div>
+        <div class="card-title">✈️ 返程航班信息</div>
         <div class="highlight-box">
-          <strong>Charles de Gaulle Airport (CDG) → Vienna International Airport (VIE)</strong><br>
-          <span style="font-size:20px;font-weight:800;color:var(--blue)">巴黎 → 维也纳</span>
-          <span class="tag">约2小时30分</span>
-          <span class="tag">约1050公里</span>
+          <strong>Vienna International Airport (VIE) → Chengdu Tianfu International Airport (TFU)</strong><br>
+          <span style="font-size:20px;font-weight:800;color:var(--blue)">维也纳 → 成都</span>
+          <span class="tag">约9-10小时</span>
+          <span class="tag">直飞/中转</span>
         </div>
         
         <div class="flight-card">
           <div class="flight-header">
             <div class="flight-route">
-              <span>CDG</span>
-              <span class="arrow">✈️</span>
               <span>VIE</span>
+              <span class="arrow">✈️</span>
+              <span>CTU</span>
             </div>
-            <span class="flight-number">参考航班</span>
+            <span class="flight-number">返程航班</span>
           </div>
           
           <div class="flight-timeline">
             <div class="flight-point">
-              <div class="flight-point-time">17:30</div>
-              <div class="flight-point-code">CDG 巴黎</div>
+              <div class="flight-point-time">12:45</div>
+              <div class="flight-point-code">VIE 维也纳</div>
             </div>
             <div class="flight-duration">
               <div class="flight-duration-line"></div>
-              <div class="flight-duration-text">约2小时30分钟</div>
+              <div class="flight-duration-text">约9-10小时</div>
             </div>
             <div class="flight-point">
-              <div class="flight-point-time">20:00</div>
-              <div class="flight-point-code">VIE 维也纳</div>
+              <div class="flight-point-time">次日</div>
+              <div class="flight-point-code">TFU 成都天府</div>
             </div>
           </div>
           
           <div class="flight-grid">
             <div class="flight-info-item">
               <div class="flight-info-label">出发机场</div>
-              <div class="flight-info-value">戴高乐机场 T2F</div>
-              <div class="flight-info-sub">Charles de Gaulle</div>
-            </div>
-            
-            <div class="flight-info-item">
-              <div class="flight-info-label">到达机场</div>
-              <div class="flight-info-value">维也纳机场</div>
+              <div class="flight-info-value">维也纳国际机场</div>
               <div class="flight-info-sub">Flughafen Wien</div>
             </div>
             
             <div class="flight-info-item">
-              <div class="flight-info-label">飞行距离</div>
-              <div class="flight-info-value">约1050公里</div>
-              <div class="flight-info-sub">651英里</div>
+              <div class="flight-info-label">到达机场</div>
+              <div class="flight-info-value">成都天府机场</div>
+              <div class="flight-info-sub">Chengdu Tianfu</div>
+            </div>
+            
+            <div class="flight-info-item">
+              <div class="flight-info-label">建议到达时间</div>
+              <div class="flight-info-value">10:45前</div>
+              <div class="flight-info-sub">提前2小时</div>
             </div>
             
             <div class="flight-info-item">
               <div class="flight-info-label">航空公司</div>
-              <div class="flight-info-value">奥地利航空/法航</div>
-              <div class="flight-info-sub">Austrian/French</div>
-            </div>
-          </div>
-          
-          <div class="transport-tips">
-            <div class="tip-item">
-              <span class="tip-icon">💡</span>
-              <span><strong>建议提前3小时：</strong>国际航班建议提前3小时到达机场办理手续</span>
-            </div>
-            <div class="tip-item">
-              <span class="tip-icon">💡</span>
-              <span><strong>提前值机：</strong>起飞前24小时可在航空公司官网办理网上值机</span>
-            </div>
-            <div class="tip-item">
-              <span class="tip-icon">💡</span>
-              <span><strong>行李额度：</strong>确认机票包含的托运行李额度和手提行李尺寸限制</span>
+              <div class="flight-info-value">四川航空/国航</div>
+              <div class="flight-info-sub">或中转航班</div>
             </div>
           </div>
         </div>
@@ -313,453 +224,120 @@
     <!-- Timeline Section -->
     <div class="section">
       <div class="card-content">
-        <div class="card-title">📍 行程安排</div>
+        <div class="card-title">📍 返程安排</div>
         <div class="timeline">
           
-          <!-- Montmartre -->
-          <div class="item" id="montmartre">
-            <div class="time">08:30</div>
-            <div class="title">🎨 Montmartre 蒙马特高地</div>
-        
-            <details>
-              <summary>查看详情</summary>
-              
-              <p class="img-caption">Photo: Montmartre district and Sacré-Cœur Basilica | Unsplash</p>
-              
-              <p><strong>【亮点】</strong>蒙马特高地(Montmartre)是巴黎最具艺术气息的区域，位于巴黎第18区的一座130米高的小山丘上。这里是印象派和后印象派运动的摇篮，曾是毕加索、梵高、雷诺阿等艺术大师的聚集地。高低错落的街道、露天咖啡馆、街头艺术家，构成了巴黎最浪漫的画面。</p>
-              
-              <div class="attraction-highlight">
-                <div class="attraction-title">⛪ Sacré-Cœur Basilica 圣心大教堂</div>
-                
-                <p class="img-caption">Photo: Sacré-Cœur Basilica on Montmartre | Unsplash</p>
-                
-                <p><strong>【亮点】</strong>圣心大教堂(Basilique du Sacré-Cœur)是蒙马特的地标建筑，始建于1875年，历时39年建成。这座纯白色的罗马-拜占庭风格大教堂矗立在山顶，是巴黎仅次于埃菲尔铁塔的第二高点，可俯瞰整个巴黎市区。</p>
-                
-                <div class="info-grid">
-                  <div class="info-item">
-                    <div class="info-label">建造时间</div>
-                    <div class="info-value">1875-1914年</div>
-                  </div>
-                  <div class="info-item">
-                    <div class="info-label">建筑风格</div>
-                    <div class="info-value">罗马-拜占庭式</div>
-                  </div>
-                  <div class="info-item">
-                    <div class="info-label">高度</div>
-                    <div class="info-value">穹顶83米</div>
-                  </div>
-                  <div class="info-item">
-                    <div class="info-label">门票</div>
-                    <div class="info-value">教堂免费，穹顶€7</div>
-                  </div>
-                </div>
-                
-                <p style="margin-top:12px"><strong>🏰 必看亮点：</strong></p>
-                <ul>
-                  <li><strong>大穹顶：</strong>攀登300级台阶到达穹顶，360°俯瞰巴黎全景，天气晴朗时可看到30公里外的景观</li>
-                  <li><strong>马赛克壁画：</strong>教堂内部巨大的金色马赛克《基督圣心》是世界上最大的马赛克之一，面积达475平方米</li>
-                  <li><strong>圣心堂：</strong>供奉着耶稣圣心像，象征着对巴黎和法国的守护</li>
-                  <li><strong>大钟：</strong>拥有法国最大的钟之一"萨瓦耶钟"，重达19吨</li>
-                </ul>
-                
-                <p style="margin-top:12px"><strong>📜 历史意义：</strong></p>
-                <p>圣心大教堂是为纪念普法战争中法国战败、巴黎公社事件而建的赎罪教堂。1870年，巴黎主教在战败后许愿建造一座教堂来拯救法国。如今的圣心大教堂不仅是宗教圣地，也是巴黎精神的象征。</p>
-                
-                <div class="warning-box">
-                  <strong>⚠️ 参观提示：</strong>教堂内部禁止拍照，请保持安静；穿短裤、短裙或无袖上衣者可能被拒绝入内。
-                </div>
-              </div>
-              
-              <div class="attraction-highlight">
-                <div class="attraction-title">🎨 Place du Tertre 画家广场</div>
-                
-                <p class="img-caption">Photo: Place du Tertre artists square | Unsplash</p>
-                
-                <p><strong>【亮点】</strong>画家广场是蒙马特的心脏地带，一个充满艺术氛围的小广场。这里曾是毕加索、梵高、图卢兹-劳特累克等大师的聚集地，如今仍有许多街头艺术家在此作画、售卖作品，是体验巴黎波西米亚风情的最佳地点。</p>
-                
-                <div class="info-grid">
-                  <div class="info-item">
-                    <div class="info-label">历史地位</div>
-                    <div class="info-value">艺术家聚集地</div>
-                  </div>
-                  <div class="info-item">
-                    <div class="info-label">著名画家</div>
-                    <div class="info-value">毕加索、梵高</div>
-                  </div>
-                  <div class="info-item">
-                    <div class="info-label">肖像画</div>
-                    <div class="info-value">€30-80</div>
-                  </div>
-                  <div class="info-item">
-                    <div class="info-label">最佳时间</div>
-                    <div class="info-value">上午游客较少</div>
-                  </div>
-                </div>
-                
-                <p style="margin-top:12px"><strong>🎭 广场体验：</strong></p>
-                <ul>
-                  <li><strong>街头画家：</strong>观看艺术家现场作画，可以选择画一幅肖像或风景作为旅行纪念</li>
-                  <li><strong>露天咖啡：</strong>在广场周围的咖啡馆坐下，感受巴黎左岸的文艺气息</li>
-                  <li><strong>艺术氛围：</strong>广场四周都是画廊和艺术工作室，可以浏览购买独特的艺术品</li>
-                </ul>
-                
-                <p style="margin-top:12px"><strong>🏛️ 圣伯多禄堂：</strong></p>
-                <p>画家广场旁是蒙马特最古老的教堂——圣伯多禄堂(Église Saint-Pierre de Montmartre)，建于12世纪，比圣心大教堂还要古老800年。这座罗马式教堂曾属于本笃会修道院，是蒙马特历史的见证者。</p>
-              </div>
-              
-              <div class="attraction-highlight">
-                <div class="attraction-title">💕 Mur des Je t'aime 爱墙</div>
-                
-                <p class="img-caption">Photo: I Love You Wall (Le Mur des Je t'aime) | Unsplash</p>
-                
-                <p><strong>【亮点】</strong>爱墙(Le Mur des Je t'aime)位于蒙马特一座小公园内，是一面约40平方米的深蓝色瓷砖墙，上面用311种语言、共1330次书写着"我爱你"。这面墙由法国艺术家Frédéric Baron创作于2000年，是巴黎最浪漫的打卡地之一。</p>
-                
-                <div class="info-grid">
-                  <div class="info-item">
-                    <div class="info-label">创建时间</div>
-                    <div class="info-value">2000年10月</div>
-                  </div>
-                  <div class="info-item">
-                    <div class="info-label">语言种类</div>
-                    <div class="info-value">311种</div>
-                  </div>
-                  <div class="info-item">
-                    <div class="info-label">"我爱你"次数</div>
-                    <div class="info-value">1330次</div>
-                  </div>
-                  <div class="info-item">
-                    <div class="info-label">门票</div>
-                    <div class="info-value">免费</div>
-                  </div>
-                </div>
-                
-                <p style="margin-top:12px"><strong>🎨 设计细节：</strong></p>
-                <ul>
-                  <li><strong>红色碎片：</strong>墙上的"我爱你"文字被一些红色碎片隔开，象征被恋人打破的心墙</li>
-                  <li><strong>蓝色背景：</strong>深蓝色代表忧郁，与热烈的红色形成对比</li>
-                  <li><strong>艺术家签名：</strong>右下角有艺术家Frédéric Baron和书法家Claire Kito的签名</li>
-                  <li><strong>中文"我爱你"：</strong>可以在墙上找到简体中文的"我爱你"</li>
-                </ul>
-                
-                <p style="margin-top:12px"><strong>📍 位置：</strong></p>
-                <p>爱墙位于Square Jehan Rictus小公园内，地址：Square Jehan Rictus, Place des Abbesses, 75018 Paris。从Abbesses地铁站出来后步行约3分钟即可到达。</p>
-              </div>
-              
-              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【蒙马特地址】Montmartre, 75018 Paris, France<br>
-              【圣心大教堂】35 Rue du Chevalier de la Barre, 75018 Paris<br>
-              【画家广场】Place du Tertre, 75018 Paris<br>
-              【爱墙】Square Jehan Rictus, Place des Abbesses, 75018 Paris<br>
-              【交通】地铁12号线至Abbesses站或2号线至Anvers站，然后步行上山（约15分钟）；也可乘坐缆车(Funiculaire)<br>
-              【停留时间】2.5-3小时<br>
-              【建议】上午9点前到达可避开人群，光线柔和适合拍照</p>
-            </details>
-          </div>
-
-          <!-- CDG Airport -->
-          <div class="item" id="cdg">
-            <div class="time">13:30</div>
-            <div class="title">✈️ CDG机场 返程准备</div>
-            <details>
-              <summary>查看详情</summary>
-              
-              <p class="img-caption">Photo: Charles de Gaulle Airport Terminal | Unsplash</p>
-              
-              <p><strong>【亮点】</strong>戴高乐机场(CDG)是欧洲第二大、世界第十大机场，也是巴黎的主要国际机场。机场以法国前总统戴高乐命名，由著名建筑师保罗·安德鲁设计，1号航站楼独特的圆形外观是巴黎的地标之一。机场内有丰富的购物和退税服务，是离开欧洲前的最后采购机会。</p>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">机场代码</div>
-                  <div class="info-value">CDG / LFPG</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">航站楼</div>
-                  <div class="info-value">T1 / T2(A-G) / T3</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">距市区</div>
-                  <div class="info-value">约25公里</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">车程</div>
-                  <div class="info-value">约45-60分钟</div>
-                </div>
-              </div>
-              
-              <div class="attraction-highlight">
-                <div class="attraction-title">🚕 前往机场交通</div>
-                
-                <p><strong>1. RER B 郊区快铁（推荐）：</strong></p>
-                <ul>
-                  <li><strong>路线：</strong>从市区多个站点(Châtelet-Les Halles、Gare du Nord等)乘坐RER B线直达机场</li>
-                  <li><strong>时间：</strong>约35-40分钟</li>
-                  <li><strong>票价：</strong>€11.45/人</li>
-                  <li><strong>运营时间：</strong>约05:00-00:30</li>
-                  <li><strong>优点：</strong>经济快捷，班次频繁(10-15分钟一班)</li>
-                </ul>
-                
-                <p><strong>2. RoissyBus 机场巴士：</strong></p>
-                <ul>
-                  <li><strong>路线：</strong>从巴黎歌剧院(Opéra)出发直达CDG各航站楼</li>
-                  <li><strong>时间：</strong>约60分钟</li>
-                  <li><strong>票价：</strong>€16.20/人</li>
-                  <li><strong>优点：</strong>舒适，行李空间大</li>
-                </ul>
-                
-                <p><strong>3. 出租车/网约车：</strong></p>
-                <ul>
-                  <li><strong>时间：</strong>约45-90分钟(取决于交通)</li>
-                  <li><strong>价格：</strong>左岸€58，右岸€53(固定价格)</li>
-                  <li><strong>网约车：</strong>Bolt、Uber等约€35-50</li>
-                  <li><strong>建议：</strong>提前2.5-3小时出发，预留堵车时间</li>
-                </ul>
-              </div>
-              
-              <div class="attraction-highlight">
-                <div class="attraction-title">💶 退税指南 Tax Refund</div>
-                
-                <p><strong>【退税条件】</strong></p>
-                <ul>
-                  <li>非欧盟居民，持有有效期6个月以上的护照</li>
-                  <li>同一天在同一家商店购物满€100.01(含)</li>
-                  <li>购买日期不超过3个月</li>
-                  <li>商品必须随身携带离境</li>
-                </ul>
-                
-                <p style="margin-top:12px"><strong>【退税流程】</strong></p>
-                <ol>
-                  <li><strong>购物时：</strong>向店员索要"Detaxe"退税单，出示护照填写表格</li>
-                  <li><strong>选择退税方式：</strong>信用卡(推荐，退税率12%)、现金(退税率10.8%)、支付宝</li>
-                  <li><strong>机场验证：</strong>在CDG的退税机(PABLO机器)上扫描退税单条形码</li>
-                  <li><strong>海关盖章：</strong>如机器无法识别，需前往海关柜台人工验证</li>
-                  <li><strong>退税：</strong>信用卡约1-2周到账，现金在退税柜台领取</li>
-                </ol>
-                
-                <div class="warning-box">
-                  <strong>⚠️ 重要提醒：</strong>退税商品需随身携带，不要托运！海关可能要求查看商品实物。
-                </div>
-                
-                <p style="margin-top:12px"><strong>【退税地点】</strong></p>
-                <ul>
-                  <li>T2C-D航站楼：出发层，安检前</li>
-                  <li>T2E-F航站楼：出发层，安检后</li>
-                  <li>T1航站楼：到达层</li>
-                </ul>
-              </div>
-              
-              <div class="attraction-highlight">
-                <div class="attraction-title">🛍️ 机场购物</div>
-                
-                <p><strong>【免税购物】</strong></p>
-                <ul>
-                  <li><strong>化妆品：</strong>香奈儿、迪奥、兰蔻等法国本土品牌价格优惠</li>
-                  <li><strong>香水：</strong>法国是世界香水之都，机场免税店选择丰富</li>
-                  <li><strong>红酒香槟：</strong>可购买法国名庄酒作为伴手礼</li>
-                  <li><strong>马卡龙：</strong>Ladurée、Pierre Hermé等品牌的马卡龙适合送礼</li>
-                  <li><strong>奢侈品：</strong>爱马仕、路易威登、卡地亚等品牌精品店</li>
-                </ul>
-                
-                <p style="margin-top:12px"><strong>【购物提示】</strong></p>
-                <ul>
-                  <li>免税商品需在欧盟以外目的地使用</li>
-                  <li>液体超过100ml需放在密封袋中</li>
-                  <li>保留购物小票以备海关检查</li>
-                  <li>部分品牌可提前在线预订，机场取货</li>
-                </ul>
-                
-                <div class="success-box">
-                  <strong>✅ 推荐购买：</strong>法国药妆(理肤泉、雅漾、欧缇丽)、La Mer护肤品、法国红酒、香槟、马卡龙礼盒。
-                </div>
-              </div>
-              
-              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】95700 Roissy-en-France, France<br>
-              【建议到达时间】国际航班提前3小时<br>
-              【值机柜台】起飞前2-3小时开放<br>
-              【安检】建议起飞前1.5小时完成<br>
-              【登机口】起飞前40分钟开始登机<br>
-              【免费WiFi】CDG免费WiFi，需简单注册</p>
-            </details>
-          </div>
-
-          <!-- Flight to Vienna -->
-          <div class="item" id="flight">
-            <div class="time">17:30</div>
-            <div class="title">✈️ 航班 CDG → VIE</div>
-            <details>
-              <summary>查看详情</summary>
-              
-              <p class="img-caption">Photo: Airplane at Charles de Gaulle Airport | Unsplash</p>
-              
-              <p><strong>【亮点】</strong>从巴黎戴高乐机场起飞，飞往奥地利维也纳国际机场。约2.5小时的航程横跨欧洲大陆，从西欧的法式浪漫切换到中欧的奥式优雅。这是本次欧洲之旅的最后一次国际航班，之后将在维也纳休息一晚，准备次日的返程。</p>
-              
-              <div class="flight-timeline" style="background:#fff;border:1px solid #bfdbfe">
-                <div class="flight-point">
-                  <div class="flight-point-time">17:30</div>
-                  <div class="flight-point-code">CDG 巴黎</div>
-                </div>
-                <div class="flight-duration">
-                  <div class="flight-duration-line"></div>
-                  <div class="flight-duration-text">约2小时30分钟</div>
-                </div>
-                <div class="flight-point">
-                  <div class="flight-point-time">20:00</div>
-                  <div class="flight-point-code">VIE 维也纳</div>
-                </div>
-              </div>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">飞行时间</div>
-                  <div class="info-value">约2小时30分</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">距离</div>
-                  <div class="info-value">约1050公里</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">时差</div>
-                  <div class="info-value">无时差（同CET）</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">航空公司</div>
-                  <div class="info-value">奥地利航空/法航</div>
-                </div>
-              </div>
-              
-              <p style="margin-top:12px"><strong>🛫 起飞前准备：</strong></p>
-              <ul>
-                <li>确认护照、登机牌在手</li>
-                <li>液体化妆品放入透明袋，单瓶不超过100ml</li>
-                <li>电子设备(手机、平板、笔记本电脑)随身携带，安检时需取出</li>
-                <li>外套、皮带、金属物品需通过安检</li>
-                <li>预留充足时间到达登机口</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>🛬 到达维也纳后：</strong></p>
-              <ul>
-                <li>跟随"Exit/Ausgang"指示前往入境检查（欧盟内部航班无需入境检查）</li>
-                <li>提取托运行李</li>
-                <li>出关后步行约5分钟即可到达Moxy Vienna Airport酒店</li>
-              </ul>
-            </details>
-          </div>
-
-          <!-- Moxy Hotel -->
+          <!-- Hotel -->
           <div class="item" id="hotel">
-            <div class="time">22:30</div>
-            <div class="title">🏨 入住 Moxy Vienna Airport</div>
+            <div class="time">09:00</div>
+            <div class="title">🏨 酒店退房 & 早餐</div>
+            <details>
+              <summary>查看详情</summary>
+              <p>Moxy Vienna Airport 酒店退房，享用酒店提供的轻食早餐或咖啡。</p>
+              <p>步行约5分钟即可到达维也纳机场航站楼，非常便利。</p>
+            </details>
+          </div>
+
+          <!-- Airport Check-in -->
+          <div class="item" id="airport">
+            <div class="time">10:45</div>
+            <div class="title">✈️ 维也纳机场 值机手续</div>
             <details>
               <summary>查看详情</summary>
               
-              <p class="img-caption">Photo: Moxy Hotel Style | Unsplash</p>
+              <p><strong>【值机流程】</strong></p>
+              <ul>
+                <li>前往对应航空公司值机柜台</li>
+                <li>出示护照办理登机牌</li>
+                <li>托运行李（如有）</li>
+                <li>获取登机牌后前往安检</li>
+              </ul>
               
-              <p><strong>【亮点】</strong>Moxy是万豪国际集团旗下的年轻时尚品牌，主打"社交型酒店"概念。Moxy Vienna Airport是维也纳机场附近最受欢迎的中档酒店之一，步行5分钟即可到达航站楼，非常适合早班机或晚班机中转的旅客。酒店设计充满活力，公共空间鼓励社交互动。</p>
+              <p style="margin-top:12px"><strong>【安检须知】</strong></p>
+              <ul>
+                <li>液体需放入透明袋，单瓶不超过100ml</li>
+                <li>电子设备（笔记本、平板）需单独取出</li>
+                <li>外套、皮带、金属物品需通过安检</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>【免税店购物】</strong></p>
+              <ul>
+                <li>奥地利特色：莫扎特巧克力、施华洛世奇水晶</li>
+                <li>欧洲化妆品：比国内价格优惠</li>
+                <li>葡萄酒：奥地利白葡萄酒品质优良</li>
+              </ul>
+            </details>
+          </div>
+
+          <!-- Flight -->
+          <div class="item" id="flight">
+            <div class="time">12:45</div>
+            <div class="title">✈️ 航班起飞 VIE → CTU</div>
+            <details>
+              <summary>查看详情</summary>
+              
+              <p><strong>【航班信息】</strong></p>
+              <ul>
+                <li>起飞时间：12:45（当地时间）</li>
+                <li>飞行时长：约9-10小时（直飞）或更长（中转）</li>
+                <li>目的地：成都天府国际机场</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>【飞行小贴士】</strong></p>
+              <ul>
+                <li>长途飞行建议穿着舒适宽松的衣服</li>
+                <li>准备好颈枕、眼罩、耳塞等助眠用品</li>
+                <li>适时起身活动，避免久坐</li>
+                <li>多喝水，保持身体水分</li>
+                <li>调整手表时间，开始适应北京时间</li>
+              </ul>
+            </details>
+          </div>
+
+          <!-- Arrival -->
+          <div class="item" id="home">
+            <div class="time">次日</div>
+            <div class="title">🏠 抵达成都 旅程圆满结束</div>
+            <details>
+              <summary>查看详情</summary>
+              
+              <p><strong>【入境流程】</strong></p>
+              <ul>
+                <li>填写入境健康申报（如需）</li>
+                <li>通过边检入境</li>
+                <li>提取托运行李</li>
+                <li>通过海关检查</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>【从天府机场返回市区】</strong></p>
+              <ul>
+                <li>地铁18号线：约45-60分钟到达市区</li>
+                <li>机场大巴：多条线路通往市区各方向</li>
+                <li>出租车/网约车：约1-1.5小时，费用约150-200元</li>
+              </ul>
             </details>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Hotel Card Section -->
+    <!-- Completion Section -->
     <div class="section">
       <div class="card-content">
-        <div class="card-title">🏨 住宿详情</div>
-        <div class="highlight-box">
-          <strong>Moxy Vienna Airport</strong>
-          <span class="tag">万豪旗下</span>
-          <span class="tag">机场步行5分钟</span>
-          <span class="tag">24小时前台</span>
-        </div>
-        
-        <div class="hotel-card">
-          <div class="hotel-header">
-            <h3 class="hotel-name">Moxy Vienna Airport</h3>
-            <span class="hotel-stars">⭐⭐⭐</span>
-            <span class="hotel-chain">万豪旗下时尚酒店</span>
-          </div>
-          
-          <div class="hotel-grid">
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">📍</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">完整地址</div>
-                <div class="hotel-info-value">Ausfahrtsstraße 4, 1300 Schwechat, Austria</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">📞</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">联系电话</div>
-                <div class="hotel-info-value">+43 1 700 73 0</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">🚶</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">距机场航站楼</div>
-                <div class="hotel-info-value">步行约5分钟，约300米</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">🚇</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">交通连接</div>
-                <div class="hotel-info-value">CAT机场快轨、S7城郊铁路、巴士、出租车</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">⏰</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">入住/退房时间</div>
-                <div class="hotel-info-value">入住：15:00后 | 退房：12:00前</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">🍽️</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">餐饮设施</div>
-                <div class="hotel-info-value">24小时Grab-and-Go小吃吧；酒吧供应鸡尾酒和轻食</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">🏋️</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">健身设施</div>
-                <div class="hotel-info-value">24小时健身中心</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">🛍️</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">周边设施</div>
-                <div class="hotel-info-value">机场内有餐厅、商店、超市；维也纳机场购物中心步行5分钟</div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="hotel-amenities">
-            <span class="amenity-tag">✓ 机场步行可达</span>
-            <span class="amenity-tag">✓ 205间客房</span>
-            <span class="amenity-tag">✓ 免费高速WiFi</span>
-            <span class="amenity-tag">✓ 24小时前台</span>
-            <span class="amenity-tag">✓ 24小时健身房</span>
-            <span class="amenity-tag">✓ 时尚酒吧</span>
-            <span class="amenity-tag">✓ 自助入住机</span>
-            <span class="amenity-tag">✓ 宠物友好</span>
+        <div class="completion-box">
+          <div class="completion-icon">🎉</div>
+          <div class="completion-title">欧洲12天深度之旅圆满结束</div>
+          <div class="completion-text">
+            感谢您跟随我们一起完成这次穿越中欧与西欧的精彩旅程！<br>
+            从维也纳到罗马，从威尼斯到米兰，从瑞士阿尔卑斯到巴黎浪漫街头，<br>
+            愿这段美好的回忆永远珍藏！
           </div>
         </div>
         
-        <div style="margin-top:16px;padding:16px;background:#f0f9ff;border-radius:12px;border-left:4px solid #0ea5e9">
-          <strong style="color:#0369a1">🌙 选择理由：</strong>
-          <p style="margin:8px 0 0 0;color:#0c4a6e;font-size:14px">位于维也纳机场内，第二天12:45的返程航班可从容应对。无需早起赶机场，步行5分钟即可到达值机柜台。酒店设计风格年轻活力，是结束旅程前放松休息的理想选择。</p>
+        <div class="success-box" style="margin-top:16px">
+          <strong>✅ 行程统计：</strong><br>
+          📅 12天11晚 | 🌍 5个国家 | 🏙️ 8座城市 | ✈️ 3段飞行<br>
+          🇦🇹 奥地利 · 🇮🇹 意大利 · 🇨🇭 瑞士 · 🇫🇷 法国
         </div>
       </div>
     </div>
@@ -767,18 +345,16 @@
     <!-- Tips Section -->
     <div class="section">
       <div class="card-content">
-        <div class="card-title">💡 实用贴士</div>
+        <div class="card-title">💡 返程贴士</div>
         <ul style="color:var(--muted);padding-left:20px">
-          <li><strong>蒙马特安全：</strong>注意防范扒手，特别是在圣心大教堂台阶和缆车附近；拒绝陌生人的"免费"手环</li>
-          <li><strong>最佳拍照时间：</strong>上午9点前或傍晚日落时分，圣心大教堂光线最美</li>
-          <li><strong>前往机场：</strong>建议13:00前从酒店出发，预留充足时间应对可能的交通延误</li>
-          <li><strong>退税预留时间：</strong>如需要办理退税，额外预留30-45分钟</li>
-          <li><strong>机场购物：</strong>免税店化妆品和香水价格优惠，可提前在网上浏览比价</li>
-          <li><strong>维也纳酒店：</strong>Moxy酒店不提供传统早餐，但24小时供应轻食和饮料</li>
-          <li><strong>第二天航班：</strong>次日12:45从成都出发，经维也纳转机，建议10:45前到达机场</li>
-          <li><strong>行李整理：</strong>利用晚上时间整理行李，为第二天的返程航班做好准备</li>
-          <li><strong>纪念品：</strong>蒙马特画家广场可购买原创画作，价格€30-200不等</li>
-          <li><strong>天气准备：</strong>蒙马特高地风大，即使是夏季也建议携带一件薄外套</li>
+          <li><strong>提前值机：</strong>起飞前24小时可在航空公司官网办理网上值机，节省机场时间</li>
+          <li><strong>行李检查：</strong>确认托运行李额度，超重行李费用较高</li>
+          <li><strong>退税：</strong>如在欧洲购物需退税，提前预留时间办理退税手续</li>
+          <li><strong>纪念品：</strong>维也纳机场可购买莫扎特巧克力、奥地利水晶等伴手礼</li>
+          <li><strong>时差调整：</strong>飞行期间尽量按目的地时间作息，减少时差影响</li>
+          <li><strong>重要物品：</strong>护照、登机牌、贵重物品随身携带</li>
+          <li><strong>电子设备：</strong>手机、充电宝确保有电，国际漫游或提前购买流量包</li>
+          <li><strong>欢迎回家：</strong>11天的精彩旅程，期待下一次出发！</li>
         </ul>
       </div>
     </div>

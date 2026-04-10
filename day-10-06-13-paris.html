@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Day 10｜06-13｜Paris 博物馆日</title>
+  <title>Day 10｜06-13｜Paris → Vienna</title>
   <style>
     :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08);--accent:#f59e0b}
     body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
@@ -47,10 +47,6 @@
     summary{cursor:pointer;font-weight:600;color:var(--blue)}
     details[open] summary{margin-bottom:12px}
     
-    /* Attraction Images */
-    .attraction-img{width:100%;border-radius:16px;margin:12px 0;box-shadow:0 4px 12px rgba(0,0,0,.1)}
-    .img-caption{font-size:12px;color:var(--muted);text-align:center;margin-top:4px;font-style:italic}
-    
     /* Navigation */
     .nav-links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
     .nav-links a{color:var(--blue);text-decoration:none;font-weight:500}
@@ -80,24 +76,28 @@
     .hotel-amenities{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
     .amenity-tag{background:#ecfdf5;color:#059669;font-size:12px;padding:6px 12px;border-radius:20px;display:flex;align-items:center;gap:6px}
     
+    /* Flight Card */
+    .flight-card{background:linear-gradient(135deg,#eff6ff 0%,#fff 100%);border:1px solid #bfdbfe;border-radius:20px;padding:20px;margin-top:16px}
+    .flight-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px}
+    .flight-route{display:flex;align-items:center;gap:12px;font-size:20px;font-weight:800;color:var(--text)}
+    .flight-route .arrow{color:var(--blue);font-size:24px}
+    .flight-number{font-size:13px;color:var(--blue);background:#dbeafe;padding:4px 10px;border-radius:12px}
+    .flight-timeline{display:flex;align-items:center;justify-content:center;gap:20px;margin:20px 0;padding:20px;background:#f8fafc;border-radius:16px}
+    .flight-point{text-align:center}
+    .flight-point-time{font-size:24px;font-weight:800;color:var(--blue)}
+    .flight-point-code{font-size:14px;color:var(--muted);margin-top:4px}
+    .flight-duration{text-align:center}
+    .flight-duration-line{width:100px;height:2px;background:var(--blue);position:relative;margin:8px 0}
+    .flight-duration-line::after{content:"✈️";position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:16px;background:#f8fafc;padding:0 8px}
+    .flight-duration-text{font-size:12px;color:var(--muted)}
+    
     /* Attraction highlight */
     .attraction-highlight{background:linear-gradient(135deg,#eff6ff 0%,#fff 100%);border:1px solid #bfdbfe;border-radius:20px;padding:20px;margin-top:16px}
     .attraction-title{font-size:18px;font-weight:800;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px}
     
-    /* Tips Section */
-    .tips-box{background:linear-gradient(135deg,#fef3c7 0%,#fffbeb 100%);border:1px solid #fcd34d;border-radius:16px;padding:16px;margin-top:12px}
-    .tips-title{font-size:14px;font-weight:700;color:#92400e;margin-bottom:8px;display:flex;align-items:center;gap:6px}
-    .tips-list{margin:0;padding-left:18px;color:#78350f}
-    .tips-list li{margin-bottom:6px;font-size:13px}
-    
-    /* Masterpiece Gallery */
-    .masterpiece-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:16px}
-    .masterpiece-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:transform .2s,box-shadow .2s}
-    .masterpiece-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.12)}
-    .masterpiece-img{width:100%;height:180px;object-fit:cover}
-    .masterpiece-content{padding:12px}
-    .masterpiece-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
-    .masterpiece-desc{font-size:12px;color:var(--muted);line-height:1.5}
+    /* Warning box */
+    .warning-box{background:#fef2f2;border-left:4px solid #ef4444;padding:12px 16px;border-radius:0 12px 12px 0;margin:12px 0}
+    .warning-box strong{color:#b91c1c}
     
     @media(max-width:768px){
       .wrap{padding:16px}
@@ -127,14 +127,14 @@
   <div class="wrap">
     <!-- Hero Section -->
     <div class="hero">
-      <h1>🎨 Day 10｜06-13｜Paris 博物馆日</h1>
-      <p class="subtitle">印象派朝圣之旅｜卢浮宫三宝 · 奥赛梵高星空 · 莎士比亚书店 · 左岸漫步</p>
+      <h1>✈️ Day 10｜06-13｜Paris → Vienna</h1>
+      <p class="subtitle">艺术高地告别巴黎｜蒙马特晨韵｜飞往音乐之都</p>
     </div>
 
     <!-- Navigation -->
     <div class="nav-links">
-      <a href="index.html">← 返回主页</a>
       <a href="day-9-06-12-geneva-to-paris.html">← Day 9</a>
+      <a href="index.html">返回主页</a>
       <a href="day-11-06-14-paris-to-vienna.html">Day 11 →</a>
     </div>
 
@@ -142,43 +142,95 @@
     <div class="banner-nav">
       <div class="banner-title">📍 行程导航</div>
       <div class="banner-track">
-        <a href="#louvre" class="banner-node active">
-          <div class="banner-time">09:00</div>
+        <a href="#montmartre" class="banner-node active">
+          <div class="banner-time">08:30</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">卢浮宫</div>
+          <div class="banner-label">蒙马特高地</div>
         </a>
         <div class="banner-arrow">→</div>
-        <a href="#orse" class="banner-node">
+        <a href="#tertre" class="banner-node">
+          <div class="banner-time">09:30</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">小丘广场</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#cdg" class="banner-node">
           <div class="banner-time">13:30</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">奥赛博物馆</div>
+          <div class="banner-label">戴高乐机场</div>
         </a>
         <div class="banner-arrow">→</div>
-        <a href="#shakespeare" class="banner-node">
-          <div class="banner-time">16:00</div>
+        <a href="#flight" class="banner-node">
+          <div class="banner-time">17:30</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">莎士比亚书店</div>
+          <div class="banner-label">飞维也纳</div>
         </a>
         <div class="banner-arrow">→</div>
-        <a href="#leftbank" class="banner-node">
-          <div class="banner-time">17:00</div>
+        <a href="#vienna" class="banner-node">
+          <div class="banner-time">20:00</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">左岸漫步</div>
-        </a>
-        <div class="banner-arrow">→</div>
-        <a href="#saintechapelle" class="banner-node">
-          <div class="banner-time">19:00</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">圣礼拜堂</div>
-        </a>
-        <div class="banner-arrow">→</div>
-        <a href="#hotel" class="banner-node">
-          <div class="banner-time">21:00</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">返回酒店</div>
+          <div class="banner-label">抵达维也纳</div>
         </a>
       </div>
       <div class="scroll-indicator">← 左右滑动查看更多 →</div>
+    </div>
+
+    <!-- Flight Card Section -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">✈️ 航班信息</div>
+        <div class="highlight-box">
+          <strong>Charles de Gaulle Airport (CDG) → Vienna International Airport (VIE)</strong><br>
+          <span style="font-size:20px;font-weight:800;color:var(--blue)">巴黎 → 维也纳</span>
+          <span class="tag">约2小时30分</span>
+          <span class="tag">约1050公里</span>
+        </div>
+        
+        <div class="flight-card">
+          <div class="flight-header">
+            <div class="flight-route">
+              <span>CDG</span>
+              <span class="arrow">✈️</span>
+              <span>VIE</span>
+            </div>
+            <span class="flight-number">参考航班</span>
+          </div>
+          
+          <div class="flight-timeline">
+            <div class="flight-point">
+              <div class="flight-point-time">17:30</div>
+              <div class="flight-point-code">CDG 巴黎</div>
+            </div>
+            <div class="flight-duration">
+              <div class="flight-duration-line"></div>
+              <div class="flight-duration-text">约2小时30分钟</div>
+            </div>
+            <div class="flight-point">
+              <div class="flight-point-time">20:00</div>
+              <div class="flight-point-code">VIE 维也纳</div>
+            </div>
+          </div>
+          
+          <div class="info-grid">
+            <div class="info-item">
+              <div class="info-label">出发机场</div>
+              <div class="info-value">戴高乐机场 T2F</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">到达机场</div>
+              <div class="info-value">维也纳机场</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">飞行距离</div>
+              <div class="info-value">约1050公里</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">航空公司</div>
+              <div class="info-value">奥地利航空/法航</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Timeline Section -->
@@ -187,475 +239,351 @@
         <div class="card-title">📍 行程安排</div>
         <div class="timeline">
           
-          <!-- Louvre Museum -->
-          <div class="item" id="louvre">
-            <div class="time">09:00 - 12:30</div>
-            <div class="title">🎨 Louvre Museum 卢浮宫</div>
+          <!-- Montmartre -->
+          <div class="item" id="montmartre">
+            <div class="time">08:30</div>
+            <div class="title">🎨 Montmartre 蒙马特高地</div>
         
             <details>
               <summary>查看详情</summary>
               
-              <p class="img-caption">Photo: Louvre Museum and Glass Pyramid | Unsplash</p>
-              
-              <p><strong>【亮点】</strong>卢浮宫(Musée du Louvre)是世界上最大、最古老的艺术博物馆之一，也是巴黎的象征。从前法国王宫到今天的艺术殿堂，这里收藏了超过38万件艺术珍品，横跨人类文明的8000年历史。</p>
+              <p><strong>【亮点】</strong>蒙马特高地(Montmartre)是巴黎最具艺术气息的区域，位于巴黎第18区的一座130米高的小山丘上。这里是印象派和后印象派运动的摇篮，曾是毕加索、梵高、雷诺阿等艺术大师的聚集地。</p>
               
               <div class="info-grid">
                 <div class="info-item">
-                  <div class="info-label">始建年份</div>
-                  <div class="info-value">1204年（原为城堡）</div>
+                  <div class="info-label">海拔</div>
+                  <div class="info-value">130米</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">开放时间</div>
-                  <div class="info-value">09:00-18:00（周二闭馆）</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">馆藏数量</div>
-                  <div class="info-value">38万+件</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">年访客</div>
-                  <div class="info-value">约800万人次</div>
-                </div>
-              </div>
-              
-              <!-- Masterpiece Gallery -->
-              <div class="attraction-highlight">
-                <div class="attraction-title">👑 卢浮宫三宝</div>
-                <div class="masterpiece-grid">
-                  <div class="masterpiece-card">
-                    <div class="masterpiece-content">
-                      <div class="masterpiece-name">🎨 Mona Lisa 蒙娜丽莎</div>
-                      <div class="masterpiece-desc">达·芬奇杰作，神秘微笑背后的艺术巅峰。1503-1519年间创作，尺寸77×53cm。被盗经历让其成为世界最著名画作。</div>
-                    </div>
-                  </div>
-                  <div class="masterpiece-card">
-                    <div class="masterpiece-content">
-                      <div class="masterpiece-name">🏛️ Winged Victory 胜利女神</div>
-                      <div class="masterpiece-desc">公元前190年的古希腊雕塑，发现于萨莫色雷斯岛。高2.75米，展现胜利女神从海风吹拂的船上降临的动态之美。</div>
-                    </div>
-                  </div>
-                  <div class="masterpiece-card">
-                    <div class="masterpiece-content">
-                      <div class="masterpiece-name">🗿 Venus de Milo 断臂维纳斯</div>
-                      <div class="masterpiece-desc">公元前130-100年的古希腊雕塑，高2.02米。1820年在希腊米洛斯岛被发现，是古典美学的永恒象征。</div>
-                    </div>
-                  </div>
-                  <div class="masterpiece-card">
-                    <div class="masterpiece-content">
-                      <div class="masterpiece-name">🔺 Glass Pyramid 玻璃金字塔</div>
-                      <div class="masterpiece-desc">贝聿铭1989年设计，高21米，由673块玻璃组成。现代建筑与古典宫殿的完美融合，是卢浮宫的当代标志。</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              
-              <p class="img-caption">Photo: Louvre Museum Interior | Unsplash</p>
-              
-              <p style="margin-top:12px"><strong>🏛️ 主要展馆：</strong></p>
-              <ul>
-                <li><strong>德农馆(Denon)：</strong>意大利绘画（蒙娜丽莎、岩间圣母）、法国绘画、阿波罗画廊</li>
-                <li><strong>萨里馆(Sully)：</strong>古希腊古罗马雕塑（断臂维纳斯、胜利女神）、埃及文物、近东文物</li>
-                <li><strong>黎塞留馆(Richelieu)：</strong>荷兰佛兰德斯绘画、德国绘画、法国雕塑、拿破仑三世套房</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>🎫 门票信息：</strong></p>
-              <ul>
-                <li>成人票：€17（在线预订）</li>
-                <li>18-25岁欧盟居民：免费</li>
-                <li>18岁以下：免费</li>
-                <li>每月第一个周五18:00后：26岁以下免费</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】Rue de Rivoli, 75001 Paris<br>
-              【交通】地铁1/7号线至Palais Royal - Musée du Louvre站<br>
-              【建议时长】3-4小时（精选路线），全天（深度参观）<br>
-              【预约入口】见页面底部"博物馆预约攻略"</p>
-            </details>
-          </div>
-
-          <!-- Lunch -->
-          <div class="item">
-            <div class="time">12:30 - 13:30</div>
-            <div class="title">🍽️ 午餐</div>
-            <details>
-              <summary>查看详情</summary>
-              <p><strong>【推荐区域】</strong>卢浮宫周边或前往奥赛博物馆途中</p>
-              <p style="margin-top:8px"><strong>🍴 推荐选择：</strong></p>
-              <ul>
-                <li><strong>卢浮宫内 Café Marly：</strong>可边用餐边欣赏玻璃金字塔和杜乐丽花园，氛围绝佳</li>
-                <li><strong>卢浮宫地下商场 Carrousel du Louvre：</strong>快餐、简餐、咖啡厅选择丰富</li>
-                <li><strong>杜乐丽花园旁：</strong>户外用餐，感受巴黎人的悠闲午后</li>
-                <li><strong>奥赛博物馆餐厅：</strong>原火车站大钟下的餐厅，本身就是艺术品</li>
-              </ul>
-              <p style="margin-top:8px"><strong>💡 贴士：</strong>奥赛博物馆的餐厅位于原火车站大钟下方，是网红打卡点，建议提前预订或错峰用餐。</p>
-            </details>
-          </div>
-
-          <!-- Musée d'Orsay -->
-          <div class="item" id="orse">
-            <div class="time">13:30 - 16:00</div>
-            <div class="title">🖼️ Musée d'Orsay 奥赛博物馆</div>
-            <details>
-              <summary>查看详情</summary>
-              
-              <p class="img-caption">Photo: Musée d'Orsay and Giant Clock | Unsplash</p>
-              
-              <p><strong>【亮点】</strong>奥赛博物馆(Musée d'Orsay)被誉为"印象派的殿堂"，收藏了世界上最重要的印象派和后印象派艺术作品。博物馆建筑本身也极具特色——由原奥赛火车站改造而成，保留了巨大的玻璃穹顶和工业时代的金色大钟。</p>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">地址</div>
-                  <div class="info-value">1 Rue de la Légion d'Honneur, 75007 Paris</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">开放时间</div>
-                  <div class="info-value">09:30-18:00（周四至21:45）</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">门票</div>
-                  <div class="info-value">€16（在线预订）</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">闭馆日</div>
-                  <div class="info-value">周一</div>
-                </div>
-              </div>
-              
-              <div class="attraction-highlight">
-                <div class="attraction-title">🎨 必看 Masterpieces</div>
-                <div class="masterpiece-grid">
-                  <div class="masterpiece-card">
-                    <div class="masterpiece-content">
-                      <div class="masterpiece-name">🌌 Van Gogh《星空》</div>
-                      <div class="masterpiece-desc">梵高1889年杰作，漩涡状的夜空充满了动感与情感，是后印象派的标志性作品</div>
-                    </div>
-                  </div>
-                  <div class="masterpiece-card">
-                    <div class="masterpiece-content">
-                      <div class="masterpiece-name">🌸 Monet《睡莲》</div>
-                      <div class="masterpiece-desc">莫奈晚年睡莲系列，光影与色彩的完美融合，开创了印象派的全新境界</div>
-                    </div>
-                  </div>
-                  <div class="masterpiece-card">
-                    <div class="masterpiece-content">
-                      <div class="masterpiece-name">💃 Renoir《煎饼磨坊的舞会》</div>
-                      <div class="masterpiece-desc">雷诺阿1876年名作，捕捉了蒙马特露天舞厅的欢乐氛围，光影斑驳的杰作</div>
-                    </div>
-                  </div>
-                  <div class="masterpiece-card">
-                    <div class="masterpiece-content">
-                      <div class="masterpiece-name">🎭 Manet《草地上的午餐》</div>
-                      <div class="masterpiece-desc">马奈1863年争议之作，打破了传统绘画的禁忌，是印象派运动的先驱</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <p style="margin-top:12px"><strong>🏛️ 建筑特色：</strong></p>
-              <ul>
-                <li><strong>原火车站改造：</strong>1900年建成的奥赛火车站于1986年改造为博物馆，是工业建筑改造的典范</li>
-                <li><strong>玻璃穹顶：</strong>巨大的玻璃天花板让自然光洒入展厅，为印象派画作提供了完美的展示环境</li>
-                <li><strong>金色大钟：</strong>位于5楼的巨型时钟是网红打卡点，透过钟面可看到塞纳河和蒙马特</li>
-                <li><strong>中央大厅：</strong>保留了火车站的开阔空间，雕塑作品在此陈列，气势恢宏</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>🖼️ 主要收藏：</strong></p>
-              <ul>
-                <li><strong>印象派（5楼）：</strong>莫奈、雷诺阿、德加、毕沙罗、西斯莱</li>
-                <li><strong>后印象派（5楼）：</strong>梵高、塞尚、高更、修拉</li>
-                <li><strong>现实主义（0楼/2楼）：</strong>库尔贝、米勒、杜米埃</li>
-                <li><strong>象征主义与新艺术（2楼）：</strong>莫罗、布格罗、家具与装饰艺术</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>💡 参观建议：</strong></p>
-              <ul>
-                <li>建议从5楼开始参观，这里是印象派精华所在</li>
-                <li>金色大钟位于5楼咖啡馆旁，拍照需排队</li>
-                <li>周四延长开放至21:45，傍晚人流较少</li>
-                <li>博物馆餐厅位于2楼大钟下方，需提前预约</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】1 Rue de la Légion d'Honneur, 75007 Paris<br>
-              【交通】RER C线至Musée d'Orsay站，或地铁12号线至Solférino站<br>
-              【门票】€16（在线预订），18-25岁欧盟居民免费<br>
-              【建议时长】2.5-3小时<br>
-              【与卢浮宫距离】步行约15分钟，可沿塞纳河右岸漫步</p>
-            </details>
-          </div>
-
-          <!-- Shakespeare and Company -->
-          <div class="item" id="shakespeare">
-            <div class="time">16:00 - 17:00</div>
-            <div class="title">📚 Shakespeare & Company 莎士比亚书店</div>
-            <details>
-              <summary>查看详情</summary>
-              
-              <p class="img-caption">Photo: Shakespeare and Company Bookstore | Unsplash</p>
-              
-              <p><strong>【亮点】</strong>莎士比亚书店(Shakespeare and Company)是巴黎最具传奇色彩的英文书店，也是电影《爱在日落黄昏时》(Before Sunset)的取景地。这家1919年创立的书店曾是海明威、乔伊斯等"迷惘的一代"作家的聚集地，如今仍是文学爱好者的朝圣地。</p>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">地址</div>
-                  <div class="info-value">37 Rue de la Bûcherie, 75005 Paris</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">开放时间</div>
-                  <div class="info-value">10:00-20:00</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">入场</div>
-                  <div class="info-value">免费</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">电影取景</div>
-                  <div class="info-value">《爱在日落黄昏时》</div>
-                </div>
-              </div>
-              
-              <div class="attraction-highlight">
-                <div class="attraction-title">🎬 《爱在日落黄昏时》打卡</div>
-                
-                <p class="img-caption">Photo: Before Sunset Movie Scene at Shakespeare & Co | Unsplash</p>
-                
-                <p>2004年电影《爱在日落黄昏时》(Before Sunset)中，杰西和塞琳娜在巴黎重逢，最终来到莎士比亚书店。影片中杰西在此举办新书发布会，而现实中的书店也经常举办文学活动和读书会。</p>
-                
-                <p style="margin-top:12px"><strong>🎭 电影同款机位：</strong></p>
-                <ul>
-                  <li><strong>书店外立面：</strong>绿色招牌和藤蔓覆盖的外墙是标志性画面</li>
-                  <li><strong>二楼阅读区：</strong>木质楼梯和二楼的小窗户是电影中出现多次的场景</li>
-                  <li><strong>打字机：</strong>店内保留着老式打字机，可体验"作家"的感觉</li>
-                  <li><strong>窗外塞纳河：</strong>从书店窗户望出去就是圣母院和塞纳河</li>
-                </ul>
-                
-                <p style="margin-top:12px"><strong>💕 浪漫氛围：</strong>书店内堆满了二手书，空气中弥漫着旧纸张和咖啡的香气。二楼设有舒适的阅读角，是感受巴黎文艺气息的最佳场所。</p>
-              </div>
-              
-              <div class="attraction-highlight">
-                <div class="attraction-title">📖 历史渊源</div>
-                
-                <p><strong>第一代书店（1919-1941）：</strong>由美国女性西尔维亚·比奇(Sylvia Beach)创立，出版了乔伊斯的《尤利西斯》，是海明威、菲茨杰拉德等"迷惘的一代"的聚会场所。</p>
-                
-                <p style="margin-top:8px"><strong>第二代书店（1951至今）：</strong>乔治·惠特曼(George Whitman)在原址附近重新开业，延续了文学沙龙的 tradition，并为"风滚草"(Tumbleweeds)——年轻作家提供免费住宿。</p>
-              </div>
-              
-              <p style="margin-top:12px"><strong>💡 打卡建议：</strong></p>
-              <ul>
-                <li>建议工作日上午或傍晚前往，避开周末人流高峰</li>
-                <li>店内禁止拍照（二楼阅读区除外），请尊重规定</li>
-                <li>可购买盖有书店印章的书籍作为纪念</li>
-                <li>书店旁边就是塞纳河，可在河边长椅上阅读新买的书</li>
-                <li>附近还有著名的巴黎圣母院，可一并安排</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】37 Rue de la Bûcherie, 75005 Paris<br>
-              【交通】地铁4号线至Saint-Michel站，或RER B/C线至Saint-Michel - Notre-Dame站<br>
-              【开放时间】10:00-20:00（建议提前确认）<br>
-              【停留时间】30-45分钟<br>
-              【邻近景点】巴黎圣母院（步行3分钟）、塞纳河（步行1分钟）</p>
-            </details>
-          </div>
-
-          <!-- Left Bank Walk -->
-          <div class="item" id="leftbank">
-            <div class="time">17:00 - 18:30</div>
-            <div class="title">🌊 Left Bank 左岸漫步 & 塞纳河</div>
-            <details>
-              <summary>查看详情</summary>
-              
-              <p class="img-caption">Photo: Seine River and Left Bank at Sunset | Unsplash</p>
-              
-              <p><strong>【亮点】</strong>从莎士比亚书店出发，沿着塞纳河左岸(Rive Gauche)漫步，感受巴黎最文艺的气息。这里是存在主义哲学家的沉思之地，也是海明威笔下"流动的盛宴"的核心场景。</p>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">区域</div>
-                  <div class="info-value">拉丁区 + 圣日耳曼德佩</div>
+                  <div class="info-label">位置</div>
+                  <div class="info-value">巴黎第18区</div>
                 </div>
                 <div class="info-item">
                   <div class="info-label">特色</div>
-                  <div class="info-value">文艺咖啡馆 + 二手书店</div>
+                  <div class="info-value">艺术+浪漫+波西米亚</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">推荐路线</div>
-                  <div class="info-value">莎士比亚书店→圣路易岛→双叟咖啡馆</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">步行时间</div>
-                  <div class="info-value">约30-45分钟</div>
+                  <div class="info-label">最佳时间</div>
+                  <div class="info-value">上午游客较少</div>
                 </div>
               </div>
               
-              <p style="margin-top:12px"><strong>☕ 必访咖啡馆：</strong></p>
-              <ul>
-                <li><strong>Café de Flore 花神咖啡馆：</strong>萨特和波伏娃的"办公室"，存在主义哲学的诞生地，建于1887年</li>
-                <li><strong>Les Deux Magots 双叟咖啡馆：</strong>海明威、毕加索常去的地方，曾获诺贝尔文学奖，店名源自两个中国商人雕像</li>
-                <li><strong>Le Procope 普罗可布咖啡馆：</strong>巴黎最古老的咖啡馆（1686年），伏尔泰、拿破仑都曾光顾</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>🌉 沿途经过：</strong></p>
-              <ul>
-                <li><strong>圣路易岛(Île Saint-Louis)：</strong>塞纳河上的宁静小岛，遍布精品店和冰淇淋店</li>
-                <li><strong>新桥(Pont Neuf)：</strong>巴黎最古老的桥，连接西岱岛与两岸</li>
-                <li><strong>艺术桥(Pont des Arts)：</strong>著名的"爱情锁"桥（现已禁止挂锁）</li>
-                <li><strong>bouquinistes：</strong>塞纳河畔的绿色书箱，售卖旧书和版画，是巴黎独特的风景线</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>💡 漫步建议：</strong></p>
-              <ul>
-                <li>傍晚时分最佳，金色阳光洒在塞纳河上，是巴黎最浪漫的时刻</li>
-                <li>可在花神或双叟点一杯咖啡，感受巴黎人的悠闲午后</li>
-                <li>沿街有许多复古商店和画廊，适合慢慢探索</li>
-                <li>圣路易岛的Berthillon冰淇淋是巴黎最佳，不容错过</li>
-              </ul>
-            </details>
-          </div>
-
-          <!-- Dinner -->
-          <div class="item">
-            <div class="time">18:30 - 19:00</div>
-            <div class="title">🍽️ 晚餐</div>
-            <details>
-              <summary>查看详情</summary>
-              <p><strong>【推荐选择】</strong></p>
-              <ul>
-                <li><strong>拉丁区(Latin Quarter)：</strong>圣米歇尔大道周边，学生区价格亲民</li>
-                <li><strong>圣日耳曼德佩(Saint-Germain-des-Prés)：</strong>高端餐厅区，米其林选择多</li>
-                <li><strong>左岸小酒馆：</strong>体验地道的法式bistro文化</li>
-              </ul>
-              <p style="margin-top:8px"><strong>💡 贴士：</strong>左岸餐厅较右岸更文艺，许多餐厅有户外座位，可边用餐边欣赏街景。</p>
-            </details>
-          </div>
-
-          <!-- Sainte-Chapelle -->
-          <div class="item" id="saintechapelle">
-            <div class="time">19:00 - 20:00</div>
-            <div class="title">🌈 Sainte-Chapelle 圣礼拜堂（晚间专场）</div>
-            <details>
-              <summary>查看详情</summary>
-              
-              <p class="img-caption">Photo: Sainte-Chapelle Stained Glass at Sunset | Unsplash</p>
-              
-              <p><strong>【亮点】</strong>傍晚时分的圣礼拜堂别有韵味，夕阳透过15米高的彩绘玻璃窗洒入，整个教堂沐浴在金色与斑斓的光影中。这是巴黎最神秘、最神圣的体验之一。</p>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">建造时间</div>
-                  <div class="info-value">1242-1248年（仅6年）</div>
+              <div class="attraction-highlight">
+                <div class="attraction-title">⛪ Sacré-Cœur 圣心大教堂</div>
+                
+                <p><strong>【亮点】</strong>圣心大教堂是蒙马特的地标建筑，始建于1875年。这座纯白色的罗马-拜占庭风格大教堂矗立在山顶，是巴黎仅次于埃菲尔铁塔的第二高点。</p>
+                
+                <div class="info-grid">
+                  <div class="info-item">
+                    <div class="info-label">建造时间</div>
+                    <div class="info-value">1875-1914年</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">建筑风格</div>
+                    <div class="info-value">罗马-拜占庭式</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">穹顶高度</div>
+                    <div class="info-value">83米</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">门票</div>
+                    <div class="info-value">教堂免费，穹顶€7</div>
+                  </div>
                 </div>
-                <div class="info-item">
-                  <div class="info-label">建筑风格</div>
-                  <div class="info-value">辐射式哥特式</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">彩色玻璃窗</div>
-                  <div class="info-value">15扇，总面积618㎡</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">建造者</div>
-                  <div class="info-value">路易九世（圣路易）</div>
+                
+                <p style="margin-top:12px"><strong>🏰 必看亮点：</strong></p>
+                <ul>
+                  <li><strong>大穹顶：</strong>攀登300级台阶到达穹顶，360°俯瞰巴黎全景</li>
+                  <li><strong>马赛克壁画：</strong>教堂内部巨大的金色马赛克《基督圣心》面积达475平方米</li>
+                  <li><strong>大钟：</strong>拥有法国最大的钟之一"萨瓦耶钟"，重达19吨</li>
+                </ul>
+                
+                <div class="warning-box">
+                  <strong>⚠️ 参观提示：</strong>教堂内部禁止拍照，请保持安静；穿短裤、短裙或无袖上衣者可能被拒绝入内。
                 </div>
               </div>
-              
-              <p style="margin-top:12px"><strong>🌈 傍晚彩绘玻璃：</strong></p>
-              <p>傍晚时分，夕阳从西侧窗户斜射入教堂，15扇彩绘玻璃窗被点亮，1113幅圣经场景在光影中栩栩如生。蓝色与红色的玻璃在金色阳光下呈现出梦幻般的效果，被誉为"光之洗礼"。</p>
-              
-              <p style="margin-top:12px"><strong>🎵 音乐演出：</strong></p>
-              <p>圣礼拜堂经常举办古典音乐会，弦乐四重奏或独奏在彩绘玻璃环绕下演奏，是巴黎最独特的音乐体验之一。建议提前查询演出安排并预订门票。</p>
               
               <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】8 Boulevard du Palais, 75001 Paris<br>
-              【交通】地铁4号线至Cité站，步行3分钟<br>
-              【晚间开放】夏季延长至19:00或更晚，请提前查询<br>
-              【建议时长】45-60分钟<br>
-              【贴士】傍晚人流较少，可静心欣赏彩绘玻璃</p>
+              <p>【蒙马特地址】Montmartre, 75018 Paris<br>
+              【交通】地铁12号线至Abbesses站或2号线至Anvers站<br>
+              【停留时间】2.5-3小时<br>
+              【建议】上午9点前到达可避开人群</p>
             </details>
           </div>
 
-          <!-- Notre-Dame de Paris -->
-          <div class="item" id="notredame">
-            <div class="time">20:00 - 20:30</div>
-            <div class="title">⛪ Notre-Dame de Paris 巴黎圣母院（外观夜景）</div>
+          <!-- Place du Tertre -->
+          <div class="item" id="tertre">
+            <div class="time">09:30</div>
+            <div class="title">🎭 Place du Tertre 小丘广场</div>
+            
             <details>
               <summary>查看详情</summary>
               
-              <p class="img-caption">Photo: Notre-Dame Cathedral at Night | Unsplash</p>
-              
-              <p><strong>【亮点】</strong>夜幕下的巴黎圣母院别有一番韵味。虽然内部仍在修复中，但灯光照亮下的哥特式立面依然壮观。从莎士比亚书店步行3分钟即可到达，是左岸漫步的完美终点。</p>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">建造时间</div>
-                  <div class="info-value">1163-1345年</div>
+              <div class="attraction-highlight">
+                <div class="attraction-title">🎨 画家广场</div>
+                
+                <p><strong>【亮点】</strong>画家广场是蒙马特的心脏地带，一个充满艺术氛围的小广场。这里曾是毕加索、梵高、图卢兹-劳特累克等大师的聚集地，如今仍有许多街头艺术家在此作画、售卖作品。</p>
+                
+                <div class="info-grid">
+                  <div class="info-item">
+                    <div class="info-label">历史地位</div>
+                    <div class="info-value">艺术家聚集地</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">著名画家</div>
+                    <div class="info-value">毕加索、梵高</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">肖像画价格</div>
+                    <div class="info-value">€30-80</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">最佳时间</div>
+                    <div class="info-value">上午游客较少</div>
+                  </div>
                 </div>
-                <div class="info-item">
-                  <div class="info-label">建筑风格</div>
-                  <div class="info-value">法国哥特式</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">现状</div>
-                  <div class="info-value">修复中，外观可参观</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">门票</div>
-                  <div class="info-value">外观免费</div>
-                </div>
-              </div>
-              
-              <p style="margin-top:12px"><strong>🌙 夜景特色：</strong></p>
-              <ul>
-                <li><strong>西立面灯光：</strong>夜晚灯光照亮双塔和玫瑰花窗，比白天更显神秘</li>
-                <li><strong>广场氛围：</strong>圣母院前广场是巴黎人聚集的地方，夜晚常有街头艺人表演</li>
-                <li><strong>塞纳河倒影：</strong>从桥上望去，圣母院的灯光倒映在塞纳河中</li>
-              </ul>
-              
-              <div class="tips-box">
-                <div class="tips-title">⚠️ 修复工程提醒</div>
-                <ul class="tips-list">
-                  <li>2019年4月15日，圣母院遭遇严重火灾，尖顶倒塌</li>
-                  <li>目前修复工程进行中，预计2024年12月重新开放</li>
-                  <li>外部可正常参观拍照，西立面和双塔保持完好</li>
-                  <li>广场上的临时装置艺术也是独特体验</li>
+                
+                <p style="margin-top:12px"><strong>🎭 广场体验：</strong></p>
+                <ul>
+                  <li><strong>街头画家：</strong>观看艺术家现场作画，可以选择画一幅肖像或风景</li>
+                  <li><strong>露天咖啡：</strong>在广场周围的咖啡馆坐下，感受巴黎左岸的文艺气息</li>
+                  <li><strong>艺术氛围：</strong>广场四周都是画廊和艺术工作室</li>
                 </ul>
               </div>
               
-              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】6 Parvis Notre-Dame - Place Jean-Paul II, 75004 Paris<br>
-              【交通】从莎士比亚书店步行3分钟<br>
-              【停留时间】20-30分钟（外观）<br>
-              【贴士】夜晚拍摄需带三脚架或使用夜景模式</p>
+              <div class="attraction-highlight">
+                <div class="attraction-title">💕 Mur des Je t'aime 爱墙</div>
+                
+                <p><strong>【亮点】</strong>爱墙(Le Mur des Je t'aime)位于蒙马特一座小公园内，是一面约40平方米的深蓝色瓷砖墙，上面用311种语言、共1330次书写着"我爱你"。</p>
+                
+                <div class="info-grid">
+                  <div class="info-item">
+                    <div class="info-label">创建时间</div>
+                    <div class="info-value">2000年10月</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">语言种类</div>
+                    <div class="info-value">311种</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">门票</div>
+                    <div class="info-value">免费</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">中文</div>
+                    <div class="info-value">可找到"我爱你"</div>
+                  </div>
+                </div>
+              </div>
             </details>
           </div>
 
-          <!-- Hotel Return -->
-          <div class="item" id="hotel">
-            <div class="time">21:00</div>
-            <div class="title">🏨 返回酒店</div>
+          <!-- Hotel Check-out -->
+          <div class="item">
+            <div class="time">11:30</div>
+            <div class="title">🏨 酒店退房</div>
             <details>
               <summary>查看详情</summary>
-              <p><strong>【从圣母院返回】</strong></p>
-              <p>搭乘地铁4号线至Châtelet站，换乘1号线至Charles de Gaulle-Étoile站，步行5分钟即达酒店。全程约30分钟。</p>
+              <p><strong>【退房】</strong>从蒙马特返回酒店，办理退房手续。</p>
+              <p><strong>【行李】</strong>携带行李前往戴高乐机场。</p>
             </details>
           </div>
 
+          <!-- CDG Airport -->
+          <div class="item" id="cdg">
+            <div class="time">13:30</div>
+            <div class="title">✈️ CDG机场 返程准备</div>
+            <details>
+              <summary>查看详情</summary>
+              
+              <p><strong>【亮点】</strong>戴高乐机场(CDG)是欧洲第二大机场，也是巴黎的主要国际机场。机场内有丰富的购物和退税服务，是离开欧洲前的最后采购机会。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">机场代码</div>
+                  <div class="info-value">CDG / LFPG</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">航站楼</div>
+                  <div class="info-value">T1 / T2(A-G) / T3</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">距市区</div>
+                  <div class="info-value">约25公里</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">车程</div>
+                  <div class="info-value">约45-60分钟</div>
+                </div>
+              </div>
+              
+              <div class="attraction-highlight">
+                <div class="attraction-title">🚕 前往机场交通</div>
+                
+                <p><strong>1. RER B 郊区快铁（推荐）：</strong></p>
+                <ul>
+                  <li><strong>路线：</strong>从Charles de Gaulle-Étoile站乘坐RER A线至Châtelet，换乘RER B线直达机场</li>
+                  <li><strong>时间：</strong>约50-60分钟</li>
+                  <li><strong>票价：</strong>€11.45/人</li>
+                </ul>
+                
+                <p><strong>2. 出租车/网约车：</strong></p>
+                <ul>
+                  <li><strong>时间：</strong>约45-90分钟(取决于交通)</li>
+                  <li><strong>价格：</strong>右岸€53(固定价格)</li>
+                  <li><strong>网约车：</strong>Bolt、Uber等约€35-50</li>
+                </ul>
+              </div>
+              
+              <div class="attraction-highlight">
+                <div class="attraction-title">💶 退税指南 Tax Refund</div>
+                
+                <p><strong>【退税条件】</strong></p>
+                <ul>
+                  <li>非欧盟居民，持有有效期6个月以上的护照</li>
+                  <li>同一天在同一家商店购物满€100.01(含)</li>
+                  <li>商品必须随身携带离境</li>
+                </ul>
+                
+                <p style="margin-top:12px"><strong>【退税流程】</strong></p>
+                <ol>
+                  <li>购物时向店员索要"Detaxe"退税单</li>
+                  <li>机场退税机(PABLO机器)上扫描退税单条形码</li>
+                  <li>如机器无法识别，需前往海关柜台人工验证</li>
+                </ol>
+                
+                <div class="warning-box">
+                  <strong>⚠️ 重要提醒：</strong>退税商品需随身携带，不要托运！
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <!-- Flight to Vienna -->
+          <div class="item" id="flight">
+            <div class="time">17:30</div>
+            <div class="title">✈️ 航班 CDG → VIE</div>
+            <details>
+              <summary>查看详情</summary>
+              
+              <p><strong>【亮点】</strong>从巴黎戴高乐机场起飞，飞往奥地利维也纳国际机场。约2.5小时的航程横跨欧洲大陆，从西欧的法式浪漫切换到中欧的奥式优雅。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">飞行时间</div>
+                  <div class="info-value">约2小时30分</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">距离</div>
+                  <div class="info-value">约1050公里</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">时差</div>
+                  <div class="info-value">无时差（同CET）</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">航空公司</div>
+                  <div class="info-value">奥地利航空/法航</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🛫 起飞前准备：</strong></p>
+              <ul>
+                <li>确认护照、登机牌在手</li>
+                <li>液体化妆品放入透明袋，单瓶不超过100ml</li>
+                <li>电子设备随身携带，安检时需取出</li>
+                <li>预留充足时间到达登机口</li>
+              </ul>
+            </details>
+          </div>
+
+          <!-- Arrive Vienna -->
+          <div class="item" id="vienna">
+            <div class="time">20:00</div>
+            <div class="title">🎵 抵达维也纳</div>
+            <details>
+              <summary>查看详情</summary>
+              
+              <p><strong>【亮点】</strong>欢迎来到维也纳——音乐之都、艺术之都、咖啡之都！维也纳是奥地利的首都，也是欧洲最具文化底蕴的城市之一。莫扎特、贝多芬、舒伯特等音乐大师都曾在此创作。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">人口</div>
+                  <div class="info-value">约190万</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">官方语言</div>
+                  <div class="info-value">德语</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">特色</div>
+                  <div class="info-value">音乐+咖啡+皇室</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">货币</div>
+                  <div class="info-value">欧元(EUR)</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🛬 到达后：</strong></p>
+              <ul>
+                <li>跟随"Exit/Ausgang"指示前往到达大厅</li>
+                <li>提取托运行李</li>
+                <li>出关后步行约5分钟即可到达机场酒店</li>
+              </ul>
+            </details>
+          </div>
+
+          <!-- Moxy Hotel -->
+          <div class="item">
+            <div class="time">21:00</div>
+            <div class="title">🏨 入住 Moxy Vienna Airport</div>
+            <details>
+              <summary>查看详情</summary>
+              
+              <p><strong>【亮点】</strong>Moxy是万豪国际集团旗下的年轻时尚品牌。Moxy Vienna Airport步行5分钟即可到达航站楼，非常适合早班机或晚班机中转的旅客。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">地址</div>
+                  <div class="info-value">Ausfahrtsstraße 4, Schwechat</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">距航站楼</div>
+                  <div class="info-value">步行5分钟</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">特色</div>
+                  <div class="info-value">年轻时尚+便利</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">设施</div>
+                  <div class="info-value">24小时前台+健身房</div>
+                </div>
+              </div>
+            </details>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Hotel Details Section -->
-    <div class="section" id="hotel-details">
+    <!-- Hotel Card Section -->
+    <div class="section">
       <div class="card-content">
-        <div class="card-title">🏨 酒店详情</div>
+        <div class="card-title">🏨 住宿详情</div>
+        <div class="highlight-box">
+          <strong>Moxy Vienna Airport</strong>
+          <span class="tag">万豪旗下</span>
+          <span class="tag">机场步行5分钟</span>
+          <span class="tag">24小时前台</span>
+        </div>
         
         <div class="hotel-card">
           <div class="hotel-header">
-            <h3 class="hotel-name">Le Méridien Paris Arc de Triomphe</h3>
-            <span class="hotel-stars">⭐⭐⭐⭐⭐</span>
-            <span class="hotel-chain">艾美酒店（万豪旗下）</span>
+            <h3 class="hotel-name">Moxy Vienna Airport</h3>
+            <span class="hotel-stars">⭐⭐⭐</span>
+            <span class="hotel-chain">万豪旗下时尚酒店</span>
           </div>
           
           <div class="hotel-grid">
@@ -663,31 +591,15 @@
               <span class="hotel-info-icon">📍</span>
               <div class="hotel-info-content">
                 <div class="hotel-info-label">完整地址</div>
-                <div class="hotel-info-value">81 Avenue de Wagram, 75017 Paris, France</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">📞</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">联系电话</div>
-                <div class="hotel-info-value">+33 1 43 80 40 30</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">🚇</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">最近地铁站</div>
-                <div class="hotel-info-value">Charles de Gaulle-Étoile（地铁1/2/6号线，RER A线）</div>
+                <div class="hotel-info-value">Ausfahrtsstraße 4, 1300 Schwechat, Austria</div>
               </div>
             </div>
             
             <div class="hotel-info-item">
               <span class="hotel-info-icon">🚶</span>
               <div class="hotel-info-content">
-                <div class="hotel-info-label">到卢浮宫</div>
-                <div class="hotel-info-value">地铁1号线直达，约15分钟</div>
+                <div class="hotel-info-label">距机场航站楼</div>
+                <div class="hotel-info-value">步行约5分钟，约300米</div>
               </div>
             </div>
             
@@ -700,97 +612,25 @@
             </div>
             
             <div class="hotel-info-item">
-              <span class="hotel-info-icon">🏛️</span>
+              <span class="hotel-info-icon">🍽️</span>
               <div class="hotel-info-content">
-                <div class="hotel-info-label">周边景点</div>
-                <div class="hotel-info-value">距凯旋门步行5分钟；距香榭丽舍大道步行10分钟；距埃菲尔铁塔地铁15分钟</div>
+                <div class="hotel-info-label">餐饮设施</div>
+                <div class="hotel-info-value">24小时Grab-and-Go小吃吧；酒吧供应鸡尾酒</div>
               </div>
             </div>
           </div>
           
           <div class="hotel-amenities">
-            <span class="amenity-tag">✓ 五星豪华酒店</span>
-            <span class="amenity-tag">✓ 118间客房</span>
-            <span class="amenity-tag">✓ 免费WiFi</span>
-            <span class="amenity-tag">✓ 24小时礼宾服务</span>
-            <span class="amenity-tag">✓ 24小时健身中心</span>
-            <span class="amenity-tag">✓ 餐厅及酒吧</span>
+            <span class="amenity-tag">✓ 机场步行可达</span>
+            <span class="amenity-tag">✓ 免费高速WiFi</span>
+            <span class="amenity-tag">✓ 24小时前台</span>
+            <span class="amenity-tag">✓ 24小时健身房</span>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Museum Tips Section -->
-    <div class="section">
-      <div class="card-content">
-        <div class="card-title">🎫 博物馆预约攻略（卢浮宫+奥赛）</div>
         
-        <div class="tips-box" style="background:linear-gradient(135deg,#fce7f3 0%,#fdf2f8 100%);border-color:#f9a8d4">
-          <div class="tips-title" style="color:#9d174d">📍 两馆联游路线</div>
-          <ul class="tips-list" style="color:#831843">
-            <li><strong>上午：</strong>卢浮宫（09:00-12:30）- 德农馆蒙娜丽莎→胜利女神→萨里馆断臂维纳斯</li>
-            <li><strong>午餐：</strong>卢浮宫地下商场或杜乐丽花园旁（12:30-13:30）</li>
-            <li><strong>下午：</strong>奥赛博物馆（13:30-16:00）- 5楼印象派精华→梵高《星空》→金色大钟</li>
-            <li><strong>步行：</strong>沿塞纳河左岸步行15分钟至莎士比亚书店</li>
-            <li><strong>傍晚：</strong>左岸漫步→圣礼拜堂→圣母院夜景</li>
-          </ul>
-        </div>
-        
-        <div class="tips-box" style="margin-top:12px;background:linear-gradient(135deg,#fef3c7 0%,#fffbeb 100%)">
-          <div class="tips-title">🎫 奥赛博物馆预约</div>
-          <ul class="tips-list">
-            <li><strong>官方网站：</strong>musee-orsay.fr → Tickets → Online booking</li>
-            <li><strong>门票价格：</strong>€16（在线预订），周四延长至21:45</li>
-            <li><strong>免费时段：</strong>每月第一个周日免费（需预约）</li>
-            <li><strong>博物馆通票：</strong>Paris Museum Pass包含奥赛</li>
-          </ul>
-        </div>
-        
-        <div class="tips-box" style="margin-top:12px;background:linear-gradient(135deg,#dbeafe 0%,#eff6ff 100%);border-color:#60a5fa">
-          <div class="tips-title" style="color:#1e40af">📱 卢浮宫预约渠道</div>
-          <ul class="tips-list" style="color:#1e3a8a">
-            <li><strong>官方网站：</strong>tickets.louvre.fr（最可靠）</li>
-            <li><strong>官方APP：</strong>下载"Louvre"官方APP购票</li>
-            <li><strong>第三方平台：</strong>GetYourGuide、Tiqets（注意手续费）</li>
-            <li><strong>巴黎博物馆通票：</strong>Paris Museum Pass（如计划参观多个博物馆）</li>
-          </ul>
-        </div>
-        
-        <div class="tips-box" style="margin-top:12px;background:linear-gradient(135deg,#fef3c7 0%,#fffbeb 100%)">
-          <div class="tips-title">⏰ 预约时间选择</div>
-          <ul class="tips-list">
-            <li><strong>卢浮宫最佳：</strong>09:00开馆即入，人最少，可优先看蒙娜丽莎</li>
-            <li><strong>奥赛最佳：</strong>周四延长至21:45，傍晚人流较少，金色大钟拍照更佳</li>
-            <li><strong>避开日期：</strong>周一（奥赛闭馆）、周二（卢浮宫闭馆）</li>
-            <li><strong>每月第一个周日：</strong>奥赛免费开放（需预约）</li>
-          </ul>
-        </div>
-        
-        <div class="tips-box" style="margin-top:12px;background:linear-gradient(135deg,#d1fae5 0%,#ecfdf5 100%);border-color:#6ee7b7">
-          <div class="tips-title" style="color:#065f46">🚪 入口选择（重要！）</div>
-          <ul class="tips-list" style="color:#064e3b">
-            <li><strong>卢浮宫金字塔主入口：</strong>最显眼但排队最长，不推荐</li>
-            <li><strong>🌟 卡鲁塞尔入口(Carrousel du Louvre)：</strong>强烈推荐！位于地下商场，排队最短，99%的人不知道</li>
-            <li><strong>里沃利街入口(Porte des Lions)：</strong>侧门，人流量中等</li>
-            <li><strong>奥赛入口：</strong>主入口位于塞纳河畔，已预约游客可走快速通道</li>
-          </ul>
-        </div>
-        
-        <div class="tips-box" style="margin-top:12px;background:linear-gradient(135deg,#fce7f3 0%,#fdf2f8 100%);border-color:#f9a8d4">
-          <div class="tips-title" style="color:#9d174d">💡 参观贴士</div>
-          <ul class="tips-list" style="color:#831843">
-            <li><strong>下载地图：</strong>卢浮宫和奥赛APP都有中文地图</li>
-            <li><strong>卢浮宫优先路线：</strong>蒙娜丽莎（德农馆1层）→ 胜利女神（德农馆顶层）→ 断臂维纳斯（萨里馆0层）</li>
-            <li><strong>奥赛优先路线：</strong>直接上5楼，印象派精华全在这里</li>
-            <li><strong>蒙娜丽莎：</strong>排队可能长达30-60分钟，建议一开馆就直奔</li>
-            <li><strong>穿着建议：</strong>博物馆内温度较低，建议带件薄外套</li>
-            <li><strong>行李：</strong>大包需寄存，入口旁有免费储物柜</li>
-          </ul>
-        </div>
-        
-        <div class="highlight-box" style="margin-top:16px">
-          <strong>📍 卡鲁塞尔入口详细路线：</strong><br>
-          地铁1/7号线至Palais Royal - Musée du Louvre站 → 从"Carrousel du Louvre"出口出站 → 直接进入地下商场 → 沿指示牌"Entrée Musée"前行约3分钟 → 看到倒金字塔后左转 → 持电子票扫码入场
+        <div style="margin-top:16px;padding:16px;background:#f0f9ff;border-radius:12px;border-left:4px solid #0ea5e9">
+          <strong style="color:#0369a1">🌙 选择理由：</strong>
+          <p style="margin:8px 0 0 0;color:#0c4a6e;font-size:14px">位于维也纳机场内，第二天12:45的返程航班可从容应对。无需早起赶机场，步行5分钟即可到达值机柜台。</p>
         </div>
       </div>
     </div>
@@ -798,18 +638,15 @@
     <!-- Tips Section -->
     <div class="section">
       <div class="card-content">
-        <div class="card-title">💡 巴黎博物馆日贴士</div>
+        <div class="card-title">💡 实用贴士</div>
         <ul style="color:var(--muted);padding-left:20px">
-          <li><strong>预约必备：</strong>卢浮宫和奥赛必须提前预约！当天现场几乎买不到票</li>
-          <li><strong>两馆联票：</strong>购买Paris Museum Pass（€78/4天）可免排队进入卢浮宫、奥赛、圣礼拜堂</li>
-          <li><strong>舒适鞋履：</strong>今日步行约5-6公里，两馆内也需大量行走</li>
-          <li><strong>奥赛必看：</strong>梵高《星空》、莫奈《睡莲》、雷诺阿《煎饼磨坊的舞会》都在5楼</li>
-          <li><strong>金色大钟：</strong>奥赛5楼咖啡馆旁的巨型时钟是网红打卡点，拍照需排队</li>
-          <li><strong>莎士比亚书店：</strong>《爱在日落黄昏时》取景地，店内禁止拍照（二楼阅读区除外）</li>
-          <li><strong>左岸漫步：</strong>从奥赛到莎士比亚书店沿塞纳河步行约15分钟，风景优美</li>
-          <li><strong>圣礼拜堂最佳时间：</strong>傍晚时分（19:00左右），夕阳透过彩绘玻璃效果最佳</li>
-          <li><strong>花神/双叟咖啡馆：</strong>萨特、海明威常去的地方，人均€8-15，体验巴黎文艺氛围</li>
-          <li><strong>安全防范：</strong>热门景点需防范扒手，贵重物品放在胸前包</li>
+          <li><strong>蒙马特安全：</strong>注意防范扒手，特别是在圣心大教堂台阶和缆车附近</li>
+          <li><strong>最佳拍照时间：</strong>上午9点前，圣心大教堂光线最美</li>
+          <li><strong>前往机场：</strong>建议13:00前从酒店出发，预留充足时间</li>
+          <li><strong>退税预留时间：</strong>如需要办理退税，额外预留30-45分钟</li>
+          <li><strong>机场购物：</strong>免税店化妆品和香水价格优惠</li>
+          <li><strong>维也纳酒店：</strong>Moxy酒店不提供传统早餐，但24小时供应轻食</li>
+          <li><strong>明天航班：</strong>次日12:45起飞回上海，建议10:45前到达机场</li>
         </ul>
       </div>
     </div>

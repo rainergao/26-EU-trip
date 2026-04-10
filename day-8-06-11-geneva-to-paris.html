@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Day 8｜06-11｜Geneva → Paris</title>
+  <title>Day 8｜06-11｜Geneva老城 → Paris</title>
   <style>
     :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08);--accent:#f59e0b}
     body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
@@ -13,16 +13,6 @@
     .hero{background:linear-gradient(135deg,#0ea5e9,#2563eb 60%,#6366f1);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
     h1{margin:0 0 8px;font-size:28px}
     .subtitle{margin:0;opacity:.9;font-size:16px}
-    
-    /* Map Section */
-    .map-section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px}
-    .map-title{font-size:16px;font-weight:700;margin-bottom:12px;color:var(--text);display:flex;align-items:center;gap:8px}
-    .map-container{width:100%;height:350px;border-radius:16px;overflow:hidden;background:#f3f4f6;position:relative}
-    .map-container iframe{width:100%;height:100%;border:0}
-    .map-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);background:linear-gradient(135deg,#e5e7eb 0%,#f3f4f6 100%)}
-    .map-placeholder svg{width:48px;height:48px;margin-bottom:12px;opacity:.5}
-    .map-route{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:13px;color:var(--muted)}
-    .map-route span{background:#f3f4f6;padding:4px 10px;border-radius:12px}
     
     /* Banner Navigation */
     .banner-nav{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px;overflow-x:auto}
@@ -57,10 +47,6 @@
     summary{cursor:pointer;font-weight:600;color:var(--blue)}
     details[open] summary{margin-bottom:12px}
     
-    /* Attraction Images */
-    .attraction-img{width:100%;border-radius:16px;margin:12px 0;box-shadow:0 4px 12px rgba(0,0,0,.1)}
-    .img-caption{font-size:12px;color:var(--muted);text-align:center;margin-top:4px;font-style:italic}
-    
     /* Navigation */
     .nav-links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
     .nav-links a{color:var(--blue);text-decoration:none;font-weight:500}
@@ -74,6 +60,21 @@
     .info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
     .info-value{font-size:14px;font-weight:600;color:var(--text)}
     .scroll-indicator{display:none}
+    
+    /* Transport Card */
+    .transport-card{background:linear-gradient(135deg,#fefce8 0%,#fff 100%);border:1px solid #fcd34d;border-radius:20px;padding:20px;margin-top:16px}
+    .transport-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+    .transport-title{font-size:18px;font-weight:800;color:var(--text);margin:0}
+    .transport-type{font-size:13px;color:#b45309;background:#fef3c7;padding:4px 10px;border-radius:12px}
+    .transport-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+    .transport-info-item{display:flex;align-items:flex-start;gap:10px}
+    .transport-info-icon{font-size:18px;min-width:24px;text-align:center}
+    .transport-info-content{flex:1}
+    .transport-info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+    .transport-info-value{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}
+    .transport-tips{margin-top:16px;padding-top:16px;border-top:1px solid #fcd34d}
+    .tip-item{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;font-size:13px;color:#92400e}
+    .tip-icon{font-size:16px}
     
     /* Hotel Card */
     .hotel-card{background:linear-gradient(135deg,#fff 0%,#f8fafc 100%);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:16px}
@@ -90,56 +91,30 @@
     .hotel-amenities{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
     .amenity-tag{background:#ecfdf5;color:#059669;font-size:12px;padding:6px 12px;border-radius:20px;display:flex;align-items:center;gap:6px}
 
-    /* Swiss Badge */
-    .swiss-badge{background:linear-gradient(135deg,#ef4444 0%,#dc2626 100%);color:#fff;padding:10px 14px;border-radius:12px;margin:12px 0;font-size:14px;display:flex;align-items:flex-start;gap:10px}
-    .swiss-badge-icon{font-size:18px}
-    .swiss-badge-content{flex:1}
-    .swiss-badge-title{font-weight:700;margin-bottom:2px}
-    .swiss-badge-text{opacity:.95;font-size:13px;line-height:1.5}
+    /* Attraction highlight */
+    .attraction-highlight{background:linear-gradient(135deg,#eff6ff 0%,#fff 100%);border:1px solid #bfdbfe;border-radius:20px;padding:20px;margin-top:16px}
+    .attraction-title{font-size:18px;font-weight:800;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px}
     
     @media(max-width:768px){
-      /* 1. 基础布局优化 */
       .wrap{padding:16px}
-      
-      /* 2. Hero区域字体优化 */
       .hero{padding:20px}
       .hero h1{font-size:22px}
       .hero .subtitle{font-size:14px}
-      
-      /* 3. Banner导航优化 */
       .banner-nav{padding:12px}
       .banner-node{padding:0 6px}
       .banner-label{max-width:70px}
-      
-      /* 4. 卡片间距优化 */
       .section{margin-bottom:14px}
       .card-content{padding:16px}
       .card-title{font-size:15px}
-      
-      /* 5. 时间轴优化 */
       .timeline{margin-left:4px}
       .item{padding:0 0 16px 20px}
       .item .time{font-size:12px}
       .item .title{font-size:16px}
-      
-      /* 6. 信息网格优化 - 小屏幕单列显示 */
       .info-grid{grid-template-columns:1fr}
       .info-item{padding:10px}
-      
-      /* 7. 电影badge优化 */
-      .movie-badge{padding:8px 12px}
-      .movie-badge-text{font-size:12px}
-      
-      /* 8. 酒店卡片优化 */
       .hotel-card{padding:16px}
       .hotel-name{font-size:18px}
       .hotel-grid{grid-template-columns:1fr;gap:12px}
-      
-      /* 9. 地图区域优化 */
-      .map-section{padding:16px}
-      .map-container{height:250px}
-      
-      /* 10. 滚动提示 */
       .scroll-indicator{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
     }
   </style>
@@ -148,49 +123,49 @@
   <div class="wrap">
     <!-- Hero Section -->
     <div class="hero">
-      <h1>🌍 Day 8｜06-11｜Geneva → Paris</h1>
-      <p class="subtitle">国际之旅 | 从联合国总部到浪漫之都的跨越</p>
+      <h1>🌍 Day 8｜06-11｜Geneva老城 → Paris</h1>
+      <p class="subtitle">瑞士老城晨韵｜TGV穿越法瑞边境｜巴黎浪漫初夜</p>
     </div>
 
     <!-- Navigation -->
     <div class="nav-links">
-      <a href="index.html">← 返回主页</a>
-      <a href="day-7-06-09-milan-to-grindelwald.html">← Day 7</a>
-      <a href="day-9-06-12-paris.html">Day 9 →</a>
+      <a href="day-7-06-10-grindelwald.html">← Day 7</a>
+      <a href="index.html">返回主页</a>
+      <a href="day-9-06-12-geneva-to-paris.html">Day 9 →</a>
     </div>
 
     <!-- Banner Navigation -->
     <div class="banner-nav">
       <div class="banner-title">📍 行程导航</div>
       <div class="banner-track">
-        <a href="#breakfast" class="banner-node active">
-          <div class="banner-time">08:00</div>
+        <a href="#oldtown" class="banner-node">
+          <div class="banner-time">Morning</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">酒店早餐</div>
+          <div class="banner-label">日内瓦老城</div>
         </a>
         <div class="banner-arrow">→</div>
-        <a href="#un" class="banner-node">
-          <div class="banner-time">09:30</div>
+        <a href="#cathedral" class="banner-node">
+          <div class="banner-time">Morning</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">联合国总部</div>
+          <div class="banner-label">圣彼得大教堂</div>
         </a>
         <div class="banner-arrow">→</div>
-        <a href="#chair" class="banner-node">
-          <div class="banner-time">12:00</div>
+        <a href="#tgv" class="banner-node active">
+          <div class="banner-time">12:15</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">断腿木椅</div>
-        </a>
-        <div class="banner-arrow">→</div>
-        <a href="#tgv" class="banner-node">
-          <div class="banner-time">13:15</div>
-          <div class="banner-dot"></div>
-          <div class="banner-label">TGV出发</div>
+          <div class="banner-label">TGV去巴黎</div>
         </a>
         <div class="banner-arrow">→</div>
         <a href="#paris" class="banner-node">
           <div class="banner-time">16:30</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">抵达巴黎</div>
+          <div class="banner-label">凯旋门</div>
+        </a>
+        <div class="banner-arrow">→</div>
+        <a href="#eiffel" class="banner-node">
+          <div class="banner-time">21:00</div>
+          <div class="banner-dot"></div>
+          <div class="banner-label">埃菲尔铁塔</div>
         </a>
       </div>
       <div class="scroll-indicator">← 左右滑动查看更多 →</div>
@@ -201,13 +176,79 @@
       <div class="card-content">
         <div class="card-title">🚄 大交通</div>
         <div class="highlight-box">
-          <strong>Geneva → Paris Gare de Lyon</strong><br>
-          <span style="font-size:20px;font-weight:800;color:var(--blue)">13:15 - 16:30</span>
+          <strong>Geneva Cornavin → Paris Gare de Lyon</strong><br>
+          <span style="font-size:20px;font-weight:800;color:var(--blue)">12:15 - 16:30</span>
           <span class="tag">约3小时15分</span>
           <span class="tag">TGV Lyria</span>
           <span class="tag">直达高速</span>
         </div>
         <p class="card-text">乘坐TGV Lyria高速列车从日内瓦直达巴黎，穿越法瑞边境，途经第戎、里昂等地，一路向北抵达浪漫之都巴黎。</p>
+        
+        <div class="transport-card">
+          <div class="transport-header">
+            <h3 class="transport-title">🎫 TGV Lyria 购票提示</h3>
+            <span class="transport-type">强烈建议提前购买</span>
+          </div>
+          
+          <div class="transport-grid">
+            <div class="transport-info-item">
+              <span class="transport-info-icon">🌐</span>
+              <div class="transport-info-content">
+                <div class="transport-info-label">购票官网</div>
+                <div class="transport-info-value">SNCF Connect (sncf-connect.com)</div>
+              </div>
+            </div>
+            
+            <div class="transport-info-item">
+              <span class="transport-info-icon">⏰</span>
+              <div class="transport-info-content">
+                <div class="transport-info-label">提前购票建议</div>
+                <div class="transport-info-value">建议提前30-90天预订，可享早鸟票价</div>
+              </div>
+            </div>
+            
+            <div class="transport-info-item">
+              <span class="transport-info-icon">💶</span>
+              <div class="transport-info-content">
+                <div class="transport-info-label">票价参考</div>
+                <div class="transport-info-value">早鸟票 €29-49 | 普通票 €60-120</div>
+              </div>
+            </div>
+            
+            <div class="transport-info-item">
+              <span class="transport-info-icon">📍</span>
+              <div class="transport-info-content">
+                <div class="transport-info-label">出发车站</div>
+                <div class="transport-info-value">Genève Cornavin</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="transport-tips">
+            <div class="tip-item">
+              <span class="tip-icon">💡</span>
+              <span><strong>座位选择：</strong>推荐选择左侧座位，沿途可欣赏勃朗峰和阿尔卑斯山景</span>
+            </div>
+            <div class="tip-item">
+              <span class="tip-icon">💡</span>
+              <span><strong>无需太早：</strong>开车前20-30分钟到达即可，无需安检</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hotel Card Preview -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">🏨 住宿</div>
+        <div class="highlight-box">
+          <strong>Le Méridien Paris Arc de Triomphe</strong>
+          <span class="tag">艾美酒店</span>
+          <span class="tag">五星</span>
+          <span class="tag">距凯旋门步行5分钟</span>
+        </div>
+        <p class="card-text">位于巴黎第17区，紧邻凯旋门和香榭丽舍大道，是探索巴黎的理想据点。</p>
       </div>
     </div>
 
@@ -217,262 +258,109 @@
         <div class="card-title">📍 行程安排</div>
         <div class="timeline">
           
-          <!-- Breakfast -->
-          <div class="item" id="breakfast">
-            <div class="time">08:00</div>
-            <div class="title">🍳 酒店早餐</div>
-            <details>
-              <summary>查看详情</summary>
-              <p><strong>【亮点】</strong>在日内瓦享用最后一顿瑞士早餐，为上午的联合国参观和下午的巴黎之旅储备能量。</p>
-              <p style="margin-top:12px"><strong>☕ 早餐内容：</strong></p>
-              <ul>
-                <li><strong>瑞士特色</strong> - 瑞士麦片(Müesli)、新鲜面包、瑞士奶酪、冷切肉</li>
-                <li><strong>热饮</strong> - 现磨咖啡、热巧克力、各类茶品</li>
-                <li><strong>蛋类</strong> - 水煮蛋、炒蛋、煎蛋等</li>
-                <li><strong>水果</strong> - 新鲜季节性水果</li>
-              </ul>
-              <p style="margin-top:12px"><strong>💡 实用信息：</strong></p>
-              <p>【时间】约45分钟（08:00-08:45）<br>
-              【建议】提前收拾行李，退房后寄存前台<br>
-              【提醒】携带护照原件，联合国参观需要</p>
-            </details>
-          </div>
-
-          <!-- Go to UN -->
-          <div class="item">
-            <div class="time">09:00</div>
-            <div class="title">🚌 前往联合国总部</div>
-            <details>
-              <summary>查看详情</summary>
-              <p><strong>【交通方式】</strong>从酒店前往联合国总部（Palais des Nations）</p>
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">公交方案</div>
-                  <div class="info-value">8路、F/V线水上巴士至"Nations"站</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">打车方案</div>
-                  <div class="info-value">约10-15分钟，CHF 12-18</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">步行方案</div>
-                  <div class="info-value">约30分钟（不推荐，时间紧张）</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">建议</div>
-                  <div class="info-value">选择打车更稳妥</div>
-                </div>
-              </div>
-              <p style="margin-top:12px"><strong>💡 出行提示：</strong></p>
-              <p>【时间】预留30分钟（09:00-09:30）<br>
-              【行李】联合国不接受大件行李寄存，建议轻装<br>
-              【重要】务必携带护照原件！</p>
-            </details>
-          </div>
-
-          <!-- UN Entry -->
-          <div class="item">
-            <div class="time">09:30</div>
-            <div class="title">🛂 安检入场</div>
-            <details>
-              <summary>查看详情</summary>
-              <p><strong>【安检流程】</strong>联合国总部实行严格安检，需提前到达</p>
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">安检时长</div>
-                  <div class="info-value">约30分钟</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">需出示</div>
-                  <div class="info-value">护照原件+预约确认</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">禁止携带</div>
-                  <div class="info-value">大背包、食物、饮料</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">寄存</div>
-                  <div class="info-value">入口可存小件物品</div>
-                </div>
-              </div>
-              <p style="margin-top:12px"><strong>⚠️ 重要提醒：</strong></p>
-              <ul>
-                <li>必须在预约时间前30分钟到达安检</li>
-                <li>护照信息与预约信息必须完全一致</li>
-                <li>建议穿着得体，避免拖鞋、短裤</li>
-                <li>相机可以带入，但部分区域禁止拍照</li>
-              </ul>
-            </details>
-          </div>
-
-          <!-- UN Tour -->
-          <div class="item" id="un">
-            <div class="time">10:00 - 12:00</div>
-            <div class="title">🏛️ 联合国总部导览（2小时）</div>
+          <!-- Geneva Old Town -->
+          <div class="item" id="oldtown">
+            <div class="time">Morning</div>
+            <div class="title">🏛️ 日内瓦老城 Vieille-Ville</div>
+        
             <details>
               <summary>查看详情</summary>
               
-              <p class="img-caption">Photo: Palais des Nations - UN Headquarters | Unsplash</p>
-              
-              <p><strong>【亮点】</strong>万国宫(Palais des Nations)是联合国欧洲总部所在地，也是世界上最重要的国际会议中心之一。这座新古典主义建筑群坐落在日内瓦湖畔的Ariana公园中，见证了无数改变世界的历史时刻。</p>
+              <p><strong>【亮点】</strong>日内瓦老城位于罗纳河与莱芒湖之间的小山坡上，是这座城市的历史核心。鹅卵石铺就的街道、古老的建筑、宁静的氛围，完美展现了瑞士法语区的独特魅力。</p>
               
               <div class="info-grid">
                 <div class="info-item">
-                  <div class="info-label">建造年份</div>
-                  <div class="info-value">1929-1938年</div>
+                  <div class="info-label">历史</div>
+                  <div class="info-value">2000多年历史</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">建筑面积</div>
-                  <div class="info-value">38万平方米</div>
+                  <div class="info-label">特色</div>
+                  <div class="info-value">鹅卵石街道+古老建筑</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">会议室数量</div>
-                  <div class="info-value">34间</div>
+                  <div class="info-label">主要景点</div>
+                  <div class="info-value">圣彼得大教堂</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">日均会议</div>
-                  <div class="info-value">约8,000人参与</div>
+                  <div class="info-label">门票</div>
+                  <div class="info-value">免费漫步</div>
                 </div>
               </div>
               
-              <p style="margin-top:12px"><strong>🏛️ 导览内容：</strong></p>
+              <p style="margin-top:12px"><strong>🚶 老城漫步路线：</strong></p>
               <ul>
-                <li><strong>Assembly Hall 大会堂</strong> - 可容纳2,000人，是联合国大会会议举办地</li>
-                <li><strong>Council Chamber 安理会厅</strong> - 墙壁覆盖象征和平的蓝色皮革</li>
-                <li><strong>人权厅</strong> - 天花板由西班牙艺术家米罗设计</li>
-                <li><strong>历史走廊</strong> - 展示联合国历史照片和纪念品</li>
-                <li><strong>艺术品收藏</strong> - 包括中国赠送的"长城"挂毯</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>🌍 参观信息：</strong></p>
-              <div class="highlight-box">
-                <strong>📋 预约须知</strong><br>
-                • 官网：visit.un.org<br>
-                • 费用：CHF 16/人<br>
-                • 需带：护照原件<br>
-                • 提前：预约时间前30分钟安检<br>
-                • 语言：提供中文导览（需预约时选择）
-              </div>
-              
-              <p style="margin-top:12px"><strong>💡 参观建议：</strong></p>
-              <ul>
-                <li>跟随官方导游，约2小时完整导览</li>
-                <li>可购买纪念品，部分收入用于联合国事业</li>
-                <li>园区内的"红厅"大理石长廊适合拍照</li>
-                <li>参观结束后可在Ariana公园漫步</li>
+                <li><strong>Bourg-de-Four广场</strong> - 老城中心，周围是露天咖啡馆</li>
+                <li><strong>特雷耶阶梯(Treille)</strong> - 154阶的台阶，可俯瞰城市</li>
+                <li><strong>老城小巷</strong> - 探索隐藏的艺术画廊和古董店</li>
+                <li><strong>市政厅</strong> - 16世纪建筑，宗教改革的重要场所</li>
               </ul>
               
               <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】Palais des Nations, 1211 Genève<br>
-              【交通】公交车5、8、11、22、28路至"Nations"站<br>
-              【导览时间】10:00-12:00（2小时）<br>
-              【门票】CHF 16/人<br>
-              【停留时间】约2.5小时（含安检）</p>
+              <p>【地址】Vieille-Ville, 1204 Genève<br>
+              【交通】从火车站步行约15分钟，或搭乘有轨电车<br>
+              【停留时间】约1.5-2小时</p>
             </details>
           </div>
 
-          <!-- Broken Chair -->
-          <div class="item" id="chair">
-            <div class="time">12:00 - 12:30</div>
-            <div class="title">🪑 断腿木椅拍照</div>
+          <!-- St. Pierre Cathedral -->
+          <div class="item" id="cathedral">
+            <div class="time">Morning</div>
+            <div class="title">⛪ St. Pierre Cathedral 圣彼得大教堂</div>
+        
             <details>
               <summary>查看详情</summary>
               
-              <p class="img-caption">Photo: Broken Chair - Symbol of Landmine Ban | Unsplash</p>
-              
-              <p><strong>【亮点】</strong>断腿木椅(Broken Chair)是联合国总部正门前广场的标志性雕塑，高12米，是反对地雷和集束炸弹的国际象征。</p>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">创作年份</div>
-                  <div class="info-value">1997年</div>
+              <div class="attraction-highlight">
+                <div class="attraction-title">⛪ 圣彼得大教堂</div>
+                
+                <p><strong>【亮点】</strong>圣彼得大教堂是日内瓦的地标建筑，始建于12世纪，融合了罗马式和哥特式风格。这里是宗教改革领袖约翰·加尔文(John Calvin)于1536-1564年间宣讲布道的地方。</p>
+                
+                <div class="info-grid">
+                  <div class="info-item">
+                    <div class="info-label">建造时间</div>
+                    <div class="info-value">12-15世纪</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">建筑风格</div>
+                    <div class="info-value">罗马式+哥特式</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">宗教意义</div>
+                    <div class="info-value">新教改革发源地</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">门票</div>
+                    <div class="info-value">教堂免费，塔楼€5</div>
+                  </div>
                 </div>
-                <div class="info-item">
-                  <div class="info-label">高度</div>
-                  <div class="info-value">12米</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">艺术家</div>
-                  <div class="info-value">Daniel Berset（瑞士）</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">象征</div>
-                  <div class="info-value">反地雷、反集束炸弹</div>
-                </div>
+                
+                <p style="margin-top:12px"><strong>🏰 北塔登顶：</strong></p>
+                <p>攀登157级螺旋台阶到达北塔顶部，可360°俯瞰日内瓦全城：一边是波光粼粼的莱芒湖(Lake Geneva)和著名的Jet d'Eau大喷泉，另一边是勃朗峰(Mont Blanc)的雪峰。</p>
+                
+                <p style="margin-top:12px"><strong>📜 考古遗址：</strong></p>
+                <p>教堂地下有令人惊叹的考古遗址，展示了从罗马时期到中世纪的层层叠叠的历史遗迹。</p>
               </div>
-              
-              <p style="margin-top:12px"><strong>📸 拍照建议：</strong></p>
-              <ul>
-                <li><strong>经典机位</strong> - 站在广场中央，以万国宫为背景</li>
-                <li><strong>创意角度</strong> - 低角度仰拍，突出雕塑高度</li>
-                <li><strong>人景结合</strong> - 可站在雕塑旁对比尺度</li>
-                <li><strong>时间</strong> - 12:00光线明亮，适合拍摄</li>
-              </ul>
               
               <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【位置】联合国总部门前广场（Place des Nations）<br>
-              【门票】免费<br>
-              【停留时间】约30分钟<br>
-              【提醒】拍照后需立即前往火车站</p>
-            </details>
-          </div>
-
-          <!-- Go to Station -->
-          <div class="item">
-            <div class="time">12:30</div>
-            <div class="title">🚶 前往火车站</div>
-            <details>
-              <summary>查看详情</summary>
-              <p><strong>【路线】</strong>从联合国总部前往Geneva Cornavin火车站</p>
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">公交</div>
-                  <div class="info-value">15路、5路至"Gare Cornavin"</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">打车</div>
-                  <div class="info-value">约10分钟，CHF 15-20</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">时间</div>
-                  <div class="info-value">约30分钟（含取票/安检）</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">建议</div>
-                  <div class="info-value">提前到达，预留取票时间</div>
-                </div>
-              </div>
-              <p style="margin-top:12px"><strong>💡 出行提示：</strong></p>
-              <p>【建议】打车更稳妥，避免误车<br>
-              【票务】电子票可直接扫码，纸质票需提前取票<br>
-              【安检】TGV需要安检，提前30分钟到站台<br>
-              【座位】提前在线选座，建议选择靠窗</p>
+              <p>【地址】Place du Bourg-de-Four 24, 1204 Genève<br>
+              【开放时间】10:00-17:30<br>
+              【停留时间】45-60分钟</p>
             </details>
           </div>
 
           <!-- TGV Journey -->
           <div class="item" id="tgv">
-            <div class="time">13:15</div>
-            <div class="title">🚄 TGV Lyria 出发</div>
+            <div class="time">12:15</div>
+            <div class="title">🚄 TGV Lyria 前往巴黎</div>
             <details>
               <summary>查看详情</summary>
               
-              <div class="swiss-badge">
-                <span class="swiss-badge-icon">🇫🇷</span>
-                <div class="swiss-badge-content">
-                  <div class="swiss-badge-title">TGV Lyria 高速列车</div>
-                  <div class="swiss-badge-text">
-                    TGV Lyria是连接瑞士与法国的高速列车，由SNCF与SBB联合运营，最高时速可达320公里/小时。
-                  </div>
-                </div>
-              </div>
-              
-              <p><strong>【亮点】</strong>乘坐TGV Lyria从日内瓦出发，穿越法瑞边境，经过第戎、里昂，一路向北抵达巴黎。列车设施现代，座位宽敞，可在餐车享用简餐。</p>
+              <p><strong>【亮点】</strong>乘坐TGV Lyria高速列车从日内瓦出发，穿越法瑞边境，经过第戎、里昂，一路向北抵达巴黎。列车设施现代，座位宽敞，可在餐车享用简餐。</p>
               
               <div class="info-grid">
                 <div class="info-item">
                   <div class="info-label">出发</div>
-                  <div class="info-value">13:15 Geneva Cornavin</div>
+                  <div class="info-value">12:15 Geneva Cornavin</div>
                 </div>
                 <div class="info-item">
                   <div class="info-label">抵达</div>
@@ -491,9 +379,9 @@
               <p style="margin-top:12px"><strong>🗺️ 途经路线：</strong></p>
               <ul>
                 <li><strong>日内瓦 → 布雷斯地区布尔格</strong> - 离开瑞士，进入法国境内</li>
-                <li><strong>第戎(Dijon)</strong> - 勃艮第大区首府，著名的芥末产地</li>
+                <li><strong>第戎(Dijon)</strong> - 勃艮第大区首府</li>
                 <li><strong>里昂(Lyon)</strong> - 法国第三大城市，美食之都</li>
-                <li><strong>巴黎方向</strong> - 穿越法国中部平原，直达巴黎</li>
+                <li><strong>巴黎方向</strong> - 穿越法国中部平原</li>
               </ul>
               
               <p style="margin-top:12px"><strong>💡 乘车建议：</strong></p>
@@ -501,69 +389,221 @@
                 <li>提前在SNCF官网或APP预订座位</li>
                 <li>车厢内提供免费WiFi</li>
                 <li>餐车提供简餐、饮料和咖啡</li>
-                <li>大件行李有专门存放区</li>
                 <li>可欣赏沿途法国乡村风光</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>🎫 票务信息：</strong></p>
-              <ul>
-                <li>建议提前预订，早鸟票更优惠</li>
-                <li>二等座票价约€70-120</li>
-                <li>一等座票价约€120-180</li>
-                <li>支持电子票，手机扫码进站</li>
               </ul>
             </details>
           </div>
 
-          <!-- Arrive Paris -->
+          <!-- Arrive Paris - Arc de Triomphe -->
           <div class="item" id="paris">
             <div class="time">16:30</div>
-            <div class="title">🗼 抵达巴黎</div>
+            <div class="title">🌟 Arc de Triomphe 凯旋门</div>
+        
             <details>
               <summary>查看详情</summary>
-              <p><strong>【亮点】</strong>欢迎来到巴黎——浪漫之都、艺术之城、时尚之都！巴黎位于塞纳河畔，是世界著名的文化和旅游胜地。</p>
+              
+              <p><strong>【亮点】</strong>凯旋门(Arc de Triomphe de l'Étoile)是巴黎最具标志性的建筑之一，也是世界上最大的一座凯旋门。位于香榭丽舍大道西端的戴高乐广场中央。</p>
               
               <div class="info-grid">
                 <div class="info-item">
-                  <div class="info-label">人口</div>
-                  <div class="info-value">约220万（都会区1200万）</div>
+                  <div class="info-label">建造时间</div>
+                  <div class="info-value">1806-1836年</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">官方语言</div>
-                  <div class="info-value">法语</div>
+                  <div class="info-label">高度</div>
+                  <div class="info-value">50米</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">时区</div>
-                  <div class="info-value">中欧夏令时CEST</div>
+                  <div class="info-label">门票</div>
+                  <div class="info-value">€13（登顶）</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">特色</div>
-                  <div class="info-value">浪漫+艺术+时尚</div>
+                  <div class="info-label">无名烈士墓</div>
+                  <div class="info-value">永恒之火</div>
                 </div>
               </div>
               
-              <p style="margin-top:12px"><strong>🚉 Gare de Lyon车站：</strong></p>
+              <p style="margin-top:12px"><strong>🏛️ 建筑特色：</strong></p>
               <ul>
-                <li>巴黎六大火车站之一，位于第12区</li>
-                <li>车站内有大名鼎鼎的Le Train Bleu蓝色列车餐厅</li>
-                <li>地铁1号线、14号线可达市中心</li>
-                <li>RER A/D线可直达迪士尼乐园和机场</li>
+                <li><strong>四大浮雕：</strong>《马赛曲》《胜利》《和平》《抵抗》</li>
+                <li><strong>无名烈士墓：</strong>拱门下方，永恒之火自1923年起从未熄灭</li>
+                <li><strong>屋顶观景：</strong>可攀登284级台阶到达顶部平台，俯瞰十二条大道</li>
               </ul>
               
-              <p style="margin-top:12px"><strong>🚇 前往酒店：</strong></p>
-              <p>从Gare de Lyon可搭乘：<br>
-              - 地铁1号线：可前往卢浮宫、香榭丽舍<br>
-              - 地铁14号线：可前往圣拉扎尔、奥林匹亚<br>
-              - RER A线：可前往迪士尼乐园方向<br>
-              - 出租车/网约车：根据酒店位置约15-30分钟</p>
-              
-              <p style="margin-top:12px"><strong>💡 到达贴士：</strong></p>
-              <p>【时间】16:30抵达，预计17:30到达酒店<br>
-              【注意】巴黎地铁较为复杂，提前下载Citymapper<br>
-              【安全】注意保管随身物品，警惕扒手</p>
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Place Charles de Gaulle, 75008 Paris<br>
+              【交通】地铁1/2/6号线至Charles de Gaulle-Étoile站<br>
+              【停留时间】60-90分钟</p>
             </details>
           </div>
 
+          <!-- Champs-Élysées -->
+          <div class="item">
+            <div class="time">18:00</div>
+            <div class="title">🛍️ Champs-Élysées 香榭丽舍大道</div>
+            <details>
+              <summary>查看详情</summary>
+              
+              <p><strong>【亮点】</strong>香榭丽舍大道(Avenue des Champs-Élysées)被誉为"世界上最美丽的大道"，长1.9公里，从凯旋门延伸至协和广场。这里是巴黎奢华与优雅的代名词。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">全长</div>
+                  <div class="info-value">1.91公里</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">宽度</div>
+                  <div class="info-value">70米</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">昵称</div>
+                  <div class="info-value">La plus belle avenue</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">始建</div>
+                  <div class="info-value">17世纪</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🛍️ 顶级购物：</strong></p>
+              <ul>
+                <li><strong>路易威登旗舰店(LV)</strong> - 全球最大的旗舰店之一</li>
+                <li><strong>迪奥(Dior)、香奈儿(Chanel)</strong> - 法国顶级奢侈品牌</li>
+                <li><strong>Ladurée</strong> - 百年马卡龙名店</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>💡 漫步建议：</strong></p>
+              <p>从凯旋门出发向东步行至协和广场，全程约25分钟。傍晚时分最佳，可在街边咖啡馆坐看华灯初上。</p>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Avenue des Champs-Élysées, 75008 Paris<br>
+              【停留时间】2-3小时</p>
+            </details>
+          </div>
+
+          <!-- Eiffel Tower -->
+          <div class="item" id="eiffel">
+            <div class="time">21:00</div>
+            <div class="title">🗼 Eiffel Tower 埃菲尔铁塔（夜景+闪灯秀）</div>
+        
+            <details>
+              <summary>查看详情</summary>
+              
+              <p><strong>【亮点】</strong>埃菲尔铁塔(La Tour Eiffel)是巴黎乃至法国的象征。夜幕降临后，铁塔披上金色的灯光外衣，每小时整点的闪灯秀(Scintillation)更是令人心醉的梦幻时刻。</p>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-label">建造时间</div>
+                  <div class="info-value">1887-1889年</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">高度</div>
+                  <div class="info-value">330米</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">闪灯时间</div>
+                  <div class="info-value">每整点5分钟</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">灯泡数量</div>
+                  <div class="info-value">20,000个</div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>✨ 闪灯秀(Scintillation)：</strong></p>
+              <p>每晚日落后至凌晨1:00，每到整点时分，铁塔上的2万个灯泡会同时闪烁5分钟，创造出令人震撼的璀璨效果。</p>
+              
+              <p style="margin-top:12px"><strong>🌃 最佳观赏点：</strong></p>
+              <ul>
+                <li><strong>特罗卡德罗广场(Trocadéro)</strong> - 最经典的角度，正对铁塔</li>
+                <li><strong>战神广场(Champ de Mars)</strong> - 位于铁塔正下方</li>
+                <li><strong>塞纳河游船</strong> - 从河上欣赏铁塔倒影</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>💡 夜游建议：</strong></p>
+              <ul>
+                <li>无需登塔，在特罗卡德罗观赏夜景和闪灯秀即可</li>
+                <li>21:00或22:00整点的闪灯秀最为壮观</li>
+                <li>可携带香槟和野餐垫，在战神广场享受铁塔下的浪漫时刻</li>
+              </ul>
+              
+              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
+              <p>【地址】Champ de Mars, 5 Avenue Anatole France, 75007 Paris<br>
+              【交通】地铁6号线至Bir-Hakeim站<br>
+              【闪灯秀时间】日落后至凌晨1:00，每整点5分钟<br>
+              【停留时间】60-90分钟（夜景观赏）</p>
+            </details>
+          </div>
+
+          <!-- Hotel -->
+          <div class="item">
+            <div class="time">22:30</div>
+            <div class="title">🏨 入住酒店</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【亮点】</strong>入住位于凯旋门旁的Le Méridien Paris Arc de Triomphe酒店，结束精彩的一天。</p>
+              <p><strong>【从铁塔前往】</strong>搭乘地铁6号线至Charles de Gaulle-Étoile站，步行5分钟即达酒店</p>
+            </details>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Hotel Details Section -->
+    <div class="section" id="hotel-details">
+      <div class="card-content">
+        <div class="card-title">🏨 酒店详情</div>
+        
+        <div class="hotel-card">
+          <div class="hotel-header">
+            <h3 class="hotel-name">Le Méridien Paris Arc de Triomphe</h3>
+            <span class="hotel-stars">⭐⭐⭐⭐⭐</span>
+            <span class="hotel-chain">艾美酒店（万豪旗下）</span>
+          </div>
+          
+          <div class="hotel-grid">
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📍</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">完整地址</div>
+                <div class="hotel-info-value">81 Avenue de Wagram, 75017 Paris, France</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🚶</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">从凯旋门前往</div>
+                <div class="hotel-info-value">步行约5分钟，距离约400米</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🚇</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">最近地铁站</div>
+                <div class="hotel-info-value">Charles de Gaulle-Étoile（地铁1/2/6号线）</div>
+              </div>
+            </div>
+            
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">⏰</span>
+              <div class="hotel-info-content">
+                <div class="hotel-info-label">入住/退房时间</div>
+                <div class="hotel-info-value">入住：15:00后 | 退房：12:00前</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="hotel-amenities">
+            <span class="amenity-tag">✓ 五星豪华酒店</span>
+            <span class="amenity-tag">✓ 118间客房</span>
+            <span class="amenity-tag">✓ 免费WiFi</span>
+            <span class="amenity-tag">✓ 24小时礼宾服务</span>
+            <span class="amenity-tag">✓ 24小时健身中心</span>
+            <span class="amenity-tag">✓ 餐厅及酒吧</span>
+          </div>
         </div>
       </div>
     </div>
@@ -573,16 +613,14 @@
       <div class="card-content">
         <div class="card-title">💡 实用贴士</div>
         <ul style="color:var(--muted);padding-left:20px">
-          <li><strong>🛂 联合国参观必备</strong> - 必须携带护照原件，提前在visit.un.org预约，费用CHF 16/人，提前30分钟到达安检。</li>
-          <li><strong>🚄 TGV票务</strong> - 建议提前在SNCF Connect APP购买，支持电子票，早鸟票更优惠。</li>
-          <li><strong>⏰ 时间把控</strong> - 联合国参观12:00结束，12:30必须出发前往车站，13:15火车不等人！</li>
-          <li><strong>🧳 行李建议</strong> - 联合国不接受大件行李，建议轻装前往或寄存在酒店。</li>
-          <li><strong>🍽️ 午餐</strong> - 联合国参观结束后时间紧张，建议在车站购买三明治或车上用餐。</li>
-          <li><strong>📱 网络</strong> - TGV提供免费WiFi，可提前下载离线地图。</li>
-          <li><strong>💶 货币</strong> - 离开瑞士前可花掉剩余的瑞士法郎，巴黎使用欧元。</li>
-          <li><strong>🗣️ 语言</strong> - 日内瓦法语区，巴黎也是法语区，但英语普及率较高。</li>
-          <li><strong>🔌 充电</strong> - TGV座位有插座，记得带上转换插头（瑞士/法国不同）。</li>
-          <li><strong>📸 断腿木椅</strong> - 是必拍地标，但注意时间，不要耽误赶火车！</li>
+          <li><strong>🚄 TGV票务：</strong>建议提前在SNCF Connect APP购买，支持电子票</li>
+          <li><strong>⏰ 时间把控：</strong>上午游览老城，11:30前到达火车站，12:15火车不等人！</li>
+          <li><strong>🧳 行李建议：</strong>可在日内瓦火车站寄存行李，轻装游览老城</li>
+          <li><strong>🍽️ 午餐：</strong>时间紧张，建议在车站购买三明治或车上用餐</li>
+          <li><strong>💶 货币切换：</strong>离开瑞士前可花掉剩余的瑞士法郎，巴黎使用欧元</li>
+          <li><strong>🔌 充电：</strong>TGV座位有插座，记得带上转换插头</li>
+          <li><strong>📸 埃菲尔铁塔：</strong>21:00整点闪灯秀不要错过！</li>
+          <li><strong>🗼 凯旋门登顶：</strong>建议使用地下通道进入，切勿穿越环岛</li>
         </ul>
       </div>
     </div>

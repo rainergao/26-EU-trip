@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Day 9｜06-12｜Geneva → Paris</title>
+  <title>Day 9｜06-12｜Paris 博物馆日</title>
   <style>
     :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--shadow:0 12px 28px rgba(15,23,42,.08);--accent:#f59e0b}
     body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
@@ -13,16 +13,6 @@
     .hero{background:linear-gradient(135deg,#1d4ed8,#2563eb 60%,#60a5fa);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);margin-bottom:20px}
     h1{margin:0 0 8px;font-size:28px}
     .subtitle{margin:0;opacity:.9;font-size:16px}
-    
-    /* Map Section */
-    .map-section{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px}
-    .map-title{font-size:16px;font-weight:700;margin-bottom:12px;color:var(--text);display:flex;align-items:center;gap:8px}
-    .map-container{width:100%;height:350px;border-radius:16px;overflow:hidden;background:#f3f4f6;position:relative}
-    .map-container iframe{width:100%;height:100%;border:0}
-    .map-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);background:linear-gradient(135deg,#e5e7eb 0%,#f3f4f6 100%)}
-    .map-placeholder svg{width:48px;height:48px;margin-bottom:12px;opacity:.5}
-    .map-route{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:13px;color:var(--muted)}
-    .map-route span{background:#f3f4f6;padding:4px 10px;border-radius:12px}
     
     /* Banner Navigation */
     .banner-nav{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px;overflow-x:auto}
@@ -57,10 +47,6 @@
     summary{cursor:pointer;font-weight:600;color:var(--blue)}
     details[open] summary{margin-bottom:12px}
     
-    /* Attraction Images */
-    .attraction-img{width:100%;border-radius:16px;margin:12px 0;box-shadow:0 4px 12px rgba(0,0,0,.1)}
-    .img-caption{font-size:12px;color:var(--muted);text-align:center;margin-top:4px;font-style:italic}
-    
     /* Navigation */
     .nav-links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
     .nav-links a{color:var(--blue);text-decoration:none;font-weight:500}
@@ -74,21 +60,6 @@
     .info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
     .info-value{font-size:14px;font-weight:600;color:var(--text)}
     .scroll-indicator{display:none}
-    
-    /* Transport Card */
-    .transport-card{background:linear-gradient(135deg,#fffbeb 0%,#fff 100%);border:1px solid #fcd34d;border-radius:20px;padding:20px;margin-top:16px}
-    .transport-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
-    .transport-title{font-size:18px;font-weight:800;color:var(--text);margin:0}
-    .transport-type{font-size:13px;color:#b45309;background:#fef3c7;padding:4px 10px;border-radius:12px}
-    .transport-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
-    .transport-info-item{display:flex;align-items:flex-start;gap:10px}
-    .transport-info-icon{font-size:18px;min-width:24px;text-align:center}
-    .transport-info-content{flex:1}
-    .transport-info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
-    .transport-info-value{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}
-    .transport-tips{margin-top:16px;padding-top:16px;border-top:1px solid #fcd34d}
-    .tip-item{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;font-size:13px;color:#92400e}
-    .tip-icon{font-size:16px}
     
     /* Hotel Card */
     .hotel-card{background:linear-gradient(135deg,#fff 0%,#f8fafc 100%);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:16px}
@@ -109,49 +80,40 @@
     .attraction-highlight{background:linear-gradient(135deg,#eff6ff 0%,#fff 100%);border:1px solid #bfdbfe;border-radius:20px;padding:20px;margin-top:16px}
     .attraction-title{font-size:18px;font-weight:800;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px}
     
+    /* Masterpiece Gallery */
+    .masterpiece-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:16px}
+    .masterpiece-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:transform .2s,box-shadow .2s}
+    .masterpiece-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+    .masterpiece-content{padding:12px}
+    .masterpiece-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+    .masterpiece-desc{font-size:12px;color:var(--muted);line-height:1.5}
+    
+    /* Tips Section */
+    .tips-box{background:linear-gradient(135deg,#fef3c7 0%,#fffbeb 100%);border:1px solid #fcd34d;border-radius:16px;padding:16px;margin-top:12px}
+    .tips-title{font-size:14px;font-weight:700;color:#92400e;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+    .tips-list{margin:0;padding-left:18px;color:#78350f}
+    .tips-list li{margin-bottom:6px;font-size:13px}
+    
     @media(max-width:768px){
-      /* 1. 基础布局优化 */
       .wrap{padding:16px}
-      
-      /* 2. Hero区域字体优化 */
       .hero{padding:20px}
       .hero h1{font-size:22px}
       .hero .subtitle{font-size:14px}
-      
-      /* 3. Banner导航优化 */
       .banner-nav{padding:12px}
       .banner-node{padding:0 6px}
       .banner-label{max-width:70px}
-      
-      /* 4. 卡片间距优化 */
       .section{margin-bottom:14px}
       .card-content{padding:16px}
       .card-title{font-size:15px}
-      
-      /* 5. 时间轴优化 */
       .timeline{margin-left:4px}
       .item{padding:0 0 16px 20px}
       .item .time{font-size:12px}
       .item .title{font-size:16px}
-      
-      /* 6. 信息网格优化 - 小屏幕单列显示 */
       .info-grid{grid-template-columns:1fr}
       .info-item{padding:10px}
-      
-      /* 7. 电影badge优化 */
-      .movie-badge{padding:8px 12px}
-      .movie-badge-text{font-size:12px}
-      
-      /* 8. 酒店卡片优化 */
       .hotel-card{padding:16px}
       .hotel-name{font-size:18px}
       .hotel-grid{grid-template-columns:1fr;gap:12px}
-      
-      /* 9. 地图区域优化 */
-      .map-section{padding:16px}
-      .map-container{height:250px}
-      
-      /* 10. 滚动提示 */
       .scroll-indicator{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
     }
   </style>
@@ -160,158 +122,52 @@
   <div class="wrap">
     <!-- Hero Section -->
     <div class="hero">
-      <h1>🌍 Day 9｜06-12｜Geneva → Paris</h1>
-      <p class="subtitle">跨国切换日｜瑞士法语区 → 法国首都｜雪山湖畔到浪漫之都</p>
+      <h1>🎨 Day 9｜06-12｜Paris 博物馆日</h1>
+      <p class="subtitle">艺术朝圣之旅｜卢浮宫三宝 · 圣母院 Gothic · 塞纳河畔漫步</p>
     </div>
 
     <!-- Navigation -->
     <div class="nav-links">
-      <a href="index.html">← 返回主页</a>
-      <a href="day-8-06-10-zermatt-to-geneva.html">← Day 8</a>
+      <a href="day-8-06-11-geneva-to-paris.html">← Day 8</a>
+      <a href="index.html">返回主页</a>
       <a href="day-10-06-13-paris.html">Day 10 →</a>
     </div>
 
-    <!-- Map Section -->
+    <!-- Banner Navigation -->
     <div class="banner-nav">
       <div class="banner-title">📍 行程导航</div>
       <div class="banner-track">
-        <a href="#geneva" class="banner-node">
+        <a href="#louvre" class="banner-node active">
           <div class="banner-time">09:00</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">日内瓦老城</div>
+          <div class="banner-label">卢浮宫</div>
         </a>
         <div class="banner-arrow">→</div>
-        <a href="#tgv" class="banner-node active">
-          <div class="banner-time">12:15</div>
+        <a href="#lunch" class="banner-node">
+          <div class="banner-time">12:00</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">TGV Lyria</div>
+          <div class="banner-label">午餐</div>
         </a>
         <div class="banner-arrow">→</div>
-        <a href="#arcdetriomphe" class="banner-node">
-          <div class="banner-time">16:30</div>
+        <a href="#notredame" class="banner-node">
+          <div class="banner-time">14:00</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">凯旋门</div>
+          <div class="banner-label">圣母院外观</div>
         </a>
         <div class="banner-arrow">→</div>
-        <a href="#champselysees" class="banner-node">
-          <div class="banner-time">18:00</div>
+        <a href="#seine" class="banner-node">
+          <div class="banner-time">17:30</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">香榭丽舍</div>
+          <div class="banner-label">塞纳河</div>
         </a>
         <div class="banner-arrow">→</div>
-        <a href="#eiffel" class="banner-node">
-          <div class="banner-time">21:00</div>
+        <a href="#dinner" class="banner-node">
+          <div class="banner-time">20:00</div>
           <div class="banner-dot"></div>
-          <div class="banner-label">埃菲尔铁塔</div>
+          <div class="banner-label">拉丁区晚餐</div>
         </a>
       </div>
       <div class="scroll-indicator">← 左右滑动查看更多 →</div>
-    </div>
-
-    <!-- Transport Card -->
-    <div class="section">
-      <div class="card-content">
-        <div class="card-title">🚄 大交通</div>
-        <div class="highlight-box">
-          <strong>Geneva Cornavin → Paris Gare de Lyon</strong><br>
-          <span style="font-size:20px;font-weight:800;color:var(--blue)">TGV Lyria 高速列车</span>
-          <span class="tag">约3小时</span>
-          <span class="tag">直达</span>
-          <span class="tag">最高时速320km/h</span>
-        </div>
-        
-        <div class="transport-card">
-          <div class="transport-header">
-            <h3 class="transport-title">🎫 TGV Lyria 购票提示</h3>
-            <span class="transport-type">强烈建议提前购买</span>
-          </div>
-          
-          <div class="transport-grid">
-            <div class="transport-info-item">
-              <span class="transport-info-icon">🌐</span>
-              <div class="transport-info-content">
-                <div class="transport-info-label">购票官网</div>
-                <div class="transport-info-value">SNCF Connect (sncf-connect.com) 或 Trainline</div>
-              </div>
-            </div>
-            
-            <div class="transport-info-item">
-              <span class="transport-info-icon">⏰</span>
-              <div class="transport-info-content">
-                <div class="transport-info-label">提前购票建议</div>
-                <div class="transport-info-value">建议提前30-90天预订，可享早鸟票价（Prems）</div>
-              </div>
-            </div>
-            
-            <div class="transport-info-item">
-              <span class="transport-info-icon">💶</span>
-              <div class="transport-info-content">
-                <div class="transport-info-label">票价参考</div>
-                <div class="transport-info-value">早鸟票 €29-49 | 普通票 €60-120 | 商务座 €150+</div>
-              </div>
-            </div>
-            
-            <div class="transport-info-item">
-              <span class="transport-info-icon">🎒</span>
-              <div class="transport-info-content">
-                <div class="transport-info-label">行李额度</div>
-                <div class="transport-info-value">每人可携带2件大行李（85cm以内）+ 1件手提行李</div>
-              </div>
-            </div>
-            
-            <div class="transport-info-item">
-              <span class="transport-info-icon">📍</span>
-              <div class="transport-info-content">
-                <div class="transport-info-label">出发车站</div>
-                <div class="transport-info-value">Genève Cornavin（日内瓦中央车站）</div>
-              </div>
-            </div>
-            
-            <div class="transport-info-item">
-              <span class="transport-info-icon">📍</span>
-              <div class="transport-info-content">
-                <div class="transport-info-label">到达车站</div>
-                <div class="transport-info-value">Paris Gare de Lyon（巴黎里昂站）</div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="transport-tips">
-            <div class="tip-item">
-              <span class="tip-icon">💡</span>
-              <span><strong>省钱秘诀：</strong>选择"Prems"早鸟票可节省50%以上，但不可退改</span>
-            </div>
-            <div class="tip-item">
-              <span class="tip-icon">💡</span>
-              <span><strong>座位选择：</strong>推荐选择左侧座位，沿途可欣赏勃朗峰和阿尔卑斯山景</span>
-            </div>
-            <div class="tip-item">
-              <span class="tip-icon">💡</span>
-              <span><strong>安检提示：</strong>无需提前太久，开车前20-30分钟到达即可，无需安检</span>
-            </div>
-            <div class="tip-item">
-              <span class="tip-icon">💡</span>
-              <span><strong>电子票：</strong>购买后可将电子票保存至手机，或打印纸质票备用</span>
-            </div>
-          </div>
-        </div>
-        
-        <p class="card-text" style="margin-top:16px">TGV Lyria是连接瑞士与法国的高速列车服务，由SNCF与SBB联合运营。列车最高时速可达320km/h，车内设有餐车，提供免费WiFi（部分班次）。</p>
-      </div>
-    </div>
-
-    <!-- Hotel Card Preview -->
-    <div class="section">
-      <div class="card-content">
-        <div class="card-title">🏨 住宿</div>
-        <div class="highlight-box">
-          <strong>Le Méridien Paris Arc de Triomphe</strong>
-          <span class="tag">艾美酒店</span>
-          <span class="tag">五星</span>
-          <span class="tag">距凯旋门步行5分钟</span>
-        </div>
-        <p class="card-text">位于巴黎第17区，紧邻凯旋门和香榭丽舍大道，是探索巴黎的理想据点。酒店详情见页面底部。</p>
-      </div>
     </div>
 
     <!-- Timeline Section -->
@@ -320,381 +176,256 @@
         <div class="card-title">📍 行程安排</div>
         <div class="timeline">
           
-          <!-- Geneva Old Town -->
-          <div class="item" id="geneva">
-            <div class="time">09:00</div>
-            <div class="title">🏛️ Geneva Old Town 日内瓦老城</div>
+          <!-- Louvre Museum -->
+          <div class="item" id="louvre">
+            <div class="time">09:00 - 12:00</div>
+            <div class="title">🎨 Louvre Museum 卢浮宫</div>
         
             <details>
               <summary>查看详情</summary>
               
-              <p class="img-caption">Photo: Geneva Old Town & Lake Geneva | Unsplash</p>
-              
-              <p><strong>【亮点】</strong>日内瓦老城位于罗纳河与莱芒湖之间的小山坡上，是这座城市的历史核心。鹅卵石铺就的街道、古老的建筑、宁静的氛围，完美展现了瑞士法语区的独特魅力。这里是宗教改革的重要发源地，也是现代国际主义精神的摇篮。</p>
-              
-              <div class="attraction-highlight">
-                <div class="attraction-title">⛪ St. Pierre Cathedral 圣彼得大教堂</div>
-                
-                <p class="img-caption">Photo: St. Pierre Cathedral Geneva | Unsplash</p>
-                
-                <p><strong>【亮点】</strong>圣彼得大教堂是日内瓦的地标建筑，始建于12世纪，融合了罗马式和哥特式风格。这里是宗教改革领袖约翰·加尔文(John Calvin)于1536-1564年间宣讲布道的地方，被称为"新教的罗马"。</p>
-                
-                <div class="info-grid">
-                  <div class="info-item">
-                    <div class="info-label">建造时间</div>
-                    <div class="info-value">12-15世纪</div>
-                  </div>
-                  <div class="info-item">
-                    <div class="info-label">建筑风格</div>
-                    <div class="info-value">罗马式+哥特式</div>
-                  </div>
-                  <div class="info-item">
-                    <div class="info-label">宗教意义</div>
-                    <div class="info-value">新教改革发源地</div>
-                  </div>
-                  <div class="info-item">
-                    <div class="info-label">门票</div>
-                    <div class="info-value">教堂免费，塔楼€5</div>
-                  </div>
-                </div>
-                
-                <p style="margin-top:12px"><strong>🏰 北塔登顶：</strong></p>
-                <p>攀登157级螺旋台阶到达北塔顶部，可360°俯瞰日内瓦全城：一边是波光粼粼的莱芒湖(Lake Geneva)和著名的Jet d'Eau大喷泉，另一边是勃朗峰(Mont Blanc)的雪峰。日出或日落时分景色最为壮丽。</p>
-                
-                <p style="margin-top:12px"><strong>📜 考古遗址：</strong></p>
-                <p>教堂地下有令人惊叹的考古遗址，展示了从罗马时期到中世纪的层层叠叠的历史遗迹，包括4世纪的洗礼堂、马赛克地板和早期基督教礼拜堂遗址。</p>
-              </div>
-              
-              <div class="attraction-highlight">
-                <div class="attraction-title">🗿 Reformation Wall 宗教改革墙</div>
-                
-                <p class="img-caption">Photo: Reformation Wall (Mur des Réformateurs) | Unsplash</p>
-                
-                <p><strong>【亮点】</strong>宗教改革墙位于美丽的堡垒公园(Parc des Bastions)内，建于1909年以纪念宗教改革400周年和日内瓦大学成立350周年。100米长的花岗岩墙壁上雕刻着16世纪宗教改革运动的主要人物。</p>
-                
-                <div class="info-grid">
-                  <div class="info-item">
-                    <div class="info-label">建造时间</div>
-                    <div class="info-value">1909-1917年</div>
-                  </div>
-                  <div class="info-item">
-                    <div class="info-label">长度</div>
-                    <div class="info-value">约100米</div>
-                  </div>
-                  <div class="info-item">
-                    <div class="info-label">中心人物</div>
-                    <div class="info-value">约翰·加尔文</div>
-                  </div>
-                  <div class="info-item">
-                    <div class="info-label">门票</div>
-                    <div class="info-value">免费</div>
-                  </div>
-                </div>
-                
-                <p style="margin-top:12px"><strong>🎭 主要雕像：</strong></p>
-                <ul>
-                  <li><strong>中心：</strong>约翰·加尔文(John Calvin) - 宗教改革的核心人物</li>
-                  <li><strong>左侧：</strong>纪尧姆·法雷尔(Guillaume Farel)、泰奥多尔·德·贝兹(Théodore de Bèze)、约翰·诺克斯(John Knox)</li>
-                  <li><strong>右侧：</strong>罗杰·威廉斯(Roger Williams)、奥利弗·克伦威尔(Oliver Cromwell)</li>
-                </ul>
-                
-                <p style="margin-top:12px"><strong>🌳 堡垒公园：</strong></p>
-                <p>公园本身是日内瓦市民喜爱的休闲场所，巨大的棋盘地面可供真人下棋，周围环绕着绿树和长椅，是感受日内瓦本地生活的好地方。</p>
-              </div>
-              
-              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【老城地址】Vieille-Ville, 1204 Genève, Switzerland<br>
-              【大教堂地址】Place du Bourg-de-Four 24, 1204 Genève<br>
-              【宗教改革墙地址】Parc des Bastions, Promenade des Bastions 1, 1205 Genève<br>
-              【交通】从酒店步行可达，或搭乘有轨电车12/14/15/18路至Bourg-de-Four站<br>
-              【停留时间】2-2.5小时</p>
-            </details>
-          </div>
-
-          <!-- Train to Paris -->
-          <div class="item" id="tgv">
-            <div class="time">12:15</div>
-            <div class="title">🚄 TGV Lyria 前往巴黎</div>
-            <details>
-              <summary>查看详情</summary>
-              
-              <p class="img-caption">Photo: TGV High Speed Train | Unsplash</p>
-              
-              <p><strong>【亮点】</strong>乘坐瑞士-法国联合运营的TGV Lyria高速列车，从日内瓦出发穿越阿尔卑斯山麓和法国东部田园风光，直达巴黎。3小时的舒适旅程是跨国旅行最便捷的选择。</p>
+              <p><strong>【亮点】</strong>卢浮宫(Musée du Louvre)是世界上最大、最古老的艺术博物馆之一，也是巴黎的象征。这里收藏了超过38万件艺术珍品，横跨人类文明的8000年历史。</p>
               
               <div class="info-grid">
                 <div class="info-item">
-                  <div class="info-label">全程距离</div>
-                  <div class="info-value">约410公里</div>
+                  <div class="info-label">始建年份</div>
+                  <div class="info-value">1204年（原为城堡）</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">行驶时间</div>
-                  <div class="info-value">约3小时</div>
+                  <div class="info-label">开放时间</div>
+                  <div class="info-value">09:00-18:00（周二闭馆）</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">最高时速</div>
-                  <div class="info-value">320 km/h</div>
+                  <div class="info-label">馆藏数量</div>
+                  <div class="info-value">38万+件</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">班次频率</div>
-                  <div class="info-value">每天约8班</div>
+                  <div class="info-label">年访客</div>
+                  <div class="info-value">约800万人次</div>
                 </div>
               </div>
               
-              <p style="margin-top:12px"><strong>🚉 车站信息：</strong></p>
+              <!-- Masterpiece Gallery -->
+              <div class="attraction-highlight">
+                <div class="attraction-title">👑 卢浮宫三宝</div>
+                <div class="masterpiece-grid">
+                  <div class="masterpiece-card">
+                    <div class="masterpiece-content">
+                      <div class="masterpiece-name">🎨 Mona Lisa 蒙娜丽莎</div>
+                      <div class="masterpiece-desc">达·芬奇杰作，神秘微笑背后的艺术巅峰。1503-1519年间创作，尺寸77×53cm。</div>
+                    </div>
+                  </div>
+                  <div class="masterpiece-card">
+                    <div class="masterpiece-content">
+                      <div class="masterpiece-name">🏛️ Winged Victory 胜利女神</div>
+                      <div class="masterpiece-desc">公元前190年的古希腊雕塑，高2.75米，展现胜利女神从海风吹拂的船上降临的动态之美。</div>
+                    </div>
+                  </div>
+                  <div class="masterpiece-card">
+                    <div class="masterpiece-content">
+                      <div class="masterpiece-name">🗿 Venus de Milo 断臂维纳斯</div>
+                      <div class="masterpiece-desc">公元前130-100年的古希腊雕塑，高2.02米。古典美学的永恒象征。</div>
+                    </div>
+                  </div>
+                  <div class="masterpiece-card">
+                    <div class="masterpiece-content">
+                      <div class="masterpiece-name">🔺 Glass Pyramid 玻璃金字塔</div>
+                      <div class="masterpiece-desc">贝聿铭1989年设计，高21米。现代建筑与古典宫殿的完美融合。</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <p style="margin-top:12px"><strong>🏛️ 主要展馆：</strong></p>
               <ul>
-                <li><strong>日内瓦出发：</strong>Gare de Genève-Cornavin - 瑞士第三繁忙的火车站，位于市中心</li>
-                <li><strong>巴黎到达：</strong>Gare de Lyon（里昂站）- 巴黎六大火车站之一，建于1900年，以宏伟的钟楼著称</li>
+                <li><strong>德农馆(Denon)：</strong>意大利绘画（蒙娜丽莎、岩间圣母）、法国绘画</li>
+                <li><strong>萨里馆(Sully)：</strong>古希腊古罗马雕塑（断臂维纳斯、胜利女神）、埃及文物</li>
+                <li><strong>黎塞留馆(Richelieu)：</strong>荷兰佛兰德斯绘画、法国雕塑</li>
               </ul>
               
-              <p style="margin-top:12px"><strong>🚇 从里昂站到市中心：</strong></p>
-              <p>到达后可搭乘地铁1号线或14号线，或RER A线前往市中心。前往凯旋门区域可搭乘地铁1号线至Charles de Gaulle-Étoile站。</p>
-              
-              <p style="margin-top:12px"><strong>💺 座位等级：</strong></p>
+              <p style="margin-top:12px"><strong>🎫 门票信息：</strong></p>
               <ul>
-                <li><strong>二等座(Second Class)：</strong>舒适座椅，电源插座，行李架</li>
-                <li><strong>一等座(First Class)：</strong>更宽敞座位，更安静车厢，部分含餐食</li>
-                <li><strong>商务座(Business Première)：</strong>可躺平座椅，优先登车，含餐食和饮品</li>
+                <li>成人票：€17（在线预订）</li>
+                <li>18-25岁欧盟居民：免费</li>
+                <li>18岁以下：免费</li>
               </ul>
               
               <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【出发】Gare de Genève-Cornavin, 1201 Genève<br>
-              【到达】Paris Gare de Lyon, 75012 Paris<br>
-              【建议】提前20-30分钟到站，确认站台信息<br>
-              【停留时间】约3小时（途中）</p>
+              <p>【地址】Rue de Rivoli, 75001 Paris<br>
+              【交通】地铁1/7号线至Palais Royal - Musée du Louvre站<br>
+              【建议时长】3小时（精选路线）<br>
+              【贴士】强烈推荐使用Carrousel du Louvre地下商场入口，排队最短</p>
             </details>
           </div>
 
-          <!-- Arc de Triomphe -->
-          <div class="item" id="arcdetriomphe">
-            <div class="time">16:30</div>
-            <div class="title">🌟 Arc de Triomphe 凯旋门</div>
+          <!-- Lunch -->
+          <div class="item" id="lunch">
+            <div class="time">12:00</div>
+            <div class="title">🍽️ 午餐</div>
+            <details>
+              <summary>查看详情</summary>
+              <p><strong>【推荐区域】</strong>卢浮宫周边或拉丁区</p>
+              <p style="margin-top:8px"><strong>🍴 推荐选择：</strong></p>
+              <ul>
+                <li><strong>卢浮宫内 Café Marly：</strong>可边用餐边欣赏玻璃金字塔</li>
+                <li><strong>卢浮宫地下商场 Carrousel du Louvre：</strong>快餐、简餐选择丰富</li>
+                <li><strong>拉丁区 Rue de Buci：</strong>传统法式小餐馆，价格实惠</li>
+              </ul>
+              <p style="margin-top:8px"><strong>💡 贴士：</strong>卢浮宫附近餐厅价格较高，步行10分钟到拉丁区能找到性价比更好的选择。</p>
+            </details>
+          </div>
+
+          <!-- Notre-Dame de Paris -->
+          <div class="item" id="notredame">
+            <div class="time">14:00</div>
+            <div class="title">⛪ Notre-Dame de Paris 圣母院（外观）</div>
         
             <details>
               <summary>查看详情</summary>
               
-              <p class="img-caption">Photo: Arc de Triomphe de l'Étoile | Unsplash</p>
-              
-              <p><strong>【亮点】</strong>凯旋门(Arc de Triomphe de l'Étoile)是巴黎最具标志性的建筑之一，也是世界上最大的一座凯旋门。位于香榭丽舍大道西端的戴高乐广场中央，是为纪念拿破仑战争胜利而建，见证了法兰西200年的荣耀与悲欢。</p>
+              <p><strong>【亮点】</strong>巴黎圣母院(Cathédrale Notre-Dame de Paris)是哥特式建筑的巅峰之作，也是法国最著名的教堂之一。维克多·雨果的同名小说让这座教堂成为浪漫与悲剧的象征。2019年大火后，修复工程正在进行中。</p>
               
               <div class="info-grid">
                 <div class="info-item">
                   <div class="info-label">建造时间</div>
-                  <div class="info-value">1806-1836年</div>
+                  <div class="info-value">1163-1345年（历时180年）</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">建筑师</div>
-                  <div class="info-value">让·夏尔格兰</div>
+                  <div class="info-label">建筑风格</div>
+                  <div class="info-value">法国哥特式</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">高度</div>
-                  <div class="info-value">50米</div>
+                  <div class="info-label">塔楼高度</div>
+                  <div class="info-value">69米</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">宽度</div>
-                  <div class="info-value">45米</div>
+                  <div class="info-label">现状</div>
+                  <div class="info-value">修复中，外观可参观</div>
                 </div>
               </div>
               
-              <p style="margin-top:12px"><strong>🏛️ 建筑特色：</strong></p>
+              <p style="margin-top:12px"><strong>🏛️ 哥特式建筑特色：</strong></p>
               <ul>
-                <li><strong>四大浮雕：</strong>《马赛曲》《胜利》《和平》《抵抗》分别雕刻在四面拱门上方，是浪漫主义雕塑的杰作</li>
-                <li><strong>无名烈士墓：</strong>拱门下方安葬着一战无名烈士，永恒之火自1923年起从未熄灭，每晚18:30有加薪仪式</li>
-                <li><strong>刻名墙：</strong>内壁刻有拿破仑时期558位将军的名字和96场胜仗</li>
-                <li><strong>屋顶观景：</strong>可攀登284级螺旋台阶到达顶部平台，俯瞰十二条大道放射状的"星形广场"全景</li>
+                <li><strong>西立面双塔：</strong>标志性的69米高双塔</li>
+                <li><strong>玫瑰花窗(Rose Window)：</strong>直径13米的巨大彩色玻璃窗</li>
+                <li><strong>滴水嘴兽(Gargoyles)：</strong>屋顶边缘的怪兽雕塑</li>
+                <li><strong>飞扶壁(Flying Buttresses)：</strong>哥特式建筑的创新结构</li>
               </ul>
               
-              
-              <p class="img-caption">Photo: View from Arc de Triomphe - Twelve Avenues | Unsplash</p>
-              
-              <p style="margin-top:12px"><strong>🎖️ 历史意义：</strong></p>
-              <p>凯旋门见证了法国历史上几乎所有重大事件：拿破仑的荣耀、波旁王朝复辟、1848年革命、普法战争、两次世界大战。1940年德军在此阅兵，1944年解放巴黎时戴高乐在此检阅部队。</p>
-              
-              <p style="margin-top:12px"><strong>💡 参观建议：</strong></p>
-              <ul>
-                <li>登顶门票€13，18-25岁欧盟居民免费，18岁以下免费</li>
-                <li>傍晚登顶可欣赏日落时分的香榭丽舍大道和铁塔</li>
-                <li>建议使用地下通道进入（从香街北侧入口），切勿直接穿越环岛</li>
-                <li>每个7月14日国庆阅兵从这里开始</li>
-              </ul>
+              <div class="tips-box">
+                <div class="tips-title">⚠️ 修复工程提醒</div>
+                <ul class="tips-list">
+                  <li>2019年4月15日，圣母院遭遇严重火灾，尖顶倒塌</li>
+                  <li>目前修复工程进行中，内部不对外开放参观</li>
+                  <li>外部可正常参观拍照，西立面和双塔保持完好</li>
+                  <li>预计2024年12月重新开放（请关注官方最新消息）</li>
+                </ul>
+              </div>
               
               <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】Place Charles de Gaulle, 75008 Paris<br>
-              【交通】地铁1/2/6号线或RER A线至Charles de Gaulle-Étoile站<br>
-              【开放时间】10:00-23:00（4-9月），10:00-22:30（10-3月）<br>
-              【停留时间】60-90分钟</p>
+              <p>【地址】6 Parvis Notre-Dame - Place Jean-Paul II, 75004 Paris<br>
+              【交通】地铁4号线至Cité站<br>
+              【停留时间】30-45分钟（外观）</p>
             </details>
           </div>
 
-          <!-- Champs-Élysées -->
-          <div class="item" id="champselysees">
-            <div class="time">18:00</div>
-            <div class="title">🛍️ Champs-Élysées 香榭丽舍大道</div>
+          <!-- Seine River -->
+          <div class="item" id="seine">
+            <div class="time">17:30</div>
+            <div class="title">🌊 Seine River 塞纳河漫步</div>
             <details>
               <summary>查看详情</summary>
               
-              <p class="img-caption">Photo: Avenue des Champs-Élysées | Unsplash</p>
-              
-              <p><strong>【亮点】</strong>香榭丽舍大道(Avenue des Champs-Élysées)被誉为"世界上最美丽的大道"，长1.9公里，宽70米，从凯旋门延伸至协和广场。这里是巴黎奢华与优雅的代名词，也是世界最著名的购物和休闲胜地。</p>
+              <p><strong>【亮点】</strong>塞纳河(La Seine)是巴黎的母亲河，也是这座城市的灵魂所在。河岸两侧被列为联合国教科文组织世界遗产，沿途经过卢浮宫、巴黎圣母院、埃菲尔铁塔等标志性建筑。</p>
               
               <div class="info-grid">
                 <div class="info-item">
                   <div class="info-label">全长</div>
-                  <div class="info-value">1.91公里</div>
+                  <div class="info-value">776公里</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">宽度</div>
-                  <div class="info-value">70米</div>
+                  <div class="info-label">巴黎段</div>
+                  <div class="info-value">约13公里</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">昵称</div>
-                  <div class="info-value">La plus belle avenue du monde</div>
+                  <div class="info-label">桥梁数量</div>
+                  <div class="info-value">37座</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">始建</div>
-                  <div class="info-value">17世纪</div>
+                  <div class="info-label">UNESCO遗产</div>
+                  <div class="info-value">1991年列入</div>
                 </div>
               </div>
               
-              <p style="margin-top:12px"><strong>🛍️ 顶级购物：</strong></p>
+              <p style="margin-top:12px"><strong>🌉 必看桥梁：</strong></p>
               <ul>
-                <li><strong>路易威登旗舰店(LV)</strong> - 全球最大的旗舰店之一，建筑本身就是艺术品</li>
-                <li><strong>卡地亚(Cartier)</strong> - 皇室御用珠宝品牌</li>
-                <li><strong>迪奥(Dior)、香奈儿(Chanel)、爱马仕(Hermès)</strong> - 法国顶级奢侈品牌旗舰店</li>
-                <li><strong>丝芙兰(Sephora)</strong> - 美妆爱好者的天堂</li>
-                <li><strong>迪士尼商店</strong> - 全球最大的迪士尼旗舰店之一</li>
+                <li><strong>Pont Neuf 新桥：</strong>巴黎最古老的桥（1607年建成）</li>
+                <li><strong>Pont des Arts 艺术桥：</strong>著名的"爱情锁"桥</li>
+                <li><strong>Pont Alexandre III 亚历山大三世桥：</strong>最华丽的桥，新艺术风格</li>
               </ul>
               
-              <p style="margin-top:12px"><strong>🍽️ 美食体验：</strong></p>
+              <p style="margin-top:12px"><strong>🚢 塞纳河游船 (可选)：</strong></p>
               <ul>
-                <li><strong>Ladurée</strong> - 百年马卡龙名店，粉色装潢是网红打卡点</li>
-                <li><strong>Fouquet's</strong> - 米其林星级餐厅，电影界名人聚会的传统场所</li>
-                <li><strong>Publicis Drugstore</strong> - 24小时营业的高端美食广场</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>🎭 文化地标：</strong></p>
-              <ul>
-                <li><strong>香榭丽舍剧院(Théâtre des Champs-Élysées)</strong> - 1913年斯特拉文斯基《春之祭》首演地</li>
-                <li><strong>大皇宫(Grand Palais)</strong> - 1900年世博会建筑，定期举办大型展览</li>
-                <li><strong>小皇宫(Petit Palais)</strong> - 免费开放的市立美术馆</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>🎄 特别活动：</strong></p>
-              <p>每年12月至1月初，香榭丽舍大道会装饰成一条灯光隧道，是巴黎最浪漫的圣诞体验。7月14日国庆阅兵也在此举行。</p>
-              
-              <p style="margin-top:12px"><strong>💡 漫步建议：</strong></p>
-              <ul>
-                <li>从凯旋门出发向东步行至协和广场，全程约25分钟</li>
-                <li>傍晚时分最佳，可在街边咖啡馆坐看华灯初上</li>
-                <li>周六夜晚人群最多，周日部分商店休息</li>
+                <li><strong>票价：</strong>成人€15</li>
+                <li><strong>航程：</strong>约1小时</li>
+                <li><strong>最佳时间：</strong>日落前后（19:00-20:00）</li>
               </ul>
               
               <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】Avenue des Champs-Élysées, 75008 Paris<br>
-              【交通】地铁1号线至George V、Franklin D. Roosevelt或Champs-Élysées-Clemenceau站<br>
-              【开放时间】商店约10:00-20:00，餐厅营业至深夜<br>
-              【停留时间】2-3小时</p>
+              <p>【推荐路线】从圣母院出发，沿左岸向西漫步<br>
+              【最佳时间】日落前1小时开始漫步<br>
+              【停留时间】2-3小时（含游船或咖啡馆小憩）</p>
             </details>
           </div>
 
-          <!-- Eiffel Tower -->
-          <div class="item" id="eiffel">
-            <div class="time">21:00</div>
-            <div class="title">🗼 Eiffel Tower 埃菲尔铁塔（夜景+闪灯秀）</div>
-        
+          <!-- Latin Quarter Dinner -->
+          <div class="item" id="dinner">
+            <div class="time">20:00</div>
+            <div class="title">🍽️ 拉丁区晚餐</div>
             <details>
               <summary>查看详情</summary>
-              
-              <img src="./images/eiffel-tower.jpg" alt="埃菲尔铁塔" style="width:100%;border-radius:16px;margin:12px 0;box-shadow:0 4px 12px rgba(0,0,0,.1)">
-              
-              <p class="img-caption">巴黎象征，建于1887-1889年，高330米，每晚闪灯秀</p>
-              
-              <p><strong>【亮点】</strong>埃菲尔铁塔(La Tour Eiffel)是巴黎乃至法国的象征，也是世界上最著名的人造建筑之一。夜幕降临后，铁塔披上金色的灯光外衣，每小时整点的闪灯秀(Scintillation)更是令人心醉的梦幻时刻。</p>
+              <p><strong>【亮点】</strong>拉丁区(Quartier Latin)是巴黎最古老的街区之一，因中世纪时期的大学生使用拉丁语而得名。这里是巴黎的知识分子和艺术家聚集地，遍布着百年咖啡馆和餐馆。</p>
               
               <div class="info-grid">
                 <div class="info-item">
-                  <div class="info-label">建造时间</div>
-                  <div class="info-value">1887-1889年</div>
+                  <div class="info-label">位置</div>
+                  <div class="info-value">巴黎第5、6区</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">高度</div>
-                  <div class="info-value">330米</div>
+                  <div class="info-label">特色</div>
+                  <div class="info-value">学生区+文艺气息</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">建筑师</div>
-                  <div class="info-value">古斯塔夫·埃菲尔</div>
+                  <div class="info-label">主要街道</div>
+                  <div class="info-value">圣米歇尔大道</div>
                 </div>
                 <div class="info-item">
-                  <div class="info-label">年访客</div>
-                  <div class="info-value">约700万人次</div>
+                  <div class="info-label">价格</div>
+                  <div class="info-value">相对亲民</div>
                 </div>
               </div>
               
-              <p style="margin-top:12px"><strong>✨ 闪灯秀(Scintillation)：</strong></p>
-              
-              <p class="img-caption">Photo: Eiffel Tower Sparkling Show | Unsplash</p>
-              
-              <p><strong>每晚日落后至凌晨1:00，每到整点时分，铁塔上的2万个灯泡会同时闪烁5分钟</strong>，创造出令人震撼的璀璨效果。这是巴黎最浪漫的视觉盛宴，也是无数情侣、求婚者的首选时刻。</p>
-              
-              <div class="info-grid">
-                <div class="info-item">
-                  <div class="info-label">闪灯时间</div>
-                  <div class="info-value">每整点开始，持续5分钟</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">灯泡数量</div>
-                  <div class="info-value">20,000个</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">最后一次</div>
-                  <div class="info-value">凌晨1:00</div>
-                </div>
-                <div class="info-item">
-                  <div class="info-label">最佳观赏</div>
-                  <div class="info-value">特罗卡德罗广场</div>
-                </div>
-              </div>
-              
-              <p style="margin-top:12px"><strong>🌃 最佳观赏点：</strong></p>
+              <p style="margin-top:12px"><strong>🍷 推荐体验：</strong></p>
               <ul>
-                <li><strong>特罗卡德罗广场(Trocadéro)</strong> - 最经典的角度，广场平台正对铁塔，闪灯秀时人群会欢呼</li>
-                <li><strong>战神广场(Champ de Mars)</strong> - 位于铁塔正下方，可仰望铁塔的宏伟</li>
-                <li><strong>塞纳河游船</strong> - 从河上欣赏铁塔倒影，浪漫指数满分</li>
-                <li><strong>Pont de Bir-Hakeim桥</strong> - 《盗梦空间》取景地，可拍摄铁塔与桥的组合</li>
+                <li><strong>传统法餐：</strong>选择一家小酒馆(Bistro)品尝经典法式料理</li>
+                <li><strong>可丽饼：</strong>法式可丽饼(Crêpe)是这里的特色小吃</li>
+                <li><strong>法式洋葱汤：</strong>经典的法式开胃菜</li>
+                <li><strong>红酒：</strong>配上一杯法国红酒</li>
               </ul>
               
-              <p style="margin-top:12px"><strong>🗼 登塔体验：</strong></p>
-              <ul>
-                <li><strong>第一层(57米)：</strong>透明玻璃地板观景台，纪念品商店</li>
-                <li><strong>第二层(115米)：</strong>最佳观景高度，可清晰看到巴黎地标，餐厅58 Tour Eiffel</li>
-                <li><strong>顶层(276米)：</strong>360°全景观景台，香槟吧， Gustave Eiffel私人办公室复原</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>💡 夜游建议：</strong></p>
-              <ul>
-                <li>无需登塔，在特罗卡德罗观赏夜景和闪灯秀即可</li>
-                <li>21:00或22:00整点的闪灯秀最为壮观（夏季天未全黑效果略逊）</li>
-                <li>可携带香槟和野餐垫，在战神广场享受铁塔下的浪漫时刻</li>
-                <li>注意随身物品安全，热门景点需防范扒手</li>
-              </ul>
-              
-              <p style="margin-top:12px"><strong>📍 实用信息：</strong></p>
-              <p>【地址】Champ de Mars, 5 Avenue Anatole France, 75007 Paris<br>
-              【交通】地铁6号线至Bir-Hakeim站，或RER C线至Champ de Mars-Tour Eiffel站<br>
-              【闪灯秀时间】日落后至凌晨1:00，每整点5分钟<br>
-              【停留时间】60-90分钟（夜景观赏）</p>
+              <p style="margin-top:12px"><strong>📍 推荐区域：</strong></p>
+              <p>Rue de la Huchette、Rue Mouffetard、Boulevard Saint-Michel周边有众多餐厅选择。</p>
             </details>
           </div>
 
-          <!-- Hotel -->
+          <!-- Hotel Return -->
           <div class="item">
-            <div class="time">22:30</div>
-            <div class="title">🏨 入住酒店</div>
+            <div class="time">22:00</div>
+            <div class="title">🏨 返回酒店</div>
             <details>
               <summary>查看详情</summary>
-              <p><strong>【亮点】</strong>入住位于凯旋门旁的Le Méridien Paris Arc de Triomphe酒店，结束精彩的一天。</p>
-              <p><strong>【地址】</strong>Le Méridien Paris Arc de Triomphe, 81 Avenue de Wagram, 75017 Paris</p>
-              <p><strong>【从铁塔前往】</strong>搭乘地铁6号线至Charles de Gaulle-Étoile站，步行5分钟即达酒店</p>
+              <p><strong>【从拉丁区返回】</strong></p>
+              <p>搭乘地铁4号线或RER B线，换乘至Charles de Gaulle-Étoile站，步行5分钟即达酒店。</p>
             </details>
           </div>
 
@@ -724,26 +455,18 @@
             </div>
             
             <div class="hotel-info-item">
-              <span class="hotel-info-icon">📞</span>
+              <span class="hotel-info-icon">🚇</span>
               <div class="hotel-info-content">
-                <div class="hotel-info-label">联系电话</div>
-                <div class="hotel-info-value">+33 1 43 80 40 30</div>
+                <div class="hotel-info-label">最近地铁站</div>
+                <div class="hotel-info-value">Charles de Gaulle-Étoile（地铁1/2/6号线）</div>
               </div>
             </div>
             
             <div class="hotel-info-item">
               <span class="hotel-info-icon">🚶</span>
               <div class="hotel-info-content">
-                <div class="hotel-info-label">从凯旋门前往</div>
-                <div class="hotel-info-value">步行约5分钟，距离约400米</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">🚇</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">最近地铁站</div>
-                <div class="hotel-info-value">Charles de Gaulle-Étoile（地铁1/2/6号线，RER A线）</div>
+                <div class="hotel-info-label">到卢浮宫</div>
+                <div class="hotel-info-value">地铁1号线直达，约15分钟</div>
               </div>
             </div>
             
@@ -754,30 +477,6 @@
                 <div class="hotel-info-value">入住：15:00后 | 退房：12:00前</div>
               </div>
             </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">🍽️</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">餐饮设施</div>
-                <div class="hotel-info-value">酒店餐厅提供法式早餐和创意料理；大堂酒吧供应鸡尾酒和轻食</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">🏋️</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">健身设施</div>
-                <div class="hotel-info-value">24小时健身中心，配备现代化健身器材</div>
-              </div>
-            </div>
-            
-            <div class="hotel-info-item">
-              <span class="hotel-info-icon">🏛️</span>
-              <div class="hotel-info-content">
-                <div class="hotel-info-label">周边景点</div>
-                <div class="hotel-info-value">距凯旋门步行5分钟；距香榭丽舍大道步行10分钟；距埃菲尔铁塔地铁15分钟</div>
-              </div>
-            </div>
           </div>
           
           <div class="hotel-amenities">
@@ -786,10 +485,45 @@
             <span class="amenity-tag">✓ 免费WiFi</span>
             <span class="amenity-tag">✓ 24小时礼宾服务</span>
             <span class="amenity-tag">✓ 24小时健身中心</span>
-            <span class="amenity-tag">✓ 餐厅及酒吧</span>
-            <span class="amenity-tag">✓ 商务中心</span>
-            <span class="amenity-tag">✓ 会议室</span>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Louvre Tips Section -->
+    <div class="section">
+      <div class="card-content">
+        <div class="card-title">🎫 卢浮宫预约攻略</div>
+        
+        <div class="tips-box" style="background:linear-gradient(135deg,#dbeafe 0%,#eff6ff 100%);border-color:#60a5fa">
+          <div class="tips-title" style="color:#1e40af">📱 官方预约渠道</div>
+          <ul class="tips-list" style="color:#1e3a8a">
+            <li><strong>官方网站：</strong>tickets.louvre.fr（最可靠）</li>
+            <li><strong>官方APP：</strong>下载"Louvre"官方APP购票</li>
+            <li><strong>巴黎博物馆通票：</strong>Paris Museum Pass</li>
+          </ul>
+        </div>
+        
+        <div class="tips-box" style="margin-top:12px;background:linear-gradient(135deg,#fef3c7 0%,#fffbeb 100%)">
+          <div class="tips-title">⏰ 预约时间选择</div>
+          <ul class="tips-list">
+            <li><strong>最佳时段：</strong>09:00开馆即入，人最少</li>
+            <li><strong>避开高峰：</strong>周三、周五开馆至21:45</li>
+            <li><strong>避开日期：</strong>周一、周二（部分展厅关闭）</li>
+          </ul>
+        </div>
+        
+        <div class="tips-box" style="margin-top:12px;background:linear-gradient(135deg,#d1fae5 0%,#ecfdf5 100%);border-color:#6ee7b7">
+          <div class="tips-title" style="color:#065f46">🚪 入口选择（重要！）</div>
+          <ul class="tips-list" style="color:#064e3b">
+            <li><strong>🌟 卡鲁塞尔入口(Carrousel)：</strong>强烈推荐！位于地下商场，排队最短</li>
+            <li><strong>金字塔主入口：</strong>最显眼但排队最长</li>
+          </ul>
+        </div>
+        
+        <div class="highlight-box" style="margin-top:16px">
+          <strong>📍 卡鲁塞尔入口详细路线：</strong><br>
+          地铁1/7号线至Palais Royal站 → 从"Carrousel du Louvre"出口出站 → 进入地下商场 → 沿指示牌前行约3分钟 → 看到倒金字塔后左转 → 持电子票扫码入场
         </div>
       </div>
     </div>
@@ -797,18 +531,15 @@
     <!-- Tips Section -->
     <div class="section">
       <div class="card-content">
-        <div class="card-title">💡 实用贴士</div>
+        <div class="card-title">💡 巴黎博物馆日贴士</div>
         <ul style="color:var(--muted);padding-left:20px">
-          <li><strong>TGV购票：</strong>提前30-90天在SNCF官网购买Prems早鸟票，可享最低€29的超值价格</li>
-          <li><strong>座位选择：</strong>TGV Lyria左侧座位可欣赏阿尔卑斯山景，右侧座位可俯瞰法国田园</li>
-          <li><strong>日内瓦-巴黎时差：</strong>无，两地同属中欧时间(CET)</li>
-          <li><strong>货币切换：</strong>日内瓦使用瑞士法郎(CHF)，巴黎使用欧元(EUR)，火车站设有货币兑换点</li>
-          <li><strong>凯旋门登顶：</strong>建议使用地下通道进入，切勿尝试穿越车流密集的环岛</li>
-          <li><strong>闪灯秀时间：</strong>埃菲尔铁塔每晚日落后至凌晨1:00每整点闪灯5分钟，夏季约21:00后开始</li>
-          <li><strong>香榭丽舍购物：</strong>大部分商店周日休息，周六营业至20:00，建议安排周五下午或周六上午购物</li>
-          <li><strong>日内瓦老城：</strong>鹅卵石路面较多，建议穿舒适步行鞋；教堂和宗教改革墙都免费开放</li>
-          <li><strong>巴黎交通：</strong>可购买Navigo Easy交通卡或单程票，地铁单程€2.10，一日票€8.45</li>
-          <li><strong>行李寄存：</strong>日内瓦Cornavin车站和巴黎Gare de Lyon都设有行李寄存柜</li>
+          <li><strong>预约必备：</strong>卢浮宫必须提前预约！当天现场几乎买不到票</li>
+          <li><strong>舒适鞋履：</strong>今日步行约3-4公里，卢浮宫内也需大量行走</li>
+          <li><strong>圣母院现状：</strong>修复期间内部不开放，但外观和广场仍可参观</li>
+          <li><strong>塞纳河漫步：</strong>黄昏时分最佳，可欣赏到日落时分的河景</li>
+          <li><strong>拉丁区：</strong>学生区价格亲民，晚餐选择丰富</li>
+          <li><strong>安全防范：</strong>热门景点需防范扒手，贵重物品放在胸前包</li>
+          <li><strong>明日行程：</strong>次日早上游览蒙马特高地，下午飞维也纳</li>
         </ul>
       </div>
     </div>
