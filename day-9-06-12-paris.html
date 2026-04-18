@@ -29,6 +29,14 @@
         .info-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
         .info-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
         .info-value{font-size:14px;font-weight:600;color:var(--text)}
+        
+        /* Ticket Styles */
+        .ticket-section{background:linear-gradient(135deg,#f0fff4 0%,#e6fffa 100%);border:2px solid #38a169;border-radius:16px;padding:16px;margin:15px 0}
+        .ticket-header{display:flex;align-items:center;gap:10px;font-weight:700;color:#22543d;font-size:1.1rem;margin-bottom:12px}
+        .ticket-badge{background:#38a169;color:white;padding:4px 12px;border-radius:20px;font-size:.85rem;font-weight:600}
+        .ticket-img{max-width:100%;border-radius:8px;border:1px solid #e2e8f0;margin-top:10px;cursor:pointer;transition:transform .2s}
+        .ticket-img:hover{transform:scale(1.02)}
+        .confirmed-time{color:#e53e3e;font-weight:700;background:#fed7d7;padding:4px 10px;border-radius:6px;display:inline-block;margin:5px 0}
     </style>
 </head>
 <body>
@@ -46,6 +54,23 @@
 
         <div class="section">
             <div class="card-content">
+                <div class="card-title">🎫 已预订门票</div>
+                
+                <div class="ticket-section">
+                    <div class="ticket-header">🏛️ 卢浮宫博物馆 <span class="ticket-badge">已确认</span></div>
+                    <div class="confirmed-time">📅 6月12日 09:00</div>
+                    <p><strong>订单号：</strong>C261020005531 | <strong>价格：</strong>€32</p>
+                    <p><strong>指定入口：</strong>Carrousel 或 Pyramid (Porte des Lions 17:15前可入)</p>
+                    <details>
+                        <summary>🖼️ 查看门票截图</summary>
+                        <img src="tickets/louvre-ticket.png" alt="卢浮宫门票" class="ticket-img" onclick="window.open(this.src)">
+                    </details>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="card-content">
                 <div class="card-title">🎯 今日行程概览</div>
                 <p>09:00卢浮宫 → 12:30午餐 → 14:00圣母院+圣礼拜堂 → 17:30塞纳河漫步 → 20:00拉丁区晚餐</p>
             </div>
@@ -58,7 +83,7 @@
                 <div class="timeline">
                     <div class="item">
                         <div class="time">09:00</div>
-                        <div class="title">🏛️ 卢浮宫博物馆</div>
+                        <div class="title">🏛️ 卢浮宫博物馆 <span style="color:#e53e3e;font-weight:bold">【预约已确认】</span></div>
                         <p>世界四大博物馆之首，欣赏《蒙娜丽莎》《断臂维纳斯》等镇馆之宝。</p>
                         <details>
                             <summary>🎫 参观信息</summary>

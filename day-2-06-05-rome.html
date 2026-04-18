@@ -25,6 +25,14 @@
         .info-item{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:12px}
         .info-label{font-size:11px;color:#718096;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
         .info-value{font-size:14px;font-weight:600;color:#1a365d}
+        
+        /* Ticket Styles */
+        .ticket-section{background:linear-gradient(135deg,#f0fff4 0%,#e6fffa 100%);border:2px solid #38a169;border-radius:16px;padding:16px;margin:15px 0}
+        .ticket-header{display:flex;align-items:center;gap:10px;font-weight:700;color:#22543d;font-size:1.1rem;margin-bottom:12px}
+        .ticket-badge{background:#38a169;color:white;padding:4px 12px;border-radius:20px;font-size:.85rem;font-weight:600}
+        .ticket-img{max-width:100%;border-radius:8px;border:1px solid #e2e8f0;margin-top:10px;cursor:pointer;transition:transform .2s}
+        .ticket-img:hover{transform:scale(1.02)}
+        .confirmed-time{color:#e53e3e;font-weight:700;background:#fed7d7;padding:4px 10px;border-radius:6px;display:inline-block;margin:5px 0}
     </style>
 </head>
 <body>
@@ -46,11 +54,37 @@
     </div>
 
     <div class="section">
+        <h2>🎫 已预订门票</h2>
+        
+        <div class="ticket-section">
+            <div class="ticket-header">🎨 博尔盖塞博物馆 <span class="ticket-badge">已确认</span></div>
+            <div class="confirmed-time">📅 6月5日 09:00 - 11:00</div>
+            <p><strong>订单号：</strong>1292509588 | <strong>价格：</strong>€18 (含€2预约费)</p>
+            <p><strong>入场ID：</strong>39 | <strong>限时：</strong>2小时</p>
+            <details>
+                <summary>🖼️ 查看门票截图</summary>
+                <img src="tickets/borghese-ticket.png" alt="博尔盖塞博物馆门票" class="ticket-img" onclick="window.open(this.src)">
+            </details>
+        </div>
+        
+        <div class="ticket-section">
+            <div class="ticket-header">🏛️ 梵蒂冈博物馆 <span class="ticket-badge">已确认</span></div>
+            <div class="confirmed-time">📅 6月5日 16:30</div>
+            <p><strong>参观编号：</strong>8625/2026-106 | <strong>价格：</strong>€25 (含€5预约费)</p>
+            <p><strong>指定入口：</strong>CORRIDOIO1 / PASSAGEWAY 1</p>
+            <details>
+                <summary>🖼️ 查看门票截图</summary>
+                <img src="tickets/vatican-ticket.png" alt="梵蒂冈博物馆门票" class="ticket-img" onclick="window.open(this.src)">
+            </details>
+        </div>
+    </div>
+
+    <div class="section">
         <h2>📍 详细安排</h2>
         
         <p><span class="time">08:00</span> 🍽️ <span class="spot">酒店早餐</span></p>
         
-        <p><span class="time">09:00</span> 🎨 <span class="spot">博尔盖塞博物馆 (Galleria Borghese)</span></p>
+        <p><span class="time">09:00</span> 🎨 <span class="spot">博尔盖塞博物馆 (Galleria Borghese)</span> <span style="color:#e53e3e;font-weight:bold">【预约已确认 09:00入场】</span></p>
         <details>
             <summary>查看详情</summary>
             <p><strong>【亮点】</strong>世界顶级的艺术博物馆，收藏有大量贝尼尼雕塑杰作和卡拉瓦乔画作。《阿波罗与达芙妮》和《普鲁托与普洛塞尔皮娜》是镇馆之宝。</p>
@@ -77,7 +111,7 @@
             <p><strong>💡 小贴士：</strong>必看作品：《阿波罗与达芙妮》《普鲁托与普洛塞尔皮娜》《大卫》（贝尼尼）、卡拉瓦乔《捧果篮的男孩》。</p>
         </details>
 
-        <p><span class="time">12:00</span> 🍝 <span class="spot">午餐</span></p>
+        <p><span class="time">12:30</span> 🍝 <span class="spot">午餐</span></p>
         <details>
             <summary>查看详情</summary>
             <p><strong>【推荐】</strong>博物馆附近或西班牙阶梯区域</p>
@@ -94,34 +128,7 @@
             <p style="margin-top:12px"><strong>💡 小贴士：</strong>罗马特色意面：Carbonara（培根蛋面）和 Cacio e Pepe（奶酪胡椒面）。</p>
         </details>
 
-        <p><span class="time">14:00</span> 🏛️ <span class="spot">梵蒂冈博物馆 (Musei Vaticani)</span></p>
-        <details>
-            <summary>查看详情</summary>
-            <p><strong>【亮点】</strong>世界上最大的博物馆之一，拥有70000多件藏品。西斯廷礼拜堂的米开朗基罗《创世纪》天顶画是西方艺术史上最伟大的杰作之一。</p>
-            <div class="info-grid">
-                <div class="info-item">
-                    <div class="info-label">地址</div>
-                    <div class="info-value">Viale Vaticano, 00165 Roma</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">开放时间</div>
-                    <div class="info-value">09:00-18:00（周日闭馆）</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">门票价格</div>
-                    <div class="info-value">€17（成人）/ €8（学生）</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">参观时长</div>
-                    <div class="info-value">3-4小时</div>
-                </div>
-            </div>
-            <p style="margin-top:12px"><strong>📱 预约攻略：</strong>强烈建议提前网上购票！现场排队可能2小时以上。官网：museivaticani.va</p>
-            <p><strong>🚇 交通方式：</strong>地铁A线Ottaviano站，步行10分钟。</p>
-            <p><strong>💡 小贴士：</strong>必看：西斯廷礼拜堂（《创世纪》《最后的审判》）、拉斐尔画室（《雅典学院》）、地图廊、松果庭院。</p>
-        </details>
-
-        <p><span class="time">17:00</span> ⛪ <span class="spot">圣彼得大教堂 (Basilica di San Pietro)</span></p>
+        <p><span class="time">14:00</span> ⛪ <span class="spot">圣彼得大教堂 (Basilica di San Pietro)</span></p>
         <details>
             <summary>查看详情</summary>
             <p><strong>【亮点】</strong>世界最大的教堂，文艺复兴建筑的巅峰之作。米开朗基罗设计的穹顶和圣彼得广场是建筑史上的杰作。</p>
@@ -147,7 +154,34 @@
             <p><strong>💡 小贴士：</strong>必看：米开朗基罗《圣殇》（Pieta）、青铜华盖、圣彼得宝座。登顶需爬551级台阶，可俯瞰梵蒂冈全景。</p>
         </details>
 
-        <p><span class="time">19:00</span> 🏰 <span class="spot">圣天使堡 & 圣天使桥</span></p>
+        <p><span class="time">16:30</span> 🏛️ <span class="spot">梵蒂冈博物馆 (Musei Vaticani)</span> <span style="color:#e53e3e;font-weight:bold">【预约已确认 16:30入场】</span></p>
+        <details>
+            <summary>查看详情</summary>
+            <p><strong>【亮点】</strong>世界上最大的博物馆之一，拥有70000多件藏品。西斯廷礼拜堂的米开朗基罗《创世纪》天顶画是西方艺术史上最伟大的杰作之一。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">地址</div>
+                    <div class="info-value">Viale Vaticano, 00165 Roma</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">开放时间</div>
+                    <div class="info-value">09:00-18:00（周日闭馆）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">门票价格</div>
+                    <div class="info-value">€17（成人）/ €8（学生）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">参观时长</div>
+                    <div class="info-value">3-4小时</div>
+                </div>
+            </div>
+            <p style="margin-top:12px"><strong>🚇 交通方式：</strong>地铁A线Ottaviano站，步行10分钟。</p>
+            <p><strong>💡 小贴士：</strong>必看：西斯廷礼拜堂（《创世纪》《最后的审判》）、拉斐尔画室（《雅典学院》）、地图廊、松果庭院。</p>
+            <p style="color:#e53e3e;font-weight:bold">⚠️ 重要提醒：门票指定入口为 CORRIDOIO1 / PASSAGEWAY 1，请提前30分钟到达！</p>
+        </details>
+
+        <p><span class="time">19:30</span> 🏰 <span class="spot">圣天使堡 & 圣天使桥</span></p>
         <details>
             <summary>查看详情</summary>
             <p><strong>【亮点】</strong>古罗马皇帝哈德良的陵墓，后改为城堡和监狱。圣天使桥上的十座天使雕像由贝尼尼设计，是罗马最美的桥梁。</p>
@@ -194,8 +228,9 @@
     <div class="tips">
         <h3>💡 实用贴士</h3>
         <ul>
-            <li>博尔盖塞博物馆必须提前预订！每次限2小时</li>
-            <li>梵蒂冈博物馆周三/周日可能闭馆，请确认</li>
+            <li><strong>✅ 已预订：</strong>博尔盖塞博物馆 6/5 09:00 | 梵蒂冈博物馆 6/5 16:30</li>
+            <li>博尔盖塞博物馆必须提前15分钟到达，过时可能无法入场</li>
+            <li>梵蒂冈博物馆指定入口：CORRIDOIO1 / PASSAGEWAY 1</li>
             <li>穿舒适鞋子，今日步行约15-20公里</li>
             <li>梵蒂冈对着装有要求：肩膀和膝盖需遮盖</li>
             <li>建议带充电宝，拍照耗电快</li>
