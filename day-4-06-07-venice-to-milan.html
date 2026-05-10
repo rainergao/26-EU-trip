@@ -17,6 +17,53 @@
         .transport { background: #e6fffa; padding: 15px; border-radius: 8px; }
         .hotel { background: #f0fff4; padding: 15px; border-radius: 8px; }
         
+        /* Lightbox */
+        .lb-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.92);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .lb-overlay:target { display: flex; }
+        .lb-overlay img {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        .lb-close {
+            position: absolute;
+            top: 15px; right: 25px;
+            color: white;
+            font-size: 40px;
+            text-decoration: none;
+            line-height: 1;
+        }
+        .lb-close:hover { color: #e2e8f0; }
+        .ticket-preview {
+            display: block;
+            width: 100%;
+            max-width: 520px;
+            margin: 0 auto 8px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .ticket-preview:hover { transform: scale(1.01); }
+        .ticket-caption {
+            text-align: center;
+            font-size: 12px;
+            color: #718096;
+            margin-top: 4px;
+            margin-bottom: 16px;
+        }
+        
         /* Details */
         details{margin-top:10px;border:1px solid #e2e8f0;border-radius:14px;background:#fafafa;padding:10px 12px}
         summary{cursor:pointer;font-weight:600;color:#2c5282}
@@ -273,31 +320,73 @@
         <p><span class="time">19:00</span> 🚆 <span class="spot">火车前往米兰</span></p>
         <details>
             <summary>查看详情</summary>
-            <p><strong>【路线】</strong>从 Venezia Mestre 火车站乘高铁前往 Milano Centrale。</p>
+            <p><strong>✅ 已预订！</strong>红箭 Frecciarossa 9758（双人商务座）</p>
+            
+            <h4 style="color:#1a365d;margin:12px 0 8px">🎫 车票信息</h4>
+            
+            <a href="#lb-vm-ticket1">
+                <img src="tickets/venice-milan-9758-ticket1.jpg" class="ticket-preview" alt="火车票1">
+            </a>
+            <p class="ticket-caption">👆 点击查看大图</p>
+            
+            <a href="#lb-vm-ticket2">
+                <img src="tickets/venice-milan-9758-ticket2.jpg" class="ticket-preview" alt="火车票2">
+            </a>
+            <p class="ticket-caption">👆 点击查看大图</p>
+            
             <div class="info-grid">
                 <div class="info-item">
-                    <div class="info-label">车程</div>
-                    <div class="info-value">约1小时45分</div>
+                    <div class="info-label">车次</div>
+                    <div class="info-value">红箭 9758 (Frecciarossa)</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">发车时间</div>
+                    <div class="info-value">19:00 Venezia Mestre</div>
                 </div>
                 <div class="info-item">
                     <div class="info-label">到达时间</div>
-                    <div class="info-value">约20:45</div>
+                    <div class="info-value">21:15 Milano Centrale</div>
                 </div>
                 <div class="info-item">
-                    <div class="info-label">车次</div>
-                    <div class="info-value">Frecciarossa 高速列车</div>
+                    <div class="info-label">车程</div>
+                    <div class="info-value">约2小时15分钟</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">车厢等级</div>
+                    <div class="info-value">1° Business（商务座）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">座位号</div>
+                    <div class="info-value">3D / 4D（Coach 2）</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">PNR预订号</div>
+                    <div class="info-value">RHPCH5</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">车厢区域</div>
+                    <div class="info-value">SILENZIO（静音车厢）</div>
                 </div>
                 <div class="info-item">
                     <div class="info-label">票价</div>
-                    <div class="info-value">€35-50</div>
+                    <div class="info-value">€53.90×2 = €107.80</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">购票日期</div>
+                    <div class="info-value">2026年5月10日</div>
                 </div>
             </div>
-            <p style="margin-top:12px"><strong>📱 预约攻略：</strong>建议在 Trenitalia 或 Italo 官网提前购买。</p>
+            
+            <p style="margin-top:12px"><strong>💡 小贴士：</strong></p>
+            <p>• 18:30前到达Mestre火车站，找到站台候车</p>
+            <p>• 登车时请向列车员出示PNR号：<strong>RHPCH5</strong></p>
+            <p>• 静音车厢(SILENZIO)请保持安静，手机调静音</p>
+            <p>• 米兰中央火车站本身就是新艺术风格的建筑杰作，值得欣赏</p>
         </details>
     </div>
 
     <div class="section">
-        <p><span class="time">20:45</span> 🌙 <span class="spot">抵达米兰</span></p>
+        <p><span class="time">21:15</span> 🌙 <span class="spot">抵达米兰</span></p>
         <details>
             <summary>查看详情</summary>
             <p><strong>【米兰中央火车站】</strong>欧洲最大的火车站之一，本身就是新艺术风格的建筑杰作。</p>
@@ -333,5 +422,15 @@
         <p>📍 Via Cosimo Del Fante 8, 20122 Milano</p>
         <p>🚇 距离米兰中央火车站地铁2站</p>
     </div>
+    <!-- Lightbox overlays -->
+    <div id="lb-vm-ticket1" class="lb-overlay">
+        <a href="#" class="lb-close">×</a>
+        <img src="tickets/venice-milan-9758-ticket1.jpg" alt="火车票1">
+    </div>
+    <div id="lb-vm-ticket2" class="lb-overlay">
+        <a href="#" class="lb-close">×</a>
+        <img src="tickets/venice-milan-9758-ticket2.jpg" alt="火车票2">
+    </div>
+
 </body>
 </html>
