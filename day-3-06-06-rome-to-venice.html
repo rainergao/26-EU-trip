@@ -17,6 +17,53 @@
         .transport { background: #e6fffa; padding: 15px; border-radius: 8px; }
         .hotel { background: #f0fff4; padding: 15px; border-radius: 8px; }
         
+        /* Lightbox */
+        .lb-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.92);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .lb-overlay:target { display: flex; }
+        .lb-overlay img {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        .lb-close {
+            position: absolute;
+            top: 15px; right: 25px;
+            color: white;
+            font-size: 40px;
+            text-decoration: none;
+            line-height: 1;
+        }
+        .lb-close:hover { color: #e2e8f0; }
+        .ticket-preview {
+            display: block;
+            width: 100%;
+            max-width: 520px;
+            margin: 0 auto 8px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .ticket-preview:hover { transform: scale(1.01); }
+        .ticket-caption {
+            text-align: center;
+            font-size: 12px;
+            color: #718096;
+            margin-top: 4px;
+            margin-bottom: 16px;
+        }
+        
         /* Details */
         details{margin-top:10px;border:1px solid #e2e8f0;border-radius:14px;background:#fafafa;padding:10px 12px}
         summary{cursor:pointer;font-weight:600;color:#2c5282}
@@ -250,10 +297,16 @@
             <p><strong>✅ 已预订！</strong>红箭 Frecciarossa 9432（双人商务座）</p>
             
             <h4 style="color:#1a365d;margin:12px 0 8px">🎫 车票信息</h4>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
-                <img src="tickets/rome-venice-9432-ticket1.jpg" alt="火车票1" style="max-width:380px;width:100%;border-radius:8px;border:1px solid #e2e8f0">
-                <img src="tickets/rome-venice-9432-ticket2.jpg" alt="火车票2" style="max-width:380px;width:100%;border-radius:8px;border:1px solid #e2e8f0">
-            </div>
+            
+            <a href="#lb-ticket1">
+                <img src="tickets/rome-venice-9432-ticket1.jpg" class="ticket-preview" alt="火车票1">
+            </a>
+            <p class="ticket-caption">👆 点击查看大图</p>
+            
+            <a href="#lb-ticket2">
+                <img src="tickets/rome-venice-9432-ticket2.jpg" class="ticket-preview" alt="火车票2">
+            </a>
+            <p class="ticket-caption">👆 点击查看大图</p>
             
             <div class="info-grid">
                 <div class="info-item">
@@ -342,5 +395,15 @@
         <p>🚂 距离 Mestre 火车站步行3分钟</p>
         <p>🚆 去威尼斯主岛（Santa Lucia站）火车10分钟</p>
     </div>
+    <!-- Lightbox overlays -->
+    <div id="lb-ticket1" class="lb-overlay">
+        <a href="#" class="lb-close">×</a>
+        <img src="tickets/rome-venice-9432-ticket1.jpg" alt="火车票1">
+    </div>
+    <div id="lb-ticket2" class="lb-overlay">
+        <a href="#" class="lb-close">×</a>
+        <img src="tickets/rome-venice-9432-ticket2.jpg" alt="火车票2">
+    </div>
+
 </body>
 </html>
